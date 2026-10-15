@@ -1,0 +1,2864 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lily Cestas &amp; Atelier Personalizados | Cestas Afetivas, Xícaras, Arte 3D, Litofania &amp; Polaroid</title>
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+/* Lily Cestas & Atelier Personalizados — Tipografia Delicada Montserrat & Contraste Dinâmico Rosé + Branco */
+:root {
+  --lily-bg: #FDF8F9;
+  --lily-surface: #FFFFFF;
+  --lily-rose-soft: #F9EBEE;
+  --lily-rose-blush: #F2D5DC;
+  --lily-rose-primary: #C87888;
+  --lily-rose-deep: #A65365;
+  --lily-rosegold: #B76E79;
+  --lily-espresso: #382126;
+  --lily-muted: #785860;
+  --lily-border: #EED9DF;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  background-color: var(--lily-bg);
+  color: var(--lily-espresso);
+}
+
+/* Tipografia principal de temas e grandes títulos: Montserrat (geométrica, leve e delicada estilo Gotham/Montserrat) */
+.font-display {
+  font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, sans-serif;
+  letter-spacing: -0.02em;
+}
+
+.font-handwriting {
+  font-family: 'Dancing Script', cursive;
+}
+
+/* Fundos Claros & Pérola */
+.bg-lily-hero {
+  background: radial-gradient(circle at 15% 15%, #FCECEF 0%, #FDF8F9 52%, #FFFFFF 100%);
+}
+
+.bg-lily-pearl {
+  background: linear-gradient(135deg, #FFFFFF 0%, #FDF6F8 55%, #F9E9EE 100%);
+}
+
+/* Containers Invertidos em Rosé & Rose Gold com Textos Brancos (Dinamismo Visual) */
+.bg-lily-rose-inverted {
+  background: linear-gradient(135deg, #C97A8A 0%, #B36273 55%, #9B4C5D 100%);
+  color: #FFFFFF;
+}
+
+.bg-lily-rose-soft-inverted {
+  background: linear-gradient(135deg, #D18494 0%, #BA6B7C 50%, #A35566 100%);
+  color: #FFFFFF;
+}
+
+.bg-lily-rose-section {
+  background: radial-gradient(circle at 85% 20%, #CC7F8F 0%, #B26273 55%, #944858 100%);
+  color: #FFFFFF;
+}
+
+.bg-rosegold-gradient {
+  background: linear-gradient(135deg, #C97A8A 0%, #B56676 50%, #994B5B 100%);
+}
+
+.text-rosegold-gradient {
+  background: linear-gradient(135deg, #A34E60 0%, #C87888 55%, #B56676 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.shadow-delicate {
+  box-shadow: 0 14px 36px -10px rgba(183, 110, 121, 0.16), 0 4px 12px -2px rgba(183, 110, 121, 0.08);
+}
+
+.shadow-floating {
+  box-shadow: 0 22px 48px -12px rgba(163, 78, 96, 0.28), 0 6px 16px -4px rgba(56, 33, 38, 0.08);
+}
+
+/* Efeito 3D realista para o Simulador de Letras & Palavras 3D em Montserrat */
+.lily-3d-text-pink {
+  color: #FFE4E9;
+  text-shadow:
+    1px 1px 0 #E09AA8,
+    2px 2px 0 #D18494,
+    3px 3px 0 #C06E7F,
+    4px 4px 0 #A85869,
+    5px 6px 14px rgba(56, 20, 28, 0.35);
+  letter-spacing: 0.14em;
+}
+
+.lily-3d-text-pearl {
+  color: #FFFFFF;
+  text-shadow:
+    1px 1px 0 #F2E4E7,
+    2px 2px 0 #E5D0D5,
+    3px 3px 0 #D4B9C0,
+    4px 4px 0 #C2A3AB,
+    5px 6px 14px rgba(56, 20, 28, 0.32);
+  letter-spacing: 0.14em;
+}
+
+.lily-3d-text-rosegold {
+  color: #F7D4DC;
+  text-shadow:
+    1px 1px 0 #D4929F,
+    2px 2px 0 #BD7785,
+    3px 3px 0 #A65E6C,
+    4px 4px 0 #8C4755,
+    5px 6px 14px rgba(56, 20, 28, 0.38);
+  letter-spacing: 0.14em;
+}
+
+/* Moldura Polaroid autêntica */
+.polaroid-card {
+  background: #FFFFFF;
+  padding: 10px 10px 26px 10px;
+  box-shadow: 0 16px 32px -8px rgba(45, 20, 26, 0.28), 0 2px 8px rgba(45, 20, 26, 0.1);
+  border: 1px solid #F3E5E8;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.polaroid-card:hover {
+  transform: translateY(-4px) rotate(0deg) !important;
+}
+
+/* Filtros Fotográficos do Simulador Polaroid & Litofania 3D */
+.photo-filter-natural { filter: contrast(1.03) saturate(1.05); }
+.photo-filter-vintage { filter: sepia(0.28) contrast(1.05) brightness(1.03) saturate(1.1); }
+.photo-filter-bw { filter: grayscale(1) contrast(1.12) brightness(1.04); }
+.photo-filter-lithophane {
+  filter: sepia(0.65) brightness(1.12) contrast(1.18) saturate(0.85);
+  box-shadow: inset 0 0 28px rgba(255, 210, 145, 0.85);
+}
+
+/* Animação suave de pulso para os hotspots */
+@keyframes pulseRing {
+  0% { transform: scale(0.96); box-shadow: 0 0 0 0 rgba(201, 122, 138, 0.75); }
+  70% { transform: scale(1); box-shadow: 0 0 0 10px rgba(201, 122, 138, 0); }
+  100% { transform: scale(0.96); box-shadow: 0 0 0 0 rgba(201, 122, 138, 0); }
+}
+
+.hotspot-pulse {
+  animation: pulseRing 2.2s infinite;
+}
+
+/* Scrollbar delicada */
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-track { background: #FDF8F9; }
+::-webkit-scrollbar-thumb { background: #E3BDC6; border-radius: 9999px; }
+::-webkit-scrollbar-thumb:hover { background: #C87888; }
+  </style>
+</head>
+<body class="min-h-screen antialiased selection:bg-[#F2D5DC] selection:text-[#382126]">
+
+  <!-- Barra de Anúncio Superior (Rosé Invertido com Texto Branco) -->
+  <div class="bg-rosegold-gradient text-white text-xs py-2.5 px-4 text-center font-medium tracking-wide">
+    <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-center gap-2">
+      <span class="px-2.5 py-0.5 rounded-full bg-white/20 text-[10px] font-display font-semibold uppercase tracking-widest">Lily Cestas &amp; Atelier 3D</span>
+      <span>Cestas Afetivas, Xícaras Personalizadas, Letras &amp; Litofania 3D e Polaroids com <strong>Cápsula QR Code Musical Cortesia</strong> ✨</span>
+      <a href="#concierge" class="underline font-semibold hover:text-[#FFE8EE] ml-1">Descubra o presente ideal em 15s →</a>
+    </div>
+  </div>
+
+  <!-- Cabeçalho Delicado Fixo com Logo Oficial Lily Cestas -->
+  <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-[#EED9DF]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between gap-4">
+      <a href="#inicio" class="flex items-center gap-3 group">
+        <img data-lily-logo="rose" src="" alt="Logo Lily Cestas" class="h-14 w-auto object-contain group-hover:scale-105 transition-transform" />
+        <div class="border-l border-[#EED9DF] pl-3">
+          <span class="font-display font-semibold text-lg sm:text-xl tracking-tight text-[#382126] block leading-none">Lily Cestas</span>
+          <span class="font-display text-[10px] uppercase tracking-[0.18em] text-[#B36273] font-medium block mt-1">Atelier &amp; Personalizados 3D</span>
+        </div>
+      </a>
+
+      <nav class="hidden xl:flex items-center gap-6 text-xs font-display font-medium uppercase tracking-wider text-[#5A3D43]">
+        <a href="#proposta" class="hover:text-[#B36273] transition-colors">A Proposta</a>
+        <a href="#concierge" class="hover:text-[#B36273] transition-colors text-[#B36273] font-semibold">✦ Quiz Concierge</a>
+        <a href="#pilares" class="hover:text-[#B36273] transition-colors">4 Categorias</a>
+        <a href="#simulador" class="hover:text-[#B36273] transition-colors font-semibold text-[#A65365]">Estúdio 3D &amp; Foto</a>
+        <a href="#catalogo" class="hover:text-[#B36273] transition-colors">Catálogo (12)</a>
+        <a href="#faq" class="hover:text-[#B36273] transition-colors">Dúvidas</a>
+      </nav>
+
+      <div class="flex items-center gap-2.5">
+        <button type="button" id="header-fav-btn" class="px-3 py-2 rounded-full border border-[#EED9DF] bg-[#FDF8F9] hover:border-[#C87888] text-xs font-display font-medium text-[#5A3D43] flex items-center gap-1.5 transition-all">
+          <span class="text-[#C87888] text-sm">♥</span>
+          <span class="hidden sm:inline">Favoritos</span>
+          <span id="header-fav-count" class="px-1.5 py-0.5 rounded-full bg-[#F9EBEE] text-[#A65365] text-[11px] font-semibold">0</span>
+        </button>
+
+        <button type="button" id="header-cart-btn" class="px-3.5 py-2 rounded-full border border-[#E5C2C9] bg-white hover:bg-[#FDF6F8] text-xs font-display font-semibold text-[#382126] flex items-center gap-2 shadow-sm transition-all">
+          <span>🧺 Sacola</span>
+          <span id="header-cart-count" class="w-5 h-5 rounded-full bg-[#B36273] text-white text-[11px] flex items-center justify-center">0</span>
+        </button>
+
+        <a href="#simulador" class="hidden sm:inline-flex items-center gap-1.5 px-4 py-2.5 rounded-full bg-rosegold-gradient text-white text-xs font-display font-semibold tracking-wide shadow-sm hover:opacity-95 transition-all">
+          <span>✦ Criar Presente</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- HERO DE ALTO IMPACTO & AUTOEXPLICATIVO ("NA CARA DA HOME") -->
+  <section id="inicio" class="bg-lily-hero pt-8 pb-16 sm:py-14 border-b border-[#EED9DF] overflow-hidden">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-8 items-center">
+        
+        <!-- Coluna Esquerda: Identidade Lily Cestas + Tipografia Montserrat Delicada + Seletor com Inversão Rosé -->
+        <div class="lg:col-span-6 space-y-6">
+          <div class="inline-flex items-center gap-3 px-4 py-1.5 rounded-full bg-white border border-[#EBCAD2] shadow-sm">
+            <img data-lily-logo="rose" src="" alt="Lily Cestas" class="h-6 w-auto object-contain" />
+            <span class="text-[11px] font-display font-semibold tracking-widest uppercase text-[#A65365]">Cestas Afetivas • Louças • Arte 3D • Polaroid</span>
+          </div>
+
+          <h1 class="font-display font-light text-3xl sm:text-5xl lg:text-[46px] text-[#382126] leading-[1.14]">
+            A delicadeza das <strong class="font-semibold text-rosegold-gradient">Cestas de Presente</strong> unida a Xícaras, <strong class="font-semibold text-[#A65365]">Arte em 3D</strong> &amp; Polaroid.
+          </h1>
+
+          <p class="text-sm sm:text-base text-[#5A3D43] leading-relaxed font-normal">
+            Bem-vindo à <strong>Lily Cestas</strong>. Evoluímos das cestas tradicionais para o primeiro <strong>atelier afetivo com personalização ao vivo</strong>: combine cestas artesanais em rosé e branco com <strong>xícaras personalizadas</strong>, <strong>letras, palavras e luminárias Litofania em 3D</strong> e <strong>fotos Polaroid com QR Code musical</strong> — na cesta completa ou em mimos avulsos.
+          </p>
+
+          <!-- Painel Autoexplicativo Imediato: Card Ativo Invertido em Rosé com Texto Branco -->
+          <div class="bg-white/90 backdrop-blur-sm p-4 rounded-3xl border border-[#EED9DF] shadow-delicate">
+            <div class="flex items-center justify-between mb-3">
+              <span class="text-[11px] font-display font-semibold uppercase tracking-wider text-[#A65365]">✦ Clique nas 4 categorias para ver as fotos reais:</span>
+              <span class="text-[11px] font-display text-[#8C6C73]">Na Cesta ou Avulso</span>
+            </div>
+            <div class="grid grid-cols-2 gap-2.5">
+              <button type="button" data-hotspot-btn="cestas" class="text-left p-3.5 rounded-2xl bg-lily-rose-inverted text-white shadow-delicate transition-all">
+                <div class="flex items-center justify-between mb-1">
+                  <span class="text-base">🧺</span>
+                  <span class="text-[10px] font-display font-semibold uppercase px-2 py-0.5 rounded-full bg-white/20 text-white">01. Origem</span>
+                </div>
+                <p class="font-display font-semibold text-xs sm:text-sm">Cestas de Presente</p>
+                <p class="text-[11px] opacity-90 line-clamp-1">Café, flores, macarons &amp; afeto</p>
+              </button>
+
+              <button type="button" data-hotspot-btn="xicaras" class="text-left p-3.5 rounded-2xl border border-[#EED9DF] bg-[#FDF8F9] hover:bg-white text-[#382126] transition-all">
+                <div class="flex items-center justify-between mb-1">
+                  <span class="text-base">☕</span>
+                  <span class="text-[10px] font-display font-semibold uppercase px-2 py-0.5 rounded-full bg-[#F9EBEE] text-[#A65365]">02. Louça</span>
+                </div>
+                <p class="font-display font-semibold text-xs sm:text-sm">Xícaras Personalizadas</p>
+                <p class="text-[11px] text-[#785860] line-clamp-1">Alça coração, ouro &amp; nomes</p>
+              </button>
+
+              <button type="button" data-hotspot-btn="arte3d" class="text-left p-3.5 rounded-2xl border border-[#EED9DF] bg-[#FDF8F9] hover:bg-white text-[#382126] transition-all">
+                <div class="flex items-center justify-between mb-1">
+                  <span class="text-base">🧊</span>
+                  <span class="text-[10px] font-display font-semibold uppercase px-2 py-0.5 rounded-full bg-[#F9EBEE] text-[#A65365]">03. Atelier 3D</span>
+                </div>
+                <p class="font-display font-semibold text-xs sm:text-sm">Letras, Litofania &amp; 3D</p>
+                <p class="text-[11px] text-[#785860] line-clamp-1">Nomes, vasos &amp; foto 3D acesa</p>
+              </button>
+
+              <button type="button" data-hotspot-btn="polaroid" class="text-left p-3.5 rounded-2xl border border-[#EED9DF] bg-[#FDF8F9] hover:bg-white text-[#382126] transition-all">
+                <div class="flex items-center justify-between mb-1">
+                  <span class="text-base">📸</span>
+                  <span class="text-[10px] font-display font-semibold uppercase px-2 py-0.5 rounded-full bg-[#F9EBEE] text-[#A65365]">04. Memórias</span>
+                </div>
+                <p class="font-display font-semibold text-xs sm:text-sm">Polaroid &amp; QR Musical</p>
+                <p class="text-[11px] text-[#785860] line-clamp-1">Fio de fada, quadros &amp; Spotify</p>
+              </button>
+            </div>
+          </div>
+
+          <!-- CTAs Principais -->
+          <div class="flex flex-wrap items-center gap-3 pt-1">
+            <a href="#simulador" class="px-6 py-3.5 rounded-full bg-rosegold-gradient text-white text-xs sm:text-sm font-display font-semibold tracking-wide shadow-floating hover:opacity-95 transition-all flex items-center gap-2">
+              <span>✦ Personalizar Meu Presente Ao Vivo</span>
+            </a>
+            <a href="#concierge" class="px-5 py-3.5 rounded-full bg-white text-[#A65365] border border-[#E5C2C9] hover:border-[#C87888] text-xs sm:text-sm font-display font-semibold shadow-sm transition-all">
+              🪄 Me Ajude a Escolher (Quiz 15s)
+            </a>
+          </div>
+        </div>
+
+        <!-- Coluna Direita: Vitrine Fotográfica Dinâmica + Container Rosé Invertido com Texto Branco -->
+        <div class="lg:col-span-6 space-y-4">
+          <div class="relative rounded-[32px] overflow-hidden border-4 border-white shadow-floating bg-white">
+            <img id="hero-main-img" src="" alt="Vitrine Lily Cestas Personalizados" class="w-full h-[310px] sm:h-[370px] object-cover max-w-full transition-all duration-500" />
+            <div class="absolute inset-0 bg-gradient-to-t from-[#382126]/60 via-transparent to-transparent"></div>
+
+            <!-- Pins Interativos sobre a Imagem -->
+            <button type="button" data-hotspot-pin="cestas" class="hotspot-pulse absolute top-4 left-4 px-3 py-1.5 rounded-full text-xs font-display font-semibold shadow-md backdrop-blur-md transition-all flex items-center gap-1.5 bg-[#B36273] text-white">
+              <span>🧺</span><span>1. Cesta Afetiva</span>
+            </button>
+
+            <button type="button" data-hotspot-pin="xicaras" class="hotspot-pulse absolute top-4 right-4 px-3 py-1.5 rounded-full text-xs font-display font-semibold shadow-md backdrop-blur-md transition-all flex items-center gap-1.5 bg-white/95 text-[#382126]">
+              <span>☕</span><span>2. Xícara Rose Gold</span>
+            </button>
+
+            <button type="button" data-hotspot-pin="arte3d" class="hotspot-pulse absolute bottom-14 left-4 px-3 py-1.5 rounded-full text-xs font-display font-semibold shadow-md backdrop-blur-md transition-all flex items-center gap-1.5 bg-white/95 text-[#382126]">
+              <span>🧊</span><span>3. Letras &amp; Litofania 3D</span>
+            </button>
+
+            <button type="button" data-hotspot-pin="polaroid" class="hotspot-pulse absolute bottom-14 right-4 px-3 py-1.5 rounded-full text-xs font-display font-semibold shadow-md backdrop-blur-md transition-all flex items-center gap-1.5 bg-white/95 text-[#382126]">
+              <span>📸</span><span>4. Polaroid &amp; QR</span>
+            </button>
+
+            <!-- Mini Galeria Rápida na Base da Foto Hero -->
+            <div class="absolute bottom-3 left-4 right-4 flex items-center justify-between text-[11px] text-white/95 bg-[#382126]/60 backdrop-blur-md px-3.5 py-1.5 rounded-full">
+              <span id="hero-photo-caption" class="font-display font-medium truncate">Foto real: Cesta Lily Imperial + Xícara + Polaroid + Arte 3D</span>
+              <button type="button" id="hero-cycle-photo-btn" class="font-display font-semibold text-[#FFD9E1] hover:underline shrink-0 ml-2">Alternar Foto ↻</button>
+            </div>
+          </div>
+
+          <!-- CONTAINER INVERTIDO EM ROSÉ COM TEXTO BRANCO (Quebra de Container solicitada) -->
+          <div class="bg-lily-rose-inverted rounded-3xl p-5 sm:p-6 border border-white/25 shadow-floating text-white">
+            <div class="flex flex-wrap items-center justify-between gap-2 mb-2">
+              <span id="hero-spotlight-badge" class="px-3 py-1 rounded-full bg-white/20 text-white text-[11px] font-display font-semibold uppercase tracking-wider backdrop-blur-xs">
+                Pilar 01 • Tradição &amp; Afeto Lily
+              </span>
+              <span id="hero-spotlight-price" class="text-xs font-display font-bold text-[#9B4C5D] bg-white px-3.5 py-1 rounded-full shadow-xs">
+                A partir de R$ 179,90
+              </span>
+            </div>
+            <h2 id="hero-spotlight-title" class="font-display font-semibold text-xl sm:text-2xl text-white mb-1.5">
+              Cestas de Presente Artesanais (Rosé &amp; Branco)
+            </h2>
+            <p id="hero-spotlight-desc" class="text-xs sm:text-sm text-white/90 leading-relaxed mb-3.5">
+              Nossas cestas em vime branco com laço de cetim rosé, flores naturais, macarons e chocolates finos — prontas para receber sua xícara personalizada, peça 3D e fotos Polaroid.
+            </p>
+            <ul id="hero-spotlight-list" class="space-y-1.5 mb-4 text-white/95"></ul>
+            <div class="flex flex-wrap items-center justify-between gap-3 pt-3 border-t border-white/20">
+              <span class="text-[11px] text-white/80 font-display">💡 Clique nos botões numerados acima para trocar a categoria</span>
+              <button type="button" id="hero-spotlight-filter-btn" class="px-4 py-2 rounded-full bg-white text-[#9B4C5D] hover:bg-[#FFF5F7] text-xs font-display font-semibold shadow-sm transition-all">
+                Ver produtos desta linha →
+              </button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- SEÇÃO AUTOEXPLICATIVA: AS 3 FORMAS DE COMPRAR (COM INVERSÃO DE CONTAINER CENTRAL EM ROSÉ) -->
+  <section id="proposta" class="py-16 bg-white border-b border-[#EED9DF]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-3xl mx-auto mb-12">
+        <span class="text-xs font-display font-semibold uppercase tracking-[0.2em] text-[#B36273] block mb-2">Posicionamento Inovador no Mercado</span>
+        <h2 class="font-display font-light text-2xl sm:text-4xl text-[#382126] mb-3">
+          Mais que uma cesta: um <strong class="font-semibold text-[#A65365]">presente que permanece para sempre</strong>
+        </h2>
+        <p class="text-sm sm:text-base text-[#6E5057]">
+          Nas floriculturas comuns, os doces acabam e a cesta é guardada. Na <strong>Lily Cestas</strong>, você une a delícia gastronômica a memórias físicas e digitais que decoram a rotina de quem você ama:
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <!-- Card 1: Branco Pérola -->
+        <div class="rounded-3xl p-6 sm:p-7 bg-lily-pearl border border-[#EED9DF] shadow-delicate flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between mb-4">
+              <span class="w-12 h-12 rounded-2xl bg-white border border-[#EBCAD2] flex items-center justify-center text-2xl shadow-sm">🧺</span>
+              <span class="px-3 py-1 rounded-full bg-[#F9EBEE] text-[#A65365] text-xs font-display font-semibold">Formato 01</span>
+            </div>
+            <h3 class="font-display font-semibold text-xl text-[#382126] mb-2">
+              Cesta Completa + Personalizados Inclusos
+            </h3>
+            <p class="text-xs sm:text-sm text-[#5A3D43] leading-relaxed mb-4">
+              Você escolhe a cesta de café da manhã, macarons ou espumante rosé e nós <strong>integramos dentro dela</strong> a xícara com o nome da pessoa, uma escultura/palavra em 3D e as fotos Polaroid do casal ou família.
+            </p>
+          </div>
+          <div class="pt-3 border-t border-[#EAD4DA] text-xs font-display font-semibold text-[#A65365]">
+            ✦ Experiência completa de despertar &amp; emocionar
+          </div>
+        </div>
+
+        <!-- Card 2: INVERTIDO EM ROSÉ COM TEXTO BRANCO -->
+        <div class="rounded-3xl p-6 sm:p-7 bg-lily-rose-inverted text-white border border-white/20 shadow-floating flex flex-col justify-between transform md:-translate-y-2">
+          <div>
+            <div class="flex items-center justify-between mb-4">
+              <span class="w-12 h-12 rounded-2xl bg-white/20 border border-white/30 flex items-center justify-center text-2xl backdrop-blur-xs">☕</span>
+              <span class="px-3 py-1 rounded-full bg-white text-[#9B4C5D] text-xs font-display font-bold">Formato 02 • Destaque</span>
+            </div>
+            <h3 class="font-display font-semibold text-xl text-white mb-2">
+              Presentes Personalizados Avulsos
+            </h3>
+            <p class="text-xs sm:text-sm text-white/90 leading-relaxed mb-4">
+              Quer presentear sem a cesta de alimentos? Peça <strong>apenas a Xícara Personalizada</strong> na caixa rosé com laço, a <strong>Luminária Litofania 3D</strong> com foto que acende, ou o <strong>Quadro Shadow Box 3D com Polaroids</strong>.
+            </p>
+          </div>
+          <div class="pt-3 border-t border-white/25 text-xs font-display font-semibold text-white">
+            ✦ Perfeito para amigas, madrinhas, namorados e envio nacional
+          </div>
+        </div>
+
+        <!-- Card 3: Branco Pérola -->
+        <div class="rounded-3xl p-6 sm:p-7 bg-lily-pearl border border-[#EED9DF] shadow-delicate flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between mb-4">
+              <span class="w-12 h-12 rounded-2xl bg-white border border-[#EBCAD2] flex items-center justify-center text-2xl shadow-sm">🧊</span>
+              <span class="px-3 py-1 rounded-full bg-[#F9EBEE] text-[#A65365] text-xs font-display font-semibold">Formato 03</span>
+            </div>
+            <h3 class="font-display font-semibold text-xl text-[#382126] mb-2">
+              Decoração Afetiva &amp; Objetos com 3D
+            </h3>
+            <p class="text-xs sm:text-sm text-[#5A3D43] leading-relaxed mb-4">
+              Peças autorais com <strong>tecnologia 3D na composição</strong> em tons rosé blush, branco pérola e rose gold: letras iniciais de mesa, palavras esculturais, vasos twist com flores secas e corações facetados.
+            </p>
+          </div>
+          <div class="pt-3 border-t border-[#EAD4DA] text-xs font-display font-semibold text-[#A65365]">
+            ✦ Design exclusivo que transforma quartos, salas e escritórios
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- INOVAÇÃO DE MERCADO 01: CONCIERGE INTELIGENTE LILY (CONTAINER INTEIRO INVERTIDO EM ROSÉ COM TEXTO BRANCO) -->
+  <section id="concierge" class="py-16 bg-lily-rose-section text-white border-b border-[#EED9DF]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+        
+        <div class="lg:col-span-5 space-y-4">
+          <span class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white/20 text-white text-xs font-display font-semibold uppercase tracking-widest backdrop-blur-xs">
+            🪄 Exclusividade Lily Cestas
+          </span>
+          <h2 class="font-display font-light text-2xl sm:text-4xl text-white leading-tight">
+            Em dúvida do que montar? Use o <strong class="font-semibold">Concierge Inteligente Lily</strong>
+          </h2>
+          <p class="text-xs sm:text-sm text-white/90 leading-relaxed">
+            Responda 3 perguntas rápidas sobre quem vai receber o presente. Nossa curadoria cruza nossas cestas, xícaras, peças 3D e Polaroids para indicar o kit perfeito — e já preenche o simulador para você!
+          </p>
+          <div class="p-4 rounded-2xl bg-white/15 border border-white/25 backdrop-blur-xs space-y-2">
+            <p class="text-xs font-display font-semibold uppercase tracking-wider text-[#FFE8EE]">✦ Diferenciais que só a Lily tem:</p>
+            <ul class="text-xs text-white/95 space-y-1.5">
+              <li>• <strong>Lily Memory Tag™ (QR Code Musical)</strong>: aponte a câmera do celular para a Polaroid e ouça a música de vocês.</li>
+              <li>• <strong>Litofania 3D Iluminada</strong>: sua foto impressa em relevo 3D que se revela quando a luz acende.</li>
+              <li>• <strong>Prévia Instantânea</strong>: teste sua foto real e o nome na xícara antes de encomendar.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="lg:col-span-7 bg-white/15 backdrop-blur-md rounded-3xl p-6 sm:p-8 border border-white/30 shadow-floating space-y-5">
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            <div>
+              <label for="quiz-who" class="block text-xs font-display font-semibold uppercase tracking-wider text-white mb-2">1. Para quem é?</label>
+              <select id="quiz-who" class="w-full rounded-2xl bg-white text-[#382126] px-3.5 py-3 text-xs sm:text-sm font-medium focus:outline-none">
+                <option value="amor">💖 Amor / Namorado(a) / Casal</option>
+                <option value="mae">🌷 Mãe / Avó / Família</option>
+                <option value="amiga">✨ Amiga / Madrinha / Aniversário</option>
+                <option value="decor">🏡 Para Mim / Decoração &amp; Mimo</option>
+              </select>
+            </div>
+
+            <div>
+              <label for="quiz-vibe" class="block text-xs font-display font-semibold uppercase tracking-wider text-white mb-2">2. Qual experiência?</label>
+              <select id="quiz-vibe" class="w-full rounded-2xl bg-white text-[#382126] px-3.5 py-3 text-xs sm:text-sm font-medium focus:outline-none">
+                <option value="completa">🧺 Cesta Completa + Personalizados</option>
+                <option value="iluminada">💡 Emoção Iluminada (3D + Polaroid)</option>
+                <option value="louca">☕ Louça Personalizada + Mimo 3D</option>
+              </select>
+            </div>
+
+            <div>
+              <label for="quiz-budget" class="block text-xs font-display font-semibold uppercase tracking-wider text-white mb-2">3. Investimento</label>
+              <select id="quiz-budget" class="w-full rounded-2xl bg-white text-[#382126] px-3.5 py-3 text-xs sm:text-sm font-medium focus:outline-none">
+                <option value="premium">Acima de R$ 170 (Experiência Luxo)</option>
+                <option value="medio">De R$ 75 a R$ 170 (Kit Afetivo)</option>
+                <option value="mimo">Até R$ 75 (Mimo Delicado Avulso)</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Resultado Dinâmico do Concierge -->
+          <div id="quiz-result-card" class="bg-white rounded-2xl p-4 sm:p-5 text-[#382126] shadow-md flex flex-col sm:flex-row items-center gap-4">
+            <img id="quiz-result-img" src="" alt="Recomendação Lily" class="w-full sm:w-28 h-28 rounded-2xl object-cover shrink-0 border border-[#EED9DF]" />
+            <div class="flex-1 min-w-0 space-y-1.5 text-center sm:text-left">
+              <div class="flex flex-wrap items-center justify-center sm:justify-start gap-2">
+                <span class="px-2.5 py-0.5 rounded-full bg-[#F9EBEE] text-[#A65365] text-[10px] font-display font-bold uppercase tracking-wider">Recomendação Perfeita</span>
+                <span id="quiz-result-price" class="text-sm font-display font-bold text-[#A65365]">R$ 239,90</span>
+              </div>
+              <h3 id="quiz-result-title" class="font-display font-semibold text-base sm:text-lg text-[#382126]">Cesta Lily Imperial Rosé &amp; Personalizados</h3>
+              <p id="quiz-result-desc" class="text-xs text-[#6E5057] line-clamp-2">Combina vime branco, rosas, chocolates, xícara personalizada com nome, letra 3D e 3 fotos Polaroid.</p>
+              <div class="pt-2 flex flex-wrap items-center justify-center sm:justify-start gap-2">
+                <button type="button" id="quiz-load-sim-btn" class="px-4 py-2 rounded-full bg-rosegold-gradient text-white text-xs font-display font-semibold shadow-xs hover:opacity-95 transition-all">
+                  ✦ Carregar Combinação no Simulador
+                </button>
+                <button type="button" id="quiz-add-direct-btn" class="px-4 py-2 rounded-full border border-[#D9A7B2] text-[#A65365] hover:bg-[#FDF2F5] text-xs font-display font-semibold transition-all">
+                  + Adicionar Direto à Sacola
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- SEÇÃO OS 4 PILARES DO UNIVERSO LILY (ALTERNÂNCIA DE CONTAINERS BRANCOS E ROSÉ INVERTIDOS) -->
+  <section id="pilares" class="py-16 bg-[#FDF8F9] border-b border-[#EED9DF]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-4">
+        <div>
+          <span class="text-xs font-display font-semibold uppercase tracking-[0.2em] text-[#B36273] block mb-2">Fotografia Autoral &amp; Acabamento Impecável</span>
+          <h2 class="font-display font-light text-2xl sm:text-4xl text-[#382126]">
+            Nossas <strong class="font-semibold text-[#A65365]">4 categorias de criação</strong>
+          </h2>
+        </div>
+        <p class="text-xs sm:text-sm text-[#6E5057] max-w-md">
+          Explore cada categoria individualmente ou combine itens de todas elas dentro de uma única cesta ou box personalizada.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-7">
+        <!-- Card 1: Cestas (Fundo Branco Pérola) -->
+        <div class="bg-white rounded-3xl border border-[#EED9DF] overflow-hidden shadow-delicate grid grid-cols-1 sm:grid-cols-12">
+          <div class="sm:col-span-5 h-56 sm:h-auto overflow-hidden">
+            <img data-lily-img="cesta_macarons" src="" alt="Cestas de Presente Lily em Rosé e Branco" class="w-full h-full object-cover max-w-full hover:scale-105 transition-transform duration-500" />
+          </div>
+          <div class="sm:col-span-7 p-6 flex flex-col justify-between">
+            <div>
+              <span class="text-[11px] font-display font-bold uppercase tracking-wider text-[#B36273]">01 • Cestas &amp; Boxes Afetivas</span>
+              <h3 class="font-display font-semibold text-xl text-[#382126] mt-1 mb-2">Cestas de Presente Personalizáveis</h3>
+              <p class="text-xs sm:text-sm text-[#6E5057] leading-relaxed mb-3">
+                Cestas em vime branco e boxes rígidas rosé recheadas com macarons, morangos, pães artesanais, chocolates finos, espumante e flores — com berço dedicado para sua xícara, peça 3D e Polaroids.
+              </p>
+            </div>
+            <div class="flex items-center justify-between pt-3 border-t border-[#F6E8EC]">
+              <span class="text-xs font-display font-bold text-[#382126]">De R$ 189,90 a R$ 239,90</span>
+              <button type="button" data-pillar-jump="cestas" class="px-3.5 py-1.5 rounded-full bg-[#F9EBEE] text-xs font-display font-semibold text-[#A65365] hover:bg-[#F2D5DC] transition-colors">Ver 4 Cestas →</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 2: Xícaras (CONTAINER INVERTIDO EM ROSÉ COM TEXTO BRANCO) -->
+        <div class="bg-lily-rose-inverted text-white rounded-3xl border border-white/25 overflow-hidden shadow-floating grid grid-cols-1 sm:grid-cols-12">
+          <div class="sm:col-span-5 h-56 sm:h-auto overflow-hidden">
+            <img data-lily-img="caneca_coracao" src="" alt="Xícaras e Canecas Personalizadas Lily" class="w-full h-full object-cover max-w-full hover:scale-105 transition-transform duration-500" />
+          </div>
+          <div class="sm:col-span-7 p-6 flex flex-col justify-between">
+            <div>
+              <span class="text-[11px] font-display font-bold uppercase tracking-wider text-[#FFE4E9]">02 • Louças Exclusivas</span>
+              <h3 class="font-display font-semibold text-xl text-white mt-1 mb-2">Xícaras &amp; Canecas Personalizadas</h3>
+              <p class="text-xs sm:text-sm text-white/90 leading-relaxed mb-3">
+                Porcelana branco pérola e cerâmica rosé blush com alça de coração rose gold ou filete dourado. Gravamos nomes, iniciais florais e enviamos com tag Polaroid pendurada no laço.
+              </p>
+            </div>
+            <div class="flex items-center justify-between pt-3 border-t border-white/25">
+              <span class="text-xs font-display font-bold text-white">De R$ 74,90 a R$ 109,90</span>
+              <button type="button" data-pillar-jump="xicaras" class="px-3.5 py-1.5 rounded-full bg-white text-xs font-display font-semibold text-[#9B4C5D] hover:bg-[#FFF5F7] transition-colors">Ver 3 Xícaras →</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 3: Arte 3D & Litofania (CONTAINER INVERTIDO EM ROSÉ COM TEXTO BRANCO) -->
+        <div class="bg-lily-rose-soft-inverted text-white rounded-3xl border border-white/25 overflow-hidden shadow-floating grid grid-cols-1 sm:grid-cols-12">
+          <div class="sm:col-span-5 h-56 sm:h-auto overflow-hidden">
+            <img data-lily-img="litofania_3d" src="" alt="Litofania 3D, Letras 3D e Objetos Decorativos" class="w-full h-full object-cover max-w-full hover:scale-105 transition-transform duration-500" />
+          </div>
+          <div class="sm:col-span-7 p-6 flex flex-col justify-between">
+            <div>
+              <span class="text-[11px] font-display font-bold uppercase tracking-wider text-[#FFE4E9]">03 • Design Tridimensional &amp; Luz</span>
+              <h3 class="font-display font-semibold text-xl text-white mt-1 mb-2">Letras 3D, Litofania &amp; Objetos 3D</h3>
+              <p class="text-xs sm:text-sm text-white/90 leading-relaxed mb-3">
+                De iniciais e palavras esculturais (<em>Amor, Gratidão</em>) até vasos espirais 3D, corações facetados e nossa inovadora <strong>Luminária Litofania 3D</strong> que revela sua foto quando acesa!
+              </p>
+            </div>
+            <div class="flex items-center justify-between pt-3 border-t border-white/25">
+              <span class="text-xs font-display font-bold text-white">De R$ 59,90 a R$ 119,90</span>
+              <button type="button" data-pillar-jump="arte3d" class="px-3.5 py-1.5 rounded-full bg-white text-xs font-display font-semibold text-[#9B4C5D] hover:bg-[#FFF5F7] transition-colors">Ver Peças 3D →</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 4: Polaroid & Quadros (Fundo Branco Pérola) -->
+        <div class="bg-white rounded-3xl border border-[#EED9DF] overflow-hidden shadow-delicate grid grid-cols-1 sm:grid-cols-12">
+          <div class="sm:col-span-5 h-56 sm:h-auto overflow-hidden">
+            <img data-lily-img="quadro_shadowbox" src="" alt="Fotografias Polaroid e Quadro Shadow Box 3D" class="w-full h-full object-cover max-w-full hover:scale-105 transition-transform duration-500" />
+          </div>
+          <div class="sm:col-span-7 p-6 flex flex-col justify-between">
+            <div>
+              <span class="text-[11px] font-display font-bold uppercase tracking-wider text-[#B36273]">04 • Memórias Físicas &amp; Digitais</span>
+              <h3 class="font-display font-semibold text-xl text-[#382126] mt-1 mb-2">Fotografia Polaroid &amp; Quadros 3D</h3>
+              <p class="text-xs sm:text-sm text-[#6E5057] leading-relaxed mb-3">
+                Kits de fotos Polaroid com fio de fada LED, mini pregadores, charms 3D e <strong>Quadro Shadow Box com placa QR Code Spotify</strong> para tocar a música de vocês no celular.
+              </p>
+            </div>
+            <div class="flex items-center justify-between pt-3 border-t border-[#F6E8EC]">
+              <span class="text-xs font-display font-bold text-[#382126]">De R$ 44,90 a R$ 84,90</span>
+              <button type="button" data-pillar-jump="polaroid" class="px-3.5 py-1.5 rounded-full bg-[#F9EBEE] text-xs font-display font-semibold text-[#A65365] hover:bg-[#F2D5DC] transition-colors">Ver Polaroids →</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ESTÚDIO INTERATIVO LILY: SIMULADOR AO VIVO COM UPLOAD DE FOTO REAL, GERADOR DE DEDICATÓRIA & CÁPSULA QR -->
+  <section id="simulador" class="py-16 bg-white border-b border-[#EED9DF]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-3xl mx-auto mb-10">
+        <span class="px-3.5 py-1 rounded-full bg-[#F9EBEE] text-[#A65365] text-xs font-display font-semibold uppercase tracking-widest inline-block mb-2">
+          ✦ Estúdio Interativo Lily Cestas
+        </span>
+        <h2 class="font-display font-light text-2xl sm:text-4xl text-[#382126] mb-2">
+          Personalize &amp; <strong class="font-semibold text-[#A65365]">Teste com Sua Própria Foto</strong> ao Vivo
+        </h2>
+        <p class="text-sm sm:text-base text-[#6E5057]">
+          Escreva o nome na xícara, digite sua palavra em 3D, <strong>envie uma foto do seu celular/computador</strong> para ver na Polaroid, adicione uma música na Cápsula QR Code e veja o resultado em tempo real!
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+        <!-- Controles do Simulador (7 colunas - Fundo Pérola) -->
+        <div class="lg:col-span-7 bg-[#FDF8F9] rounded-3xl p-6 sm:p-8 border border-[#EED9DF] shadow-delicate space-y-6">
+          
+          <!-- Passo 1: Base -->
+          <div>
+            <label for="sim-base-select" class="block text-xs font-display font-bold uppercase tracking-wider text-[#A65365] mb-2">
+              1. Escolha o Formato do Presente (Cesta Completa ou Avulsos)
+            </label>
+            <select id="sim-base-select" class="w-full rounded-2xl border border-[#E5C2C9] bg-white px-4 py-3 text-xs sm:text-sm font-medium text-[#382126] focus:outline-none focus:border-[#C87888]">
+              <option value="cesta" data-price="149.00" data-label="Cesta Lily Imperial (Vime Branco + Flores, Macarons &amp; Delícias)">🧺 Cesta Lily Imperial em Vime Branco + Flores &amp; Delícias (R$ 149,00)</option>
+              <option value="box" data-price="89.00" data-label="Box Rígida Luxo Rosé &amp; Pérola com Laço de Cetim + Trufas">🎁 Box Rígida Luxo Rosé &amp; Pérola com Laço + Trufas (R$ 89,00)</option>
+              <option value="avulso" data-price="0.00" data-label="Apenas Itens Personalizados Avulsos (Embalagem Presente Cortesia)">✨ Quero Apenas os Itens Personalizados Avulsos (Embalagem Cortesia - R$ 0,00)</option>
+            </select>
+          </div>
+
+          <!-- Passo 2: Xícara -->
+          <div class="grid grid-cols-1 sm:grid-cols-12 gap-4 pt-4 border-t border-[#EED9DF]">
+            <div class="sm:col-span-7">
+              <label for="sim-mug-select" class="block text-xs font-display font-bold uppercase tracking-wider text-[#A65365] mb-2">
+                2. Xícara ou Caneca Personalizada
+              </label>
+              <select id="sim-mug-select" class="w-full rounded-2xl border border-[#E5C2C9] bg-white px-4 py-3 text-xs sm:text-sm font-medium text-[#382126] focus:outline-none focus:border-[#C87888]">
+                <option value="rose-gold" data-price="58.90" data-label="Caneca Rosé &amp; Branco com Alça Coração Rose Gold">☕ Caneca Alça Coração Rose Gold + Tag Polaroid (+R$ 58,90)</option>
+                <option value="rose-matte" data-price="54.90" data-label="Xícara Porcelana Branco Pérola &amp; Alça Rose Gold">🌸 Xícara Porcelana Branco Pérola &amp; Rose Gold (+R$ 54,90)</option>
+                <option value="cha-floral" data-price="74.90" data-label="Xícara de Chá Imperial com Pires Floral &amp; Colher Coração">🍵 Xícara de Chá com Pires Floral &amp; Colher Coração (+R$ 74,90)</option>
+                <option value="none" data-price="0.00" data-label="Sem Xícara Personalizada">— Não incluir xícara neste pedido (R$ 0,00)</option>
+              </select>
+            </div>
+            <div class="sm:col-span-5">
+              <label for="sim-mug-text" class="block text-xs font-display font-bold uppercase tracking-wider text-[#382126] mb-2">
+                Nome ou Monograma na Louça
+              </label>
+              <input id="sim-mug-text" type="text" maxlength="24" value="Ana Clara ✨" placeholder="Ex: Mãe Te Amo ✨" class="w-full rounded-2xl border border-[#E5C2C9] bg-white px-4 py-3 text-xs sm:text-sm text-[#382126] focus:outline-none focus:border-[#C87888]" />
+            </div>
+          </div>
+
+          <!-- Passo 3: Letras, Palavras, Litofania & Objetos 3D -->
+          <div class="pt-4 border-t border-[#EED9DF] space-y-4">
+            <div class="grid grid-cols-1 sm:grid-cols-12 gap-4">
+              <div class="sm:col-span-7">
+                <label for="sim-3d-select" class="block text-xs font-display font-bold uppercase tracking-wider text-[#A65365] mb-2">
+                  3. Peça do Atelier 3D (Letras, Litofania ou Vaso 3D)
+                </label>
+                <select id="sim-3d-select" class="w-full rounded-2xl border border-[#E5C2C9] bg-white px-4 py-3 text-xs sm:text-sm font-medium text-[#382126] focus:outline-none focus:border-[#C87888]">
+                  <option value="palavra" data-price="49.90" data-label="Palavra Escultural 3D Sob Medida">🧊 Palavra Escultural 3D Sob Medida (+R$ 49,90)</option>
+                  <option value="inicial" data-price="36.90" data-label="Letra Inicial 3D de Mesa (12cm) + Coração 3D">🔤 Letra Inicial 3D de Mesa 12cm + Coração (+R$ 36,90)</option>
+                  <option value="litofania" data-price="98.90" data-label="Luminária Litofania 3D com Foto Iluminada LED">💡 Luminária Litofania 3D com Foto que Acende (+R$ 98,90)</option>
+                  <option value="vaso3d" data-price="68.90" data-label="Vaso Twist 3D Rosé com Flores Secas + Coração Facetado">🏺 Vaso Twist 3D Rosé + Coração Facetado 3D (+R$ 68,90)</option>
+                  <option value="none" data-price="0.00" data-label="Sem Item 3D">— Não incluir peça 3D (R$ 0,00)</option>
+                </select>
+              </div>
+              <div class="sm:col-span-5">
+                <label for="sim-3d-text" class="block text-xs font-display font-bold uppercase tracking-wider text-[#382126] mb-2">
+                  Palavra ou Iniciais em 3D
+                </label>
+                <input id="sim-3d-text" type="text" maxlength="12" value="AMOR" placeholder="Ex: GRATIDÃO ou L&amp;M" class="w-full rounded-2xl border border-[#E5C2C9] bg-white px-4 py-3 text-xs sm:text-sm uppercase font-display font-semibold text-[#382126] focus:outline-none focus:border-[#C87888]" />
+              </div>
+            </div>
+
+            <div class="flex flex-wrap items-center gap-2.5">
+              <span class="text-xs font-display font-semibold text-[#5A3D43]">Tom da peça 3D:</span>
+              <button type="button" data-sim-color3d="pink" data-sim-color3d-label="Rosé Blush Pastel" class="px-3.5 py-1.5 rounded-full bg-[#F4C7D0] text-[#382126] text-xs font-display font-semibold ring-2 ring-[#382126] transition-all">
+                Rosé Blush Pastel
+              </button>
+              <button type="button" data-sim-color3d="pearl" data-sim-color3d-label="Branco Pérola Acetinado" class="px-3.5 py-1.5 rounded-full bg-white border border-[#E5C2C9] text-[#382126] text-xs font-display font-semibold transition-all">
+                Branco Pérola
+              </button>
+              <button type="button" data-sim-color3d="rosegold" data-sim-color3d-label="Rose Gold Metálico" class="px-3.5 py-1.5 rounded-full bg-[#C97A8A] text-white text-xs font-display font-semibold transition-all">
+                Rose Gold Metálico
+              </button>
+            </div>
+          </div>
+
+          <!-- Passo 4: Fotografias Polaroid + Upload de Foto Real + Filtros -->
+          <div class="pt-4 border-t border-[#EED9DF] space-y-4">
+            <div class="grid grid-cols-1 sm:grid-cols-12 gap-4">
+              <div class="sm:col-span-7">
+                <label for="sim-polaroid-select" class="block text-xs font-display font-bold uppercase tracking-wider text-[#A65365] mb-2">
+                  4. Fotografias Polaroid &amp; Quadros
+                </label>
+                <select id="sim-polaroid-select" class="w-full rounded-2xl border border-[#E5C2C9] bg-white px-4 py-3 text-xs sm:text-sm font-medium text-[#382126] focus:outline-none focus:border-[#C87888]">
+                  <option value="pack8" data-price="44.90" data-label="Varal 8 Polaroids + Fio de Fada LED &amp; Charms 3D">📸 8 Fotos Polaroid + Fio de Fada LED &amp; Charms 3D (+R$ 44,90)</option>
+                  <option value="shadowbox" data-price="78.90" data-label="Quadro Shadow Box 3D + 3 Polaroids + Placa QR Musical">🖼️ Quadro Shadow Box 3D + Polaroids + Placa QR (+R$ 78,90)</option>
+                  <option value="pack6" data-price="36.90" data-label="Pack 6 Polaroids Imantadas + Suporte de Mesa 3D">✨ 6 Polaroids Imantadas + Base de Mesa 3D (+R$ 36,90)</option>
+                  <option value="none" data-price="0.00" data-label="Sem Fotos Polaroid">— Não incluir fotos Polaroid (R$ 0,00)</option>
+                </select>
+              </div>
+              <div class="sm:col-span-5">
+                <label for="sim-polaroid-caption" class="block text-xs font-display font-bold uppercase tracking-wider text-[#382126] mb-2">
+                  Legenda na Polaroid
+                </label>
+                <input id="sim-polaroid-caption" type="text" maxlength="34" value="Nosso momento inesquecível ♥" placeholder="Ex: Para sempre nós ♥" class="w-full rounded-2xl border border-[#E5C2C9] bg-white px-4 py-3 text-xs sm:text-sm text-[#382126] focus:outline-none focus:border-[#C87888]" />
+              </div>
+            </div>
+
+            <!-- Inovação: Upload Real de Foto do Cliente + Seletor de Efeito -->
+            <div class="p-3.5 rounded-2xl bg-white border border-[#EED9DF] flex flex-wrap items-center justify-between gap-3">
+              <div class="flex items-center gap-3">
+                <label for="sim-photo-upload" class="cursor-pointer px-3.5 py-2 rounded-xl bg-[#F9EBEE] hover:bg-[#F2D5DC] text-[#A65365] text-xs font-display font-semibold transition-colors inline-flex items-center gap-1.5">
+                  <span>📷 Enviar Minha Foto para Testar</span>
+                  <input id="sim-photo-upload" type="file" accept="image/*" class="hidden" />
+                </label>
+                <span class="text-[11px] text-[#785860]">Veja sua foto real na Polaroid ao lado!</span>
+              </div>
+              <div class="flex items-center gap-1.5">
+                <span class="text-[11px] font-display font-semibold text-[#5A3D43]">Filtro:</span>
+                <button type="button" data-photo-filter="natural" class="px-2.5 py-1 rounded-lg bg-[#382126] text-white text-[11px] font-display font-medium">Natural</button>
+                <button type="button" data-photo-filter="vintage" class="px-2.5 py-1 rounded-lg bg-[#FDF8F9] border border-[#E5C2C9] text-[#5A3D43] text-[11px] font-display font-medium">Retrô</button>
+                <button type="button" data-photo-filter="bw" class="px-2.5 py-1 rounded-lg bg-[#FDF8F9] border border-[#E5C2C9] text-[#5A3D43] text-[11px] font-display font-medium">P&amp;B</button>
+                <button type="button" data-photo-filter="lithophane" class="px-2.5 py-1 rounded-lg bg-[#FDF8F9] border border-[#E5C2C9] text-[#A65365] text-[11px] font-display font-semibold">💡 Luz 3D</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Passo 5: Cápsula de Memória QR Code Musical + Gerador Inteligente de Dedicatória -->
+          <div class="pt-4 border-t border-[#EED9DF] space-y-4">
+            <div class="grid grid-cols-1 sm:grid-cols-12 gap-4">
+              <div class="sm:col-span-5">
+                <label for="sim-occasion-select" class="block text-xs font-display font-bold uppercase tracking-wider text-[#A65365] mb-2">
+                  5. Ocasião Especial
+                </label>
+                <select id="sim-occasion-select" class="w-full rounded-2xl border border-[#E5C2C9] bg-white px-4 py-3 text-xs sm:text-sm font-medium text-[#382126] focus:outline-none focus:border-[#C87888]">
+                  <option value="Aniversário Especial">🎂 Aniversário Especial</option>
+                  <option value="Amor &amp; Romântico">💖 Amor &amp; Romântico</option>
+                  <option value="Dia das Mães / Família">🌷 Mãe / Família</option>
+                  <option value="Gratidão &amp; Amizade">✨ Amiga / Madrinha</option>
+                  <option value="Decoração / Mimo Pessoal">🏡 Decoração / Mimo</option>
+                </select>
+              </div>
+              <div class="sm:col-span-7">
+                <label for="sim-qr-song" class="block text-xs font-display font-bold uppercase tracking-wider text-[#A65365] mb-2">
+                  🎵 Música ou Link para Placa QR Code (Cortesia Lily)
+                </label>
+                <input id="sim-qr-song" type="text" maxlength="50" value="Perfect - Ed Sheeran (Nossa Música)" placeholder="Nome da música, link Spotify ou vídeo..." class="w-full rounded-2xl border border-[#E5C2C9] bg-white px-4 py-3 text-xs sm:text-sm text-[#382126] focus:outline-none focus:border-[#C87888]" />
+              </div>
+            </div>
+
+            <div>
+              <div class="flex items-center justify-between mb-2">
+                <label for="sim-card-msg" class="text-xs font-display font-bold uppercase tracking-wider text-[#382126]">
+                  Dedicatória no Cartão Rosé (Cortesia)
+                </label>
+                <button type="button" id="sim-generate-msg-btn" class="text-xs font-display font-semibold text-[#A65365] bg-[#F9EBEE] hover:bg-[#F2D5DC] px-3 py-1 rounded-full transition-colors">
+                  ✨ Gerar Mensagem Emocionante
+                </button>
+              </div>
+              <input id="sim-card-msg" type="text" maxlength="110" value="Que cada detalhe desta cesta traga doçura, amor e memórias inesquecíveis para o seu dia!" class="w-full rounded-2xl border border-[#E5C2C9] bg-white px-4 py-3 text-xs sm:text-sm text-[#382126] focus:outline-none focus:border-[#C87888]" />
+            </div>
+          </div>
+
+        </div>
+
+        <!-- PAINEL DE PRÉ-VISUALIZAÇÃO AO VIVO (5 colunas - INVERTIDO EM ROSÉ COM TEXTO BRANCO!) -->
+        <div class="lg:col-span-5 bg-lily-rose-inverted text-white rounded-3xl p-6 sm:p-7 border-2 border-white/30 shadow-floating space-y-5 sticky top-24">
+          <div class="flex items-center justify-between border-b border-white/25 pb-3">
+            <div class="flex items-center gap-2.5">
+              <img data-lily-logo="white" src="" alt="Lily Cestas" class="h-9 w-auto object-contain" />
+              <div>
+                <span class="text-[10px] font-display font-semibold uppercase tracking-[0.2em] text-[#FFE4E9] block">Prévia em Tempo Real</span>
+                <h3 class="font-display font-semibold text-xl text-white">Seu Projeto Lily</h3>
+              </div>
+            </div>
+            <span id="sim-preview-occasion" class="px-3 py-1 rounded-full bg-white/20 text-white text-xs font-display font-semibold border border-white/30">
+              Aniversário Especial
+            </span>
+          </div>
+
+          <div class="p-3 rounded-2xl bg-white/15 border border-white/25 flex items-center gap-3 backdrop-blur-xs">
+            <span class="text-xl">🧺</span>
+            <div class="min-w-0">
+              <span class="text-[10px] font-display uppercase tracking-wider text-[#FFE4E9] block">Formato Selecionado</span>
+              <p id="sim-preview-base" class="text-xs sm:text-sm font-display font-semibold text-white truncate">
+                Cesta Lily Imperial (Vime Branco + Flores, Macarons &amp; Delícias)
+              </p>
+            </div>
+          </div>
+
+          <!-- Grid Visual: Xícara + Peça 3D -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+            <!-- Simulação Visual da Xícara -->
+            <div id="sim-preview-mug-box" class="bg-white text-[#382126] rounded-2xl p-4 border border-white/40 flex flex-col items-center text-center shadow-sm transition-opacity">
+              <span class="text-[10px] font-display font-bold uppercase tracking-wider text-[#A65365] mb-2">Prévia da Louça</span>
+              <div class="relative my-1 flex items-center justify-center">
+                <div id="sim-mug-cup-body" class="w-28 h-20 rounded-b-3xl rounded-t-lg border-2 border-[#B76E79] bg-white shadow-xs flex flex-col items-center justify-center px-2 relative z-10">
+                  <span class="text-[10px] text-[#C87888]">✿ ✿ ✿</span>
+                  <span id="sim-preview-mug-text" class="font-display font-semibold text-xs text-[#382126] leading-tight line-clamp-2 mt-0.5">
+                    Ana Clara ✨
+                  </span>
+                </div>
+                <div class="w-6 h-12 rounded-r-full border-4 border-[#B76E79] -ml-1.5"></div>
+              </div>
+              <p id="sim-preview-mug-style" class="text-[10px] font-display text-[#785860] mt-2 line-clamp-1">
+                Caneca Alça Coração Rose Gold
+              </p>
+            </div>
+
+            <!-- Simulação Visual da Peça 3D em Montserrat -->
+            <div id="sim-preview-3d-box" class="bg-[#382126]/65 backdrop-blur-xs rounded-2xl p-4 border border-white/25 flex flex-col items-center justify-between text-center transition-opacity">
+              <span class="text-[10px] font-display font-bold uppercase tracking-wider text-[#FFE4E9]">Escultura / Arte 3D</span>
+              <div class="py-3 flex flex-col items-center justify-center">
+                <span id="sim-preview-3d-text" class="font-display font-bold text-xl sm:text-2xl lily-3d-text-pink select-none">
+                  AMOR
+                </span>
+                <div class="w-24 h-1.5 rounded-full bg-white/35 mt-2"></div>
+              </div>
+              <p id="sim-preview-3d-label" class="text-[10px] font-display text-[#FFE4E9] line-clamp-1">
+                Palavra Escultural 3D • Rosé Blush
+              </p>
+            </div>
+          </div>
+
+          <!-- Simulação Visual da Moldura Polaroid + Placa QR Code Musical -->
+          <div id="sim-preview-polaroid-box" class="polaroid-card rounded-xl mx-auto max-w-xs transform -rotate-1 transition-all text-[#382126]">
+            <div class="relative h-32 rounded-lg overflow-hidden bg-[#FDF2F5]">
+              <img id="sim-polaroid-img" data-lily-img="polaroid_led" src="" alt="Prévia Polaroid" class="w-full h-full object-cover max-w-full photo-filter-natural transition-all" />
+              <span id="sim-preview-polaroid-badge" class="absolute bottom-2 left-2 px-2 py-0.5 rounded-full bg-white/90 text-[10px] font-display font-semibold text-[#382126]">
+                8 Polaroids + Fio de Fada
+              </span>
+              <span class="absolute top-2 right-2 px-2 py-0.5 rounded-full bg-[#B36273] text-white text-[9px] font-display font-bold">LILY PHOTO</span>
+            </div>
+            <p id="sim-preview-polaroid-caption" class="font-handwriting text-center text-lg text-[#382126] pt-2 leading-none">
+              Nosso momento inesquecível ♥
+            </p>
+            <!-- Placa QR Code Musical Lily Memory Tag -->
+            <div class="mt-2 pt-2 border-t border-[#F3E5E8] flex items-center justify-between px-1 text-[10px] text-[#785860]">
+              <div class="flex items-center gap-1.5 truncate">
+                <span class="w-4 h-4 rounded-xs bg-[#382126] text-white flex items-center justify-center text-[8px] font-bold shrink-0">QR</span>
+                <span id="sim-preview-qr-song" class="font-display font-medium truncate">🎵 Perfect - Ed Sheeran (Nossa Música)</span>
+              </div>
+              <span class="text-[#C87888] font-bold shrink-0">ılı.lıllılı</span>
+            </div>
+          </div>
+
+          <!-- Mensagem do Cartão -->
+          <div class="p-3 rounded-2xl bg-white/15 border border-white/25 text-center backdrop-blur-xs">
+            <p id="sim-preview-card-msg" class="text-xs italic text-white/95">
+              "Que cada detalhe desta cesta traga doçura, amor e memórias inesquecíveis para o seu dia!"
+            </p>
+          </div>
+
+          <!-- Resumo Financeiro e Botão Branco Invertido -->
+          <div class="bg-white/95 text-[#382126] rounded-2xl p-4 shadow-md space-y-2">
+            <div id="sim-price-breakdown" class="space-y-1"></div>
+            <div class="flex items-center justify-between pt-2 border-t border-[#EAD4DA]">
+              <span class="text-xs font-display font-bold uppercase tracking-wider text-[#785860]">Investimento Total</span>
+              <span id="sim-total-price" class="font-display font-bold text-2xl text-[#A65365]">R$ 302,70</span>
+            </div>
+          </div>
+
+          <button type="button" id="sim-add-to-cart-btn" class="w-full py-3.5 px-6 rounded-full bg-white text-[#9B4C5D] hover:bg-[#FFF5F7] font-display font-bold text-xs sm:text-sm uppercase tracking-wider shadow-floating transition-all">
+            ✦ Adicionar Criação Lily à Sacola
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CATÁLOGO COMPLETO COM AS 12 FOTOS EXCLUSIVAS (1 PARA CADA PRODUTO) -->
+  <section id="catalogo" class="py-16 bg-[#FDF8F9] border-b border-[#EED9DF]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex flex-col md:flex-row md:items-end justify-between mb-6 gap-4">
+        <div>
+          <span class="text-xs font-display font-semibold uppercase tracking-[0.2em] text-[#B36273] block mb-2">Vitrine Completa Lily Cestas</span>
+          <h2 class="font-display font-light text-2xl sm:text-4xl text-[#382126]">
+            Catálogo com <strong class="font-semibold text-[#A65365]">12 Criações Autorais</strong>
+          </h2>
+        </div>
+        <span id="catalog-count" class="text-xs font-display font-semibold text-[#785860] bg-white px-4 py-2 rounded-full border border-[#EED9DF]">
+          12 criações disponíveis
+        </span>
+      </div>
+
+      <!-- FAIXA CLUBE DE MIMOS LILY (CONTAINER ROSÉ INVERTIDO COM TEXTO BRANCO) -->
+      <div class="bg-lily-rose-inverted text-white rounded-3xl p-4 sm:p-5 mb-8 shadow-delicate flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div class="flex items-center gap-3.5">
+          <span class="w-11 h-11 rounded-2xl bg-white/20 flex items-center justify-center text-xl shrink-0">🎁</span>
+          <div>
+            <p class="font-display font-semibold text-sm sm:text-base text-white">Clube de Mimos Lily Cestas • Presentes Extras no Seu Pedido</p>
+            <p class="text-xs text-white/90">Acima de <strong>R$ 120</strong> você ganha 1 Mini Chaveiro Coração 3D Rosé • Acima de <strong>R$ 220</strong> ganha <strong>Placa QR Code Musical + 2 Polaroids Extras</strong>!</p>
+          </div>
+        </div>
+        <button type="button" id="banner-open-cart-btn" class="px-4 py-2 rounded-full bg-white text-[#9B4C5D] text-xs font-display font-bold shrink-0 hover:bg-[#FFF5F7] transition-all">
+          Ver Meu Progresso →
+        </button>
+      </div>
+
+      <!-- Barra de Filtros e Pesquisa -->
+      <div class="bg-white p-4 rounded-3xl border border-[#EED9DF] shadow-xs mb-8 space-y-4">
+        <div class="flex flex-wrap items-center gap-2">
+          <button type="button" data-cat-filter="todos" class="px-4 py-2 rounded-full text-xs font-display font-semibold bg-[#B36273] text-white shadow-xs transition-all">
+            Todos (12)
+          </button>
+          <button type="button" data-cat-filter="cestas" class="px-4 py-2 rounded-full text-xs font-display font-medium bg-white text-[#5A3D43] border border-[#EED9DF] hover:border-[#C87888] transition-all">
+            🧺 Cestas &amp; Boxes (4)
+          </button>
+          <button type="button" data-cat-filter="xicaras" class="px-4 py-2 rounded-full text-xs font-display font-medium bg-white text-[#5A3D43] border border-[#EED9DF] hover:border-[#C87888] transition-all">
+            ☕ Xícaras &amp; Canecas (3)
+          </button>
+          <button type="button" data-cat-filter="arte3d" class="px-4 py-2 rounded-full text-xs font-display font-medium bg-white text-[#5A3D43] border border-[#EED9DF] hover:border-[#C87888] transition-all">
+            🧊 Letras, Litofania &amp; 3D (3)
+          </button>
+          <button type="button" data-cat-filter="polaroid" class="px-4 py-2 rounded-full text-xs font-display font-medium bg-white text-[#5A3D43] border border-[#EED9DF] hover:border-[#C87888] transition-all">
+            📸 Polaroid &amp; Quadros 3D (2)
+          </button>
+          <button type="button" data-cat-filter="favoritos" class="px-4 py-2 rounded-full text-xs font-display font-medium bg-white text-[#A65365] border border-[#EED9DF] hover:border-[#C87888] transition-all">
+            ♥ Favoritos
+          </button>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-12 gap-3 pt-2 border-t border-[#F7E9ED]">
+          <div class="sm:col-span-8">
+            <input id="catalog-search" type="search" placeholder="Buscar por cesta macarons, litofania 3D, caneca alça coração, letras 3D, polaroid..." class="w-full rounded-2xl border border-[#E5C2C9] bg-[#FDF8F9] px-4 py-2.5 text-xs sm:text-sm text-[#382126] focus:outline-none focus:border-[#C87888]" />
+          </div>
+          <div class="sm:col-span-4">
+            <select id="catalog-sort" aria-label="Ordenar catálogo" class="w-full rounded-2xl border border-[#E5C2C9] bg-[#FDF8F9] px-4 py-2.5 text-xs sm:text-sm font-display font-medium text-[#382126] focus:outline-none focus:border-[#C87888]">
+              <option value="destaques">Ordenar: Destaques Lily Cestas</option>
+              <option value="menor-preco">Ordenar: Menor Investimento</option>
+              <option value="maior-preco">Ordenar: Maior Investimento</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <!-- Grid de Cards de Produto -->
+      <div id="catalog-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+    </div>
+  </section>
+
+  <!-- COMO FUNCIONA (PASSO A PASSO COM CARDS ALTERNADOS BRANCO E ROSÉ INVERTIDO) -->
+  <section id="como-funciona" class="py-16 bg-white border-b border-[#EED9DF]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-2xl mx-auto mb-12">
+        <span class="text-xs font-display font-semibold uppercase tracking-[0.2em] text-[#B36273] block mb-2">Experiência Fluida do Começo ao Fim</span>
+        <h2 class="font-display font-light text-2xl sm:text-4xl text-[#382126]">
+          Do seu clique até a <strong class="font-semibold text-[#A65365]">entrega com laço rosé</strong>
+        </h2>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div class="p-6 rounded-3xl bg-[#FDF8F9] border border-[#EED9DF]">
+          <span class="w-9 h-9 rounded-full bg-rosegold-gradient text-white text-xs font-display font-bold flex items-center justify-center mb-4">01</span>
+          <h3 class="font-display font-semibold text-lg text-[#382126] mb-2">Escolha ou Simule</h3>
+          <p class="text-xs sm:text-sm text-[#6E5057] leading-relaxed">
+            Escolha no catálogo ou monte no Estúdio Interativo sua combinação de Cesta, Xícara, Peça 3D e Polaroids.
+          </p>
+        </div>
+
+        <div class="p-6 rounded-3xl bg-lily-rose-inverted text-white shadow-delicate">
+          <span class="w-9 h-9 rounded-full bg-white text-[#9B4C5D] text-xs font-display font-bold flex items-center justify-center mb-4">02</span>
+          <h3 class="font-display font-semibold text-lg text-white mb-2">Fotos &amp; Música QR</h3>
+          <p class="text-xs sm:text-sm text-white/90 leading-relaxed">
+            Teste sua foto aqui no site, escolha a música da Cápsula QR Code e gere seu protocolo no novo Checkout em 3 etapas.
+          </p>
+        </div>
+
+        <div class="p-6 rounded-3xl bg-[#FDF8F9] border border-[#EED9DF]">
+          <span class="w-9 h-9 rounded-full bg-rosegold-gradient text-white text-xs font-display font-bold flex items-center justify-center mb-4">03</span>
+          <h3 class="font-display font-semibold text-lg text-[#382126] mb-2">Aprovação Digital</h3>
+          <p class="text-xs sm:text-sm text-[#6E5057] leading-relaxed">
+            Nosso atelier envia a arte final da xícara e da modelagem 3D pelo WhatsApp para você aprovar antes da produção.
+          </p>
+        </div>
+
+        <div class="p-6 rounded-3xl bg-lily-rose-soft-inverted text-white shadow-delicate">
+          <span class="w-9 h-9 rounded-full bg-white text-[#9B4C5D] text-xs font-display font-bold flex items-center justify-center mb-4">04</span>
+          <h3 class="font-display font-semibold text-lg text-white mb-2">Entrega Inesquecível</h3>
+          <p class="text-xs sm:text-sm text-white/90 leading-relaxed">
+            Entregamos com hora marcada (a partir das 06h30), embalagem perfumada, fita de cetim rosé e cartão caligrafado.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DEPOIMENTOS DE CLIENTES & FAQ -->
+  <section id="depoimentos" class="py-16 bg-[#FDF8F9] border-b border-[#EED9DF]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
+      
+      <div>
+        <div class="text-center max-w-2xl mx-auto mb-10">
+          <span class="text-xs font-display font-semibold uppercase tracking-[0.2em] text-[#B36273] block mb-2">Quem recebe se emociona</span>
+          <h2 class="font-display font-light text-2xl sm:text-4xl text-[#382126]">
+            Histórias reais da <strong class="font-semibold text-[#A65365]">Lily Cestas</strong>
+          </h2>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div class="bg-white p-6 rounded-3xl border border-[#EED9DF] shadow-xs">
+            <div class="text-[#C87888] text-sm mb-2">★★★★★</div>
+            <p class="text-xs sm:text-sm text-[#5A3D43] italic leading-relaxed mb-4">
+              "Eu já amava as cestas da Lily, mas quando vi que podia colocar uma xícara com o nome da minha mãe, a palavra GRATIDÃO em 3D rosé e nossas fotos Polaroid dentro da cesta, ela chorou de emoção!"
+            </p>
+            <p class="text-xs font-display font-bold text-[#382126]">Camila Fontes • Cesta Lily Imperial + 3D</p>
+          </div>
+
+          <!-- Card Central Invertido em Rosé com Texto Branco -->
+          <div class="bg-lily-rose-inverted text-white p-6 rounded-3xl border border-white/25 shadow-floating">
+            <div class="text-[#FFE4E9] text-sm mb-2">★★★★★</div>
+            <p class="text-xs sm:text-sm text-white/95 italic leading-relaxed mb-4">
+              "Pedi a Luminária Litofania 3D com a foto do nosso casamento e o Quadro Shadow Box com QR Code da nossa música. Quando acendeu a luz e revelou a foto em 3D, ficamos sem palavras!"
+            </p>
+            <p class="text-xs font-display font-bold text-white">Beatriz &amp; Lucas • Litofania 3D &amp; Polaroids</p>
+          </div>
+
+          <div class="bg-white p-6 rounded-3xl border border-[#EED9DF] shadow-xs">
+            <div class="text-[#C87888] text-sm mb-2">★★★★★</div>
+            <p class="text-xs sm:text-sm text-[#5A3D43] italic leading-relaxed mb-4">
+              "Encomendei as canecas com alça de coração rose gold e a letra inicial 3D para minhas madrinhas. A delicadeza da fonte e do acabamento rosé superou tudo o que já vi no mercado."
+            </p>
+            <p class="text-xs font-display font-bold text-[#382126]">Mariana Siqueira • Canecas Coração &amp; Letras 3D</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Perguntas Frequentes -->
+      <div id="faq" class="max-w-3xl mx-auto">
+        <div class="text-center mb-8">
+          <span class="text-xs font-display font-semibold uppercase tracking-[0.2em] text-[#B36273] block mb-2">Tire suas dúvidas</span>
+          <h2 class="font-display font-light text-2xl sm:text-3xl text-[#382126]">
+            Perguntas <strong class="font-semibold text-[#A65365]">Frequentes</strong>
+          </h2>
+        </div>
+        <div id="faq-list" class="space-y-3"></div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- RODAPÉ COMPLETO INVERTIDO EM ROSÉ IMPERIAL COM LOGO LILY -->
+  <footer class="bg-lily-rose-section text-white pt-14 pb-10 border-t border-white/20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-8 pb-10 border-b border-white/20">
+        <div class="md:col-span-2 space-y-4">
+          <div class="flex items-center gap-3.5">
+            <div class="bg-white/95 p-2 rounded-2xl shadow-sm">
+              <img data-lily-logo="rose" src="" alt="Lily Cestas Logo" class="h-12 w-auto object-contain" />
+            </div>
+            <div>
+              <span class="font-display font-bold text-2xl text-white block leading-none">Lily Cestas</span>
+              <span class="font-display text-[11px] uppercase tracking-[0.2em] text-[#FFE4E9] block mt-1">Atelier de Presentes &amp; Arte 3D</span>
+            </div>
+          </div>
+          <p class="text-xs sm:text-sm text-white/90 max-w-md leading-relaxed">
+            Atelier especializado em Cestas de Presente Afetivas, Xícaras e Canecas Personalizadas, Letras, Palavras e Luminárias Litofania em 3D, Objetos Decorativos com 3D e Revelação Fotográfica estilo Polaroid com Cápsula QR Code Musical.
+          </p>
+          <div class="flex flex-wrap gap-2 pt-1">
+            <span class="px-3 py-1 rounded-full bg-white/15 border border-white/25 text-[11px] font-display text-white font-medium">Identidade Rosé &amp; Branco</span>
+            <span class="px-3 py-1 rounded-full bg-white/15 border border-white/25 text-[11px] font-display text-white font-medium">Impressão 3D &amp; Litofania</span>
+            <span class="px-3 py-1 rounded-full bg-white/15 border border-white/25 text-[11px] font-display text-white font-medium">Cápsula QR Musical</span>
+          </div>
+        </div>
+
+        <div>
+          <h3 class="text-xs font-display font-bold uppercase tracking-wider text-[#FFE4E9] mb-3">Nossas 4 Linhas</h3>
+          <ul class="space-y-2 text-xs sm:text-sm text-white/90">
+            <li><a href="#catalogo" class="hover:text-white hover:underline">Cestas &amp; Boxes de Presente</a></li>
+            <li><a href="#catalogo" class="hover:text-white hover:underline">Xícaras &amp; Canecas Rose Gold</a></li>
+            <li><a href="#catalogo" class="hover:text-white hover:underline">Letras 3D &amp; Litofania Iluminada</a></li>
+            <li><a href="#catalogo" class="hover:text-white hover:underline">Vasos &amp; Corações Facetados 3D</a></li>
+            <li><a href="#catalogo" class="hover:text-white hover:underline">Polaroids &amp; Quadro Shadow Box</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h3 class="text-xs font-display font-bold uppercase tracking-wider text-[#FFE4E9] mb-3">Atendimento &amp; Entregas</h3>
+          <p class="text-xs sm:text-sm text-white/90 leading-relaxed mb-4">
+            Segunda a Sábado: 08h às 19h<br />
+            Entregas Agendadas de Cestas a partir das 06h30.<br />
+            Envio de Personalizados 3D, Louças e Polaroids para todo o Brasil.
+          </p>
+          <a href="#simulador" class="inline-block px-5 py-2.5 rounded-full bg-white text-[#9B4C5D] text-xs font-display font-bold hover:bg-[#FFF5F7] shadow-sm transition-colors">
+            Criar Meu Presente Agora →
+          </a>
+        </div>
+      </div>
+
+      <div class="pt-6 flex flex-col sm:flex-row items-center justify-between gap-2 text-xs text-white/80 font-display">
+        <p>© 2026 Lily Cestas &amp; Atelier Personalizados. Todos os direitos reservados.</p>
+        <p>Design delicado em Rosé Blush, Branco Pérola &amp; Rose Gold ✨</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- DRAWER LATERAL: SACOLA COM BARRA DE PROGRESSO DE MIMO GRÁTIS -->
+  <div id="cart-drawer" class="hidden fixed inset-0 z-50">
+    <div id="cart-backdrop" class="fixed inset-0 bg-[#382126]/50 backdrop-blur-xs"></div>
+    <div class="fixed top-0 right-0 bottom-0 w-full max-w-md bg-white shadow-floating border-l border-[#EED9DF] flex flex-col z-10">
+      <div class="p-5 bg-lily-rose-inverted text-white flex items-center justify-between">
+        <div class="flex items-center gap-2.5">
+          <img data-lily-logo="white" src="" alt="Lily Cestas" class="h-8 w-auto object-contain" />
+          <div>
+            <span class="text-[10px] font-display font-semibold uppercase tracking-wider text-[#FFE4E9] block">Sua Encomenda Afetiva</span>
+            <h3 class="font-display font-semibold text-lg text-white">Sacola Lily Cestas</h3>
+          </div>
+        </div>
+        <button type="button" id="close-cart-btn" class="w-8 h-8 rounded-full bg-white/20 hover:bg-white/30 text-sm font-bold text-white">✕</button>
+      </div>
+
+      <!-- Barra Gamificada de Mimos Grátis -->
+      <div class="px-5 py-3 bg-[#FDF2F5] border-b border-[#EED9DF]">
+        <div class="flex items-center justify-between text-[11px] font-display font-semibold text-[#A65365] mb-1.5">
+          <span id="cart-reward-text">Adicione R$ 120,00 para ganhar Chaveiro Coração 3D Grátis!</span>
+          <span id="cart-reward-pct">0%</span>
+        </div>
+        <div class="w-full h-2 rounded-full bg-white overflow-hidden border border-[#EBCAD2]">
+          <div id="cart-reward-bar" class="h-full bg-rosegold-gradient transition-all duration-500" style="width: 0%"></div>
+        </div>
+      </div>
+
+      <div id="cart-items-list" class="p-5 flex-1 overflow-y-auto space-y-3"></div>
+
+      <div class="p-5 border-t border-[#EED9DF] bg-[#FDF8F9] space-y-3">
+        <div class="flex items-center justify-between">
+          <span class="text-xs font-display font-bold uppercase tracking-wider text-[#785860]">Subtotal</span>
+          <span id="cart-drawer-total" class="font-display font-bold text-2xl text-[#382126]">R$ 0,00</span>
+        </div>
+        <button type="button" id="open-checkout-modal-btn" class="w-full py-3.5 px-6 rounded-full bg-rosegold-gradient text-white text-xs sm:text-sm font-display font-semibold uppercase tracking-wider shadow-md hover:opacity-95 transition-all">
+          Avançar para o Checkout Lily (3 Passos) →
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL DE PERSONALIZAÇÃO RÁPIDA DE PRODUTO -->
+  <div id="product-custom-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4">
+    <div id="prod-modal-backdrop" class="fixed inset-0 bg-[#382126]/55 backdrop-blur-xs"></div>
+    <div class="relative z-10 bg-white rounded-3xl max-w-lg w-full border border-[#EED9DF] shadow-floating overflow-hidden max-h-[92vh] overflow-y-auto">
+      <div class="relative h-52 bg-[#FDF6F8]">
+        <img id="modal-prod-img" src="" alt="Produto Lily Cestas" class="w-full h-full object-cover max-w-full" />
+        <button type="button" id="close-prod-modal-btn" class="absolute top-3 right-3 w-8 h-8 rounded-full bg-white/90 text-[#382126] font-bold text-sm shadow-sm">✕</button>
+        <span id="modal-prod-cat" class="absolute bottom-3 left-3 px-3 py-1 rounded-full bg-[#B36273] text-white text-xs font-display font-semibold">Categoria</span>
+      </div>
+      <div class="p-6 space-y-4">
+        <div class="flex items-start justify-between gap-2">
+          <h3 id="modal-prod-title" class="font-display font-semibold text-xl text-[#382126] leading-snug">Produto</h3>
+          <span id="modal-prod-price" class="text-lg font-display font-bold text-[#A65365] shrink-0">R$ 0,00</span>
+        </div>
+        <p id="modal-prod-desc" class="text-xs sm:text-sm text-[#6E5057]"></p>
+        <div class="p-3.5 rounded-2xl bg-[#FDF8F9] border border-[#EED9DF]">
+          <span class="text-[10px] font-display font-bold uppercase tracking-wider text-[#A65365] block mb-1.5">O que acompanha esta criação Lily:</span>
+          <ul id="modal-prod-includes" class="space-y-1"></ul>
+        </div>
+        <div class="space-y-3 pt-2 border-t border-[#F5E6EA]">
+          <div>
+            <label for="modal-custom-text" class="block text-xs font-display font-semibold text-[#382126] mb-1">
+              Personalização (<span id="modal-prod-hint" class="text-[#A65365]">Nome, Letra 3D ou Legenda</span>):
+            </label>
+            <input id="modal-custom-text" type="text" placeholder="Digite o nome, iniciais 3D, frase ou música QR..." class="w-full rounded-xl border border-[#E5C2C9] px-3.5 py-2.5 text-xs sm:text-sm text-[#382126] focus:outline-none focus:border-[#C87888]" />
+          </div>
+          <div>
+            <label for="modal-custom-color" class="block text-xs font-display font-semibold text-[#382126] mb-1">
+              Acabamento &amp; Paleta Preferida:
+            </label>
+            <select id="modal-custom-color" class="w-full rounded-xl border border-[#E5C2C9] px-3.5 py-2.5 text-xs sm:text-sm text-[#382126] bg-white">
+              <option value="Rosé Blush &amp; Branco Pérola (Assinatura Lily)">Rosé Blush &amp; Branco Pérola (Assinatura Lily)</option>
+              <option value="Branco Pérola com Metalizado Rose Gold">Branco Pérola com Metalizado Rose Gold</option>
+              <option value="Total Rosé Pastel Delicado">Total Rosé Pastel Delicado</option>
+            </select>
+          </div>
+        </div>
+        <button type="button" id="confirm-prod-modal-btn" class="w-full py-3.5 rounded-full bg-rosegold-gradient text-white text-xs sm:text-sm font-display font-semibold uppercase tracking-wider shadow-sm hover:opacity-95 transition-all">
+          Salvar Personalização &amp; Adicionar à Sacola
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- NOVO CHECKOUT UX/UI EM 3 ETAPAS (REVISÃO & MIMOS -> ENTREGA & CÁPSULA QR -> PAGAMENTO PIX/CARTÃO & PROTOCOLO WHATSAPP) -->
+  <div id="checkout-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4">
+    <div id="checkout-backdrop" class="fixed inset-0 bg-[#382126]/60 backdrop-blur-xs"></div>
+    <div class="relative z-10 bg-white rounded-3xl max-w-2xl w-full border border-[#EED9DF] shadow-floating overflow-hidden max-h-[94vh] flex flex-col">
+      
+      <!-- Cabeçalho do Checkout Invertido em Rosé -->
+      <div class="p-5 bg-lily-rose-inverted text-white flex items-center justify-between">
+        <div class="flex items-center gap-3">
+          <img data-lily-logo="white" src="" alt="Lily Cestas" class="h-9 w-auto object-contain" />
+          <div>
+            <span class="text-[10px] font-display font-semibold uppercase tracking-widest text-[#FFE4E9] block">Checkout Seguro &amp; Personalizado</span>
+            <h3 class="font-display font-semibold text-lg sm:text-xl text-white">Finalizar Encomenda Lily Cestas</h3>
+          </div>
+        </div>
+        <button type="button" id="close-checkout-modal-btn" class="w-8 h-8 rounded-full bg-white/20 hover:bg-white/30 text-sm font-bold text-white">✕</button>
+      </div>
+
+      <!-- Indicador Visual das 3 Etapas -->
+      <div class="px-6 py-3 bg-[#FDF2F5] border-b border-[#EED9DF] grid grid-cols-3 gap-2">
+        <button type="button" data-checkout-step-btn="1" class="flex items-center justify-center gap-1.5 py-1.5 px-2 rounded-full text-xs font-display font-bold bg-[#B36273] text-white transition-all">
+          <span>1. Sacola &amp; Mimos</span>
+        </button>
+        <button type="button" data-checkout-step-btn="2" class="flex items-center justify-center gap-1.5 py-1.5 px-2 rounded-full text-xs font-display font-medium bg-white text-[#785860] border border-[#EED9DF] transition-all">
+          <span>2. Entrega &amp; QR</span>
+        </button>
+        <button type="button" data-checkout-step-btn="3" class="flex items-center justify-center gap-1.5 py-1.5 px-2 rounded-full text-xs font-display font-medium bg-white text-[#785860] border border-[#EED9DF] transition-all">
+          <span>3. PIX / WhatsApp</span>
+        </button>
+      </div>
+
+      <!-- Corpo Rolável do Checkout -->
+      <div class="p-6 overflow-y-auto space-y-5 flex-1">
+        
+        <!-- ETAPA 1: REVISÃO DOS ITENS, BRINDES DESBLOQUEADOS & UPSELLS 1-CLIQUE -->
+        <div id="checkout-step-1" class="space-y-4">
+          <div class="p-3.5 rounded-2xl bg-[#FDF8F9] border border-[#EED9DF]">
+            <p id="checkout-gift-banner" class="text-xs font-display font-semibold text-[#A65365]"></p>
+          </div>
+
+          <div>
+            <h4 class="text-xs font-display font-bold uppercase tracking-wider text-[#382126] mb-2">Itens Personalizados do Seu Pedido:</h4>
+            <div id="checkout-step1-items" class="space-y-2 max-h-44 overflow-y-auto pr-1"></div>
+          </div>
+
+          <!-- Order Bumps / Mimos Extras de 1 Clique -->
+          <div class="pt-3 border-t border-[#EED9DF]">
+            <h4 class="text-xs font-display font-bold uppercase tracking-wider text-[#A65365] mb-2.5">✦ Toques Finais Exclusivos (Adicione com 1 clique):</h4>
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
+              <button type="button" data-upsell-add="Luzes Fio de Fada LED Quente" data-upsell-price="14.90" class="p-3 rounded-2xl border border-[#EED9DF] bg-[#FDF8F9] hover:border-[#C87888] text-left transition-all">
+                <p class="font-display font-semibold text-xs text-[#382126]">✨ + Fio de Fada LED</p>
+                <p class="text-[11px] text-[#785860]">Ilumina a cesta/fotos</p>
+                <p class="text-xs font-display font-bold text-[#A65365] mt-1">+ R$ 14,90</p>
+              </button>
+              <button type="button" data-upsell-add="Placa QR Code Spotify Rose Gold" data-upsell-price="16.90" class="p-3 rounded-2xl border border-[#EED9DF] bg-[#FDF8F9] hover:border-[#C87888] text-left transition-all">
+                <p class="font-display font-semibold text-xs text-[#382126]">🎵 + Placa QR Spotify 3D</p>
+                <p class="text-[11px] text-[#785860]">Toca a música no celular</p>
+                <p class="text-xs font-display font-bold text-[#A65365] mt-1">+ R$ 16,90</p>
+              </button>
+              <button type="button" data-upsell-add="Mini Coração Facetado 3D Perfumado" data-upsell-price="12.90" class="p-3 rounded-2xl border border-[#EED9DF] bg-[#FDF8F9] hover:border-[#C87888] text-left transition-all">
+                <p class="font-display font-semibold text-xs text-[#382126]">💖 + Mini Coração 3D</p>
+                <p class="text-[11px] text-[#785860]">Aroma exclusivo Lily</p>
+                <p class="text-xs font-display font-bold text-[#A65365] mt-1">+ R$ 12,90</p>
+              </button>
+            </div>
+          </div>
+
+          <div class="flex justify-end pt-2">
+            <button type="button" id="to-step-2-btn" class="px-6 py-3 rounded-full bg-rosegold-gradient text-white text-xs sm:text-sm font-display font-semibold shadow-sm hover:opacity-95 transition-all">
+              Continuar para Entrega &amp; Agendamento →
+            </button>
+          </div>
+        </div>
+
+        <!-- ETAPA 2: DADOS DE QUEM ENVIA, QUEM RECEBE, AGENDAMENTO E CÁPSULA QR -->
+        <div id="checkout-step-2" class="hidden space-y-4">
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div>
+              <label for="checkout-name" class="block text-xs font-display font-semibold text-[#382126] mb-1">Seu Nome (Quem envia)</label>
+              <input id="checkout-name" type="text" placeholder="Ex: Juliana Martins" class="w-full rounded-xl border border-[#E5C2C9] px-3.5 py-2.5 text-xs sm:text-sm" />
+            </div>
+            <div>
+              <label for="checkout-recipient" class="block text-xs font-display font-semibold text-[#382126] mb-1">Nome de Quem Vai Receber</label>
+              <input id="checkout-recipient" type="text" placeholder="Ex: Dona Helena / Amor" class="w-full rounded-xl border border-[#E5C2C9] px-3.5 py-2.5 text-xs sm:text-sm" />
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+            <div>
+              <label for="checkout-delivery" class="block text-xs font-display font-semibold text-[#382126] mb-1">Modalidade de Entrega</label>
+              <select id="checkout-delivery" class="w-full rounded-xl border border-[#E5C2C9] px-3 py-2.5 text-xs sm:text-sm bg-white">
+                <option value="Entrega Agendada (Hora Marcada)" data-fee="15.00">🚗 Entrega Hora Marcada (+R$ 15)</option>
+                <option value="Entrega Surpresa Matinal (06h30-08h30)" data-fee="20.00">🌅 Surpresa Matinal 06h30 (+R$ 20)</option>
+                <option value="Retirada no Atelier Lily (Grátis)" data-fee="0.00">🏪 Retirada no Atelier Lily (R$ 0)</option>
+                <option value="Envio Correios / Transportadora" data-fee="22.00">📦 Correios / Sedex (+R$ 22)</option>
+              </select>
+            </div>
+            <div>
+              <label for="checkout-date" class="block text-xs font-display font-semibold text-[#382126] mb-1">Data Desejada</label>
+              <input id="checkout-date" type="text" value="Sábado (Manhã)" placeholder="Ex: 18/10 ou Sábado" class="w-full rounded-xl border border-[#E5C2C9] px-3.5 py-2.5 text-xs sm:text-sm" />
+            </div>
+            <div>
+              <label for="checkout-slot" class="block text-xs font-display font-semibold text-[#382126] mb-1">Janela de Horário</label>
+              <select id="checkout-slot" class="w-full rounded-xl border border-[#E5C2C9] px-3 py-2.5 text-xs sm:text-sm bg-white">
+                <option value="Manhã • 06h30 às 09h00">06h30 às 09h00</option>
+                <option value="Manhã • 09h00 às 12h00">09h00 às 12h00</option>
+                <option value="Tarde • 14h00 às 18h00">14h00 às 18h00</option>
+                <option value="Noite • 18h30 às 21h00">18h30 às 21h00</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-12 gap-3">
+            <div class="sm:col-span-4">
+              <label for="checkout-cep" class="block text-xs font-display font-semibold text-[#382126] mb-1">CEP de Entrega</label>
+              <input id="checkout-cep" type="text" placeholder="Ex: 06500-000" class="w-full rounded-xl border border-[#E5C2C9] px-3.5 py-2.5 text-xs sm:text-sm" />
+            </div>
+            <div class="sm:col-span-8">
+              <label for="checkout-address" class="block text-xs font-display font-semibold text-[#382126] mb-1">Endereço / Bairro ou Observação</label>
+              <input id="checkout-address" type="text" placeholder="Rua, número, condomínio ou referência..." class="w-full rounded-xl border border-[#E5C2C9] px-3.5 py-2.5 text-xs sm:text-sm" />
+            </div>
+          </div>
+
+          <div class="p-3.5 rounded-2xl bg-[#FDF2F5] border border-[#EED9DF]">
+            <label for="checkout-qr-link" class="block text-xs font-display font-bold text-[#A65365] mb-1">
+              🎵 Link ou Música para a Cápsula QR Code Musical (Grátis):
+            </label>
+            <input id="checkout-qr-link" type="text" placeholder="Ex: Nome da música no Spotify ou mensagem secreta em vídeo..." class="w-full rounded-xl border border-[#E5C2C9] bg-white px-3.5 py-2 text-xs sm:text-sm" />
+          </div>
+
+          <div class="flex items-center justify-between pt-2">
+            <button type="button" id="back-to-step-1-btn" class="px-4 py-2.5 rounded-full border border-[#E5C2C9] text-xs font-display font-semibold text-[#5A3D43]">
+              ← Voltar
+            </button>
+            <button type="button" id="to-step-3-btn" class="px-6 py-3 rounded-full bg-rosegold-gradient text-white text-xs sm:text-sm font-display font-semibold shadow-sm hover:opacity-95 transition-all">
+              Ir para Pagamento &amp; Resumo Final →
+            </button>
+          </div>
+        </div>
+
+        <!-- ETAPA 3: FORMA DE PAGAMENTO (PIX 5% OFF / CARTÃO) + PROTOCOLO PRONTO PARA WHATSAPP -->
+        <div id="checkout-step-3" class="hidden space-y-4">
+          <div>
+            <span class="block text-xs font-display font-bold uppercase tracking-wider text-[#A65365] mb-2">Escolha a Forma de Pagamento Preferida:</span>
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
+              <button type="button" data-pay-method="PIX com 5% de Desconto" class="p-3 rounded-2xl border-2 border-[#B36273] bg-[#FDF2F5] text-left transition-all">
+                <span class="text-xs font-display font-bold text-[#A65365] block">💠 PIX (5% OFF)</span>
+                <span class="text-[11px] text-[#5A3D43]">Desconto imediato</span>
+              </button>
+              <button type="button" data-pay-method="Cartão de Crédito (até 3x sem juros)" class="p-3 rounded-2xl border border-[#EED9DF] bg-white text-left transition-all">
+                <span class="text-xs font-display font-bold text-[#382126] block">💳 Cartão até 3x</span>
+                <span class="text-[11px] text-[#785860]">Link seguro sem juros</span>
+              </button>
+              <button type="button" data-pay-method="Combinar no Atendimento WhatsApp" class="p-3 rounded-2xl border border-[#EED9DF] bg-white text-left transition-all">
+                <span class="text-xs font-display font-bold text-[#382126] block">💬 Via WhatsApp</span>
+                <span class="text-[11px] text-[#785860]">Após aprovar a arte</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Resumo Financeiro Detalhado -->
+          <div class="p-4 rounded-2xl bg-[#FDF8F9] border border-[#EED9DF] space-y-1.5 text-xs">
+            <div class="flex justify-between text-[#5A3D43]">
+              <span>Subtotal dos Produtos:</span>
+              <span id="checkout-sub-val" class="font-semibold">R$ 0,00</span>
+            </div>
+            <div class="flex justify-between text-[#5A3D43]">
+              <span>Taxa de Entrega / Modalidade:</span>
+              <span id="checkout-ship-val" class="font-semibold">R$ 15,00</span>
+            </div>
+            <div class="flex justify-between text-[#A65365]">
+              <span>Desconto PIX / Mimos Desbloqueados:</span>
+              <span id="checkout-disc-val" class="font-bold">- R$ 0,00</span>
+            </div>
+            <div class="flex justify-between pt-2 border-t border-[#EED9DF] text-sm font-display font-bold text-[#382126]">
+              <span>Total Final do Pedido:</span>
+              <span id="checkout-final-val" class="text-lg text-[#A65365]">R$ 0,00</span>
+            </div>
+          </div>
+
+          <div>
+            <label for="checkout-summary-preview" class="block text-xs font-display font-semibold text-[#382126] mb-1">Protocolo Completo do Pedido Lily Cestas:</label>
+            <textarea id="checkout-summary-preview" rows="5" readonly class="w-full rounded-2xl border border-[#E5C2C9] bg-[#FDF8F9] p-3 text-xs text-[#5A3D43] font-mono"></textarea>
+          </div>
+
+          <div class="flex flex-wrap items-center justify-between gap-3 pt-1">
+            <button type="button" id="back-to-step-2-btn" class="px-4 py-2.5 rounded-full border border-[#E5C2C9] text-xs font-display font-semibold text-[#5A3D43]">
+              ← Voltar
+            </button>
+            <div class="flex flex-wrap items-center gap-2 flex-1 justify-end">
+              <button type="button" id="copy-order-summary-btn" class="py-3 px-4 rounded-full border border-[#B36273] text-[#A65365] hover:bg-[#FDF2F5] text-xs font-display font-bold transition-all">
+                📋 Copiar Protocolo
+              </button>
+              <a id="whatsapp-direct-link" href="#" target="_blank" rel="noopener noreferrer" class="py-3 px-5 rounded-full bg-rosegold-gradient text-white text-xs sm:text-sm font-display font-bold shadow-md hover:opacity-95 transition-all inline-flex items-center gap-1.5">
+                <span>💬 Enviar Pedido no WhatsApp</span>
+              </a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Container de Notificações Toast -->
+  <div id="toast-container" class="fixed bottom-5 right-5 z-50 flex flex-col gap-2 max-w-sm"></div>
+
+  <script src="lily-images.js"></script>
+  <script>
+
+(function () {
+  const HOTSPOTS = {
+    cestas: {
+      badge: "Pilar 01 • Tradição & Afeto Lily",
+      title: "Cestas de Presente Artesanais (Rosé & Branco)",
+      desc: "Nossas cestas em vime branco com laço de cetim rosé, flores naturais, macarons e chocolates finos — prontas para receber sua xícara personalizada, peça 3D e fotos Polaroid.",
+      highlights: [
+        "Cestas de Café da Manhã, Macarons, Frutas & Espumante Rosé",
+        "Acabamento em seda blush, fita de cetim rosé e cartão caligrafado",
+        "Integre xícara com nome, palavra 3D e fotos Polaroid na mesma cesta"
+      ],
+      priceFrom: "A partir de R$ 189,90",
+      filterKey: "cestas",
+      heroImgKey: "hero_imperial",
+      caption: "Foto real: Cesta Lily Imperial + Xícara + Polaroid + Arte 3D"
+    },
+    xicaras: {
+      badge: "Pilar 02 • Louça Exclusiva Personalizada",
+      title: "Xícaras & Canecas Personalizadas em Porcelana",
+      desc: "Porcelana de alto brilho em branco pérola ou cerâmica rosé blush com alça de coração metalizada rose gold. Gravamos nomes, iniciais florais e frases afetivas.",
+      highlights: [
+        "Canecas com Alça de Coração Rose Gold e Xícaras com Pires Imperial",
+        "Personalização definitiva em alta temperatura com nome ou monograma",
+        "Acompanha tag Polaroid pendurada no laço rosé e caixa presenteável"
+      ],
+      priceFrom: "A partir de R$ 74,90",
+      filterKey: "xicaras",
+      heroImgKey: "caneca_coracao",
+      caption: "Foto real: Caneca Alça Coração Rose Gold + Tag Polaroid + Inicial 3D"
+    },
+    arte3d: {
+      badge: "Pilar 03 • Design Tridimensional & Luz",
+      title: "Letras 3D, Litofania Iluminada & Objetos com 3D",
+      desc: "Peças esculturais produzidas em impressão 3D de alta precisão: iniciais de mesa, palavras decorativas (Amor, Gratidão), vasos twist e a mágica Luminária Litofania 3D que revela sua foto com a luz!",
+      highlights: [
+        "Luminária Litofania 3D: sua foto em relevo que ganha vida ao acender",
+        "Letras iniciais de mesa, nomes personalizados e palavras esculturais",
+        "Vasos espirais 3D com flores secas e corações geométricos facetados"
+      ],
+      priceFrom: "A partir de R$ 59,90",
+      filterKey: "arte3d",
+      heroImgKey: "litofania_3d",
+      caption: "Foto real: Luminária Litofania 3D Iluminada com Foto + Coração 3D"
+    },
+    polaroid: {
+      badge: "Pilar 04 • Memórias Físicas & Digitais",
+      title: "Fotografia Polaroid, Quadros 3D & Cápsula QR Musical",
+      desc: "Suas fotos do celular reveladas em moldura clássica Polaroid com legenda afetiva, fio de fada LED, charms 3D e nossa Placa QR Code que toca a música especial de vocês no celular.",
+      highlights: [
+        "Quadro Shadow Box com Polaroids suspensas, letras 3D e placa QR Spotify",
+        "Kits com Fio de Fada LED, mini pregadores rosé e corações 3D",
+        "Papel fotográfico premium com proteção UV que dura por gerações"
+      ],
+      priceFrom: "A partir de R$ 44,90",
+      filterKey: "polaroid",
+      heroImgKey: "quadro_shadowbox",
+      caption: "Foto real: Quadro Shadow Box 3D + Polaroids + Placa QR Musical"
+    }
+  };
+
+  // 12 Produtos — Cada um com sua própria foto exclusiva (Zero repetição!)
+  const PRODUCTS = [
+    {
+      id: "prod-1",
+      name: "Cesta Lily Imperial Rosé & Personalizados",
+      category: "cestas",
+      categoryLabel: "Cestas de Presente",
+      price: 239.90,
+      badge: "Mais Vendida",
+      imageKey: "hero_imperial",
+      shortDesc: "Nossa cesta assinatura em vime branco com rosas naturais, bombons finos, 1 xícara personalizada com nome, palavra 'AMOR' em 3D e 3 fotos Polaroid.",
+      customizable: "Nome na xícara + Palavra 3D + 3 Fotos Polaroid + Música QR",
+      includes: [
+        "Cesta vime branco grande com laço duplo de cetim rosé",
+        "1 Xícara porcelana alça rose gold personalizada com nome",
+        "1 Escultura 'AMOR' ou Inicial em 3D rosé e branco",
+        "3 Fotografias Polaroid com legenda + Placa QR Code Musical",
+        "Buquê de mini rosas blush, Ferrero/bombons finos, croissant e suco integral"
+      ]
+    },
+    {
+      id: "prod-2",
+      name: "Cesta Despertar Delicado (Café da Manhã & Afeto)",
+      category: "cestas",
+      categoryLabel: "Cestas de Presente",
+      price: 189.90,
+      badge: "Manhã Perfeita",
+      imageKey: "cesta_cafe",
+      shortDesc: "Cesta artesanal de café da manhã em tons rosé e branco com pães especiais, frutas frescas, caneca floral personalizada e fotos estilo Polaroid.",
+      customizable: "Nome na caneca + 2 Fotos Polaroid + Dedicatória no cartão",
+      includes: [
+        "Cesta de vime branco forrada com papel de seda blush",
+        "1 Caneca cerâmica personalizada com nome ou frase",
+        "2 Fotos Polaroid com mini pregador rose gold",
+        "Croissant amanteigado, waffles, geleia francesa, morangos, uvas e drip coffee"
+      ]
+    },
+    {
+      id: "prod-3",
+      name: "Cesta Doce Encanto (Macarons, Rosas, Caneca & 3D)",
+      category: "cestas",
+      categoryLabel: "Cestas de Presente",
+      price: 209.90,
+      badge: "Delicadeza Pura",
+      imageKey: "cesta_macarons",
+      shortDesc: "Cesta branca charmosa com macarons franceses rosé, morangos selecionados, rosas blush, caneca inicial 'M' alça rose gold e coração + letra 3D.",
+      customizable: "Inicial na caneca + Letra 3D de 12cm + Coração 3D",
+      includes: [
+        "Cesta trançada branca com fita de chiffon rosé artesanal",
+        "6 Macarons franceses artesanais + Morangos frescos selecionados",
+        "1 Caneca porcelana pérola com alça metálica rose gold",
+        "1 Letra Inicial 3D + 1 Coração 3D em relevo acetinado",
+        "Arranjo de rosas colombianas tom pastel"
+      ]
+    },
+    {
+      id: "prod-4",
+      name: "Box Luxo Lily Romântica (Espumante, 'Amor' 3D & Polaroid)",
+      category: "cestas",
+      categoryLabel: "Cestas de Presente",
+      price: 224.90,
+      badge: "Edição Romântica",
+      imageKey: "box_romantica",
+      shortDesc: "Caixa rígida branco pérola com fita de cetim rosé, espumante rosé, trufas artesanais, palavra 'Amor' em 3D rose gold e 4 fotos Polaroid iluminadas.",
+      customizable: "Palavra 3D + 4 Fotos Polaroid + Música QR Code",
+      includes: [
+        "Box rígida luxo em branco pérola e interior rosé com laço de cetim",
+        "1 Baby Espumante Rosé + Caixa com 6 trufas belgas artesanais",
+        "1 Escultura 3D 'Amor' (ou nome) em acabamento rose gold",
+        "4 Fotos Polaroid com fio de fada LED quente incluso"
+      ]
+    },
+    {
+      id: "prod-5",
+      name: "Caneca 'Afeto em Flor' Alça Coração + Tag Polaroid & Letra 3D",
+      category: "xicaras",
+      categoryLabel: "Xícaras Personalizadas",
+      price: 74.90,
+      badge: "Sucesso Absoluto",
+      imageKey: "caneca_coracao",
+      shortDesc: "Caneca degradê rosé e branco com alça de coração rose gold, arte botânica com inicial, mini foto Polaroid pendurada no laço e letra 3D de mesa.",
+      customizable: "Inicial/Nome na caneca + 1 Foto Polaroid na alça + 1 Letra 3D",
+      includes: [
+        "1 Caneca Cerâmica Premium 325ml com alça coração rose gold",
+        "1 Mini foto Polaroid amarrada com laço de linho rosé",
+        "1 Letra Inicial 3D de mesa (12cm) na cor rosé blush",
+        "Caixa presenteável Lily Cestas perfumada"
+      ]
+    },
+    {
+      id: "prod-6",
+      name: "Dupla de Xícaras Porcelana Floral & Alça Rose Gold",
+      category: "xicaras",
+      categoryLabel: "Xícaras Personalizadas",
+      price: 109.90,
+      badge: "Kit Casal / Amigas",
+      imageKey: "xicara_dupla",
+      shortDesc: "Par de xícaras (1 branco pérola e 1 rosé blush matte) com ilustração floral aquarelada, detalhes metalizados rose gold e nomes personalizados.",
+      customizable: "2 Nomes ou Iniciais + Frase no verso + Caixa Presente",
+      includes: [
+        "1 Xícara Branco Pérola 320ml com alça e borda rose gold",
+        "1 Xícara Rosé Blush Matte 320ml com interior perolado",
+        "Gravação personalizada dos 2 nomes em alta temperatura",
+        "Caixa rígida branca com berço duplo e fita de cetim rosé"
+      ]
+    },
+    {
+      id: "prod-7",
+      name: "Xícara de Chá com Pires 'Monograma Imperial' & Colher Coração",
+      category: "xicaras",
+      categoryLabel: "Xícaras Personalizadas",
+      price: 86.90,
+      badge: "Alta Porcelana",
+      imageKey: "xicara_imperial",
+      shortDesc: "Conjunto clássico de xícara de chá e pires ondulado com filete rose gold, brasão floral rosé personalizado e colherzinha dourada com topo de coração.",
+      customizable: "Inicial no brasão floral + Nome no pires + Caixa Rosé",
+      includes: [
+        "1 Xícara de chá 220ml em porcelana fina perolada + Pires floral",
+        "1 Colher de chá em inox rose gold com coração vazado",
+        "1 Caixa de presente rígida rosa pastel com laço de cetim",
+        "Cartão de dedicatória caligrafado"
+      ]
+    },
+    {
+      id: "prod-8",
+      name: "Luminária Litofania 3D com Foto Iluminada + Coração 3D",
+      category: "arte3d",
+      categoryLabel: "Letras, Litofania & 3D",
+      price: 119.90,
+      badge: "Inovação Exclusiva 3D",
+      imageKey: "litofania_3d",
+      shortDesc: "A maior inovação do nosso atelier: sua fotografia favorita impressa em relevo 3D que se revela magicamente com luz LED quente, acompanhada de coração 3D.",
+      customizable: "1 Foto especial para Litofania 3D + Cor da moldura + Coração 3D",
+      includes: [
+        "1 Luminária Curva em Litofania 3D de alta resolução (16x14cm)",
+        "Sistema de iluminação LED branco quente (bivolt/USB com botão liga/desliga)",
+        "1 Escultura Coração Geométrico Facetado 3D em rosé pastel",
+        "Embalagem protetora de luxo pronta para presentear"
+      ]
+    },
+    {
+      id: "prod-9",
+      name: "Kit Letras & Palavras Esculturais 3D de Mesa (Monograma + Nome)",
+      category: "arte3d",
+      categoryLabel: "Letras, Litofania & 3D",
+      price: 59.90,
+      badge: "Feito Sob Medida",
+      imageKey: "letras_3d",
+      shortDesc: "Conjunto decorativo em impressão 3D de alta definição com iniciais do casal/família, símbolo '&' rose gold e palavra escultural (Gratidão, Amor ou Nome).",
+      customizable: "Iniciais + Palavra de até 10 letras + Combinação de cores",
+      includes: [
+        "2 Letras Iniciais 3D de 12cm (ficam em pé sozinhas)",
+        "1 Símbolo '&' ou Coração 3D em acabamento rose gold",
+        "1 Palavra cursiva 3D com base estável e detalhe floral",
+        "Polímero biodegradável premium com toque acetinado"
+      ]
+    },
+    {
+      id: "prod-10",
+      name: "Trio Decorativo 3D: Vaso Twist Rosé com Flores Secas + Corações",
+      category: "arte3d",
+      categoryLabel: "Objetos com 3D & Decoração",
+      price: 89.90,
+      badge: "Design de Interiores",
+      imageKey: "vaso_coracoes_3d",
+      shortDesc: "Conjunto escultural com 1 vaso espiral 3D rosé matte com buquê de flores secas naturais e 2 corações facetados 3D (branco pérola e rose gold).",
+      customizable: "Cores do vaso e dos corações 3D + Tag personalizada",
+      includes: [
+        "1 Vaso Geométrico Espiral 3D (15cm) em rosé blush matte",
+        "1 Maço de flores desidratadas (lagurus branco e gypsophila rosé)",
+        "2 Corações Facetados Low-Poly 3D (Pérola e Rose Gold)",
+        "Tag com frase afetiva presa no vaso"
+      ]
+    },
+    {
+      id: "prod-11",
+      name: "Quadro Shadow Box 3D 'LOVE' + Polaroids Suspensas & Placa QR",
+      category: "polaroid",
+      categoryLabel: "Polaroid & Quadros 3D",
+      price: 84.90,
+      badge: "Híbrido 3D + Música",
+      imageKey: "quadro_shadowbox",
+      shortDesc: "Quadro caixa-alta branco com palavra em relevo 3D rose gold, 3 fotos Polaroid penduradas com flores 3D e placa QR Code que toca a música de vocês!",
+      customizable: "Palavra 3D no topo + 3 Fotos Polaroid + Música na Placa QR",
+      includes: [
+        "Quadro Shadow Box branco 22x22cm com profundidade e vidro protetor",
+        "Letras em relevo 3D metalizado rose gold (LOVE, AMOR ou Nome)",
+        "3 Fotografias Polaroid no mini varal com pregadores e mini flores 3D",
+        "Placa Rose Gold com QR Code Musical interativo (Spotify/YouTube)"
+      ]
+    },
+    {
+      id: "prod-12",
+      name: "Kit Memórias Polaroid Iluminado (10 Fotos + Fio de Fada & Charms 3D)",
+      category: "polaroid",
+      categoryLabel: "Polaroid & Quadros 3D",
+      price: 44.90,
+      badge: "Mimo Afetivo",
+      imageKey: "polaroid_led",
+      shortDesc: "10 fotografias reveladas no formato clássico Polaroid com legenda personalizada, cordão de luzes LED Fio de Fada, mini pregadores e charms de coração 3D.",
+      customizable: "10 Fotos do seu celular + Legendas + Música QR Code na capa",
+      includes: [
+        "10 Fotos Polaroid (10x8cm) com laminação protetora anti-desbotamento",
+        "1 Cordão Fio de Fada LED (2 metros, pilhas inclusas)",
+        "10 Mini pregadores + 6 mini corações/flores 3D em relevo",
+        "Caixa envelope rosé com fita de cetim e tag QR Code Musical"
+      ]
+    }
+  ];
+
+  const DEDICATION_SUGGESTIONS = {
+    "Aniversário Especial": [
+      "Que o seu novo ciclo seja tão doce, iluminado e especial quanto cada detalhe desta cesta. Feliz aniversário! ✨",
+      "Preparei cada item personalizado pensando no seu sorriso. Que seu dia seja repleto de amor e memórias lindas! 🎂",
+      "Você merece um presente único no mundo, feito com seu nome e nossas melhores lembranças. Parabéns! 💖"
+    ],
+    "Amor & Romântico": [
+      "Cada foto Polaroid aqui guarda um pedacinho da nossa história. Te amo hoje e para sempre! ♥",
+      "Que nosso amor continue iluminando nossos dias como este presente feito sob medida para nós dois. ✨",
+      "Aponte o celular para o QR Code, dê play na nossa música e sinta o meu abraço em cada detalhe desta cesta! 🎵💖"
+    ],
+    "Dia das Mães / Família": [
+      "Mãe, sua delicadeza inspira minha vida. Fiz esta cesta com seu nome e nossas fotos para lembrar o quanto te amo! 🌷",
+      "Gratidão por cada gesto de amor. Que sua xícara nova aqueça suas manhãs com todo o meu carinho! ☕♥"
+    ],
+    "Gratidão & Amizade": [
+      "Amiga, obrigada por fazer parte das minhas melhores memórias. Um mimo personalizado para celebrar sua vida! ✨",
+      "Para uma pessoa única, um presente feito sob medida com todo o carinho do mundo. Conta comigo sempre! 🌸"
+    ],
+    "Decoração / Mimo Pessoal": [
+      "Um toque de afeto, luz e delicadeza para deixar o seu cantinho favorito ainda mais especial! 🏡✨"
+    ]
+  };
+
+  const FAQS = [
+    {
+      q: "Posso comprar apenas os itens personalizados (Xícara, 3D, Litofania ou Polaroid) sem a cesta?",
+      a: "Com certeza! Na Lily Cestas você pode encomendar tanto as Cestas e Boxes completas quanto qualquer item personalizado avulso (como apenas uma Caneca Alça Coração, um Kit de Letras 3D, a Luminária Litofania 3D ou o Kit de Polaroids). Todos os itens avulsos já vão em embalagem presenteável cortesia com laço rosé."
+    },
+    {
+      q: "Como funciona a Placa QR Code Musical (Lily Memory Tag™) e a Luminária Litofania 3D?",
+      a: "Na Cápsula QR Code Musical, gravamos um código exclusivo na Polaroid ou em uma plaquinha rose gold: quando a pessoa presenteada aponta a câmera do celular, abre direto a música de vocês no Spotify ou um vídeo secreto seu! Já a Luminária Litofania 3D transforma sua foto favorita em uma peça tridimensional que, ao acender a luz LED interna, revela o retrato com riqueza impressionante de detalhes."
+    },
+    {
+      q: "Como envio as fotos das Polaroids e aprovo a arte da xícara e do 3D?",
+      a: "Você pode testar sua foto aqui mesmo no Estúdio Interativo do site! Ao finalizar seu pedido no nosso Checkout de 3 etapas, geramos seu protocolo completo e abrimos a conversa no WhatsApp, onde você anexa as fotos em alta qualidade e recebe a prévia digital da xícara e do modelo 3D para aprovar antes de produzirmos."
+    },
+    {
+      q: "Qual é o prazo de produção e como funcionam as entregas agendadas?",
+      a: "Para cestas e kits Polaroid, realizamos entregas agendadas a partir das 06h30 da manhã (inclusive com pedidos para o mesmo dia ou dia seguinte). Para xícaras personalizadas, Luminárias Litofania 3D e esculturas 3D sob medida, pedimos de 1 a 2 dias úteis para aprovação da arte e acabamento impecável."
+    }
+  ];
+
+  // Estado Global
+  let state = {
+    activeHotspot: "cestas",
+    heroPhotoIndex: 0,
+    catalogFilter: "todos",
+    searchQuery: "",
+    sortBy: "destaques",
+    favorites: [],
+    cart: [],
+    checkoutStep: 1,
+    paymentMethod: "PIX com 5% de Desconto",
+    deliveryFee: 15.00,
+    msgSuggestionIdx: 0,
+    sim: {
+      base: "cesta",
+      basePrice: 149.00,
+      baseLabel: "Cesta Lily Imperial (Vime Branco + Flores, Macarons & Delícias)",
+      mug: "rose-gold",
+      mugPrice: 58.90,
+      mugLabel: "Caneca Rosé & Branco com Alça Coração Rose Gold",
+      mugText: "Ana Clara ✨",
+      item3d: "palavra",
+      item3dPrice: 49.90,
+      item3dLabel: "Palavra Escultural 3D Sob Medida",
+      text3d: "AMOR",
+      color3d: "pink",
+      color3dLabel: "Rosé Blush Pastel",
+      polaroid: "pack8",
+      polaroidPrice: 44.90,
+      polaroidLabel: "Varal 8 Polaroids + Fio de Fada LED & Charms 3D",
+      polaroidCaption: "Nosso momento inesquecível ♥",
+      photoFilter: "natural",
+      customPhotoDataUrl: null,
+      occasion: "Aniversário Especial",
+      qrSong: "Perfect - Ed Sheeran (Nossa Música)",
+      cardMessage: "Que cada detalhe desta cesta traga doçura, amor e memórias inesquecíveis para o seu dia!"
+    },
+    activeModalProduct: null,
+    quizRecommendation: PRODUCTS[0]
+  };
+
+  try {
+    const savedCart = localStorage.getItem("lily_cart_v2");
+    if (savedCart) state.cart = JSON.parse(savedCart);
+    const savedFavs = localStorage.getItem("lily_favs_v2");
+    if (savedFavs) state.favorites = JSON.parse(savedFavs);
+  } catch (e) {}
+
+  function saveState() {
+    try {
+      localStorage.setItem("lily_cart_v2", JSON.stringify(state.cart));
+      localStorage.setItem("lily_favs_v2", JSON.stringify(state.favorites));
+    } catch (e) {}
+  }
+
+  function formatBRL(value) {
+    return "R$ " + Number(value).toFixed(2).replace(".", ",");
+  }
+
+  function getImgSrc(key) {
+    if (window.LILY_IMAGES && window.LILY_IMAGES[key]) {
+      return window.LILY_IMAGES[key];
+    }
+    return "";
+  }
+
+  function showToast(message) {
+    const container = document.getElementById("toast-container");
+    if (!container) return;
+    const toast = document.createElement("div");
+    toast.className = "flex items-center gap-3 px-4 py-3 rounded-2xl bg-[#382126] text-white text-xs sm:text-sm font-display font-medium shadow-floating border border-[#C87888]/50 transition-all duration-300";
+    toast.innerHTML = `<span class="w-2.5 h-2.5 rounded-full bg-[#F2D5DC] shrink-0"></span><span>${message}</span>`;
+    container.appendChild(toast);
+    setTimeout(() => {
+      toast.style.opacity = "0";
+      toast.style.transform = "translateY(8px)";
+      setTimeout(() => toast.remove(), 300);
+    }, 3200);
+  }
+
+  // Inicializar Logos e Imagens Estáticas
+  function hydrateStaticImages() {
+    document.querySelectorAll("[data-lily-logo='rose']").forEach(img => {
+      img.src = getImgSrc("logo");
+    });
+    document.querySelectorAll("[data-lily-logo='white']").forEach(img => {
+      img.src = getImgSrc("logo_white");
+    });
+    document.querySelectorAll("[data-lily-img]").forEach(img => {
+      const key = img.getAttribute("data-lily-img");
+      img.src = getImgSrc(key);
+    });
+  }
+
+  // Renderizar Painel Interativo do Hero (Hotspots + Foto Dinâmica)
+  function renderHeroHotspot() {
+    const data = HOTSPOTS[state.activeHotspot] || HOTSPOTS.cestas;
+    const badgeEl = document.getElementById("hero-spotlight-badge");
+    const titleEl = document.getElementById("hero-spotlight-title");
+    const descEl = document.getElementById("hero-spotlight-desc");
+    const listEl = document.getElementById("hero-spotlight-list");
+    const priceEl = document.getElementById("hero-spotlight-price");
+    const mainImg = document.getElementById("hero-main-img");
+    const captionEl = document.getElementById("hero-photo-caption");
+
+    if (badgeEl) badgeEl.textContent = data.badge;
+    if (titleEl) titleEl.textContent = data.title;
+    if (descEl) descEl.textContent = data.desc;
+    if (priceEl) priceEl.textContent = data.priceFrom;
+    if (mainImg) mainImg.src = getImgSrc(data.heroImgKey);
+    if (captionEl) captionEl.textContent = data.caption;
+
+    if (listEl) {
+      listEl.innerHTML = data.highlights
+        .map(h => `<li class="flex items-start gap-2 text-xs sm:text-sm text-white/95"><span class="text-[#FFE4E9] font-bold mt-0.5">✦</span><span>${h}</span></li>`)
+        .join("");
+    }
+
+    // Atualizar botões de pilar no Hero (Ativo fica Rosé Invertido com texto branco!)
+    document.querySelectorAll("[data-hotspot-btn]").forEach(btn => {
+      const key = btn.getAttribute("data-hotspot-btn");
+      const isActive = key === state.activeHotspot;
+      if (isActive) {
+        btn.className = "text-left p-3.5 rounded-2xl bg-lily-rose-inverted text-white shadow-delicate transition-all";
+      } else {
+        btn.className = "text-left p-3.5 rounded-2xl border border-[#EED9DF] bg-[#FDF8F9] hover:bg-white text-[#382126] transition-all";
+      }
+    });
+
+    // Atualizar pins na foto do Hero
+    document.querySelectorAll("[data-hotspot-pin]").forEach(pin => {
+      const key = pin.getAttribute("data-hotspot-pin");
+      const isActive = key === state.activeHotspot;
+      if (isActive) {
+        pin.className = "hotspot-pulse absolute px-3 py-1.5 rounded-full text-xs font-display font-semibold shadow-md backdrop-blur-md transition-all flex items-center gap-1.5 bg-[#B36273] text-white ring-4 ring-white/50 scale-105 " + getPinPosClass(key);
+      } else {
+        pin.className = "hotspot-pulse absolute px-3 py-1.5 rounded-full text-xs font-display font-semibold shadow-md backdrop-blur-md transition-all flex items-center gap-1.5 bg-white/95 text-[#382126] " + getPinPosClass(key);
+      }
+    });
+  }
+
+  function getPinPosClass(key) {
+    if (key === "cestas") return "top-4 left-4";
+    if (key === "xicaras") return "top-4 right-4";
+    if (key === "arte3d") return "bottom-14 left-4";
+    return "bottom-14 right-4";
+  }
+
+  // Renderizar Concierge Inteligente (Quiz de 15s)
+  function renderConciergeQuiz() {
+    const who = document.getElementById("quiz-who")?.value || "amor";
+    const vibe = document.getElementById("quiz-vibe")?.value || "completa";
+    const budget = document.getElementById("quiz-budget")?.value || "premium";
+
+    let chosen = PRODUCTS[0];
+    if (budget === "premium") {
+      if (who === "amor" && vibe === "iluminada") chosen = PRODUCTS[3]; // Box Luxo Romântica
+      else if (who === "mae") chosen = PRODUCTS[1]; // Cesta Despertar Delicado
+      else if (who === "amiga") chosen = PRODUCTS[2]; // Cesta Doce Encanto Macarons
+      else chosen = PRODUCTS[0]; // Cesta Lily Imperial
+    } else if (budget === "medio") {
+      if (vibe === "iluminada") chosen = PRODUCTS[7]; // Luminária Litofania 3D
+      else if (vibe === "louca") chosen = PRODUCTS[5]; // Dupla de Xícaras
+      else if (who === "decor") chosen = PRODUCTS[9]; // Vaso Twist 3D
+      else chosen = PRODUCTS[10]; // Quadro Shadow Box 3D
+    } else {
+      if (vibe === "louca") chosen = PRODUCTS[4]; // Caneca Alça Coração + 3D
+      else if (vibe === "iluminada") chosen = PRODUCTS[11]; // Kit Polaroid Fio de Fada
+      else chosen = PRODUCTS[8]; // Kit Letras & Palavras 3D
+    }
+
+    state.quizRecommendation = chosen;
+    const imgEl = document.getElementById("quiz-result-img");
+    const titleEl = document.getElementById("quiz-result-title");
+    const descEl = document.getElementById("quiz-result-desc");
+    const priceEl = document.getElementById("quiz-result-price");
+
+    if (imgEl) imgEl.src = getImgSrc(chosen.imageKey);
+    if (titleEl) titleEl.textContent = chosen.name;
+    if (descEl) descEl.textContent = chosen.shortDesc;
+    if (priceEl) priceEl.textContent = formatBRL(chosen.price);
+  }
+
+  // Renderizar Simulador 3D & Personalizados ao Vivo
+  function renderSimulator() {
+    const s = state.sim;
+    const total = s.basePrice + s.mugPrice + s.item3dPrice + s.polaroidPrice;
+
+    const totalEl = document.getElementById("sim-total-price");
+    if (totalEl) totalEl.textContent = formatBRL(total);
+
+    const summaryBase = document.getElementById("sim-preview-base");
+    if (summaryBase) summaryBase.textContent = s.baseLabel;
+
+    // Preview da Louça
+    const mugPreviewBox = document.getElementById("sim-preview-mug-box");
+    const mugTextDisplay = document.getElementById("sim-preview-mug-text");
+    const mugStyleDisplay = document.getElementById("sim-preview-mug-style");
+    const mugCupGraphic = document.getElementById("sim-mug-cup-body");
+
+    if (s.mug === "none") {
+      if (mugPreviewBox) mugPreviewBox.classList.add("opacity-40");
+      if (mugTextDisplay) mugTextDisplay.textContent = "Sem xícara";
+      if (mugStyleDisplay) mugStyleDisplay.textContent = "Opcional";
+    } else {
+      if (mugPreviewBox) mugPreviewBox.classList.remove("opacity-40");
+      if (mugTextDisplay) mugTextDisplay.textContent = s.mugText.trim() || "Seu Nome ✨";
+      if (mugStyleDisplay) mugStyleDisplay.textContent = s.mugLabel;
+      if (mugCupGraphic) {
+        if (s.mug === "rose-matte") {
+          mugCupGraphic.style.background = "linear-gradient(135deg, #FFFFFF 0%, #FAF2F4 100%)";
+        } else if (s.mug === "cha-floral") {
+          mugCupGraphic.style.background = "linear-gradient(135deg, #FFFFFF 0%, #FCECEF 100%)";
+        } else {
+          mugCupGraphic.style.background = "linear-gradient(135deg, #F9DCE3 0%, #FFFFFF 100%)";
+        }
+      }
+    }
+
+    // Preview 3D
+    const box3d = document.getElementById("sim-preview-3d-box");
+    const text3dEl = document.getElementById("sim-preview-3d-text");
+    const label3dEl = document.getElementById("sim-preview-3d-label");
+    if (s.item3d === "none") {
+      if (box3d) box3d.classList.add("opacity-40");
+      if (text3dEl) text3dEl.textContent = "—";
+      if (label3dEl) label3dEl.textContent = "Sem peça 3D";
+    } else {
+      if (box3d) box3d.classList.remove("opacity-40");
+      const rawText = (s.text3d || "AMOR").toUpperCase().slice(0, 12);
+      if (text3dEl) {
+        text3dEl.textContent = s.item3d === "inicial" ? rawText.slice(0, 2) + " ♥" : s.item3d === "litofania" ? "💡 " + rawText.slice(0, 8) : rawText;
+        text3dEl.className = "font-display font-bold text-xl sm:text-2xl transition-all select-none " +
+          (s.color3d === "pearl" ? "lily-3d-text-pearl" : s.color3d === "rosegold" ? "lily-3d-text-rosegold" : "lily-3d-text-pink");
+      }
+      if (label3dEl) label3dEl.textContent = `${s.item3dLabel} • ${s.color3dLabel}`;
+    }
+
+    // Preview Polaroid + Foto Upload + Filtro + QR Musical
+    const polBox = document.getElementById("sim-preview-polaroid-box");
+    const polCaption = document.getElementById("sim-preview-polaroid-caption");
+    const polBadge = document.getElementById("sim-preview-polaroid-badge");
+    const polImg = document.getElementById("sim-polaroid-img");
+    const qrSongEl = document.getElementById("sim-preview-qr-song");
+
+    if (s.polaroid === "none") {
+      if (polBox) polBox.classList.add("opacity-40");
+      if (polCaption) polCaption.textContent = "Sem pack Polaroid";
+      if (polBadge) polBadge.textContent = "Opcional";
+    } else {
+      if (polBox) polBox.classList.remove("opacity-40");
+      if (polCaption) polCaption.textContent = s.polaroidCaption.trim() || "Com todo meu amor ♥";
+      if (polBadge) polBadge.textContent = s.polaroidLabel;
+    }
+
+    if (polImg) {
+      if (s.customPhotoDataUrl) {
+        polImg.src = s.customPhotoDataUrl;
+      } else if (s.item3d === "litofania" || s.photoFilter === "lithophane") {
+        polImg.src = getImgSrc("litofania_3d");
+      } else {
+        polImg.src = getImgSrc("polaroid_led");
+      }
+      polImg.className = `w-full h-full object-cover max-w-full transition-all photo-filter-${s.photoFilter}`;
+    }
+
+    if (qrSongEl) {
+      qrSongEl.textContent = "🎵 " + (s.qrSong.trim() || "Cápsula QR Code Musical Cortesia");
+    }
+
+    // Preview Cartão
+    const cardOccasionEl = document.getElementById("sim-preview-occasion");
+    const cardMsgEl = document.getElementById("sim-preview-card-msg");
+    if (cardOccasionEl) cardOccasionEl.textContent = s.occasion;
+    if (cardMsgEl) cardMsgEl.textContent = `"${s.cardMessage.trim() || "Com carinho, Lily Cestas ✨"}"`;
+
+    // Breakdown de preços
+    const breakdownEl = document.getElementById("sim-price-breakdown");
+    if (breakdownEl) {
+      const items = [
+        { name: s.baseLabel, val: s.basePrice },
+        ...(s.mug !== "none" ? [{ name: `${s.mugLabel} ("${s.mugText || "Personalizado"}")`, val: s.mugPrice }] : []),
+        ...(s.item3d !== "none" ? [{ name: `${s.item3dLabel} [${s.text3d || "3D"}]`, val: s.item3dPrice }] : []),
+        ...(s.polaroid !== "none" ? [{ name: s.polaroidLabel, val: s.polaroidPrice }] : []),
+        { name: "Cápsula QR Musical + Cartão Rosé Caligrafado", val: 0 }
+      ];
+      breakdownEl.innerHTML = items.map(it => `
+        <div class="flex items-center justify-between text-xs py-1 border-b border-[#F5E6EA] last:border-0">
+          <span class="text-[#5A3D43] truncate pr-2">${it.name}</span>
+          <span class="font-display font-semibold text-[#382126] shrink-0">${it.val === 0 ? "Cortesia" : formatBRL(it.val)}</span>
+        </div>
+      `).join("");
+    }
+  }
+
+  // Renderizar Catálogo de 12 Produtos (Com cards destacados alternando estilo)
+  function renderCatalog() {
+    const grid = document.getElementById("catalog-grid");
+    const countEl = document.getElementById("catalog-count");
+    if (!grid) return;
+
+    let filtered = PRODUCTS.filter(p => {
+      const matchCat = state.catalogFilter === "todos" || p.category === state.catalogFilter ||
+        (state.catalogFilter === "favoritos" && state.favorites.includes(p.id));
+      const q = state.searchQuery.trim().toLowerCase();
+      const matchQuery = !q ||
+        p.name.toLowerCase().includes(q) ||
+        p.shortDesc.toLowerCase().includes(q) ||
+        p.categoryLabel.toLowerCase().includes(q) ||
+        p.customizable.toLowerCase().includes(q);
+      return matchCat && matchQuery;
+    });
+
+    if (state.sortBy === "menor-preco") {
+      filtered.sort((a, b) => a.price - b.price);
+    } else if (state.sortBy === "maior-preco") {
+      filtered.sort((a, b) => b.price - a.price);
+    }
+
+    if (countEl) {
+      countEl.textContent = `${filtered.length} ${filtered.length === 1 ? "criação disponível" : "criações disponíveis"}`;
+    }
+
+    document.querySelectorAll("[data-cat-filter]").forEach(btn => {
+      const cat = btn.getAttribute("data-cat-filter");
+      if (cat === state.catalogFilter) {
+        btn.className = "px-4 py-2 rounded-full text-xs font-display font-semibold bg-[#B36273] text-white shadow-xs transition-all";
+      } else {
+        btn.className = "px-4 py-2 rounded-full text-xs font-display font-medium bg-white text-[#5A3D43] border border-[#EED9DF] hover:border-[#C87888] transition-all";
+      }
+    });
+
+    if (filtered.length === 0) {
+      grid.innerHTML = `
+        <div class="col-span-full bg-white rounded-3xl p-10 text-center border border-[#EED9DF]">
+          <p class="font-display font-semibold text-xl text-[#382126] mb-2">Nenhum item encontrado para esse filtro</p>
+          <p class="text-xs sm:text-sm text-[#785860] mb-4">Limpe o filtro para visualizar todas as 12 criações da Lily Cestas.</p>
+          <button type="button" id="reset-catalog-btn" class="px-5 py-2.5 rounded-full bg-[#B36273] text-white text-xs font-display font-semibold hover:bg-[#9B4C5D] transition-all">
+            Mostrar Todas as 12 Criações
+          </button>
+        </div>
+      `;
+      document.getElementById("reset-catalog-btn")?.addEventListener("click", () => {
+        state.catalogFilter = "todos";
+        state.searchQuery = "";
+        const searchInput = document.getElementById("catalog-search");
+        if (searchInput) searchInput.value = "";
+        renderCatalog();
+      });
+      return;
+    }
+
+    grid.innerHTML = filtered.map((p, idx) => {
+      const isFav = state.favorites.includes(p.id);
+      const imgSrc = getImgSrc(p.imageKey);
+      // Quebra de container: destaca os cards assinatura (Ex: prod-4 Box Romântica, prod-8 Litofania 3D, prod-11 Shadow Box) em Rosé Invertido!
+      const isInvertedCard = (p.id === "prod-4" || p.id === "prod-8" || p.id === "prod-11");
+
+      if (isInvertedCard) {
+        return `
+          <article class="bg-lily-rose-inverted text-white rounded-3xl border border-white/25 overflow-hidden shadow-floating hover:scale-[1.01] transition-all duration-300 flex flex-col">
+            <div class="relative h-56 overflow-hidden bg-[#382126]">
+              <img src="${imgSrc}" alt="${p.name}" class="w-full h-full object-cover max-w-full transition-transform duration-500 hover:scale-105" />
+              <div class="absolute top-3 left-3 flex flex-wrap gap-1.5">
+                <span class="px-3 py-1 rounded-full text-[10px] font-display font-bold uppercase bg-white text-[#9B4C5D] shadow-xs">
+                  ${p.categoryLabel}
+                </span>
+                <span class="px-2.5 py-1 rounded-full text-[10px] font-display font-bold uppercase bg-[#382126]/85 text-[#FFE4E9] backdrop-blur-xs">
+                  ✦ ${p.badge}
+                </span>
+              </div>
+              <button type="button" data-fav-btn="${p.id}" aria-label="Favoritar ${p.name}" class="absolute top-3 right-3 w-9 h-9 rounded-full bg-white/90 hover:bg-white flex items-center justify-center shadow-xs transition-all">
+                <span class="text-base ${isFav ? "text-[#C87888]" : "text-[#B89CA3]"}">${isFav ? "♥" : "♡"}</span>
+              </button>
+            </div>
+            <div class="p-5 flex-1 flex flex-col justify-between">
+              <div>
+                <h3 class="font-display font-semibold text-lg text-white leading-snug mb-1.5">${p.name}</h3>
+                <p class="text-xs text-white/90 leading-relaxed mb-3">${p.shortDesc}</p>
+                <div class="p-2.5 rounded-2xl bg-white/15 border border-white/25 mb-4 backdrop-blur-xs">
+                  <p class="text-[10px] font-display font-bold uppercase tracking-wider text-[#FFE4E9] mb-0.5">✦ Personalização inclusa:</p>
+                  <p class="text-xs text-white font-medium">${p.customizable}</p>
+                </div>
+              </div>
+              <div class="pt-3 border-t border-white/25 flex items-center justify-between gap-2">
+                <div>
+                  <span class="block text-[10px] font-display uppercase tracking-wider text-[#FFE4E9]">Investimento</span>
+                  <span class="text-lg font-display font-bold text-white">${formatBRL(p.price)}</span>
+                </div>
+                <div class="flex items-center gap-2">
+                  <button type="button" data-customize-prod="${p.id}" class="px-3 py-2 rounded-xl border border-white/40 text-xs font-display font-semibold text-white hover:bg-white/15 transition-all">
+                    Personalizar
+                  </button>
+                  <button type="button" data-quick-add="${p.id}" class="px-3.5 py-2 rounded-xl bg-white text-[#9B4C5D] text-xs font-display font-bold hover:bg-[#FFF5F7] transition-all shadow-xs">
+                    + Sacola
+                  </button>
+                </div>
+              </div>
+            </div>
+          </article>
+        `;
+      }
+
+      return `
+        <article class="bg-white rounded-3xl border border-[#EED9DF] overflow-hidden shadow-delicate hover:shadow-floating transition-all duration-300 flex flex-col">
+          <div class="relative h-56 overflow-hidden bg-[#FDF6F8]">
+            <img src="${imgSrc}" alt="${p.name}" class="w-full h-full object-cover max-w-full transition-transform duration-500 hover:scale-105" />
+            <div class="absolute top-3 left-3 flex flex-wrap gap-1.5">
+              <span class="px-3 py-1 rounded-full text-[10px] font-display font-bold uppercase bg-white/95 text-[#382126] shadow-xs backdrop-blur-xs">
+                ${p.categoryLabel}
+              </span>
+              <span class="px-2.5 py-1 rounded-full text-[10px] font-display font-bold uppercase bg-[#B36273] text-white shadow-xs">
+                ${p.badge}
+              </span>
+            </div>
+            <button type="button" data-fav-btn="${p.id}" aria-label="Favoritar ${p.name}" class="absolute top-3 right-3 w-9 h-9 rounded-full bg-white/90 hover:bg-white flex items-center justify-center shadow-xs transition-all">
+              <span class="text-base ${isFav ? "text-[#C87888]" : "text-[#B89CA3]"}">${isFav ? "♥" : "♡"}</span>
+            </button>
+          </div>
+          <div class="p-5 flex-1 flex flex-col justify-between">
+            <div>
+              <h3 class="font-display font-semibold text-lg text-[#382126] leading-snug mb-1.5">${p.name}</h3>
+              <p class="text-xs text-[#6E5057] leading-relaxed mb-3">${p.shortDesc}</p>
+              <div class="p-2.5 rounded-2xl bg-[#FDF6F8] border border-[#F5E4E8] mb-4">
+                <p class="text-[10px] font-display font-bold uppercase tracking-wider text-[#A65365] mb-0.5">✦ Personalização inclusa:</p>
+                <p class="text-xs text-[#4A2E35] font-medium">${p.customizable}</p>
+              </div>
+            </div>
+            <div class="pt-3 border-t border-[#F6E8EC] flex items-center justify-between gap-2">
+              <div>
+                <span class="block text-[10px] font-display uppercase tracking-wider text-[#8C6C73]">Investimento</span>
+                <span class="text-lg font-display font-bold text-[#382126]">${formatBRL(p.price)}</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <button type="button" data-customize-prod="${p.id}" class="px-3 py-2 rounded-xl border border-[#D9A7B2] text-xs font-display font-semibold text-[#A65365] hover:bg-[#FDF2F5] transition-all">
+                  Personalizar
+                </button>
+                <button type="button" data-quick-add="${p.id}" class="px-3.5 py-2 rounded-xl bg-rosegold-gradient text-white text-xs font-display font-semibold hover:opacity-95 transition-all shadow-xs">
+                  + Sacola
+                </button>
+              </div>
+            </div>
+          </div>
+        </article>
+      `;
+    }).join("");
+  }
+
+  // Renderizar FAQ
+  function renderFaq() {
+    const faqList = document.getElementById("faq-list");
+    if (!faqList) return;
+    faqList.innerHTML = FAQS.map((item, idx) => `
+      <div class="bg-white rounded-2xl border border-[#EED9DF] overflow-hidden shadow-xs">
+        <button type="button" data-faq-toggle="${idx}" class="w-full px-5 py-4 text-left flex items-center justify-between gap-4 hover:bg-[#FDF8F9] transition-colors">
+          <span class="font-display font-semibold text-xs sm:text-sm text-[#382126]">${item.q}</span>
+          <span id="faq-icon-${idx}" class="w-7 h-7 rounded-full bg-[#F9EBEE] text-[#A65365] flex items-center justify-center font-bold text-sm shrink-0">${idx === 0 ? "−" : "+"}</span>
+        </button>
+        <div id="faq-ans-${idx}" class="${idx === 0 ? "block" : "hidden"} px-5 pb-4 text-xs sm:text-sm text-[#6E5057] leading-relaxed border-t border-[#F9EBEE] pt-3">
+          ${item.a}
+        </div>
+      </div>
+    `).join("");
+  }
+
+  // Renderizar Sacola & Barra de Progresso de Mimos
+  function renderCart() {
+    const count = state.cart.reduce((acc, item) => acc + item.qty, 0);
+    const total = state.cart.reduce((acc, item) => acc + item.price * item.qty, 0);
+
+    const badgeEl = document.getElementById("header-cart-count");
+    if (badgeEl) badgeEl.textContent = String(count);
+
+    const favBadgeEl = document.getElementById("header-fav-count");
+    if (favBadgeEl) favBadgeEl.textContent = String(state.favorites.length);
+
+    const cartTotalEl = document.getElementById("cart-drawer-total");
+    if (cartTotalEl) cartTotalEl.textContent = formatBRL(total);
+
+    // Barra de Recompensa Gamificada
+    const rewardText = document.getElementById("cart-reward-text");
+    const rewardPct = document.getElementById("cart-reward-pct");
+    const rewardBar = document.getElementById("cart-reward-bar");
+    const pct = Math.min(100, Math.round((total / 220) * 100));
+    if (rewardBar) rewardBar.style.width = pct + "%";
+    if (rewardPct) rewardPct.textContent = pct + "%";
+    if (rewardText) {
+      if (total === 0) {
+        rewardText.textContent = "Adicione R$ 120,00 para ganhar Chaveiro Coração 3D Grátis!";
+      } else if (total < 120) {
+        rewardText.textContent = `Faltam ${formatBRL(120 - total)} para ganhar 1 Mini Chaveiro Coração 3D Grátis!`;
+      } else if (total < 220) {
+        rewardText.textContent = `🎉 Ganhou Chaveiro 3D! Faltam ${formatBRL(220 - total)} para ganhar Placa QR Musical + 2 Polaroids!`;
+      } else {
+        rewardText.textContent = "👑 Parabéns! Você desbloqueou TODOS os Mimos Grátis Lily (Chaveiro 3D + Placa QR + 2 Polaroids)!";
+      }
+    }
+
+    const cartItemsEl = document.getElementById("cart-items-list");
+    if (!cartItemsEl) return;
+    if (state.cart.length === 0) {
+      cartItemsEl.innerHTML = `
+        <div class="text-center py-12 px-4">
+          <div class="w-14 h-14 rounded-full bg-[#F9EBEE] text-[#C87888] flex items-center justify-center mx-auto mb-3 text-2xl">🧺</div>
+          <p class="font-display font-semibold text-base text-[#382126] mb-1">Sua sacola Lily Cestas está vazia</p>
+          <p class="text-xs text-[#785860]">Escolha uma cesta afetiva, xícara personalizada, Luminária Litofania 3D ou use nosso Simulador Ao Vivo.</p>
+        </div>
+      `;
+      return;
+    }
+
+    cartItemsEl.innerHTML = state.cart.map((item, idx) => `
+      <div class="p-3.5 rounded-2xl bg-[#FDF8F9] border border-[#EED9DF] flex flex-col gap-2">
+        <div class="flex items-start justify-between gap-2">
+          <div>
+            <h4 class="font-display font-semibold text-xs sm:text-sm text-[#382126]">${item.name}</h4>
+            <p class="text-[11px] text-[#785860] mt-0.5">${item.details || "Personalização padrão Lily Cestas"}</p>
+          </div>
+          <button type="button" data-cart-remove="${idx}" class="text-[11px] font-display font-semibold text-[#A65365] hover:underline shrink-0">Remover</button>
+        </div>
+        <div class="flex items-center justify-between pt-2 border-t border-[#F3E2E6]">
+          <div class="flex items-center gap-2">
+            <button type="button" data-cart-dec="${idx}" class="w-6 h-6 rounded-full bg-white border border-[#E5C2C9] text-xs font-bold text-[#382126]">−</button>
+            <span class="text-xs font-display font-semibold w-5 text-center">${item.qty}</span>
+            <button type="button" data-cart-inc="${idx}" class="w-6 h-6 rounded-full bg-white border border-[#E5C2C9] text-xs font-bold text-[#382126]">+</button>
+          </div>
+          <span class="text-xs sm:text-sm font-display font-bold text-[#382126]">${formatBRL(item.price * item.qty)}</span>
+        </div>
+      </div>
+    `).join("");
+  }
+
+  // Renderizar Modal de Checkout em 3 Etapas
+  function renderCheckoutModal() {
+    const step = state.checkoutStep;
+    [1, 2, 3].forEach(s => {
+      const panel = document.getElementById(`checkout-step-${s}`);
+      if (panel) panel.classList.toggle("hidden", s !== step);
+    });
+
+    document.querySelectorAll("[data-checkout-step-btn]").forEach(btn => {
+      const s = Number(btn.getAttribute("data-checkout-step-btn"));
+      if (s === step) {
+        btn.className = "flex items-center justify-center gap-1.5 py-1.5 px-2 rounded-full text-xs font-display font-bold bg-[#B36273] text-white transition-all";
+      } else if (s < step) {
+        btn.className = "flex items-center justify-center gap-1.5 py-1.5 px-2 rounded-full text-xs font-display font-semibold bg-[#F9EBEE] text-[#A65365] border border-[#EBCAD2] transition-all";
+      } else {
+        btn.className = "flex items-center justify-center gap-1.5 py-1.5 px-2 rounded-full text-xs font-display font-medium bg-white text-[#785860] border border-[#EED9DF] transition-all";
+      }
+    });
+
+    const subtotal = state.cart.reduce((acc, item) => acc + item.price * item.qty, 0);
+    const effectiveSub = subtotal > 0 ? subtotal : (state.sim.basePrice + state.sim.mugPrice + state.sim.item3dPrice + state.sim.polaroidPrice);
+
+    // Banner de brindes na Etapa 1
+    const giftBanner = document.getElementById("checkout-gift-banner");
+    if (giftBanner) {
+      if (effectiveSub >= 220) {
+        giftBanner.textContent = "👑 Brindes Desbloqueados no Seu Pedido: 1x Mini Chaveiro Coração 3D Rosé + 1x Placa QR Code Musical + 2x Fotos Polaroid Extras (Grátis)!";
+      } else if (effectiveSub >= 120) {
+        giftBanner.textContent = `🎁 Brinde Desbloqueado: 1x Mini Chaveiro Coração 3D Rosé Grátis! (Adicione mais ${formatBRL(220 - effectiveSub)} para ganhar Placa QR Musical + 2 Polaroids)`;
+      } else {
+        giftBanner.textContent = `✨ Dica Lily: Adicione mais ${formatBRL(120 - effectiveSub)} para ganhar 1x Mini Chaveiro Coração 3D Rosé Grátis!`;
+      }
+    }
+
+    // Lista de itens na Etapa 1
+    const step1Items = document.getElementById("checkout-step1-items");
+    if (step1Items) {
+      if (state.cart.length === 0) {
+        step1Items.innerHTML = `
+          <div class="p-3 rounded-xl bg-[#FDF8F9] border border-[#EED9DF] flex justify-between items-center text-xs">
+            <span>1x Criação do Simulador (${state.sim.baseLabel})</span>
+            <span class="font-display font-bold text-[#A65365]">${formatBRL(effectiveSub)}</span>
+          </div>
+        `;
+      } else {
+        step1Items.innerHTML = state.cart.map((it, idx) => `
+          <div class="p-3 rounded-xl bg-[#FDF8F9] border border-[#EED9DF] flex justify-between items-center text-xs">
+            <div class="pr-2">
+              <p class="font-display font-semibold text-[#382126]">${it.qty}x ${it.name}</p>
+              <p class="text-[11px] text-[#785860]">${it.details || ""}</p>
+            </div>
+            <span class="font-display font-bold text-[#A65365] shrink-0">${formatBRL(it.price * it.qty)}</span>
+          </div>
+        `).join("");
+      }
+    }
+
+    // Cálculo financeiro da Etapa 3
+    const isPix = state.paymentMethod.includes("PIX");
+    const discount = isPix ? effectiveSub * 0.05 : 0;
+    const finalTotal = effectiveSub + state.deliveryFee - discount;
+
+    const subEl = document.getElementById("checkout-sub-val");
+    const shipEl = document.getElementById("checkout-ship-val");
+    const discEl = document.getElementById("checkout-disc-val");
+    const finalEl = document.getElementById("checkout-final-val");
+
+    if (subEl) subEl.textContent = formatBRL(effectiveSub);
+    if (shipEl) shipEl.textContent = state.deliveryFee === 0 ? "Grátis" : formatBRL(state.deliveryFee);
+    if (discEl) discEl.textContent = isPix ? `- ${formatBRL(discount)} (5% PIX)` : "R$ 0,00";
+    if (finalEl) finalEl.textContent = formatBRL(finalTotal);
+
+    const summaryText = generateOrderSummaryText(effectiveSub, discount, finalTotal);
+    const summaryArea = document.getElementById("checkout-summary-preview");
+    if (summaryArea) summaryArea.value = summaryText;
+
+    const waLink = document.getElementById("whatsapp-direct-link");
+    if (waLink) {
+      waLink.href = "https://wa.me/?text=" + encodeURIComponent(summaryText);
+    }
+  }
+
+  function generateOrderSummaryText(effectiveSub, discount, finalTotal) {
+    const clientName = (document.getElementById("checkout-name")?.value || "Cliente Lily").trim();
+    const recipient = (document.getElementById("checkout-recipient")?.value || "Pessoa Especial").trim();
+    const deliveryDate = (document.getElementById("checkout-date")?.value || "A combinar").trim();
+    const deliverySlot = (document.getElementById("checkout-slot")?.value || "Manhã").trim();
+    const deliveryType = (document.getElementById("checkout-delivery")?.value || "Entrega Agendada").trim();
+    const cep = (document.getElementById("checkout-cep")?.value || "").trim();
+    const address = (document.getElementById("checkout-address")?.value || "A confirmar no atendimento").trim();
+    const qrLink = (document.getElementById("checkout-qr-link")?.value || state.sim.qrSong || "A definir").trim();
+
+    let lines = [
+      `🌸 *PROTOCOLO DE ENCOMENDA — LILY CESTAS & ATELIER 3D* 🌸`,
+      `• *De:* ${clientName}  ➔  *Para:* ${recipient}`,
+      `• *Modalidade:* ${deliveryType}`,
+      `• *Data & Janela:* ${deliveryDate} (${deliverySlot})`,
+      `• *Endereço/CEP:* ${address} ${cep ? `| CEP: ${cep}` : ""}`,
+      `• *Cápsula QR Code Musical:* ${qrLink}`,
+      `----------------------------------------`,
+      `*ITENS PERSONALIZADOS:*`
+    ];
+    if (state.cart.length === 0) {
+      lines.push(`• 1x Projeto Estúdio Lily (${state.sim.baseLabel}) — ${formatBRL(effectiveSub)}`);
+      lines.push(`  ↳ Louça: "${state.sim.mugText}" | 3D: "${state.sim.text3d}" (${state.sim.color3dLabel}) | Polaroid: "${state.sim.polaroidCaption}"`);
+    } else {
+      state.cart.forEach(it => {
+        lines.push(`• ${it.qty}x ${it.name} (${formatBRL(it.price * it.qty)})`);
+        if (it.details) lines.push(`  ↳ ${it.details}`);
+      });
+    }
+    if (effectiveSub >= 220) {
+      lines.push(`🎁 *Brindes Clube Lily Inclusos:* Mini Chaveiro Coração 3D + Placa QR Musical + 2 Polaroids Extras!`);
+    } else if (effectiveSub >= 120) {
+      lines.push(`🎁 *Brinde Clube Lily Incluso:* 1x Mini Chaveiro Coração 3D Rosé!`);
+    }
+    lines.push(`----------------------------------------`);
+    lines.push(`• *Pagamento escolhido:* ${state.paymentMethod}`);
+    if (discount > 0) lines.push(`• *Desconto PIX (5%):* - ${formatBRL(discount)}`);
+    lines.push(`• *TOTAL FINAL:* ${formatBRL(finalTotal)}`);
+    lines.push(`✨ Vou enviar as fotos das Polaroids/Litofania 3D aqui na conversa!`);
+    return lines.join("\n");
+  }
+
+  function openProductModal(prodId) {
+    const prod = PRODUCTS.find(p => p.id === prodId);
+    if (!prod) return;
+    state.activeModalProduct = prod;
+
+    const modal = document.getElementById("product-custom-modal");
+    const title = document.getElementById("modal-prod-title");
+    const cat = document.getElementById("modal-prod-cat");
+    const price = document.getElementById("modal-prod-price");
+    const desc = document.getElementById("modal-prod-desc");
+    const includesList = document.getElementById("modal-prod-includes");
+    const customHint = document.getElementById("modal-prod-hint");
+    const img = document.getElementById("modal-prod-img");
+    const inputText = document.getElementById("modal-custom-text");
+
+    if (title) title.textContent = prod.name;
+    if (cat) cat.textContent = prod.categoryLabel;
+    if (price) price.textContent = formatBRL(prod.price);
+    if (desc) desc.textContent = prod.shortDesc;
+    if (customHint) customHint.textContent = prod.customizable;
+    if (img) img.src = getImgSrc(prod.imageKey);
+    if (inputText) inputText.value = "";
+    if (includesList) {
+      includesList.innerHTML = prod.includes.map(inc => `<li class="flex items-center gap-2 text-xs text-[#5A3D43]"><span class="text-[#C87888] font-bold">✓</span><span>${inc}</span></li>`).join("");
+    }
+    if (modal) modal.classList.remove("hidden");
+  }
+
+  function closeProductModal() {
+    document.getElementById("product-custom-modal")?.classList.add("hidden");
+    state.activeModalProduct = null;
+  }
+
+  function bindEvents() {
+    document.addEventListener("click", (e) => {
+      const hotspotBtn = e.target.closest("[data-hotspot-btn]");
+      if (hotspotBtn) {
+        state.activeHotspot = hotspotBtn.getAttribute("data-hotspot-btn");
+        renderHeroHotspot();
+        return;
+      }
+
+      const hotspotPin = e.target.closest("[data-hotspot-pin]");
+      if (hotspotPin) {
+        state.activeHotspot = hotspotPin.getAttribute("data-hotspot-pin");
+        renderHeroHotspot();
+        return;
+      }
+
+      const catBtn = e.target.closest("[data-cat-filter]");
+      if (catBtn) {
+        state.catalogFilter = catBtn.getAttribute("data-cat-filter");
+        renderCatalog();
+        return;
+      }
+
+      const pillarJump = e.target.closest("[data-pillar-jump]");
+      if (pillarJump) {
+        state.catalogFilter = pillarJump.getAttribute("data-pillar-jump");
+        renderCatalog();
+        document.getElementById("catalogo")?.scrollIntoView({ behavior: "smooth" });
+        return;
+      }
+
+      const favBtn = e.target.closest("[data-fav-btn]");
+      if (favBtn) {
+        const id = favBtn.getAttribute("data-fav-btn");
+        const idx = state.favorites.indexOf(id);
+        if (idx >= 0) {
+          state.favorites.splice(idx, 1);
+          showToast("Removido dos seus favoritos");
+        } else {
+          state.favorites.push(id);
+          showToast("Salvo nos seus favoritos Lily ♥");
+        }
+        saveState();
+        renderCatalog();
+        renderCart();
+        return;
+      }
+
+      const quickAdd = e.target.closest("[data-quick-add]");
+      if (quickAdd) {
+        const id = quickAdd.getAttribute("data-quick-add");
+        const prod = PRODUCTS.find(p => p.id === id);
+        if (prod) {
+          state.cart.push({
+            id: prod.id + "-" + Date.now(),
+            name: prod.name,
+            price: prod.price,
+            qty: 1,
+            details: "Personalização: " + prod.customizable
+          });
+          saveState();
+          renderCart();
+          showToast(`"${prod.name}" adicionado à Sacola Lily!`);
+        }
+        return;
+      }
+
+      const custProd = e.target.closest("[data-customize-prod]");
+      if (custProd) {
+        openProductModal(custProd.getAttribute("data-customize-prod"));
+        return;
+      }
+
+      const faqToggle = e.target.closest("[data-faq-toggle]");
+      if (faqToggle) {
+        const idx = faqToggle.getAttribute("data-faq-toggle");
+        const ans = document.getElementById(`faq-ans-${idx}`);
+        const icon = document.getElementById(`faq-icon-${idx}`);
+        if (ans) {
+          const isHidden = ans.classList.contains("hidden");
+          ans.classList.toggle("hidden", !isHidden);
+          if (icon) icon.textContent = isHidden ? "−" : "+";
+        }
+        return;
+      }
+
+      const cartInc = e.target.closest("[data-cart-inc]");
+      if (cartInc) {
+        const idx = Number(cartInc.getAttribute("data-cart-inc"));
+        if (state.cart[idx]) {
+          state.cart[idx].qty += 1;
+          saveState();
+          renderCart();
+        }
+        return;
+      }
+
+      const cartDec = e.target.closest("[data-cart-dec]");
+      if (cartDec) {
+        const idx = Number(cartDec.getAttribute("data-cart-dec"));
+        if (state.cart[idx]) {
+          if (state.cart[idx].qty > 1) state.cart[idx].qty -= 1;
+          else state.cart.splice(idx, 1);
+          saveState();
+          renderCart();
+        }
+        return;
+      }
+
+      const cartRem = e.target.closest("[data-cart-remove]");
+      if (cartRem) {
+        const idx = Number(cartRem.getAttribute("data-cart-remove"));
+        state.cart.splice(idx, 1);
+        saveState();
+        renderCart();
+        showToast("Item removido da sacola");
+        return;
+      }
+
+      const color3dBtn = e.target.closest("[data-sim-color3d]");
+      if (color3dBtn) {
+        state.sim.color3d = color3dBtn.getAttribute("data-sim-color3d");
+        state.sim.color3dLabel = color3dBtn.getAttribute("data-sim-color3d-label");
+        document.querySelectorAll("[data-sim-color3d]").forEach(b => {
+          b.classList.toggle("ring-2", b === color3dBtn);
+          b.classList.toggle("ring-[#382126]", b === color3dBtn);
+        });
+        renderSimulator();
+        return;
+      }
+
+      const filterBtn = e.target.closest("[data-photo-filter]");
+      if (filterBtn) {
+        state.sim.photoFilter = filterBtn.getAttribute("data-photo-filter");
+        document.querySelectorAll("[data-photo-filter]").forEach(b => {
+          if (b === filterBtn) {
+            b.className = "px-2.5 py-1 rounded-lg bg-[#382126] text-white text-[11px] font-display font-medium";
+          } else {
+            b.className = "px-2.5 py-1 rounded-lg bg-[#FDF8F9] border border-[#E5C2C9] text-[#5A3D43] text-[11px] font-display font-medium";
+          }
+        });
+        renderSimulator();
+        return;
+      }
+
+      const stepBtn = e.target.closest("[data-checkout-step-btn]");
+      if (stepBtn) {
+        state.checkoutStep = Number(stepBtn.getAttribute("data-checkout-step-btn"));
+        renderCheckoutModal();
+        return;
+      }
+
+      const upsellBtn = e.target.closest("[data-upsell-add]");
+      if (upsellBtn) {
+        const name = upsellBtn.getAttribute("data-upsell-add");
+        const price = Number(upsellBtn.getAttribute("data-upsell-price"));
+        state.cart.push({
+          id: "upsell-" + Date.now(),
+          name: "Adicional: " + name,
+          price: price,
+          qty: 1,
+          details: "Toque final adicionado no Checkout"
+        });
+        saveState();
+        renderCart();
+        renderCheckoutModal();
+        showToast(`"${name}" adicionado ao seu pedido! ✨`);
+        return;
+      }
+
+      const payBtn = e.target.closest("[data-pay-method]");
+      if (payBtn) {
+        state.paymentMethod = payBtn.getAttribute("data-pay-method");
+        document.querySelectorAll("[data-pay-method]").forEach(b => {
+          if (b === payBtn) {
+            b.className = "p-3 rounded-2xl border-2 border-[#B36273] bg-[#FDF2F5] text-left transition-all";
+          } else {
+            b.className = "p-3 rounded-2xl border border-[#EED9DF] bg-white text-left transition-all";
+          }
+        });
+        renderCheckoutModal();
+        return;
+      }
+    });
+
+    // Botão alternar foto do Hero
+    document.getElementById("hero-cycle-photo-btn")?.addEventListener("click", () => {
+      const keys = ["cestas", "xicaras", "arte3d", "polaroid"];
+      const nextIdx = (keys.indexOf(state.activeHotspot) + 1) % keys.length;
+      state.activeHotspot = keys[nextIdx];
+      renderHeroHotspot();
+    });
+
+    document.getElementById("hero-spotlight-filter-btn")?.addEventListener("click", () => {
+      const data = HOTSPOTS[state.activeHotspot] || HOTSPOTS.cestas;
+      state.catalogFilter = data.filterKey;
+      renderCatalog();
+      document.getElementById("catalogo")?.scrollIntoView({ behavior: "smooth" });
+    });
+
+    // Eventos do Concierge Quiz
+    ["quiz-who", "quiz-vibe", "quiz-budget"].forEach(id => {
+      document.getElementById(id)?.addEventListener("change", renderConciergeQuiz);
+    });
+
+    document.getElementById("quiz-load-sim-btn")?.addEventListener("click", () => {
+      const rec = state.quizRecommendation;
+      if (!rec) return;
+      if (rec.category === "cestas") {
+        state.sim.base = "cesta";
+        state.sim.basePrice = 149.00;
+        state.sim.baseLabel = rec.name;
+      } else {
+        state.sim.base = "avulso";
+        state.sim.basePrice = 0;
+        state.sim.baseLabel = "Itens Personalizados Avulsos (Embalagem Presente Cortesia)";
+      }
+      renderSimulator();
+      document.getElementById("simulador")?.scrollIntoView({ behavior: "smooth" });
+      showToast(`Recomendação "${rec.name}" carregada no Estúdio ao Vivo! ✨`);
+    });
+
+    document.getElementById("quiz-add-direct-btn")?.addEventListener("click", () => {
+      const rec = state.quizRecommendation;
+      if (!rec) return;
+      state.cart.push({
+        id: rec.id + "-" + Date.now(),
+        name: rec.name,
+        price: rec.price,
+        qty: 1,
+        details: "Recomendado pelo Concierge Lily • " + rec.customizable
+      });
+      saveState();
+      renderCart();
+      showToast(`"${rec.name}" adicionado à Sacola Lily!`);
+      document.getElementById("cart-drawer")?.classList.remove("hidden");
+    });
+
+    // Controles do Simulador
+    document.getElementById("sim-base-select")?.addEventListener("change", (e) => {
+      const opt = e.target.selectedOptions[0];
+      state.sim.base = e.target.value;
+      state.sim.basePrice = Number(opt.getAttribute("data-price") || 0);
+      state.sim.baseLabel = opt.getAttribute("data-label") || opt.textContent;
+      renderSimulator();
+    });
+
+    document.getElementById("sim-mug-select")?.addEventListener("change", (e) => {
+      const opt = e.target.selectedOptions[0];
+      state.sim.mug = e.target.value;
+      state.sim.mugPrice = Number(opt.getAttribute("data-price") || 0);
+      state.sim.mugLabel = opt.getAttribute("data-label") || opt.textContent;
+      renderSimulator();
+    });
+
+    document.getElementById("sim-mug-text")?.addEventListener("input", (e) => {
+      state.sim.mugText = e.target.value;
+      renderSimulator();
+    });
+
+    document.getElementById("sim-3d-select")?.addEventListener("change", (e) => {
+      const opt = e.target.selectedOptions[0];
+      state.sim.item3d = e.target.value;
+      state.sim.item3dPrice = Number(opt.getAttribute("data-price") || 0);
+      state.sim.item3dLabel = opt.getAttribute("data-label") || opt.textContent;
+      renderSimulator();
+    });
+
+    document.getElementById("sim-3d-text")?.addEventListener("input", (e) => {
+      state.sim.text3d = e.target.value;
+      renderSimulator();
+    });
+
+    document.getElementById("sim-polaroid-select")?.addEventListener("change", (e) => {
+      const opt = e.target.selectedOptions[0];
+      state.sim.polaroid = e.target.value;
+      state.sim.polaroidPrice = Number(opt.getAttribute("data-price") || 0);
+      state.sim.polaroidLabel = opt.getAttribute("data-label") || opt.textContent;
+      renderSimulator();
+    });
+
+    document.getElementById("sim-polaroid-caption")?.addEventListener("input", (e) => {
+      state.sim.polaroidCaption = e.target.value;
+      renderSimulator();
+    });
+
+    // Upload real de foto do usuário para testar na Polaroid
+    document.getElementById("sim-photo-upload")?.addEventListener("change", (e) => {
+      const file = e.target.files?.[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = function (ev) {
+        state.sim.customPhotoDataUrl = ev.target.result;
+        renderSimulator();
+        showToast("Sua foto foi aplicada na Polaroid ao vivo! 📸");
+      };
+      reader.readAsDataURL(file);
+    });
+
+    document.getElementById("sim-occasion-select")?.addEventListener("change", (e) => {
+      state.sim.occasion = e.target.value;
+      renderSimulator();
+    });
+
+    document.getElementById("sim-qr-song")?.addEventListener("input", (e) => {
+      state.sim.qrSong = e.target.value;
+      renderSimulator();
+    });
+
+    document.getElementById("sim-card-msg")?.addEventListener("input", (e) => {
+      state.sim.cardMessage = e.target.value;
+      renderSimulator();
+    });
+
+    // Gerador Inteligente de Dedicatórias Afetivas
+    document.getElementById("sim-generate-msg-btn")?.addEventListener("click", () => {
+      const list = DEDICATION_SUGGESTIONS[state.sim.occasion] || DEDICATION_SUGGESTIONS["Aniversário Especial"];
+      state.msgSuggestionIdx = (state.msgSuggestionIdx + 1) % list.length;
+      const msg = list[state.msgSuggestionIdx];
+      state.sim.cardMessage = msg;
+      const input = document.getElementById("sim-card-msg");
+      if (input) input.value = msg;
+      renderSimulator();
+      showToast("Nova mensagem afetiva gerada para o seu cartão! ✨");
+    });
+
+    // Adicionar criação do Simulador à Sacola
+    document.getElementById("sim-add-to-cart-btn")?.addEventListener("click", () => {
+      const s = state.sim;
+      const total = s.basePrice + s.mugPrice + s.item3dPrice + s.polaroidPrice;
+      if (total <= 0) {
+        showToast("Selecione pelo menos um item ou base no simulador!");
+        return;
+      }
+      const parts = [];
+      if (s.mug !== "none") parts.push(`Louça: "${s.mugText || "Personalizada"}"`);
+      if (s.item3d !== "none") parts.push(`3D: "${s.text3d || "Arte 3D"}" (${s.color3dLabel})`);
+      if (s.polaroid !== "none") parts.push(`${s.polaroidLabel} ("${s.polaroidCaption || "Com legenda"}")`);
+      if (s.qrSong) parts.push(`QR Musical: "${s.qrSong}"`);
+
+      state.cart.push({
+        id: "sim-" + Date.now(),
+        name: `Criação Estúdio Lily • ${s.baseLabel}`,
+        price: total,
+        qty: 1,
+        details: parts.join(" | ")
+      });
+      saveState();
+      renderCart();
+      showToast("Sua criação personalizada foi adicionada à Sacola Lily! ✨");
+      document.getElementById("cart-drawer")?.classList.remove("hidden");
+    });
+
+    // Busca e Ordenação do Catálogo
+    document.getElementById("catalog-search")?.addEventListener("input", (e) => {
+      state.searchQuery = e.target.value;
+      renderCatalog();
+    });
+
+    document.getElementById("catalog-sort")?.addEventListener("change", (e) => {
+      state.sortBy = e.target.value;
+      renderCatalog();
+    });
+
+    document.getElementById("header-fav-btn")?.addEventListener("click", () => {
+      state.catalogFilter = state.catalogFilter === "favoritos" ? "todos" : "favoritos";
+      renderCatalog();
+      document.getElementById("catalogo")?.scrollIntoView({ behavior: "smooth" });
+    });
+
+    // Abrir/Fechar Sacola Drawer
+    const cartDrawer = document.getElementById("cart-drawer");
+    document.getElementById("header-cart-btn")?.addEventListener("click", () => cartDrawer?.classList.remove("hidden"));
+    document.getElementById("banner-open-cart-btn")?.addEventListener("click", () => cartDrawer?.classList.remove("hidden"));
+    document.getElementById("close-cart-btn")?.addEventListener("click", () => cartDrawer?.classList.add("hidden"));
+    document.getElementById("cart-backdrop")?.addEventListener("click", () => cartDrawer?.classList.add("hidden"));
+
+    // Modal de Produto Individual
+    document.getElementById("close-prod-modal-btn")?.addEventListener("click", closeProductModal);
+    document.getElementById("prod-modal-backdrop")?.addEventListener("click", closeProductModal);
+    document.getElementById("confirm-prod-modal-btn")?.addEventListener("click", () => {
+      const prod = state.activeModalProduct;
+      if (!prod) return;
+      const customText = (document.getElementById("modal-custom-text")?.value || "").trim();
+      const customColor = (document.getElementById("modal-custom-color")?.value || "").trim();
+      state.cart.push({
+        id: prod.id + "-" + Date.now(),
+        name: prod.name,
+        price: prod.price,
+        qty: 1,
+        details: `${customText ? `Personalização: "${customText}"` : "Texto/Fotos a definir no WhatsApp"} • ${customColor}`
+      });
+      saveState();
+      renderCart();
+      closeProductModal();
+      showToast(`"${prod.name}" salvo na sacola Lily!`);
+    });
+
+    // Novo Checkout em 3 Etapas
+    const checkoutModal = document.getElementById("checkout-modal");
+    document.getElementById("open-checkout-modal-btn")?.addEventListener("click", () => {
+      cartDrawer?.classList.add("hidden");
+      state.checkoutStep = 1;
+      renderCheckoutModal();
+      checkoutModal?.classList.remove("hidden");
+    });
+
+    document.getElementById("close-checkout-modal-btn")?.addEventListener("click", () => checkoutModal?.classList.add("hidden"));
+    document.getElementById("checkout-backdrop")?.addEventListener("click", () => checkoutModal?.classList.add("hidden"));
+
+    document.getElementById("to-step-2-btn")?.addEventListener("click", () => {
+      state.checkoutStep = 2;
+      renderCheckoutModal();
+    });
+    document.getElementById("back-to-step-1-btn")?.addEventListener("click", () => {
+      state.checkoutStep = 1;
+      renderCheckoutModal();
+    });
+    document.getElementById("to-step-3-btn")?.addEventListener("click", () => {
+      state.checkoutStep = 3;
+      renderCheckoutModal();
+    });
+    document.getElementById("back-to-step-2-btn")?.addEventListener("click", () => {
+      state.checkoutStep = 2;
+      renderCheckoutModal();
+    });
+
+    document.getElementById("checkout-delivery")?.addEventListener("change", (e) => {
+      const opt = e.target.selectedOptions[0];
+      state.deliveryFee = Number(opt.getAttribute("data-fee") || 0);
+      renderCheckoutModal();
+    });
+
+    ["checkout-name", "checkout-recipient", "checkout-date", "checkout-slot", "checkout-cep", "checkout-address", "checkout-qr-link"].forEach(id => {
+      document.getElementById(id)?.addEventListener("input", renderCheckoutModal);
+    });
+
+    document.getElementById("copy-order-summary-btn")?.addEventListener("click", () => {
+      const summaryArea = document.getElementById("checkout-summary-preview");
+      if (!summaryArea) return;
+      summaryArea.select();
+      try {
+        document.execCommand("copy");
+        showToast("Protocolo do pedido copiado! Pronto para enviar no WhatsApp 🌸");
+      } catch (err) {
+        showToast("Protocolo gerado com sucesso!");
+      }
+    });
+  }
+
+  function init() {
+    hydrateStaticImages();
+    renderHeroHotspot();
+    renderConciergeQuiz();
+    renderSimulator();
+    renderCatalog();
+    renderFaq();
+    renderCart();
+    bindEvents();
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", init);
+  } else {
+    init();
+  }
+})();
+  </script>
+</body>
+</html>
