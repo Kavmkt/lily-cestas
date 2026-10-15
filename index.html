@@ -168,40 +168,87 @@ html {
 ::-webkit-scrollbar-thumb { background: #E3BDC6; border-radius: 9999px; }
 ::-webkit-scrollbar-thumb:hover { background: #C87888; }
   </style>
+
+<style id="preview-css">
+:root{--rose:#B76E79;--rose-d:#A65365;--ink:#382126;--bg:#FDF8F9;--line:#EED9DF}
+.trustbar{background:var(--ink);color:#fff;font:500 11.5px/1.3 'Plus Jakarta Sans',sans-serif;padding:8px 12px;display:flex;gap:6px 22px;justify-content:center;flex-wrap:wrap;text-align:center}
+.trustbar .pv{background:#F2D5DC;color:var(--ink);font-weight:700;border-radius:99px;padding:1px 9px;font-size:10px;letter-spacing:.08em}
+.trustbar span.t3{display:none}@media(min-width:760px){.trustbar span.t3{display:inline}}
+#topo{background:linear-gradient(180deg,#FBEEF1 0%,var(--bg) 100%)}
+.nh-eyebrow{font:600 11px/1.3 'Montserrat',sans-serif;letter-spacing:.14em;text-transform:uppercase;color:var(--rose-d)}
+.nh h1{font-family:'Montserrat',sans-serif;font-weight:300;letter-spacing:-.02em;color:var(--ink);line-height:1.12;font-size:clamp(30px,6.4vw,50px);margin:.5rem 0 .8rem}
+.nh h1 b{font-weight:600;color:var(--rose-d)}
+.nh .sub{color:#5A3D43;font-size:16px;line-height:1.6;max-width:34rem}
+.cta1,.cta2{display:inline-flex;align-items:center;justify-content:center;gap:8px;border-radius:99px;font:600 14px 'Montserrat',sans-serif;padding:14px 26px;text-decoration:none;transition:.2s;min-height:48px}
+.cta1{background:linear-gradient(135deg,#C87888,var(--rose-d));color:#fff;box-shadow:0 10px 24px -10px rgba(166,83,101,.7)}.cta1:hover{filter:brightness(1.05);transform:translateY(-1px)}
+.cta2{background:#fff;color:var(--rose-d);border:1.5px solid #E5C2C9}.cta2:hover{background:#FDF2F5}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}.chips span{background:#fff;border:1px solid var(--line);border-radius:99px;padding:6px 12px;font:500 12px 'Plus Jakarta Sans',sans-serif;color:#5A3D43}
+.heroimg{position:relative;border-radius:30px;overflow:hidden;box-shadow:0 30px 60px -28px rgba(166,83,101,.55);background:#fff}
+.heroimg img{display:block;width:100%;aspect-ratio:4/3;object-fit:cover}
+.heroimg .tag{position:absolute;left:14px;right:14px;bottom:14px;background:rgba(255,255,255,.96);border-radius:20px;padding:12px 14px;display:flex;align-items:center;justify-content:space-between;gap:10px;backdrop-filter:blur(6px)}
+.heroimg .tag small{display:block;font:600 10px 'Montserrat',sans-serif;letter-spacing:.1em;text-transform:uppercase;color:var(--rose-d)}
+.heroimg .tag b{font:600 14px/1.25 'Montserrat',sans-serif;color:var(--ink);display:block}
+.heroimg .tag .pr{font:700 15px 'Montserrat',sans-serif;color:var(--rose-d);white-space:nowrap}
+.cep{background:#fff;border:1px solid var(--line);border-radius:22px;padding:14px;margin-top:20px}.chips{margin-top:20px}@media(max-width:767px){.nh-eyebrow{display:none}}
+.cep label{font:600 12px 'Montserrat',sans-serif;color:var(--ink);display:block;margin-bottom:8px}
+.cep .row{display:flex;gap:8px}.cep input{flex:1;min-width:0;border:1px solid #E5C2C9;border-radius:14px;padding:12px 14px;font-size:16px;background:var(--bg)}
+.cep button{border:0;border-radius:14px;background:var(--ink);color:#fff;font:600 13px 'Montserrat',sans-serif;padding:0 18px;cursor:pointer}
+.cep .res{display:none;margin-top:10px;font-size:13px;line-height:1.5;border-radius:14px;padding:10px 12px}
+.cep .res.ok{display:block;background:#F2FAF4;border:1px solid #CBE8D3;color:#1F5D33}.cep .res.ask{display:block;background:#FFF7EC;border:1px solid #F3DDB8;color:#7A4B0C}
+.cep .res a{font-weight:600;color:inherit}
+.cats{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:34px}@media(min-width:900px){.cats{grid-template-columns:repeat(4,1fr);gap:18px}}
+.cat{position:relative;border-radius:22px;overflow:hidden;background:#fff;border:1px solid var(--line);text-align:left;cursor:pointer;padding:0;transition:.25s}.cat:hover{transform:translateY(-3px);box-shadow:0 18px 34px -20px rgba(166,83,101,.6)}
+.cat img{display:block;width:100%;aspect-ratio:4/3;object-fit:cover}.cat .ct{display:block;padding:10px 12px 12px}.cat b{display:block;font:600 14px/1.2 'Montserrat',sans-serif;color:var(--ink)}.cat small{font:500 12px 'Plus Jakarta Sans',sans-serif;color:var(--rose-d)}
+.sec-h{font:300 clamp(24px,4.4vw,38px)/1.15 'Montserrat',sans-serif;letter-spacing:-.02em;color:var(--ink)}.sec-h b{font-weight:600;color:var(--rose-d)}
+/* catálogo compacto */
+#catalog-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}@media(min-width:900px){#catalog-grid{grid-template-columns:repeat(4,minmax(0,1fr));gap:20px}}
+.pcard{background:#fff;border:1px solid var(--line);border-radius:20px;overflow:hidden;display:flex;flex-direction:column;transition:.25s}.pcard:hover{box-shadow:0 18px 34px -22px rgba(166,83,101,.65);transform:translateY(-2px)}
+.pimg{position:relative}.pimg img{display:block;width:100%;aspect-ratio:4/3;object-fit:cover}
+.pbadge{position:absolute;left:8px;top:8px;background:var(--rose);color:#fff;font:700 9.5px 'Montserrat',sans-serif;letter-spacing:.06em;text-transform:uppercase;border-radius:99px;padding:4px 9px}
+.pfav{position:absolute;right:8px;top:8px;width:34px;height:34px;border-radius:99px;background:rgba(255,255,255,.92);border:0;cursor:pointer;font-size:16px;color:#B89CA3}.pfav .on{color:#C87888}
+.pbody{padding:12px;display:flex;flex-direction:column;gap:6px;flex:1}.pcat{font:600 10px 'Montserrat',sans-serif;letter-spacing:.08em;text-transform:uppercase;color:var(--rose-d);margin:0}
+.pbody h3{font:600 14px/1.3 'Montserrat',sans-serif;color:var(--ink);margin:0;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.pwhat{font-size:11.5px;line-height:1.45;color:#785860;margin:0;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.pfoot{margin-top:auto;padding-top:6px}.pprice{font:700 18px 'Montserrat',sans-serif;color:var(--ink)}.pnote{display:block;font-size:11px;color:#2F7A4A;font-weight:600}
+.pbtns{display:grid;grid-template-columns:1fr;gap:6px;margin-top:6px}@media(min-width:520px){.pbtns{grid-template-columns:1fr 1fr}}
+.btn1,.btn2{border-radius:12px;font:600 12px 'Montserrat',sans-serif;padding:10px 8px;cursor:pointer;min-height:40px}.btn1{background:linear-gradient(135deg,#C87888,var(--rose-d));color:#fff;border:0}.btn2{background:#fff;color:var(--rose-d);border:1px solid #D9A7B2}
+.catpills{flex-wrap:nowrap!important;overflow-x:auto;padding-bottom:4px;-webkit-overflow-scrolling:touch;scrollbar-width:none}.catpills::-webkit-scrollbar{display:none}.catpills button{white-space:nowrap;flex:0 0 auto}
+.sm\:grid-cols-12:has(#catalog-search){display:none}
+/* barra mobile + whatsapp flutuante */
+.mbar{position:fixed;left:0;right:0;bottom:0;z-index:35;display:flex;gap:10px;padding:10px 12px calc(10px + env(safe-area-inset-bottom));background:rgba(255,255,255,.97);border-top:1px solid var(--line);backdrop-filter:blur(8px)}
+.mbar a{flex:1;text-align:center;border-radius:99px;padding:13px 10px;font:600 14px 'Montserrat',sans-serif;text-decoration:none;min-height:48px;display:flex;align-items:center;justify-content:center;gap:6px}
+.mbar .a1{background:linear-gradient(135deg,#C87888,var(--rose-d));color:#fff}.mbar .a2{background:#25D366;color:#fff}
+.wafab{display:none}
+@media(min-width:768px){.mbar{display:none}.wafab{display:flex;position:fixed;right:22px;bottom:22px;z-index:35;align-items:center;gap:8px;background:#25D366;color:#fff;border-radius:99px;padding:13px 20px;font:600 14px 'Montserrat',sans-serif;text-decoration:none;box-shadow:0 14px 30px -10px rgba(37,211,102,.7)}}
+@media(max-width:767px){body{padding-bottom:76px}#toast-container{bottom:88px!important}section[class*="py-16"]{padding-top:2.75rem!important;padding-bottom:2.75rem!important}}
+.igblock{background:linear-gradient(135deg,#C87888,var(--rose-d));color:#fff;border-radius:26px;padding:26px;text-align:center}
+.igblock a{display:inline-block;margin-top:12px;background:#fff;color:var(--rose-d);font:600 14px 'Montserrat',sans-serif;border-radius:99px;padding:12px 22px;text-decoration:none}
+</style>
 </head>
 <body class="min-h-screen antialiased selection:bg-[#F2D5DC] selection:text-[#382126]">
 
-  <!-- Barra de Anúncio Superior (Rosé Invertido com Texto Branco) -->
-  <div class="bg-rosegold-gradient text-white text-xs py-2.5 px-4 text-center font-medium tracking-wide">
-    <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-center gap-2">
-      <span class="px-2.5 py-0.5 rounded-full bg-white/20 text-[10px] font-display font-semibold uppercase tracking-widest">Lily Cestas &amp; Atelier 3D</span>
-      <span>Cestas Afetivas, Xícaras Personalizadas, Letras &amp; Litofania 3D e Polaroids com <strong>Cápsula QR Code Musical Cortesia</strong> ✨</span>
-      <a href="#concierge" class="underline font-semibold hover:text-[#FFE8EE] ml-1">Descubra o presente ideal em 15s →</a>
-    </div>
-  </div>
+  <div class="trustbar"><span>🚚 Entrega agendada a partir das 06h30</span><span>💳 Pix com 5% off</span><span class="t3">✓ Você aprova a arte antes da produção</span></div>
 
   <!-- Cabeçalho Delicado Fixo com Logo Oficial Lily Cestas -->
   <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-[#EED9DF]">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between gap-4">
-      <a href="#inicio" class="flex items-center gap-3 group">
-        <img data-lily-logo="rose" src="" alt="Logo Lily Cestas" class="h-14 w-auto object-contain group-hover:scale-105 transition-transform" />
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 sm:h-20 flex items-center justify-between gap-3 sm:gap-4">
+      <a href="#topo" class="flex items-center gap-3 group">
+        <img data-lily-logo="rose" src="" alt="Logo Lily Cestas" class="h-10 sm:h-14 w-auto object-contain group-hover:scale-105 transition-transform" />
         <div class="border-l border-[#EED9DF] pl-3">
           <span class="font-display font-semibold text-lg sm:text-xl tracking-tight text-[#382126] block leading-none">Lily Cestas</span>
-          <span class="font-display text-[10px] uppercase tracking-[0.18em] text-[#B36273] font-medium block mt-1">Atelier &amp; Personalizados 3D</span>
+          <span class="font-display text-[10px] uppercase tracking-[0.18em] text-[#B36273] font-medium hidden sm:block mt-1">Atelier &amp; Personalizados 3D</span>
         </div>
       </a>
 
       <nav class="hidden xl:flex items-center gap-6 text-xs font-display font-medium uppercase tracking-wider text-[#5A3D43]">
-        <a href="#proposta" class="hover:text-[#B36273] transition-colors">A Proposta</a>
         <a href="#concierge" class="hover:text-[#B36273] transition-colors text-[#B36273] font-semibold">✦ Quiz Concierge</a>
-        <a href="#pilares" class="hover:text-[#B36273] transition-colors">4 Categorias</a>
         <a href="#simulador" class="hover:text-[#B36273] transition-colors font-semibold text-[#A65365]">Estúdio 3D &amp; Foto</a>
-        <a href="#catalogo" class="hover:text-[#B36273] transition-colors">Catálogo (12)</a>
+        <a href="#catalogo" class="hover:text-[#B36273] transition-colors">Presentes</a>
         <a href="#faq" class="hover:text-[#B36273] transition-colors">Dúvidas</a>
       </nav>
 
       <div class="flex items-center gap-2.5">
-        <button type="button" id="header-fav-btn" class="px-3 py-2 rounded-full border border-[#EED9DF] bg-[#FDF8F9] hover:border-[#C87888] text-xs font-display font-medium text-[#5A3D43] flex items-center gap-1.5 transition-all">
+        <button type="button" id="header-fav-btn" data-x="1" class="max-sm:!hidden px-3 py-2 rounded-full border border-[#EED9DF] bg-[#FDF8F9] hover:border-[#C87888] text-xs font-display font-medium text-[#5A3D43] flex items-center gap-1.5 transition-all">
           <span class="text-[#C87888] text-sm">♥</span>
           <span class="hidden sm:inline">Favoritos</span>
           <span id="header-fav-count" class="px-1.5 py-0.5 rounded-full bg-[#F9EBEE] text-[#A65365] text-[11px] font-semibold">0</span>
@@ -212,6 +259,7 @@ html {
           <span id="header-cart-count" class="w-5 h-5 rounded-full bg-[#B36273] text-white text-[11px] flex items-center justify-center">0</span>
         </button>
 
+        <a href="https://wa.me/5511914955434?text=Oi%21%20Vim%20pelo%20site%20da%20Lily%20Cestas%20e%20quero%20ajuda%20para%20escolher%20um%20presente." target="_blank" rel="noopener" class="hidden md:inline-flex items-center gap-1.5 px-4 py-2.5 rounded-full border border-[#25D366] text-[#1F8F4A] text-xs font-display font-semibold hover:bg-[#F2FAF4] transition-all"><span>WhatsApp</span></a>
         <a href="#simulador" class="hidden sm:inline-flex items-center gap-1.5 px-4 py-2.5 rounded-full bg-rosegold-gradient text-white text-xs font-display font-semibold tracking-wide shadow-sm hover:opacity-95 transition-all">
           <span>✦ Criar Presente</span>
         </a>
@@ -220,7 +268,41 @@ html {
   </header>
 
   <!-- HERO DE ALTO IMPACTO & AUTOEXPLICATIVO ("NA CARA DA HOME") -->
-  <section id="inicio" class="bg-lily-hero pt-8 pb-16 sm:py-14 border-b border-[#EED9DF] overflow-hidden">
+  
+  <section id="topo" class="nh">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-7 pb-10 sm:pt-12 sm:pb-14">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+        <div class="lg:col-span-6">
+          <span class="nh-eyebrow">Santana de Parnaíba · Alphaville · Barueri · Cajamar</span>
+          <h1>Cestas de presente <b>personalizadas</b> em Santana de Parnaíba e Alphaville</h1>
+          <p class="sub">Rosas, café da manhã, xícara com nome, letras em 3D e fotos Polaroid com a música de vocês no QR Code. <strong>Você aprova a arte antes de produzirmos.</strong></p>
+          <p style="margin-top:20px;display:flex;flex-wrap:wrap;gap:10px"><a class="cta1" href="#catalogo">Ver cestas e presentes</a><a class="cta2" href="https://wa.me/5511914955434?text=Oi%21%20Vim%20pelo%20site%20da%20Lily%20Cestas%20e%20quero%20ajuda%20para%20escolher%20um%20presente." target="_blank" rel="noopener">Falar no WhatsApp</a></p>
+        </div>
+        <div class="lg:col-span-6">
+          <div class="heroimg">
+            <img src="/assets/img/hero-imperial.webp" alt="Cesta Lily Imperial rosé em vime branco com rosas, bombons, xícara personalizada e Polaroids" width="760" height="567" fetchpriority="high">
+            <div class="tag"><div><small>Mais vendida</small><b>Cesta Lily Imperial Rosé</b></div><div style="text-align:right"><span class="pr">R$ 239,90</span><button type="button" data-customize-prod="prod-1" class="btn1" style="display:block;margin-top:4px;padding:8px 14px">Personalizar</button></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="lg:flex lg:items-start lg:gap-8" style="margin-top:6px">
+        <form class="cep" id="cep-form" autocomplete="off" style="flex:1;max-width:none">
+          <label for="cep-input">Entregamos no seu endereço? Informe o CEP</label>
+          <div class="row"><input id="cep-input" inputmode="numeric" maxlength="9" placeholder="00000-000" aria-describedby="cep-res"><button type="submit">Verificar</button></div>
+          <div class="res" id="cep-res" role="status"></div>
+        </form>
+        <div class="chips" style="flex:1"><span>✎ Você aprova a arte antes de produzir</span><span>🎁 Placa QR musical de cortesia</span><span>📍 Santana de Parnaíba, Alphaville, Barueri e Cajamar</span></div>
+      </div>
+      <div class="cats">
+        <button type="button" class="cat" data-hero-cat="cestas"><img src="/assets/img/hero-imperial.webp" alt="Cestas de presente rosé com flores e delícias" width="760" height="567" loading="lazy"><span class="ct"><b>Cestas de presente</b><small>a partir de R$ 189,90</small></span></button>
+        <button type="button" class="cat" data-hero-cat="xicaras"><img src="/assets/img/caneca-coracao.webp" alt="Caneca personalizada com alça de coração rose gold" width="760" height="567" loading="lazy"><span class="ct"><b>Xícaras e canecas</b><small>a partir de R$ 74,90</small></span></button>
+        <button type="button" class="cat" data-hero-cat="arte3d"><img src="/assets/img/litofania-3d.webp" alt="Luminária litofania 3D com foto iluminada" width="760" height="567" loading="lazy"><span class="ct"><b>Letras e litofania 3D</b><small>a partir de R$ 59,90</small></span></button>
+        <button type="button" class="cat" data-hero-cat="polaroid"><img src="/assets/img/quadro-shadowbox.webp" alt="Quadro Shadow Box com Polaroids e QR Code musical" width="760" height="567" loading="lazy"><span class="ct"><b>Polaroid e quadros</b><small>a partir de R$ 44,90</small></span></button>
+      </div>
+    </div>
+  </section>
+
+  <section id="inicio" style="display:none" hidden class="bg-lily-hero pt-8 pb-16 sm:py-14 border-b border-[#EED9DF] overflow-hidden">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-8 items-center">
         
@@ -356,80 +438,76 @@ html {
   </section>
 
   <!-- SEÇÃO AUTOEXPLICATIVA: AS 3 FORMAS DE COMPRAR (COM INVERSÃO DE CONTAINER CENTRAL EM ROSÉ) -->
-  <section id="proposta" class="py-16 bg-white border-b border-[#EED9DF]">
+  <section id="catalogo" class="py-12 bg-[#FDF8F9] border-b border-[#EED9DF]">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="text-center max-w-3xl mx-auto mb-12">
-        <span class="text-xs font-display font-semibold uppercase tracking-[0.2em] text-[#B36273] block mb-2">Posicionamento Inovador no Mercado</span>
-        <h2 class="font-display font-light text-2xl sm:text-4xl text-[#382126] mb-3">
-          Mais que uma cesta: um <strong class="font-semibold text-[#A65365]">presente que permanece para sempre</strong>
-        </h2>
-        <p class="text-sm sm:text-base text-[#6E5057]">
-          Nas floriculturas comuns, os doces acabam e a cesta é guardada. Na <strong>Lily Cestas</strong>, você une a delícia gastronômica a memórias físicas e digitais que decoram a rotina de quem você ama:
-        </p>
+      <div class="flex flex-col md:flex-row md:items-end justify-between mb-6 gap-4">
+        <div>
+          <span class="text-xs font-display font-semibold uppercase tracking-[0.2em] text-[#B36273] block mb-2">Escolha seu presente</span>
+          <h2 class="font-display font-light text-2xl sm:text-4xl text-[#382126]">
+            Presentes <strong class="font-semibold text-[#A65365]">prontos para personalizar</strong>
+          </h2>
+        </div>
+        <span id="catalog-count" class="text-xs font-display font-semibold text-[#785860] bg-white px-4 py-2 rounded-full border border-[#EED9DF]">
+          12 criações disponíveis
+        </span>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <!-- Card 1: Branco Pérola -->
-        <div class="rounded-3xl p-6 sm:p-7 bg-lily-pearl border border-[#EED9DF] shadow-delicate flex flex-col justify-between">
+      <!-- FAIXA CLUBE DE MIMOS LILY (CONTAINER ROSÉ INVERTIDO COM TEXTO BRANCO) -->
+      <div class="bg-lily-rose-inverted text-white rounded-3xl p-4 sm:p-5 mb-8 shadow-delicate flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div class="flex items-center gap-3.5">
+          <span class="w-11 h-11 rounded-2xl bg-white/20 flex items-center justify-center text-xl shrink-0">🎁</span>
           <div>
-            <div class="flex items-center justify-between mb-4">
-              <span class="w-12 h-12 rounded-2xl bg-white border border-[#EBCAD2] flex items-center justify-center text-2xl shadow-sm">🧺</span>
-              <span class="px-3 py-1 rounded-full bg-[#F9EBEE] text-[#A65365] text-xs font-display font-semibold">Formato 01</span>
-            </div>
-            <h3 class="font-display font-semibold text-xl text-[#382126] mb-2">
-              Cesta Completa + Personalizados Inclusos
-            </h3>
-            <p class="text-xs sm:text-sm text-[#5A3D43] leading-relaxed mb-4">
-              Você escolhe a cesta de café da manhã, macarons ou espumante rosé e nós <strong>integramos dentro dela</strong> a xícara com o nome da pessoa, uma escultura/palavra em 3D e as fotos Polaroid do casal ou família.
-            </p>
-          </div>
-          <div class="pt-3 border-t border-[#EAD4DA] text-xs font-display font-semibold text-[#A65365]">
-            ✦ Experiência completa de despertar &amp; emocionar
+            <p class="font-display font-semibold text-sm sm:text-base text-white">Clube de Mimos Lily Cestas • Presentes Extras no Seu Pedido</p>
+            <p class="text-xs text-white/90">Acima de <strong>R$ 120</strong> você ganha 1 Mini Chaveiro Coração 3D Rosé • Acima de <strong>R$ 220</strong> ganha <strong>Placa QR Code Musical + 2 Polaroids Extras</strong>!</p>
           </div>
         </div>
+        <button type="button" id="banner-open-cart-btn" class="px-4 py-2 rounded-full bg-white text-[#9B4C5D] text-xs font-display font-bold shrink-0 hover:bg-[#FFF5F7] transition-all">
+          Ver Meu Progresso →
+        </button>
+      </div>
 
-        <!-- Card 2: INVERTIDO EM ROSÉ COM TEXTO BRANCO -->
-        <div class="rounded-3xl p-6 sm:p-7 bg-lily-rose-inverted text-white border border-white/20 shadow-floating flex flex-col justify-between transform md:-translate-y-2">
-          <div>
-            <div class="flex items-center justify-between mb-4">
-              <span class="w-12 h-12 rounded-2xl bg-white/20 border border-white/30 flex items-center justify-center text-2xl backdrop-blur-xs">☕</span>
-              <span class="px-3 py-1 rounded-full bg-white text-[#9B4C5D] text-xs font-display font-bold">Formato 02 • Destaque</span>
-            </div>
-            <h3 class="font-display font-semibold text-xl text-white mb-2">
-              Presentes Personalizados Avulsos
-            </h3>
-            <p class="text-xs sm:text-sm text-white/90 leading-relaxed mb-4">
-              Quer presentear sem a cesta de alimentos? Peça <strong>apenas a Xícara Personalizada</strong> na caixa rosé com laço, a <strong>Luminária Litofania 3D</strong> com foto que acende, ou o <strong>Quadro Shadow Box 3D com Polaroids</strong>.
-            </p>
-          </div>
-          <div class="pt-3 border-t border-white/25 text-xs font-display font-semibold text-white">
-            ✦ Perfeito para amigas, madrinhas, namorados e envio nacional
-          </div>
+      <!-- Barra de Filtros e Pesquisa -->
+      <div class="bg-white p-4 rounded-3xl border border-[#EED9DF] shadow-xs mb-8 space-y-4">
+        <div class="catpills flex items-center gap-2">
+          <button type="button" data-cat-filter="todos" class="px-4 py-2 rounded-full text-xs font-display font-semibold bg-[#B36273] text-white shadow-xs transition-all">
+            Todos (12)
+          </button>
+          <button type="button" data-cat-filter="cestas" class="px-4 py-2 rounded-full text-xs font-display font-medium bg-white text-[#5A3D43] border border-[#EED9DF] hover:border-[#C87888] transition-all">
+            🧺 Cestas &amp; Boxes (4)
+          </button>
+          <button type="button" data-cat-filter="xicaras" class="px-4 py-2 rounded-full text-xs font-display font-medium bg-white text-[#5A3D43] border border-[#EED9DF] hover:border-[#C87888] transition-all">
+            ☕ Xícaras &amp; Canecas (3)
+          </button>
+          <button type="button" data-cat-filter="arte3d" class="px-4 py-2 rounded-full text-xs font-display font-medium bg-white text-[#5A3D43] border border-[#EED9DF] hover:border-[#C87888] transition-all">
+            🧊 Letras, Litofania &amp; 3D (3)
+          </button>
+          <button type="button" data-cat-filter="polaroid" class="px-4 py-2 rounded-full text-xs font-display font-medium bg-white text-[#5A3D43] border border-[#EED9DF] hover:border-[#C87888] transition-all">
+            📸 Polaroid &amp; Quadros 3D (2)
+          </button>
+          <button type="button" data-cat-filter="favoritos" class="px-4 py-2 rounded-full text-xs font-display font-medium bg-white text-[#A65365] border border-[#EED9DF] hover:border-[#C87888] transition-all">
+            ♥ Favoritos
+          </button>
         </div>
 
-        <!-- Card 3: Branco Pérola -->
-        <div class="rounded-3xl p-6 sm:p-7 bg-lily-pearl border border-[#EED9DF] shadow-delicate flex flex-col justify-between">
-          <div>
-            <div class="flex items-center justify-between mb-4">
-              <span class="w-12 h-12 rounded-2xl bg-white border border-[#EBCAD2] flex items-center justify-center text-2xl shadow-sm">🧊</span>
-              <span class="px-3 py-1 rounded-full bg-[#F9EBEE] text-[#A65365] text-xs font-display font-semibold">Formato 03</span>
-            </div>
-            <h3 class="font-display font-semibold text-xl text-[#382126] mb-2">
-              Decoração Afetiva &amp; Objetos com 3D
-            </h3>
-            <p class="text-xs sm:text-sm text-[#5A3D43] leading-relaxed mb-4">
-              Peças autorais com <strong>tecnologia 3D na composição</strong> em tons rosé blush, branco pérola e rose gold: letras iniciais de mesa, palavras esculturais, vasos twist com flores secas e corações facetados.
-            </p>
+        <div class="grid grid-cols-1 sm:grid-cols-12 gap-3 pt-2 border-t border-[#F7E9ED]">
+          <div class="sm:col-span-8">
+            <input id="catalog-search" type="search" placeholder="Buscar por cesta macarons, litofania 3D, caneca alça coração, letras 3D, polaroid..." class="w-full rounded-2xl border border-[#E5C2C9] bg-[#FDF8F9] px-4 py-2.5 text-xs sm:text-sm text-[#382126] focus:outline-none focus:border-[#C87888]" />
           </div>
-          <div class="pt-3 border-t border-[#EAD4DA] text-xs font-display font-semibold text-[#A65365]">
-            ✦ Design exclusivo que transforma quartos, salas e escritórios
+          <div class="sm:col-span-4">
+            <select id="catalog-sort" aria-label="Ordenar catálogo" class="w-full rounded-2xl border border-[#E5C2C9] bg-[#FDF8F9] px-4 py-2.5 text-xs sm:text-sm font-display font-medium text-[#382126] focus:outline-none focus:border-[#C87888]">
+              <option value="destaques">Ordenar: Destaques Lily Cestas</option>
+              <option value="menor-preco">Ordenar: Menor Investimento</option>
+              <option value="maior-preco">Ordenar: Maior Investimento</option>
+            </select>
           </div>
         </div>
       </div>
+
+      <!-- Grid de Cards de Produto -->
+      <div id="catalog-grid" class=""></div>
     </div>
   </section>
 
-  <!-- INOVAÇÃO DE MERCADO 01: CONCIERGE INTELIGENTE LILY (CONTAINER INTEIRO INVERTIDO EM ROSÉ COM TEXTO BRANCO) -->
   <section id="concierge" class="py-16 bg-lily-rose-section text-white border-b border-[#EED9DF]">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
@@ -511,106 +589,6 @@ html {
     </div>
   </section>
 
-  <!-- SEÇÃO OS 4 PILARES DO UNIVERSO LILY (ALTERNÂNCIA DE CONTAINERS BRANCOS E ROSÉ INVERTIDOS) -->
-  <section id="pilares" class="py-16 bg-[#FDF8F9] border-b border-[#EED9DF]">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-4">
-        <div>
-          <span class="text-xs font-display font-semibold uppercase tracking-[0.2em] text-[#B36273] block mb-2">Fotografia Autoral &amp; Acabamento Impecável</span>
-          <h2 class="font-display font-light text-2xl sm:text-4xl text-[#382126]">
-            Nossas <strong class="font-semibold text-[#A65365]">4 categorias de criação</strong>
-          </h2>
-        </div>
-        <p class="text-xs sm:text-sm text-[#6E5057] max-w-md">
-          Explore cada categoria individualmente ou combine itens de todas elas dentro de uma única cesta ou box personalizada.
-        </p>
-      </div>
-
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-7">
-        <!-- Card 1: Cestas (Fundo Branco Pérola) -->
-        <div class="bg-white rounded-3xl border border-[#EED9DF] overflow-hidden shadow-delicate grid grid-cols-1 sm:grid-cols-12">
-          <div class="sm:col-span-5 h-56 sm:h-auto overflow-hidden">
-            <img data-lily-img="cesta_macarons" src="" alt="Cestas de Presente Lily em Rosé e Branco" class="w-full h-full object-cover max-w-full hover:scale-105 transition-transform duration-500" />
-          </div>
-          <div class="sm:col-span-7 p-6 flex flex-col justify-between">
-            <div>
-              <span class="text-[11px] font-display font-bold uppercase tracking-wider text-[#B36273]">01 • Cestas &amp; Boxes Afetivas</span>
-              <h3 class="font-display font-semibold text-xl text-[#382126] mt-1 mb-2">Cestas de Presente Personalizáveis</h3>
-              <p class="text-xs sm:text-sm text-[#6E5057] leading-relaxed mb-3">
-                Cestas em vime branco e boxes rígidas rosé recheadas com macarons, morangos, pães artesanais, chocolates finos, espumante e flores — com berço dedicado para sua xícara, peça 3D e Polaroids.
-              </p>
-            </div>
-            <div class="flex items-center justify-between pt-3 border-t border-[#F6E8EC]">
-              <span class="text-xs font-display font-bold text-[#382126]">De R$ 189,90 a R$ 239,90</span>
-              <button type="button" data-pillar-jump="cestas" class="px-3.5 py-1.5 rounded-full bg-[#F9EBEE] text-xs font-display font-semibold text-[#A65365] hover:bg-[#F2D5DC] transition-colors">Ver 4 Cestas →</button>
-            </div>
-          </div>
-        </div>
-
-        <!-- Card 2: Xícaras (CONTAINER INVERTIDO EM ROSÉ COM TEXTO BRANCO) -->
-        <div class="bg-lily-rose-inverted text-white rounded-3xl border border-white/25 overflow-hidden shadow-floating grid grid-cols-1 sm:grid-cols-12">
-          <div class="sm:col-span-5 h-56 sm:h-auto overflow-hidden">
-            <img data-lily-img="caneca_coracao" src="" alt="Xícaras e Canecas Personalizadas Lily" class="w-full h-full object-cover max-w-full hover:scale-105 transition-transform duration-500" />
-          </div>
-          <div class="sm:col-span-7 p-6 flex flex-col justify-between">
-            <div>
-              <span class="text-[11px] font-display font-bold uppercase tracking-wider text-[#FFE4E9]">02 • Louças Exclusivas</span>
-              <h3 class="font-display font-semibold text-xl text-white mt-1 mb-2">Xícaras &amp; Canecas Personalizadas</h3>
-              <p class="text-xs sm:text-sm text-white/90 leading-relaxed mb-3">
-                Porcelana branco pérola e cerâmica rosé blush com alça de coração rose gold ou filete dourado. Gravamos nomes, iniciais florais e enviamos com tag Polaroid pendurada no laço.
-              </p>
-            </div>
-            <div class="flex items-center justify-between pt-3 border-t border-white/25">
-              <span class="text-xs font-display font-bold text-white">De R$ 74,90 a R$ 109,90</span>
-              <button type="button" data-pillar-jump="xicaras" class="px-3.5 py-1.5 rounded-full bg-white text-xs font-display font-semibold text-[#9B4C5D] hover:bg-[#FFF5F7] transition-colors">Ver 3 Xícaras →</button>
-            </div>
-          </div>
-        </div>
-
-        <!-- Card 3: Arte 3D & Litofania (CONTAINER INVERTIDO EM ROSÉ COM TEXTO BRANCO) -->
-        <div class="bg-lily-rose-soft-inverted text-white rounded-3xl border border-white/25 overflow-hidden shadow-floating grid grid-cols-1 sm:grid-cols-12">
-          <div class="sm:col-span-5 h-56 sm:h-auto overflow-hidden">
-            <img data-lily-img="litofania_3d" src="" alt="Litofania 3D, Letras 3D e Objetos Decorativos" class="w-full h-full object-cover max-w-full hover:scale-105 transition-transform duration-500" />
-          </div>
-          <div class="sm:col-span-7 p-6 flex flex-col justify-between">
-            <div>
-              <span class="text-[11px] font-display font-bold uppercase tracking-wider text-[#FFE4E9]">03 • Design Tridimensional &amp; Luz</span>
-              <h3 class="font-display font-semibold text-xl text-white mt-1 mb-2">Letras 3D, Litofania &amp; Objetos 3D</h3>
-              <p class="text-xs sm:text-sm text-white/90 leading-relaxed mb-3">
-                De iniciais e palavras esculturais (<em>Amor, Gratidão</em>) até vasos espirais 3D, corações facetados e nossa inovadora <strong>Luminária Litofania 3D</strong> que revela sua foto quando acesa!
-              </p>
-            </div>
-            <div class="flex items-center justify-between pt-3 border-t border-white/25">
-              <span class="text-xs font-display font-bold text-white">De R$ 59,90 a R$ 119,90</span>
-              <button type="button" data-pillar-jump="arte3d" class="px-3.5 py-1.5 rounded-full bg-white text-xs font-display font-semibold text-[#9B4C5D] hover:bg-[#FFF5F7] transition-colors">Ver Peças 3D →</button>
-            </div>
-          </div>
-        </div>
-
-        <!-- Card 4: Polaroid & Quadros (Fundo Branco Pérola) -->
-        <div class="bg-white rounded-3xl border border-[#EED9DF] overflow-hidden shadow-delicate grid grid-cols-1 sm:grid-cols-12">
-          <div class="sm:col-span-5 h-56 sm:h-auto overflow-hidden">
-            <img data-lily-img="quadro_shadowbox" src="" alt="Fotografias Polaroid e Quadro Shadow Box 3D" class="w-full h-full object-cover max-w-full hover:scale-105 transition-transform duration-500" />
-          </div>
-          <div class="sm:col-span-7 p-6 flex flex-col justify-between">
-            <div>
-              <span class="text-[11px] font-display font-bold uppercase tracking-wider text-[#B36273]">04 • Memórias Físicas &amp; Digitais</span>
-              <h3 class="font-display font-semibold text-xl text-[#382126] mt-1 mb-2">Fotografia Polaroid &amp; Quadros 3D</h3>
-              <p class="text-xs sm:text-sm text-[#6E5057] leading-relaxed mb-3">
-                Kits de fotos Polaroid com fio de fada LED, mini pregadores, charms 3D e <strong>Quadro Shadow Box com placa QR Code Spotify</strong> para tocar a música de vocês no celular.
-              </p>
-            </div>
-            <div class="flex items-center justify-between pt-3 border-t border-[#F6E8EC]">
-              <span class="text-xs font-display font-bold text-[#382126]">De R$ 44,90 a R$ 84,90</span>
-              <button type="button" data-pillar-jump="polaroid" class="px-3.5 py-1.5 rounded-full bg-[#F9EBEE] text-xs font-display font-semibold text-[#A65365] hover:bg-[#F2D5DC] transition-colors">Ver Polaroids →</button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ESTÚDIO INTERATIVO LILY: SIMULADOR AO VIVO COM UPLOAD DE FOTO REAL, GERADOR DE DEDICATÓRIA & CÁPSULA QR -->
   <section id="simulador" class="py-16 bg-white border-b border-[#EED9DF]">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center max-w-3xl mx-auto mb-10">
@@ -883,78 +861,6 @@ html {
     </div>
   </section>
 
-  <!-- CATÁLOGO COMPLETO COM AS 12 FOTOS EXCLUSIVAS (1 PARA CADA PRODUTO) -->
-  <section id="catalogo" class="py-16 bg-[#FDF8F9] border-b border-[#EED9DF]">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex flex-col md:flex-row md:items-end justify-between mb-6 gap-4">
-        <div>
-          <span class="text-xs font-display font-semibold uppercase tracking-[0.2em] text-[#B36273] block mb-2">Vitrine Completa Lily Cestas</span>
-          <h2 class="font-display font-light text-2xl sm:text-4xl text-[#382126]">
-            Catálogo com <strong class="font-semibold text-[#A65365]">12 Criações Autorais</strong>
-          </h2>
-        </div>
-        <span id="catalog-count" class="text-xs font-display font-semibold text-[#785860] bg-white px-4 py-2 rounded-full border border-[#EED9DF]">
-          12 criações disponíveis
-        </span>
-      </div>
-
-      <!-- FAIXA CLUBE DE MIMOS LILY (CONTAINER ROSÉ INVERTIDO COM TEXTO BRANCO) -->
-      <div class="bg-lily-rose-inverted text-white rounded-3xl p-4 sm:p-5 mb-8 shadow-delicate flex flex-col sm:flex-row items-center justify-between gap-4">
-        <div class="flex items-center gap-3.5">
-          <span class="w-11 h-11 rounded-2xl bg-white/20 flex items-center justify-center text-xl shrink-0">🎁</span>
-          <div>
-            <p class="font-display font-semibold text-sm sm:text-base text-white">Clube de Mimos Lily Cestas • Presentes Extras no Seu Pedido</p>
-            <p class="text-xs text-white/90">Acima de <strong>R$ 120</strong> você ganha 1 Mini Chaveiro Coração 3D Rosé • Acima de <strong>R$ 220</strong> ganha <strong>Placa QR Code Musical + 2 Polaroids Extras</strong>!</p>
-          </div>
-        </div>
-        <button type="button" id="banner-open-cart-btn" class="px-4 py-2 rounded-full bg-white text-[#9B4C5D] text-xs font-display font-bold shrink-0 hover:bg-[#FFF5F7] transition-all">
-          Ver Meu Progresso →
-        </button>
-      </div>
-
-      <!-- Barra de Filtros e Pesquisa -->
-      <div class="bg-white p-4 rounded-3xl border border-[#EED9DF] shadow-xs mb-8 space-y-4">
-        <div class="flex flex-wrap items-center gap-2">
-          <button type="button" data-cat-filter="todos" class="px-4 py-2 rounded-full text-xs font-display font-semibold bg-[#B36273] text-white shadow-xs transition-all">
-            Todos (12)
-          </button>
-          <button type="button" data-cat-filter="cestas" class="px-4 py-2 rounded-full text-xs font-display font-medium bg-white text-[#5A3D43] border border-[#EED9DF] hover:border-[#C87888] transition-all">
-            🧺 Cestas &amp; Boxes (4)
-          </button>
-          <button type="button" data-cat-filter="xicaras" class="px-4 py-2 rounded-full text-xs font-display font-medium bg-white text-[#5A3D43] border border-[#EED9DF] hover:border-[#C87888] transition-all">
-            ☕ Xícaras &amp; Canecas (3)
-          </button>
-          <button type="button" data-cat-filter="arte3d" class="px-4 py-2 rounded-full text-xs font-display font-medium bg-white text-[#5A3D43] border border-[#EED9DF] hover:border-[#C87888] transition-all">
-            🧊 Letras, Litofania &amp; 3D (3)
-          </button>
-          <button type="button" data-cat-filter="polaroid" class="px-4 py-2 rounded-full text-xs font-display font-medium bg-white text-[#5A3D43] border border-[#EED9DF] hover:border-[#C87888] transition-all">
-            📸 Polaroid &amp; Quadros 3D (2)
-          </button>
-          <button type="button" data-cat-filter="favoritos" class="px-4 py-2 rounded-full text-xs font-display font-medium bg-white text-[#A65365] border border-[#EED9DF] hover:border-[#C87888] transition-all">
-            ♥ Favoritos
-          </button>
-        </div>
-
-        <div class="grid grid-cols-1 sm:grid-cols-12 gap-3 pt-2 border-t border-[#F7E9ED]">
-          <div class="sm:col-span-8">
-            <input id="catalog-search" type="search" placeholder="Buscar por cesta macarons, litofania 3D, caneca alça coração, letras 3D, polaroid..." class="w-full rounded-2xl border border-[#E5C2C9] bg-[#FDF8F9] px-4 py-2.5 text-xs sm:text-sm text-[#382126] focus:outline-none focus:border-[#C87888]" />
-          </div>
-          <div class="sm:col-span-4">
-            <select id="catalog-sort" aria-label="Ordenar catálogo" class="w-full rounded-2xl border border-[#E5C2C9] bg-[#FDF8F9] px-4 py-2.5 text-xs sm:text-sm font-display font-medium text-[#382126] focus:outline-none focus:border-[#C87888]">
-              <option value="destaques">Ordenar: Destaques Lily Cestas</option>
-              <option value="menor-preco">Ordenar: Menor Investimento</option>
-              <option value="maior-preco">Ordenar: Maior Investimento</option>
-            </select>
-          </div>
-        </div>
-      </div>
-
-      <!-- Grid de Cards de Produto -->
-      <div id="catalog-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
-    </div>
-  </section>
-
-  <!-- COMO FUNCIONA (PASSO A PASSO COM CARDS ALTERNADOS BRANCO E ROSÉ INVERTIDO) -->
   <section id="como-funciona" class="py-16 bg-white border-b border-[#EED9DF]">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center max-w-2xl mx-auto mb-12">
@@ -1000,45 +906,10 @@ html {
     </div>
   </section>
 
-  <!-- DEPOIMENTOS DE CLIENTES & FAQ -->
   <section id="depoimentos" class="py-16 bg-[#FDF8F9] border-b border-[#EED9DF]">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
       
-      <div>
-        <div class="text-center max-w-2xl mx-auto mb-10">
-          <span class="text-xs font-display font-semibold uppercase tracking-[0.2em] text-[#B36273] block mb-2">Quem recebe se emociona</span>
-          <h2 class="font-display font-light text-2xl sm:text-4xl text-[#382126]">
-            Histórias reais da <strong class="font-semibold text-[#A65365]">Lily Cestas</strong>
-          </h2>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <div class="bg-white p-6 rounded-3xl border border-[#EED9DF] shadow-xs">
-            <div class="text-[#C87888] text-sm mb-2">★★★★★</div>
-            <p class="text-xs sm:text-sm text-[#5A3D43] italic leading-relaxed mb-4">
-              "Eu já amava as cestas da Lily, mas quando vi que podia colocar uma xícara com o nome da minha mãe, a palavra GRATIDÃO em 3D rosé e nossas fotos Polaroid dentro da cesta, ela chorou de emoção!"
-            </p>
-            <p class="text-xs font-display font-bold text-[#382126]">Camila Fontes • Cesta Lily Imperial + 3D</p>
-          </div>
-
-          <!-- Card Central Invertido em Rosé com Texto Branco -->
-          <div class="bg-lily-rose-inverted text-white p-6 rounded-3xl border border-white/25 shadow-floating">
-            <div class="text-[#FFE4E9] text-sm mb-2">★★★★★</div>
-            <p class="text-xs sm:text-sm text-white/95 italic leading-relaxed mb-4">
-              "Pedi a Luminária Litofania 3D com a foto do nosso casamento e o Quadro Shadow Box com QR Code da nossa música. Quando acendeu a luz e revelou a foto em 3D, ficamos sem palavras!"
-            </p>
-            <p class="text-xs font-display font-bold text-white">Beatriz &amp; Lucas • Litofania 3D &amp; Polaroids</p>
-          </div>
-
-          <div class="bg-white p-6 rounded-3xl border border-[#EED9DF] shadow-xs">
-            <div class="text-[#C87888] text-sm mb-2">★★★★★</div>
-            <p class="text-xs sm:text-sm text-[#5A3D43] italic leading-relaxed mb-4">
-              "Encomendei as canecas com alça de coração rose gold e a letra inicial 3D para minhas madrinhas. A delicadeza da fonte e do acabamento rosé superou tudo o que já vi no mercado."
-            </p>
-            <p class="text-xs font-display font-bold text-[#382126]">Mariana Siqueira • Canecas Coração &amp; Letras 3D</p>
-          </div>
-        </div>
-      </div>
+      <div class="igblock"><h2 class="sec-h" style="color:#fff">Veja entregas <b style="color:#fff">de verdade</b> no Instagram</h2><p style="opacity:.95;margin:.5rem 0 0">Fotos dos presentes montados e entregues pela Lily Cestas.</p><a href="https://www.instagram.com/lilycestas.ofc/" target="_blank" rel="noopener">Seguir @lilycestas.ofc</a></div>
 
       <!-- Perguntas Frequentes -->
       <div id="faq" class="max-w-3xl mx-auto">
@@ -1054,9 +925,6 @@ html {
     </div>
   </section>
 
-  <!-- RODAPÉ COMPLETO INVERTIDO EM ROSÉ IMPERIAL COM LOGO LILY -->
-
-  <!-- ONDE ENTREGAMOS (conteúdo estático e rastreável para SEO local) -->
   <section id="onde-entregamos" class="py-14 bg-white border-t border-[#EED9DF]">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <h2 class="font-display font-light text-2xl sm:text-3xl text-[#382126] mb-3">Cestas de presente e presentes personalizados em <strong class="font-semibold text-[#A65365]">Santana de Parnaíba, Alphaville, Barueri e Cajamar</strong></h2>
@@ -1066,6 +934,177 @@ html {
         <a href="/cestas-de-presente-alphaville/" class="p-4 rounded-2xl border border-[#EED9DF] bg-[#FDF8F9] hover:bg-white text-sm font-display font-semibold text-[#A65365]">Presentes em Alphaville →</a>
         <a href="/cestas-de-presente-barueri/" class="p-4 rounded-2xl border border-[#EED9DF] bg-[#FDF8F9] hover:bg-white text-sm font-display font-semibold text-[#A65365]">Presentes em Barueri →</a>
         <a href="/cestas-de-presente-cajamar/" class="p-4 rounded-2xl border border-[#EED9DF] bg-[#FDF8F9] hover:bg-white text-sm font-display font-semibold text-[#A65365]">Presentes em Cajamar →</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="proposta" style="display:none" hidden class="py-16 bg-white border-b border-[#EED9DF]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-3xl mx-auto mb-12">
+        <span class="text-xs font-display font-semibold uppercase tracking-[0.2em] text-[#B36273] block mb-2">Posicionamento Inovador no Mercado</span>
+        <h2 class="font-display font-light text-2xl sm:text-4xl text-[#382126] mb-3">
+          Mais que uma cesta: um <strong class="font-semibold text-[#A65365]">presente que permanece para sempre</strong>
+        </h2>
+        <p class="text-sm sm:text-base text-[#6E5057]">
+          Nas floriculturas comuns, os doces acabam e a cesta é guardada. Na <strong>Lily Cestas</strong>, você une a delícia gastronômica a memórias físicas e digitais que decoram a rotina de quem você ama:
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <!-- Card 1: Branco Pérola -->
+        <div class="rounded-3xl p-6 sm:p-7 bg-lily-pearl border border-[#EED9DF] shadow-delicate flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between mb-4">
+              <span class="w-12 h-12 rounded-2xl bg-white border border-[#EBCAD2] flex items-center justify-center text-2xl shadow-sm">🧺</span>
+              <span class="px-3 py-1 rounded-full bg-[#F9EBEE] text-[#A65365] text-xs font-display font-semibold">Formato 01</span>
+            </div>
+            <h3 class="font-display font-semibold text-xl text-[#382126] mb-2">
+              Cesta Completa + Personalizados Inclusos
+            </h3>
+            <p class="text-xs sm:text-sm text-[#5A3D43] leading-relaxed mb-4">
+              Você escolhe a cesta de café da manhã, macarons ou espumante rosé e nós <strong>integramos dentro dela</strong> a xícara com o nome da pessoa, uma escultura/palavra em 3D e as fotos Polaroid do casal ou família.
+            </p>
+          </div>
+          <div class="pt-3 border-t border-[#EAD4DA] text-xs font-display font-semibold text-[#A65365]">
+            ✦ Experiência completa de despertar &amp; emocionar
+          </div>
+        </div>
+
+        <!-- Card 2: INVERTIDO EM ROSÉ COM TEXTO BRANCO -->
+        <div class="rounded-3xl p-6 sm:p-7 bg-lily-rose-inverted text-white border border-white/20 shadow-floating flex flex-col justify-between transform md:-translate-y-2">
+          <div>
+            <div class="flex items-center justify-between mb-4">
+              <span class="w-12 h-12 rounded-2xl bg-white/20 border border-white/30 flex items-center justify-center text-2xl backdrop-blur-xs">☕</span>
+              <span class="px-3 py-1 rounded-full bg-white text-[#9B4C5D] text-xs font-display font-bold">Formato 02 • Destaque</span>
+            </div>
+            <h3 class="font-display font-semibold text-xl text-white mb-2">
+              Presentes Personalizados Avulsos
+            </h3>
+            <p class="text-xs sm:text-sm text-white/90 leading-relaxed mb-4">
+              Quer presentear sem a cesta de alimentos? Peça <strong>apenas a Xícara Personalizada</strong> na caixa rosé com laço, a <strong>Luminária Litofania 3D</strong> com foto que acende, ou o <strong>Quadro Shadow Box 3D com Polaroids</strong>.
+            </p>
+          </div>
+          <div class="pt-3 border-t border-white/25 text-xs font-display font-semibold text-white">
+            ✦ Perfeito para amigas, madrinhas, namorados e envio nacional
+          </div>
+        </div>
+
+        <!-- Card 3: Branco Pérola -->
+        <div class="rounded-3xl p-6 sm:p-7 bg-lily-pearl border border-[#EED9DF] shadow-delicate flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between mb-4">
+              <span class="w-12 h-12 rounded-2xl bg-white border border-[#EBCAD2] flex items-center justify-center text-2xl shadow-sm">🧊</span>
+              <span class="px-3 py-1 rounded-full bg-[#F9EBEE] text-[#A65365] text-xs font-display font-semibold">Formato 03</span>
+            </div>
+            <h3 class="font-display font-semibold text-xl text-[#382126] mb-2">
+              Decoração Afetiva &amp; Objetos com 3D
+            </h3>
+            <p class="text-xs sm:text-sm text-[#5A3D43] leading-relaxed mb-4">
+              Peças autorais com <strong>tecnologia 3D na composição</strong> em tons rosé blush, branco pérola e rose gold: letras iniciais de mesa, palavras esculturais, vasos twist com flores secas e corações facetados.
+            </p>
+          </div>
+          <div class="pt-3 border-t border-[#EAD4DA] text-xs font-display font-semibold text-[#A65365]">
+            ✦ Design exclusivo que transforma quartos, salas e escritórios
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="pilares" style="display:none" hidden class="py-16 bg-[#FDF8F9] border-b border-[#EED9DF]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-4">
+        <div>
+          <span class="text-xs font-display font-semibold uppercase tracking-[0.2em] text-[#B36273] block mb-2">Fotografia Autoral &amp; Acabamento Impecável</span>
+          <h2 class="font-display font-light text-2xl sm:text-4xl text-[#382126]">
+            Nossas <strong class="font-semibold text-[#A65365]">4 categorias de criação</strong>
+          </h2>
+        </div>
+        <p class="text-xs sm:text-sm text-[#6E5057] max-w-md">
+          Explore cada categoria individualmente ou combine itens de todas elas dentro de uma única cesta ou box personalizada.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-7">
+        <!-- Card 1: Cestas (Fundo Branco Pérola) -->
+        <div class="bg-white rounded-3xl border border-[#EED9DF] overflow-hidden shadow-delicate grid grid-cols-1 sm:grid-cols-12">
+          <div class="sm:col-span-5 h-56 sm:h-auto overflow-hidden">
+            <img data-lily-img="cesta_macarons" src="" alt="Cestas de Presente Lily em Rosé e Branco" class="w-full h-full object-cover max-w-full hover:scale-105 transition-transform duration-500" />
+          </div>
+          <div class="sm:col-span-7 p-6 flex flex-col justify-between">
+            <div>
+              <span class="text-[11px] font-display font-bold uppercase tracking-wider text-[#B36273]">01 • Cestas &amp; Boxes Afetivas</span>
+              <h3 class="font-display font-semibold text-xl text-[#382126] mt-1 mb-2">Cestas de Presente Personalizáveis</h3>
+              <p class="text-xs sm:text-sm text-[#6E5057] leading-relaxed mb-3">
+                Cestas em vime branco e boxes rígidas rosé recheadas com macarons, morangos, pães artesanais, chocolates finos, espumante e flores — com berço dedicado para sua xícara, peça 3D e Polaroids.
+              </p>
+            </div>
+            <div class="flex items-center justify-between pt-3 border-t border-[#F6E8EC]">
+              <span class="text-xs font-display font-bold text-[#382126]">De R$ 189,90 a R$ 239,90</span>
+              <button type="button" data-pillar-jump="cestas" class="px-3.5 py-1.5 rounded-full bg-[#F9EBEE] text-xs font-display font-semibold text-[#A65365] hover:bg-[#F2D5DC] transition-colors">Ver 4 Cestas →</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 2: Xícaras (CONTAINER INVERTIDO EM ROSÉ COM TEXTO BRANCO) -->
+        <div class="bg-lily-rose-inverted text-white rounded-3xl border border-white/25 overflow-hidden shadow-floating grid grid-cols-1 sm:grid-cols-12">
+          <div class="sm:col-span-5 h-56 sm:h-auto overflow-hidden">
+            <img data-lily-img="caneca_coracao" src="" alt="Xícaras e Canecas Personalizadas Lily" class="w-full h-full object-cover max-w-full hover:scale-105 transition-transform duration-500" />
+          </div>
+          <div class="sm:col-span-7 p-6 flex flex-col justify-between">
+            <div>
+              <span class="text-[11px] font-display font-bold uppercase tracking-wider text-[#FFE4E9]">02 • Louças Exclusivas</span>
+              <h3 class="font-display font-semibold text-xl text-white mt-1 mb-2">Xícaras &amp; Canecas Personalizadas</h3>
+              <p class="text-xs sm:text-sm text-white/90 leading-relaxed mb-3">
+                Porcelana branco pérola e cerâmica rosé blush com alça de coração rose gold ou filete dourado. Gravamos nomes, iniciais florais e enviamos com tag Polaroid pendurada no laço.
+              </p>
+            </div>
+            <div class="flex items-center justify-between pt-3 border-t border-white/25">
+              <span class="text-xs font-display font-bold text-white">De R$ 74,90 a R$ 109,90</span>
+              <button type="button" data-pillar-jump="xicaras" class="px-3.5 py-1.5 rounded-full bg-white text-xs font-display font-semibold text-[#9B4C5D] hover:bg-[#FFF5F7] transition-colors">Ver 3 Xícaras →</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 3: Arte 3D & Litofania (CONTAINER INVERTIDO EM ROSÉ COM TEXTO BRANCO) -->
+        <div class="bg-lily-rose-soft-inverted text-white rounded-3xl border border-white/25 overflow-hidden shadow-floating grid grid-cols-1 sm:grid-cols-12">
+          <div class="sm:col-span-5 h-56 sm:h-auto overflow-hidden">
+            <img data-lily-img="litofania_3d" src="" alt="Litofania 3D, Letras 3D e Objetos Decorativos" class="w-full h-full object-cover max-w-full hover:scale-105 transition-transform duration-500" />
+          </div>
+          <div class="sm:col-span-7 p-6 flex flex-col justify-between">
+            <div>
+              <span class="text-[11px] font-display font-bold uppercase tracking-wider text-[#FFE4E9]">03 • Design Tridimensional &amp; Luz</span>
+              <h3 class="font-display font-semibold text-xl text-white mt-1 mb-2">Letras 3D, Litofania &amp; Objetos 3D</h3>
+              <p class="text-xs sm:text-sm text-white/90 leading-relaxed mb-3">
+                De iniciais e palavras esculturais (<em>Amor, Gratidão</em>) até vasos espirais 3D, corações facetados e nossa inovadora <strong>Luminária Litofania 3D</strong> que revela sua foto quando acesa!
+              </p>
+            </div>
+            <div class="flex items-center justify-between pt-3 border-t border-white/25">
+              <span class="text-xs font-display font-bold text-white">De R$ 59,90 a R$ 119,90</span>
+              <button type="button" data-pillar-jump="arte3d" class="px-3.5 py-1.5 rounded-full bg-white text-xs font-display font-semibold text-[#9B4C5D] hover:bg-[#FFF5F7] transition-colors">Ver Peças 3D →</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 4: Polaroid & Quadros (Fundo Branco Pérola) -->
+        <div class="bg-white rounded-3xl border border-[#EED9DF] overflow-hidden shadow-delicate grid grid-cols-1 sm:grid-cols-12">
+          <div class="sm:col-span-5 h-56 sm:h-auto overflow-hidden">
+            <img data-lily-img="quadro_shadowbox" src="" alt="Fotografias Polaroid e Quadro Shadow Box 3D" class="w-full h-full object-cover max-w-full hover:scale-105 transition-transform duration-500" />
+          </div>
+          <div class="sm:col-span-7 p-6 flex flex-col justify-between">
+            <div>
+              <span class="text-[11px] font-display font-bold uppercase tracking-wider text-[#B36273]">04 • Memórias Físicas &amp; Digitais</span>
+              <h3 class="font-display font-semibold text-xl text-[#382126] mt-1 mb-2">Fotografia Polaroid &amp; Quadros 3D</h3>
+              <p class="text-xs sm:text-sm text-[#6E5057] leading-relaxed mb-3">
+                Kits de fotos Polaroid com fio de fada LED, mini pregadores, charms 3D e <strong>Quadro Shadow Box com placa QR Code Spotify</strong> para tocar a música de vocês no celular.
+              </p>
+            </div>
+            <div class="flex items-center justify-between pt-3 border-t border-[#F6E8EC]">
+              <span class="text-xs font-display font-bold text-[#382126]">De R$ 44,90 a R$ 84,90</span>
+              <button type="button" data-pillar-jump="polaroid" class="px-3.5 py-1.5 rounded-full bg-[#F9EBEE] text-xs font-display font-semibold text-[#A65365] hover:bg-[#F2D5DC] transition-colors">Ver Polaroids →</button>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -1113,6 +1152,7 @@ html {
           <a href="#simulador" class="inline-block px-5 py-2.5 rounded-full bg-white text-[#9B4C5D] text-xs font-display font-bold hover:bg-[#FFF5F7] shadow-sm transition-colors">
             Criar Meu Presente Agora →
           </a>
+          <a href="https://wa.me/5511914955434?text=Oi%21%20Vim%20pelo%20site%20da%20Lily%20Cestas%20e%20quero%20ajuda%20para%20escolher%20um%20presente." target="_blank" rel="noopener" class="inline-block mt-2 px-5 py-2.5 rounded-full border border-white/60 text-white text-xs font-display font-bold hover:bg-white/15 transition-colors">Falar no WhatsApp</a>
         </div>
       </div>
 
@@ -1413,7 +1453,7 @@ html {
   <!-- Container de Notificações Toast -->
   <div id="toast-container" class="fixed bottom-5 right-5 z-50 flex flex-col gap-2 max-w-sm"></div>
 
-  <script src="lily-images.js"></script>
+  <script src="/lily-images.js"></script>
   <script>
 
 (function () {
@@ -2081,99 +2121,27 @@ html {
       return;
     }
 
-    grid.innerHTML = filtered.map((p, idx) => {
+    grid.innerHTML = filtered.map((p) => {
       const isFav = state.favorites.includes(p.id);
       const imgSrc = getImgSrc(p.imageKey);
-      // Quebra de container: destaca os cards assinatura (Ex: prod-4 Box Romântica, prod-8 Litofania 3D, prod-11 Shadow Box) em Rosé Invertido!
-      const isInvertedCard = (p.id === "prod-4" || p.id === "prod-8" || p.id === "prod-11");
-
-      if (isInvertedCard) {
-        return `
-          <article class="bg-lily-rose-inverted text-white rounded-3xl border border-white/25 overflow-hidden shadow-floating hover:scale-[1.01] transition-all duration-300 flex flex-col">
-            <div class="relative h-56 overflow-hidden bg-[#382126]">
-              <img src="${imgSrc}" alt="${p.name}" class="w-full h-full object-cover max-w-full transition-transform duration-500 hover:scale-105" />
-              <div class="absolute top-3 left-3 flex flex-wrap gap-1.5">
-                <span class="px-3 py-1 rounded-full text-[10px] font-display font-bold uppercase bg-white text-[#9B4C5D] shadow-xs">
-                  ${p.categoryLabel}
-                </span>
-                <span class="px-2.5 py-1 rounded-full text-[10px] font-display font-bold uppercase bg-[#382126]/85 text-[#FFE4E9] backdrop-blur-xs">
-                  ✦ ${p.badge}
-                </span>
-              </div>
-              <button type="button" data-fav-btn="${p.id}" aria-label="Favoritar ${p.name}" class="absolute top-3 right-3 w-9 h-9 rounded-full bg-white/90 hover:bg-white flex items-center justify-center shadow-xs transition-all">
-                <span class="text-base ${isFav ? "text-[#C87888]" : "text-[#B89CA3]"}">${isFav ? "♥" : "♡"}</span>
-              </button>
-            </div>
-            <div class="p-5 flex-1 flex flex-col justify-between">
-              <div>
-                <h3 class="font-display font-semibold text-lg text-white leading-snug mb-1.5">${p.name}</h3>
-                <p class="text-xs text-white/90 leading-relaxed mb-3">${p.shortDesc}</p>
-                <div class="p-2.5 rounded-2xl bg-white/15 border border-white/25 mb-4 backdrop-blur-xs">
-                  <p class="text-[10px] font-display font-bold uppercase tracking-wider text-[#FFE4E9] mb-0.5">✦ Personalização inclusa:</p>
-                  <p class="text-xs text-white font-medium">${p.customizable}</p>
-                </div>
-              </div>
-              <div class="pt-3 border-t border-white/25 flex items-center justify-between gap-2">
-                <div>
-                  <span class="block text-[10px] font-display uppercase tracking-wider text-[#FFE4E9]">Investimento</span>
-                  <span class="text-lg font-display font-bold text-white">${formatBRL(p.price)}</span>
-                </div>
-                <div class="flex items-center gap-2">
-                  <button type="button" data-customize-prod="${p.id}" class="px-3 py-2 rounded-xl border border-white/40 text-xs font-display font-semibold text-white hover:bg-white/15 transition-all">
-                    Personalizar
-                  </button>
-                  <button type="button" data-quick-add="${p.id}" class="px-3.5 py-2 rounded-xl bg-white text-[#9B4C5D] text-xs font-display font-bold hover:bg-[#FFF5F7] transition-all shadow-xs">
-                    + Sacola
-                  </button>
-                </div>
-              </div>
-            </div>
-          </article>
-        `;
-      }
-
       return `
-        <article class="bg-white rounded-3xl border border-[#EED9DF] overflow-hidden shadow-delicate hover:shadow-floating transition-all duration-300 flex flex-col">
-          <div class="relative h-56 overflow-hidden bg-[#FDF6F8]">
-            <img src="${imgSrc}" alt="${p.name}" class="w-full h-full object-cover max-w-full transition-transform duration-500 hover:scale-105" />
-            <div class="absolute top-3 left-3 flex flex-wrap gap-1.5">
-              <span class="px-3 py-1 rounded-full text-[10px] font-display font-bold uppercase bg-white/95 text-[#382126] shadow-xs backdrop-blur-xs">
-                ${p.categoryLabel}
-              </span>
-              <span class="px-2.5 py-1 rounded-full text-[10px] font-display font-bold uppercase bg-[#B36273] text-white shadow-xs">
-                ${p.badge}
-              </span>
-            </div>
-            <button type="button" data-fav-btn="${p.id}" aria-label="Favoritar ${p.name}" class="absolute top-3 right-3 w-9 h-9 rounded-full bg-white/90 hover:bg-white flex items-center justify-center shadow-xs transition-all">
-              <span class="text-base ${isFav ? "text-[#C87888]" : "text-[#B89CA3]"}">${isFav ? "♥" : "♡"}</span>
-            </button>
+        <article class="pcard">
+          <div class="pimg">
+            <img src="${imgSrc}" alt="${p.name}" loading="lazy" width="760" height="567" />
+            ${p.badge ? `<span class="pbadge">${p.badge}</span>` : ""}
+            <button type="button" data-fav-btn="${p.id}" aria-label="Favoritar ${p.name}" class="pfav"><span class="${isFav ? "on" : ""}">${isFav ? "♥" : "♡"}</span></button>
           </div>
-          <div class="p-5 flex-1 flex flex-col justify-between">
-            <div>
-              <h3 class="font-display font-semibold text-lg text-[#382126] leading-snug mb-1.5">${p.name}</h3>
-              <p class="text-xs text-[#6E5057] leading-relaxed mb-3">${p.shortDesc}</p>
-              <div class="p-2.5 rounded-2xl bg-[#FDF6F8] border border-[#F5E4E8] mb-4">
-                <p class="text-[10px] font-display font-bold uppercase tracking-wider text-[#A65365] mb-0.5">✦ Personalização inclusa:</p>
-                <p class="text-xs text-[#4A2E35] font-medium">${p.customizable}</p>
-              </div>
-            </div>
-            <div class="pt-3 border-t border-[#F6E8EC] flex items-center justify-between gap-2">
-              <div>
-                <span class="block text-[10px] font-display uppercase tracking-wider text-[#8C6C73]">Investimento</span>
-                <span class="text-lg font-display font-bold text-[#382126]">${formatBRL(p.price)}</span>
-              </div>
-              <div class="flex items-center gap-2">
-                <button type="button" data-customize-prod="${p.id}" class="px-3 py-2 rounded-xl border border-[#D9A7B2] text-xs font-display font-semibold text-[#A65365] hover:bg-[#FDF2F5] transition-all">
-                  Personalizar
-                </button>
-                <button type="button" data-quick-add="${p.id}" class="px-3.5 py-2 rounded-xl bg-rosegold-gradient text-white text-xs font-display font-semibold hover:opacity-95 transition-all shadow-xs">
-                  + Sacola
-                </button>
-              </div>
+          <div class="pbody">
+            <p class="pcat">${p.categoryLabel}</p>
+            <h3>${p.name}</h3>
+            <p class="pwhat">${p.customizable}</p>
+            <div class="pfoot"><span class="pprice">${formatBRL(p.price)}</span><span class="pnote">${formatBRL(p.price * 0.95)} no Pix</span></div>
+            <div class="pbtns">
+              <button type="button" data-customize-prod="${p.id}" class="btn2">Personalizar</button>
+              <button type="button" data-quick-add="${p.id}" class="btn1">Adicionar</button>
             </div>
           </div>
-        </article>
-      `;
+        </article>`;
     }).join("");
   }
 
@@ -2885,6 +2853,50 @@ html {
     init();
   }
 })();
+  </script>
+
+  <div class="mbar"><a class="a1" href="#catalogo">Escolher presente</a><a class="a2" href="https://wa.me/5511914955434?text=Oi%21%20Vim%20pelo%20site%20da%20Lily%20Cestas%20e%20quero%20ajuda%20para%20escolher%20um%20presente." target="_blank" rel="noopener">WhatsApp</a></div>
+  <a class="wafab" href="https://wa.me/5511914955434?text=Oi%21%20Vim%20pelo%20site%20da%20Lily%20Cestas%20e%20quero%20ajuda%20para%20escolher%20um%20presente." target="_blank" rel="noopener" aria-label="Falar no WhatsApp">💬 Falar no WhatsApp</a>
+  <script>
+  (function () {
+    var WA = "5511914955434";
+    document.addEventListener("click", function (e) {
+      var b = e.target.closest("[data-hero-cat]");
+      if (!b) return;
+      var f = document.querySelector('#catalogo [data-cat-filter="' + b.getAttribute("data-hero-cat") + '"]');
+      if (f) f.click();
+      var s = document.getElementById("catalogo");
+      if (s) s.scrollIntoView({ behavior: "smooth", block: "start" });
+    });
+    var inp = document.getElementById("cep-input"), form = document.getElementById("cep-form"), res = document.getElementById("cep-res");
+    if (!inp || !form) return;
+    inp.addEventListener("input", function () {
+      var d = inp.value.replace(/\D/g, "").slice(0, 8);
+      inp.value = d.length > 5 ? d.slice(0, 5) + "-" + d.slice(5) : d;
+    });
+    function city(n) {
+      if (n >= 6500000 && n <= 6549999) return "Santana de Parnaíba";
+      if (n >= 6400000 && n <= 6499999) return "Barueri / Alphaville";
+      if (n >= 7750000 && n <= 7799999) return "Cajamar";
+      return "";
+    }
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+      var d = inp.value.replace(/\D/g, "");
+      if (d.length !== 8) { res.className = "res ask"; res.textContent = "Digite o CEP completo, com 8 números."; return; }
+      var c = city(parseInt(d, 10));
+      var cepTxt = d.slice(0, 5) + "-" + d.slice(5);
+      if (c) {
+        var msg = "Oi! Meu CEP é " + cepTxt + " (" + c + "). Qual o horário e a taxa de entrega?";
+        res.className = "res ok";
+        res.innerHTML = "<strong>Atendemos " + c + "!</strong> Confirmamos horário e taxa no pedido. <a href=\"https://wa.me/" + WA + "?text=" + encodeURIComponent(msg) + "\" target=\"_blank\" rel=\"noopener\">Confirmar pelo WhatsApp →</a>";
+      } else {
+        var msg2 = "Oi! Meu CEP é " + cepTxt + ". Vocês entregam na minha região?";
+        res.className = "res ask";
+        res.innerHTML = "Vamos conferir a entrega para esse CEP. Xícaras, 3D e Polaroids enviamos para todo o Brasil. <a href=\"https://wa.me/" + WA + "?text=" + encodeURIComponent(msg2) + "\" target=\"_blank\" rel=\"noopener\">Perguntar pelo WhatsApp →</a>";
+      }
+    });
+  })();
   </script>
 </body>
 </html>
