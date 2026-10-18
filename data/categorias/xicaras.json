@@ -1,0 +1,36 @@
+{
+  "ativa": true,
+  "ordem": 2,
+  "chave": "xicaras",
+  "nome": "Xícaras Personalizadas",
+  "nome_curto": "Xícaras & Canecas",
+  "icone": "☕",
+  "nome_tile": "Xícaras e canecas",
+  "eh_cesta": false,
+  "foto": "/assets/produtos/caneca-coracao.webp",
+  "frase_apoio": "Porcelana de alto brilho em branco pérola ou cerâmica rosé blush com alça de coração metalizada rose gold. Gravamos nomes, iniciais florais e frases afetivas.",
+  "destaques": [
+    "Canecas com Alça de Coração Rose Gold e Xícaras com Pires Imperial",
+    "Personalização definitiva em alta temperatura com nome ou monograma",
+    "Acompanha tag Polaroid pendurada no laço rosé e caixa presenteável"
+  ],
+  "pagina_url": "xicaras-canecas-personalizadas",
+  "pagina_titulo": "Xícaras e Canecas Personalizadas com Nome | Lily Cestas",
+  "pagina_descricao": "Xícaras e canecas personalizadas com nome, alça de coração rose gold e monograma. Presente delicado em Santana de Parnaíba, Alphaville, Barueri e Cajamar.",
+  "pagina_h1": "Xícaras e Canecas Personalizadas com Nome e Alça Rose Gold",
+  "pagina_intro": "Xícaras de porcelana e canecas com acabamento rosé e branco, alça de coração rose gold e personalização com nome, frase ou monograma. Podem ir em uma cesta de presente ou avulsas, já em embalagem presenteável com laço.",
+  "pagina_secoes": [
+    {
+      "titulo": "Presente que a pessoa usa todos os dias",
+      "texto": "Uma xícara personalizada é um presente prático e afetivo: aparece no café da manhã, no trabalho e nas fotos do dia a dia. Funciona muito bem para madrinhas, mães, avós, professoras, casais e lembrancinhas de formatura ou aniversário."
+    },
+    {
+      "titulo": "Como funciona a personalização",
+      "texto": "Você escolhe o modelo, escreve o nome ou a frase e recebe a prévia digital da arte pelo WhatsApp para aprovar. A produção de xícaras personalizadas leva de 1 a 2 dias úteis após a aprovação."
+    },
+    {
+      "titulo": "Combine com outras peças",
+      "texto": "Monte um kit com a xícara, uma letra ou palavra em 3D e fotos Polaroid, ou escolha uma cesta de presente completa que já inclui a xícara personalizada."
+    }
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "status": "ativo",
+  "ordem": 1,
+  "nome": "Cesta Lily Imperial Rosé & Personalizados",
+  "categoria": "cestas",
+  "preco": 239.9,
+  "preco_promocional": null,
+  "selo": "Mais Vendida",
+  "foto": "/assets/produtos/hero-imperial.webp",
+  "descricao": "Nossa cesta assinatura em vime branco com rosas naturais, bombons finos, 1 xícara personalizada com nome, palavra 'AMOR' em 3D e 3 fotos Polaroid.",
+  "personalizacao": "Nome na xícara + Palavra 3D + 3 Fotos Polaroid + Música QR",
+  "inclui": [
+    "Cesta vime branco grande com laço duplo de cetim rosé",
+    "1 Xícara porcelana alça rose gold personalizada com nome",
+    "1 Escultura 'AMOR' ou Inicial em 3D rosé e branco",
+    "3 Fotografias Polaroid com legenda + Placa QR Code Musical",
+    "Buquê de mini rosas blush, Ferrero/bombons finos, croissant e suco integral"
+  ],
+  "destaque": true,
+  "quiz": [
+    "completa"
+  ]
+}

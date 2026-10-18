@@ -1,0 +1,22 @@
+{
+  "status": "ativo",
+  "ordem": 12,
+  "nome": "Kit Memórias Polaroid Iluminado (10 Fotos + Fio de Fada & Charms 3D)",
+  "categoria": "polaroid",
+  "preco": 44.9,
+  "preco_promocional": null,
+  "selo": "Mimo Afetivo",
+  "foto": "/assets/produtos/polaroid-led.webp",
+  "descricao": "10 fotografias reveladas no formato clássico Polaroid com legenda personalizada, cordão de luzes LED Fio de Fada, mini pregadores e charms de coração 3D.",
+  "personalizacao": "10 Fotos do seu celular + Legendas + Música QR Code na capa",
+  "inclui": [
+    "10 Fotos Polaroid (10x8cm) com laminação protetora anti-desbotamento",
+    "1 Cordão Fio de Fada LED (2 metros, pilhas inclusas)",
+    "10 Mini pregadores + 6 mini corações/flores 3D em relevo",
+    "Caixa envelope rosé com fita de cetim e tag QR Code Musical"
+  ],
+  "destaque": false,
+  "quiz": [
+    "iluminada"
+  ]
+}

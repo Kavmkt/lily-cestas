@@ -1,0 +1,22 @@
+{
+  "status": "ativo",
+  "ordem": 10,
+  "nome": "Trio Decorativo 3D: Vaso Twist Rosé com Flores Secas + Corações",
+  "categoria": "arte3d",
+  "preco": 89.9,
+  "preco_promocional": null,
+  "selo": "Design de Interiores",
+  "foto": "/assets/produtos/vaso-coracoes-3d.webp",
+  "descricao": "Conjunto escultural com 1 vaso espiral 3D rosé matte com buquê de flores secas naturais e 2 corações facetados 3D (branco pérola e rose gold).",
+  "personalizacao": "Cores do vaso e dos corações 3D + Tag personalizada",
+  "inclui": [
+    "1 Vaso Geométrico Espiral 3D (15cm) em rosé blush matte",
+    "1 Maço de flores desidratadas (lagurus branco e gypsophila rosé)",
+    "2 Corações Facetados Low-Poly 3D (Pérola e Rose Gold)",
+    "Tag com frase afetiva presa no vaso"
+  ],
+  "destaque": false,
+  "quiz": [
+    "decor"
+  ]
+}

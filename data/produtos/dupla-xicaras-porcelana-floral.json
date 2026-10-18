@@ -1,0 +1,22 @@
+{
+  "status": "ativo",
+  "ordem": 6,
+  "nome": "Dupla de Xícaras Porcelana Floral & Alça Rose Gold",
+  "categoria": "xicaras",
+  "preco": 109.9,
+  "preco_promocional": null,
+  "selo": "Kit Casal / Amigas",
+  "foto": "/assets/produtos/xicara-dupla.webp",
+  "descricao": "Par de xícaras (1 branco pérola e 1 rosé blush matte) com ilustração floral aquarelada, detalhes metalizados rose gold e nomes personalizados.",
+  "personalizacao": "2 Nomes ou Iniciais + Frase no verso + Caixa Presente",
+  "inclui": [
+    "1 Xícara Branco Pérola 320ml com alça e borda rose gold",
+    "1 Xícara Rosé Blush Matte 320ml com interior perolado",
+    "Gravação personalizada dos 2 nomes em alta temperatura",
+    "Caixa rígida branca com berço duplo e fita de cetim rosé"
+  ],
+  "destaque": false,
+  "quiz": [
+    "louca"
+  ]
+}

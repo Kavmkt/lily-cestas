@@ -1,0 +1,106 @@
+{
+  "bases": [
+    {
+      "chave": "cesta",
+      "texto_menu": "🧺 Cesta Lily Imperial em Vime Branco + Flores & Delícias (R$ 149,00)",
+      "nome": "Cesta Lily Imperial (Vime Branco + Flores, Macarons & Delícias)",
+      "preco": 149.0
+    },
+    {
+      "chave": "box",
+      "texto_menu": "🎁 Box Rígida Luxo Rosé & Pérola com Laço + Trufas (R$ 89,00)",
+      "nome": "Box Rígida Luxo Rosé & Pérola com Laço de Cetim + Trufas",
+      "preco": 89.0
+    },
+    {
+      "chave": "avulso",
+      "texto_menu": "✨ Quero Apenas os Itens Personalizados Avulsos (Embalagem Cortesia - R$ 0,00)",
+      "nome": "Apenas Itens Personalizados Avulsos (Embalagem Presente Cortesia)",
+      "preco": 0.0
+    }
+  ],
+  "louca": [
+    {
+      "chave": "rose-gold",
+      "texto_menu": "☕ Caneca Alça Coração Rose Gold + Tag Polaroid",
+      "nome": "Caneca Rosé & Branco com Alça Coração Rose Gold",
+      "preco": 58.9
+    },
+    {
+      "chave": "rose-matte",
+      "texto_menu": "🌸 Xícara Porcelana Branco Pérola & Rose Gold",
+      "nome": "Xícara Porcelana Branco Pérola & Alça Rose Gold",
+      "preco": 54.9
+    },
+    {
+      "chave": "cha-floral",
+      "texto_menu": "🍵 Xícara de Chá com Pires Floral & Colher Coração",
+      "nome": "Xícara de Chá Imperial com Pires Floral & Colher Coração",
+      "preco": 74.9
+    },
+    {
+      "chave": "none",
+      "texto_menu": "— Não incluir xícara neste pedido (R$ 0,00)",
+      "nome": "Sem Xícara Personalizada",
+      "preco": 0.0
+    }
+  ],
+  "pecas_3d": [
+    {
+      "chave": "palavra",
+      "texto_menu": "🧊 Palavra Escultural 3D Sob Medida",
+      "nome": "Palavra Escultural 3D Sob Medida",
+      "preco": 49.9
+    },
+    {
+      "chave": "inicial",
+      "texto_menu": "🔤 Letra Inicial 3D de Mesa 12cm + Coração",
+      "nome": "Letra Inicial 3D de Mesa (12cm) + Coração 3D",
+      "preco": 36.9
+    },
+    {
+      "chave": "litofania",
+      "texto_menu": "💡 Luminária Litofania 3D com Foto que Acende",
+      "nome": "Luminária Litofania 3D com Foto Iluminada LED",
+      "preco": 98.9
+    },
+    {
+      "chave": "vaso3d",
+      "texto_menu": "🏺 Vaso Twist 3D Rosé + Coração Facetado 3D",
+      "nome": "Vaso Twist 3D Rosé com Flores Secas + Coração Facetado",
+      "preco": 68.9
+    },
+    {
+      "chave": "none",
+      "texto_menu": "— Não incluir peça 3D (R$ 0,00)",
+      "nome": "Sem Item 3D",
+      "preco": 0.0
+    }
+  ],
+  "polaroids": [
+    {
+      "chave": "pack8",
+      "texto_menu": "📸 8 Fotos Polaroid + Fio de Fada LED & Charms 3D",
+      "nome": "Varal 8 Polaroids + Fio de Fada LED & Charms 3D",
+      "preco": 44.9
+    },
+    {
+      "chave": "shadowbox",
+      "texto_menu": "🖼️ Quadro Shadow Box 3D + Polaroids + Placa QR",
+      "nome": "Quadro Shadow Box 3D + 3 Polaroids + Placa QR Musical",
+      "preco": 78.9
+    },
+    {
+      "chave": "pack6",
+      "texto_menu": "✨ 6 Polaroids Imantadas + Base de Mesa 3D",
+      "nome": "Pack 6 Polaroids Imantadas + Suporte de Mesa 3D",
+      "preco": 36.9
+    },
+    {
+      "chave": "none",
+      "texto_menu": "— Não incluir fotos Polaroid (R$ 0,00)",
+      "nome": "Sem Fotos Polaroid",
+      "preco": 0.0
+    }
+  ]
+}

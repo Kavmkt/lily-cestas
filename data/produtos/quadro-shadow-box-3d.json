@@ -1,0 +1,22 @@
+{
+  "status": "ativo",
+  "ordem": 11,
+  "nome": "Quadro Shadow Box 3D 'LOVE' + Polaroids Suspensas & Placa QR",
+  "categoria": "polaroid",
+  "preco": 84.9,
+  "preco_promocional": null,
+  "selo": "Híbrido 3D + Música",
+  "foto": "/assets/produtos/quadro-shadowbox.webp",
+  "descricao": "Quadro caixa-alta branco com palavra em relevo 3D rose gold, 3 fotos Polaroid penduradas com flores 3D e placa QR Code que toca a música de vocês!",
+  "personalizacao": "Palavra 3D no topo + 3 Fotos Polaroid + Música na Placa QR",
+  "inclui": [
+    "Quadro Shadow Box branco 22x22cm com profundidade e vidro protetor",
+    "Letras em relevo 3D metalizado rose gold (LOVE, AMOR ou Nome)",
+    "3 Fotografias Polaroid no mini varal com pregadores e mini flores 3D",
+    "Placa Rose Gold com QR Code Musical interativo (Spotify/YouTube)"
+  ],
+  "destaque": true,
+  "quiz": [
+    "completa"
+  ]
+}

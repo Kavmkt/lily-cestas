@@ -1,0 +1,24 @@
+{
+  "status": "ativo",
+  "ordem": 3,
+  "nome": "Cesta Doce Encanto (Macarons, Rosas, Caneca & 3D)",
+  "categoria": "cestas",
+  "preco": 209.9,
+  "preco_promocional": null,
+  "selo": "Delicadeza Pura",
+  "foto": "/assets/produtos/cesta-macarons.webp",
+  "descricao": "Cesta branca charmosa com macarons franceses rosé, morangos selecionados, rosas blush, caneca inicial 'M' alça rose gold e coração + letra 3D.",
+  "personalizacao": "Inicial na caneca + Letra 3D de 12cm + Coração 3D",
+  "inclui": [
+    "Cesta trançada branca com fita de chiffon rosé artesanal",
+    "6 Macarons franceses artesanais + Morangos frescos selecionados",
+    "1 Caneca porcelana pérola com alça metálica rose gold",
+    "1 Letra Inicial 3D + 1 Coração 3D em relevo acetinado",
+    "Arranjo de rosas colombianas tom pastel"
+  ],
+  "destaque": false,
+  "quiz": [
+    "amiga",
+    "completa"
+  ]
+}

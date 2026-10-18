@@ -1,0 +1,22 @@
+{
+  "status": "ativo",
+  "ordem": 9,
+  "nome": "Kit Letras & Palavras Esculturais 3D de Mesa (Monograma + Nome)",
+  "categoria": "arte3d",
+  "preco": 59.9,
+  "preco_promocional": null,
+  "selo": "Feito Sob Medida",
+  "foto": "/assets/produtos/letras-3d.webp",
+  "descricao": "Conjunto decorativo em impressão 3D de alta definição com iniciais do casal/família, símbolo '&' rose gold e palavra escultural (Gratidão, Amor ou Nome).",
+  "personalizacao": "Iniciais + Palavra de até 10 letras + Combinação de cores",
+  "inclui": [
+    "2 Letras Iniciais 3D de 12cm (ficam em pé sozinhas)",
+    "1 Símbolo '&' ou Coração 3D em acabamento rose gold",
+    "1 Palavra cursiva 3D com base estável e detalhe floral",
+    "Polímero biodegradável premium com toque acetinado"
+  ],
+  "destaque": false,
+  "quiz": [
+    "completa"
+  ]
+}

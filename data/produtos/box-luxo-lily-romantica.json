@@ -1,0 +1,23 @@
+{
+  "status": "ativo",
+  "ordem": 4,
+  "nome": "Box Luxo Lily Romântica (Espumante, 'Amor' 3D & Polaroid)",
+  "categoria": "cestas",
+  "preco": 224.9,
+  "preco_promocional": null,
+  "selo": "Edição Romântica",
+  "foto": "/assets/produtos/box-romantica.webp",
+  "descricao": "Caixa rígida branco pérola com fita de cetim rosé, espumante rosé, trufas artesanais, palavra 'Amor' em 3D rose gold e 4 fotos Polaroid iluminadas.",
+  "personalizacao": "Palavra 3D + 4 Fotos Polaroid + Música QR Code",
+  "inclui": [
+    "Box rígida luxo em branco pérola e interior rosé com laço de cetim",
+    "1 Baby Espumante Rosé + Caixa com 6 trufas belgas artesanais",
+    "1 Escultura 3D 'Amor' (ou nome) em acabamento rose gold",
+    "4 Fotos Polaroid com fio de fada LED quente incluso"
+  ],
+  "destaque": false,
+  "quiz": [
+    "amor",
+    "iluminada"
+  ]
+}

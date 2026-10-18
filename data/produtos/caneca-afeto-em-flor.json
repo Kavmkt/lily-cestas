@@ -1,0 +1,22 @@
+{
+  "status": "ativo",
+  "ordem": 5,
+  "nome": "Caneca 'Afeto em Flor' Alça Coração + Tag Polaroid & Letra 3D",
+  "categoria": "xicaras",
+  "preco": 74.9,
+  "preco_promocional": null,
+  "selo": "Sucesso Absoluto",
+  "foto": "/assets/produtos/caneca-coracao.webp",
+  "descricao": "Caneca degradê rosé e branco com alça de coração rose gold, arte botânica com inicial, mini foto Polaroid pendurada no laço e letra 3D de mesa.",
+  "personalizacao": "Inicial/Nome na caneca + 1 Foto Polaroid na alça + 1 Letra 3D",
+  "inclui": [
+    "1 Caneca Cerâmica Premium 325ml com alça coração rose gold",
+    "1 Mini foto Polaroid amarrada com laço de linho rosé",
+    "1 Letra Inicial 3D de mesa (12cm) na cor rosé blush",
+    "Caixa presenteável Lily Cestas perfumada"
+  ],
+  "destaque": false,
+  "quiz": [
+    "louca"
+  ]
+}

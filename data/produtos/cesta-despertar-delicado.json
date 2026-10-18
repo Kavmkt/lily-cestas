@@ -1,0 +1,23 @@
+{
+  "status": "ativo",
+  "ordem": 2,
+  "nome": "Cesta Despertar Delicado (Café da Manhã & Afeto)",
+  "categoria": "cestas",
+  "preco": 189.9,
+  "preco_promocional": null,
+  "selo": "Manhã Perfeita",
+  "foto": "/assets/produtos/cesta-cafe.webp",
+  "descricao": "Cesta artesanal de café da manhã em tons rosé e branco com pães especiais, frutas frescas, caneca floral personalizada e fotos estilo Polaroid.",
+  "personalizacao": "Nome na caneca + 2 Fotos Polaroid + Dedicatória no cartão",
+  "inclui": [
+    "Cesta de vime branco forrada com papel de seda blush",
+    "1 Caneca cerâmica personalizada com nome ou frase",
+    "2 Fotos Polaroid com mini pregador rose gold",
+    "Croissant amanteigado, waffles, geleia francesa, morangos, uvas e drip coffee"
+  ],
+  "destaque": true,
+  "quiz": [
+    "mae",
+    "completa"
+  ]
+}

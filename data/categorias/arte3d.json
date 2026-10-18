@@ -1,0 +1,36 @@
+{
+  "ativa": true,
+  "ordem": 3,
+  "chave": "arte3d",
+  "nome": "Letras, Litofania & 3D",
+  "nome_curto": "Letras, Litofania & 3D",
+  "icone": "🧊",
+  "nome_tile": "Letras e litofania 3D",
+  "eh_cesta": false,
+  "foto": "/assets/produtos/litofania-3d.webp",
+  "frase_apoio": "Peças esculturais produzidas em impressão 3D de alta precisão: iniciais de mesa, palavras decorativas (Amor, Gratidão), vasos twist e a mágica Luminária Litofania 3D que revela sua foto com a luz!",
+  "destaques": [
+    "Luminária Litofania 3D: sua foto em relevo que ganha vida ao acender",
+    "Letras iniciais de mesa, nomes personalizados e palavras esculturais",
+    "Vasos espirais 3D com flores secas e corações geométricos facetados"
+  ],
+  "pagina_url": "litofania-3d-luminaria-personalizada",
+  "pagina_titulo": "Luminária Litofania 3D e Letras 3D Personalizadas | Lily Cestas",
+  "pagina_descricao": "Luminária litofania 3D com a sua foto, letras e palavras em 3D e decoração personalizada em impressão 3D. Presentes afetivos com entrega na região de Alphaville.",
+  "pagina_h1": "Luminária Litofania 3D, Letras e Palavras em 3D Personalizadas",
+  "pagina_intro": "A litofania transforma uma foto em uma peça tridimensional: apagada ela parece um relevo branco, e quando a luz LED acende a imagem se revela em detalhes. Também criamos letras, nomes, palavras e corações em 3D nas cores rosé e branco para decorar mesa, quarto e cestas de presente.",
+  "pagina_secoes": [
+    {
+      "titulo": "O que é uma luminária litofania",
+      "texto": "É uma luminária feita por impressão 3D em camadas de espessuras diferentes. Quanto mais fina a camada, mais luz passa, e é isso que desenha a foto. Fotos com bom contraste e rostos bem iluminados costumam dar o melhor resultado, e você pode testar a sua foto no Estúdio ao vivo da página inicial."
+    },
+    {
+      "titulo": "Ideias de presente com letras 3D",
+      "texto": "Inicial do casal, nome do bebê, a palavra AMOR ou GRATIDÃO: as peças em 3D combinam com cestas, boxes e quadros. Cada peça é feita sob medida, com acabamento delicado em rosé e branco."
+    },
+    {
+      "titulo": "Prazo e aprovação",
+      "texto": "Para luminárias litofania e esculturas 3D sob medida pedimos de 1 a 2 dias úteis para aprovação da arte e acabamento. Você aprova a prévia pelo WhatsApp antes da produção."
+    }
+  ]
+}

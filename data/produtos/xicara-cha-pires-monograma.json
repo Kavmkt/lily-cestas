@@ -1,0 +1,22 @@
+{
+  "status": "ativo",
+  "ordem": 7,
+  "nome": "Xícara de Chá com Pires 'Monograma Imperial' & Colher Coração",
+  "categoria": "xicaras",
+  "preco": 86.9,
+  "preco_promocional": null,
+  "selo": "Alta Porcelana",
+  "foto": "/assets/produtos/xicara-imperial.webp",
+  "descricao": "Conjunto clássico de xícara de chá e pires ondulado com filete rose gold, brasão floral rosé personalizado e colherzinha dourada com topo de coração.",
+  "personalizacao": "Inicial no brasão floral + Nome no pires + Caixa Rosé",
+  "inclui": [
+    "1 Xícara de chá 220ml em porcelana fina perolada + Pires floral",
+    "1 Colher de chá em inox rose gold com coração vazado",
+    "1 Caixa de presente rígida rosa pastel com laço de cetim",
+    "Cartão de dedicatória caligrafado"
+  ],
+  "destaque": false,
+  "quiz": [
+    "louca"
+  ]
+}

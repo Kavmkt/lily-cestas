@@ -1,0 +1,263 @@
+# Painel de edição da Lily Cestas (Pages CMS, https://app.pagescms.org)
+# Tudo o que aparece no painel está definido aqui. Quem edita só usa o formulário.
+
+media:
+  input: assets/produtos
+  output: /assets/produtos
+  extensions: [jpg, jpeg, png, webp, heic]
+
+content:
+  # ------------------------------------------------------------------ PRODUTOS
+  - name: produtos
+    label: Produtos
+    type: collection
+    path: data/produtos
+    format: json
+    view:
+      fields: [nome, categoria, preco, status]
+      primary: nome
+    fields:
+      - name: nome
+        label: Nome do produto
+        type: string
+        required: true
+      - name: categoria
+        label: Categoria
+        type: reference
+        required: true
+        description: Escolha a categoria onde o produto aparece no site.
+        options:
+          collection: categorias
+          search: nome
+          value: '{fields.chave}'
+          label: '{fields.nome}'
+      - name: preco
+        label: Preço (R$)
+        type: number
+        required: true
+        description: Preço normal do produto. Exemplo 89.90 (use ponto, sem R$).
+      - name: preco_promocional
+        label: Preço promocional (R$)
+        type: number
+        description: Opcional. Se preencher, o site mostra o preço antigo riscado e vende por este valor. Precisa ser menor que o preço normal. Apague para encerrar a promoção.
+      - name: status
+        label: Situação
+        type: select
+        required: true
+        default: ativo
+        description: Ativo = à venda. Esgotado = aparece mas sem botão de compra. Oculto = some do site (sem apagar).
+        options:
+          values:
+            - { value: ativo, label: Ativo (à venda) }
+            - { value: esgotado, label: Esgotado }
+            - { value: oculto, label: Oculto (não aparece no site) }
+      - name: foto
+        label: Foto principal
+        type: image
+        required: true
+        description: Envie uma foto nítida, de preferência na horizontal. O site reduz o tamanho sozinho.
+      - name: alt
+        label: Descrição da foto (opcional)
+        type: string
+        description: Frase curta que descreve a foto. Ajuda pessoas com deficiência visual e o Google.
+      - name: selo
+        label: Selo (opcional)
+        type: string
+        description: Faixa curta sobre a foto, como "Mais vendida" ou "Novo". Deixe vazio se não quiser.
+      - name: descricao
+        label: Descrição curta
+        type: text
+        description: Duas ou três frases sobre o que vem no produto.
+      - name: personalizacao
+        label: O que dá para personalizar
+        type: string
+        description: Exemplo - Nome na xícara + palavra 3D + 3 fotos Polaroid.
+      - name: inclui
+        label: O que vem no produto
+        type: string
+        list: true
+        description: Um item por linha (clique em Adicionar para incluir mais).
+      - name: ordem
+        label: Ordem na vitrine
+        type: number
+        default: 50
+        description: Números menores aparecem primeiro (1 aparece antes de 2).
+      - name: destaque
+        label: Destaque
+        type: boolean
+        default: false
+        description: Produtos em destaque aparecem nas páginas de cada cidade.
+      - name: quiz
+        label: Aparece no quiz para quem?
+        type: select
+        list: true
+        description: Opcional. Ajuda o Concierge (quiz de 15 segundos) a recomendar este produto.
+        options:
+          multiple: true
+          values:
+            - { value: amor, label: Para amor / namorado(a) / casal }
+            - { value: mae, label: Para mãe / avó / família }
+            - { value: amiga, label: Para amiga / madrinha / aniversário }
+            - { value: decor, label: Para mim / decoração }
+            - { value: completa, label: Combina com cesta completa }
+            - { value: iluminada, label: Combina com emoção iluminada (3D + Polaroid) }
+            - { value: louca, label: Combina com louça personalizada }
+
+  # ------------------------------------------------------------------ CATEGORIAS
+  - name: categorias
+    label: Categorias
+    type: collection
+    path: data/categorias
+    format: json
+    view:
+      fields: [nome, ordem, ativa]
+      primary: nome
+    fields:
+      - name: nome
+        label: Nome da categoria
+        type: string
+        required: true
+        description: Exemplo - Cestas de Presente.
+      - name: chave
+        label: Código interno
+        type: string
+        required: true
+        description: Apenas letras minúsculas, sem espaço nem acento (exemplo - velas). Não mude depois de criada.
+      - name: ativa
+        label: Mostrar no site
+        type: boolean
+        default: true
+        description: Desligue para esconder a categoria e os produtos dela.
+      - name: ordem
+        label: Ordem no site
+        type: number
+        default: 50
+      - name: nome_curto
+        label: Nome curto (botões de filtro)
+        type: string
+        description: Exemplo - Cestas & Boxes.
+      - name: icone
+        label: Emoji
+        type: string
+        description: Um emoji para o botão de filtro, como 🧺 ou ☕.
+      - name: nome_tile
+        label: Nome no cartão da primeira tela
+        type: string
+      - name: foto
+        label: Foto do cartão da categoria
+        type: image
+        description: Foto que aparece no cartão da categoria na primeira tela.
+      - name: eh_cesta
+        label: É uma categoria de cestas/boxes?
+        type: boolean
+        default: false
+        description: Ligue só para cestas e boxes. Eles viram a base do presente no Estúdio ao vivo.
+      - name: frase_apoio
+        label: Frase de apoio
+        type: text
+      - name: pagina_url
+        label: Endereço da página (SEO)
+        type: string
+        description: Parte final do endereço. Exemplo - velas-aromaticas gera lilycestas.com.br/velas-aromaticas/
+      - name: pagina_titulo
+        label: Título no Google
+        type: string
+        description: Até 60 caracteres. Exemplo - Velas Aromáticas Personalizadas | Lily Cestas.
+      - name: pagina_descricao
+        label: Descrição no Google
+        type: text
+        description: Até 160 caracteres. Fale do produto e das cidades atendidas.
+      - name: pagina_h1
+        label: Título da página
+        type: string
+      - name: pagina_intro
+        label: Texto de abertura da página
+        type: text
+      - name: pagina_secoes
+        label: Seções de texto da página
+        type: object
+        list: true
+        fields:
+          - { name: titulo, label: Título da seção, type: string }
+          - { name: texto, label: Texto, type: text }
+
+  # ------------------------------------------------------------------ ESTÚDIO
+  - name: estudio
+    label: Estúdio ao vivo (opções e preços)
+    type: file
+    path: data/estudio.json
+    format: json
+    fields:
+      - name: bases
+        label: Base do presente
+        type: object
+        list: true
+        fields:
+          - { name: nome, label: Nome completo (aparece no pedido), type: string, required: true }
+          - { name: texto_menu, label: Texto no menu (pode ter emoji), type: string }
+          - { name: preco, label: Preço (R$), type: number, required: true }
+          - { name: chave, label: Código interno (não mude), type: string, required: true }
+      - name: louca
+        label: Xícaras e canecas
+        type: object
+        list: true
+        fields:
+          - { name: nome, label: Nome completo (aparece no pedido), type: string, required: true }
+          - { name: texto_menu, label: Texto no menu (pode ter emoji), type: string }
+          - { name: preco, label: Preço (R$), type: number, required: true }
+          - { name: chave, label: Código interno (não mude), type: string, required: true }
+      - name: pecas_3d
+        label: Peças 3D
+        type: object
+        list: true
+        fields:
+          - { name: nome, label: Nome completo (aparece no pedido), type: string, required: true }
+          - { name: texto_menu, label: Texto no menu (pode ter emoji), type: string }
+          - { name: preco, label: Preço (R$), type: number, required: true }
+          - { name: chave, label: Código interno (não mude), type: string, required: true }
+      - name: polaroids
+        label: Polaroids e quadros
+        type: object
+        list: true
+        fields:
+          - { name: nome, label: Nome completo (aparece no pedido), type: string, required: true }
+          - { name: texto_menu, label: Texto no menu (pode ter emoji), type: string }
+          - { name: preco, label: Preço (R$), type: number, required: true }
+          - { name: chave, label: Código interno (não mude), type: string, required: true }
+
+  # ------------------------------------------------------------------ PERGUNTAS FREQUENTES
+  - name: faq
+    label: Perguntas frequentes
+    type: file
+    path: data/faq.json
+    format: json
+    fields:
+      - name: perguntas
+        label: Perguntas
+        type: object
+        list: true
+        fields:
+          - { name: pergunta, label: Pergunta, type: string, required: true }
+          - { name: resposta, label: Resposta, type: text, required: true }
+
+  # ------------------------------------------------------------------ CONFIGURAÇÕES
+  - name: config
+    label: Configurações da loja
+    type: file
+    path: data/config.json
+    format: json
+    fields:
+      - { name: whatsapp, label: WhatsApp (com DDD, só números), type: string, description: Exemplo 5511914955434 }
+      - { name: instagram, label: Link do Instagram, type: string }
+      - { name: pix_desconto, label: Desconto no Pix (%), type: number, description: Exemplo 5 }
+      - { name: taxa_entrega, label: Taxa de entrega padrão (R$), type: number }
+      - { name: brinde1_valor, label: Brinde 1 - pedido a partir de (R$), type: number }
+      - { name: brinde1_nome, label: Brinde 1 - nome, type: string }
+      - { name: brinde2_valor, label: Brinde 2 - pedido a partir de (R$), type: number }
+      - { name: brinde2_nome, label: Brinde 2 - nome, type: string }
+      - { name: foto_estudio_litofania, label: Foto da prévia da litofania (Estúdio), type: image }
+      - { name: foto_estudio_polaroid, label: Foto da prévia da Polaroid (Estúdio), type: image }
+      - name: loja_no_ar
+        label: Loja completa como página principal
+        type: boolean
+        description: ATENÇÃO - só ligue quando combinado. Desligado, o site mostra a página de links (WhatsApp e iFood) e a loja fica em /home/.

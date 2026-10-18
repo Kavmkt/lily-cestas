@@ -1,0 +1,22 @@
+{
+  "status": "ativo",
+  "ordem": 8,
+  "nome": "Luminária Litofania 3D com Foto Iluminada + Coração 3D",
+  "categoria": "arte3d",
+  "preco": 119.9,
+  "preco_promocional": null,
+  "selo": "Inovação Exclusiva 3D",
+  "foto": "/assets/produtos/litofania-3d.webp",
+  "descricao": "A maior inovação do nosso atelier: sua fotografia favorita impressa em relevo 3D que se revela magicamente com luz LED quente, acompanhada de coração 3D.",
+  "personalizacao": "1 Foto especial para Litofania 3D + Cor da moldura + Coração 3D",
+  "inclui": [
+    "1 Luminária Curva em Litofania 3D de alta resolução (16x14cm)",
+    "Sistema de iluminação LED branco quente (bivolt/USB com botão liga/desliga)",
+    "1 Escultura Coração Geométrico Facetado 3D em rosé pastel",
+    "Embalagem protetora de luxo pronta para presentear"
+  ],
+  "destaque": true,
+  "quiz": [
+    "iluminada"
+  ]
+}
