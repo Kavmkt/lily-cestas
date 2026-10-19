@@ -91,7 +91,6 @@ content:
       - name: quiz
         label: Aparece no quiz para quem?
         type: select
-        list: true
         description: Opcional. Ajuda o Concierge (quiz de 15 segundos) a recomendar este produto.
         options:
           multiple: true
