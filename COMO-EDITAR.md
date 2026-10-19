@@ -7,12 +7,14 @@ Guia para quem cuida do site. Não precisa saber programar.
 2. Escolha o repositório **Kavmkt/lily-cestas**.
 3. No menu da esquerda você vê: **Produtos**, **Categorias**, **Estúdio ao vivo**, **Perguntas frequentes** e **Configurações da loja**.
 
+> O painel está em inglês nos botões: **Save** = Salvar, **Add an entry** = Adicionar, **Add an item** = Adicionar item, **Edit** = Editar. Os campos e as explicações estão em português.
+
 > Depois de clicar em **Salvar**, o site se atualiza sozinho em **1 a 3 minutos**. Se a mudança não aparecer, recarregue a página (Ctrl+Shift+R no computador).
 
 ## Trocar o preço de um produto
 1. **Produtos** → clique no produto.
 2. Altere o campo **Preço (R$)**. Use ponto: `89.90`.
-3. **Salvar**.
+3. Clique em **Save**.
 
 ## Fazer uma promoção
 No produto, preencha **Preço promocional**. O site mostra o preço antigo riscado. Para encerrar, apague o campo e salve.
@@ -24,7 +26,7 @@ No produto, campo **Situação**:
 - **Oculto**: some do site, mas não é apagado (dá para voltar depois).
 
 ## Adicionar um produto novo
-1. **Produtos** → **Adicionar**.
+1. **Produtos** → **Add an entry**.
 2. Preencha nome, categoria, preço e envie a **foto** (pode ser direto do celular).
 3. Escreva uma descrição curta e o que dá para personalizar.
 4. **Salvar**.
@@ -35,7 +37,7 @@ A foto é reduzida e otimizada automaticamente.
 No produto, clique em **Foto principal** e envie outra. **Salvar**.
 
 ## Criar uma categoria nova (ex.: Velas)
-1. **Categorias** → **Adicionar**.
+1. **Categorias** → **Add an entry**.
 2. Preencha **Nome**, **Código interno** (minúsculas, sem espaço, ex.: `velas`), **Nome curto**, **Emoji** e a **Foto do cartão**.
 3. Preencha os campos do bloco de página (endereço, títulos e textos) para o Google encontrar a categoria. Isso cria uma página nova em `lilycestas.com.br/<endereço>/`.
 4. Depois, ao criar ou editar um produto, escolha essa categoria.
