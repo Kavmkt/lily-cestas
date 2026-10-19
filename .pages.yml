@@ -91,9 +91,9 @@ content:
       - name: quiz
         label: Aparece no quiz para quem?
         type: select
-        description: Opcional. Ajuda o Concierge (quiz de 15 segundos) a recomendar este produto.
+        list: true
+        description: Opcional. Ajuda o Concierge (quiz de 15 segundos) a recomendar este produto. Clique em Add an item e escolha uma opção por vez.
         options:
-          multiple: true
           values:
             - { value: amor, label: Para amor / namorado(a) / casal }
             - { value: mae, label: Para mãe / avó / família }
