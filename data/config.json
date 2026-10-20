@@ -4,10 +4,12 @@
   "instagram": "https://www.instagram.com/lilycestas.ofc/",
   "pix_desconto": 5,
   "taxa_entrega": 15,
-  "brinde1_valor": 120,
-  "brinde1_nome": "Mini Chaveiro Coração 3D Rosé",
-  "brinde2_valor": 220,
-  "brinde2_nome": "Placa QR Code Musical + 2 Polaroids Extras",
+  "brinde1_valor": 150,
+  "brinde1_nome": "Chaveiro de brinde",
+  "brinde2_valor": 200,
+  "brinde2_nome": "Chaveiro personalizado com o seu nome",
   "foto_estudio_litofania": "/assets/produtos/litofania-3d.webp",
-  "foto_estudio_polaroid": "/assets/produtos/polaroid-led.webp"
+  "foto_estudio_polaroid": "/assets/produtos/polaroid-led.webp",
+  "foto_chaveiro_simples": "",
+  "foto_chaveiro_personalizado": ""
 }

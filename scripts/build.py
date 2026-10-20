@@ -80,8 +80,9 @@ def to_number(value, where, required=True):
 # ---------------------------------------------------------------- dados
 config = {
     'loja_no_ar': False, 'whatsapp': '5511914955434', 'instagram': 'https://www.instagram.com/lilycestas.ofc/',
-    'pix_desconto': 5, 'taxa_entrega': 15, 'brinde1_valor': 120, 'brinde1_nome': 'Mini Chaveiro Coração 3D Rosé',
-    'brinde2_valor': 220, 'brinde2_nome': 'Placa QR Code Musical + 2 Polaroids Extras',
+    'pix_desconto': 5, 'taxa_entrega': 15, 'brinde1_valor': 150, 'brinde1_nome': 'Chaveiro de brinde',
+    'brinde2_valor': 200, 'brinde2_nome': 'Chaveiro personalizado com o seu nome',
+    'foto_chaveiro_simples': '', 'foto_chaveiro_personalizado': '',
     'foto_estudio_litofania': '', 'foto_estudio_polaroid': '',
 }
 config.update({k: v for k, v in load_json(ROOT / 'data/config.json', {}).items() if v not in (None, '')})
@@ -266,7 +267,7 @@ BUSINESS = {
     '@type': ['Store', 'LocalBusiness'], '@id': BASE + '/#negocio', 'name': 'Lily Cestas',
     'alternateName': 'Lily Cestas & Atelier Personalizados', 'url': BASE + '/',
     'image': BASE + '/assets/img/og-lily-cestas.jpg', 'logo': BASE + '/assets/img/icon-512.png',
-    'description': 'Atelier de cestas de presente afetivas, cestas de café da manhã, xícaras e canecas personalizadas, litofania 3D, letras 3D e Polaroids com QR Code musical.',
+    'description': 'Atelier de cestas de presente afetivas, cestas de café da manhã, xícaras e canecas personalizadas, litofania 3D, letras 3D e Polaroids.',
     'priceRange': f'R${int(PRECO_MIN)} - R${int(max(final_price(p) for p in visible))}',
     'telephone': phone,
     'contactPoint': {'@type': 'ContactPoint', 'telephone': phone, 'contactType': 'customer service', 'availableLanguage': 'Portuguese', 'url': f'https://wa.me/{WA}'},
@@ -329,7 +330,7 @@ def footer_html():
     cat_li = ''.join(f'<li><a href="/{c["pagina_url"]}/">{esc(c["nome"])}</a></li>' for c in cats_with if c.get('pagina_url'))
     city_li = ''.join(f'<li><a href="/{x["slug"]}/">Presentes em {x["cidade"]}</a></li>' for x in CITIES)
     return f'''<footer class="foot"><div class="wrap grid">
-<div><strong>Lily Cestas</strong><p>Atelier de cestas de presente afetivas, louças personalizadas, arte 3D e Polaroids com QR Code musical. Santana de Parnaíba, SP.</p><p><a href="https://wa.me/{WA}" rel="noopener" target="_blank">WhatsApp {phone}</a><br><a href="{config['instagram']}" rel="noopener" target="_blank">Instagram @lilycestas.ofc</a></p></div>
+<div><strong>Lily Cestas</strong><p>Atelier de cestas de presente afetivas, louças personalizadas, arte 3D e Polaroids. Santana de Parnaíba, SP.</p><p><a href="https://wa.me/{WA}" rel="noopener" target="_blank">WhatsApp {phone}</a><br><a href="{config['instagram']}" rel="noopener" target="_blank">Instagram @lilycestas.ofc</a></p></div>
 <div><strong>Nossos presentes</strong><ul>{cat_li}</ul></div>
 <div><strong>Onde entregamos</strong><ul>{city_li}</ul></div>
 </div><p class="copy">© {datetime.date.today().year} Lily Cestas &amp; Atelier Personalizados.</p></footer>
@@ -374,7 +375,7 @@ CITIES = [
          title='Cestas de Presente em Santana de Parnaíba | Lily Cestas',
          desc='Cestas de presente, café da manhã, xícaras e presentes personalizados em Santana de Parnaíba, SP. Entrega agendada a partir das 06h30. Peça pelo site.',
          h1='Cestas de Presente e Presentes Personalizados em Santana de Parnaíba',
-         intro='A Lily Cestas é um atelier de presentes de Santana de Parnaíba, em São Paulo. Montamos cestas de presente afetivas, cestas de café da manhã, xícaras e canecas personalizadas, luminárias litofania 3D e fotos Polaroid com QR Code musical.',
+         intro='A Lily Cestas é um atelier de presentes de Santana de Parnaíba, em São Paulo. Montamos cestas de presente afetivas, cestas de café da manhã, xícaras e canecas personalizadas, luminárias litofania 3D e fotos Polaroid.',
          blocks=[('Presentes para o Centro Histórico, Fazendinha e outras regiões da cidade', 'Atendemos moradores de Santana de Parnaíba que querem surpreender família, amigos e quem mora longe, e também quem trabalha na cidade. Para o Centro Histórico, a Fazendinha, o Suru e demais bairros, informe o CEP no checkout para confirmarmos a entrega no horário escolhido.'),
                  ('Entrega agendada a partir das 06h30', 'Cestas e kits Polaroid podem ser agendados para chegar logo cedo, inclusive para o mesmo dia ou dia seguinte, conforme a disponibilidade. Para presentes personalizados com arte (xícaras, litofania e 3D) reserve de 1 a 2 dias úteis para a aprovação da prévia.'),
                  ('Datas em que mais encomendam por aqui', 'Aniversário, Dia das Mães, Dia dos Namorados, Natal, nascimento de bebê, formatura e agradecimento a professores e equipes. Se o prazo estiver curto, chame no WhatsApp para vermos o que dá para fazer.')],
@@ -392,7 +393,7 @@ CITIES = [
          title='Cestas de Presente em Barueri | Lily Cestas',
          desc='Cestas de presente, café da manhã, xícaras personalizadas e presentes em 3D para Barueri, SP. Personalize no site e agende a entrega.',
          h1='Cestas de Presente e Presentes Personalizados em Barueri',
-         intro='Atendemos Barueri com cestas de presente afetivas, cestas de café da manhã, xícaras e canecas personalizadas, litofania 3D e Polaroids com QR Code musical. Você personaliza no site e agenda a entrega no horário que preferir.',
+         intro='Atendemos Barueri com cestas de presente afetivas, cestas de café da manhã, xícaras e canecas personalizadas, litofania 3D e Polaroids. Você personaliza no site e agenda a entrega no horário que preferir.',
          blocks=[('Entrega em Barueri', 'Para o Centro, o Jardim Silveira, o Tamboré, a Aldeia da Serra e demais bairros, informe o CEP no checkout. Confirmamos a disponibilidade, o horário e a taxa de entrega para o seu endereço antes de fechar o pedido.'),
                  ('Presente de última hora?', 'Cestas prontas e kits Polaroid podem ser agendados para o mesmo dia ou dia seguinte, conforme a agenda do atelier. Para peças personalizadas com arte, o prazo é de 1 a 2 dias úteis após a aprovação.'),
                  ('Opções para todos os orçamentos', f'Do kit Polaroid iluminado a cestas completas, o catálogo tem presentes a partir de {brl(PRECO_MIN)}. O Quiz Concierge ajuda a escolher pelo valor que você quer investir.')],
@@ -432,6 +433,13 @@ for c in cats_with:
                                [('Início', '/'), (c['nome'], path)], extra, rel, (ps[0]['_img'], ps[0].get('alt') or ps[0]['nome'])))
     page_urls.append(path)
 
+REDIRECTS = {'/polaroid-quadro-qr-code-musical/': '/polaroid-quadro-shadow-box/'}
+for old_path, new_path in REDIRECTS.items():
+    if any(f'/{c["pagina_url"]}/' == new_path for c in cats_with):
+        write_page(old_path, f'''<!DOCTYPE html><html lang="pt-BR"><head><meta charset="UTF-8"><title>Página movida | Lily Cestas</title>
+<link rel="canonical" href="{BASE}{new_path}"><meta name="robots" content="noindex"><meta http-equiv="refresh" content="0; url={new_path}">
+</head><body><p>Esta página mudou. <a href="{new_path}">Clique aqui para continuar</a>.</p></body></html>''')
+
 featured = ([p for p in active if p.get('destaque')] + [p for p in active if not p.get('destaque')])[:4]
 for c in CITIES:
     path = f'/{c["slug"]}/'
@@ -439,7 +447,7 @@ for c in CITIES:
     items = [
         (f'A Lily Cestas entrega em {cid}?', f'Sim, atendemos {cid}. Informe o CEP no checkout e confirmamos a disponibilidade, o horário e a taxa de entrega para o seu endereço.'),
         (f'Qual o prazo para receber uma cesta de presente em {cid}?', 'Cestas e kits Polaroid podem ser agendados para o mesmo dia ou dia seguinte, conforme a agenda, com entregas a partir das 06h30. Peças personalizadas com arte levam de 1 a 2 dias úteis após a aprovação.'),
-        ('Posso personalizar a cesta com nome, foto e música?', 'Pode. A xícara leva o nome, a palavra em 3D e as fotos Polaroid são personalizadas, e a placa QR Code abre a música ou o vídeo que você escolher.'),
+        ('Posso personalizar a cesta com nome e fotos?', 'Pode. A xícara leva o nome, a palavra em 3D e as fotos Polaroid são personalizadas.'),
     ] + FAQ_COMMON[-2:]
     viz = ''.join(f'<a href="/{CITY_BY[v]["slug"]}/">{CITY_BY[v]["cidade"]}</a>' for v in c['vizinhas'])
     rel = '<section class="rel"><h2>Também atendemos</h2><p>' + viz + '</p><p>' + ''.join(f'<a href="/{o["pagina_url"]}/">{esc(o["nome"])}</a>' for o in cats_with if o.get('pagina_url')) + '</p></section>'
@@ -489,13 +497,27 @@ hero_img = f'''<div class="heroimg">
             <img src="{hero_p["_img"]}" alt="{esc(hero_p.get("alt") or hero_p["nome"])}" width="760" height="567" fetchpriority="high">
             <div class="tag"><div><small>{esc(hero_p["selo"] or "Destaque")}</small><b>{esc(hero_p["nome"])}</b></div><div style="text-align:right"><span class="pr">{brl(final_price(hero_p))}</span><button type="button" data-customize-prod="{hero_p["id"]}" class="btn1" style="display:block;margin-top:4px;padding:8px 14px">Personalizar</button></div></div>
           </div>'''
+foto_k1 = img_url(config.get('foto_chaveiro_simples'))
+foto_k2 = img_url(config.get('foto_chaveiro_personalizado'))
+if foto_k1 and foto_k2:
+    v1 = brl(config["brinde1_valor"]).replace(",00", "")
+    v2 = brl(config["brinde2_valor"]).replace(",00", "")
+    hero_img = f'''<div class="kw">
+            <span class="kw-eyebrow">Brinde Lily Cestas</span>
+            <h2>Ganhe um chaveiro nas suas compras</h2>
+            <div class="kw-row">
+              <div class="kw-item"><img src="{foto_k1}" alt="{esc(config["brinde1_nome"])}" width="300" height="300" loading="eager"><small>Compras a partir de {v1}</small><b>{esc(config["brinde1_nome"])}</b></div>
+              <div class="kw-item hl"><img src="{foto_k2}" alt="{esc(config["brinde2_nome"])}" width="300" height="300" loading="eager"><small>Compras a partir de {v2}</small><b>{esc(config["brinde2_nome"])}</b></div>
+            </div>
+            <a class="kw-cta" href="#catalogo">Ver presentes →</a>
+          </div>'''
 pills = '\n          '.join(f'<button type="button" data-cat-filter="{c["chave"]}" class="{pill_cls}">\n            {esc(c["icone"])} {esc(c["nome_curto"])} ({len(cat_prods[c["chave"]])})\n          </button>' for c in cats_with)
 mimos = (f'<p class="text-xs text-white/90">Acima de <strong>{brl(config["brinde1_valor"]).replace(",00", "")}</strong> você ganha {esc(config["brinde1_nome"])} • '
          f'Acima de <strong>{brl(config["brinde2_valor"]).replace(",00", "")}</strong> ganha <strong>{esc(config["brinde2_nome"])}</strong>!</p>')
-reward_init = f'Adicione {brl(config["brinde1_valor"])} para ganhar {esc(config["brinde1_nome"])} grátis!'
+reward_init = f'Compre a partir de {brl(config["brinde1_valor"])} e ganhe {esc(config["brinde1_nome"])}!'
 
 title = 'Cestas de Presente em Santana de Parnaíba e Alphaville | Lily Cestas'
-desc_home = 'Cestas de presente, café da manhã, xícaras personalizadas, litofania 3D e Polaroid com QR Code musical. Santana de Parnaíba, Alphaville, Barueri e Cajamar.'
+desc_home = 'Cestas de presente, café da manhã, xícaras personalizadas, litofania 3D e Polaroid. Santana de Parnaíba, Alphaville, Barueri e Cajamar.'
 home_ld = jsonld(BUSINESS,
                  {'@type': 'WebSite', '@id': BASE + '/#site', 'url': BASE + '/', 'name': 'Lily Cestas', 'inLanguage': 'pt-BR', 'publisher': {'@id': BASE + '/#negocio'}},
                  {'@type': 'ItemList', 'name': 'Catálogo Lily Cestas', 'itemListElement': [{'@type': 'ListItem', 'position': i + 1, 'item': prod_ld(p)} for i, p in enumerate(visible)]},
@@ -504,7 +526,7 @@ repl = {
     'TITLE': esc(title), 'CANONICAL': f'<link rel="canonical" href="{BASE}{SHOP}">',
     'ROBOTS': f'<meta name="robots" content="{"index, follow, max-image-preview:large" if LOJA_NO_AR else "noindex, nofollow"}">',
     'JSONLD': home_ld, 'WA': WA, 'INSTA': config['instagram'], 'PIX': str(int(config['pix_desconto'])), 'N': str(len(visible)),
-    'HERO_CATS': hero_cats, 'HERO_IMG': hero_img, 'CAT_PILLS': pills, 'MIMOS_TEXT': mimos, 'REWARD_INIT': reward_init, 'DATA_JS': data_js,
+    'B1V': brl(config['brinde1_valor']).replace(',00', ''), 'HERO_CATS': hero_cats, 'HERO_IMG': hero_img, 'CAT_PILLS': pills, 'MIMOS_TEXT': mimos, 'REWARD_INIT': reward_init, 'DATA_JS': data_js,
     'OPT_BASES': ''.join(opt(o) for o in SIM['bases']), 'OPT_LOUCA': ''.join(opt(o) for o in SIM['louca']),
     'OPT_3D': ''.join(opt(o) for o in SIM['pecas_3d']), 'OPT_POL': ''.join(opt(o) for o in SIM['polaroids']),
 }
