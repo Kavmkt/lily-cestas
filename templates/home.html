@@ -4,15 +4,15 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>{{TITLE}}</title>
-<meta name="description" content="Cestas de presente, café da manhã, xícaras personalizadas, litofania 3D e fotos Polaroid. Santana de Parnaíba, Alphaville, Barueri e Cajamar.">
+<meta name="description" content="Cestas de presente, café da manhã e xícaras personalizadas com nome. Entregas em Santana de Parnaíba, Alphaville, Barueri e Cajamar.">
 {{CANONICAL}}
 {{ROBOTS}}
 <meta name="theme-color" content="#B76E79">
 <link rel="icon" href="/favicon.ico" sizes="any"><link rel="icon" type="image/png" sizes="192x192" href="/assets/img/icon-192.png"><link rel="apple-touch-icon" href="/assets/img/icon-180.png">
 <meta property="og:locale" content="pt_BR"><meta property="og:type" content="website"><meta property="og:site_name" content="Lily Cestas">
-<meta property="og:title" content="Cestas de Presente em Santana de Parnaíba e Alphaville | Lily Cestas"><meta property="og:description" content="Cestas de presente, café da manhã, xícaras personalizadas, litofania 3D e fotos Polaroid. Santana de Parnaíba, Alphaville, Barueri e Cajamar."><meta property="og:url" content="https://lilycestas.com.br/">
+<meta property="og:title" content="Cestas de Presente em Santana de Parnaíba e Alphaville | Lily Cestas"><meta property="og:description" content="Cestas de presente, café da manhã e xícaras personalizadas com nome. Entregas em Santana de Parnaíba, Alphaville, Barueri e Cajamar."><meta property="og:url" content="https://lilycestas.com.br/">
 <meta property="og:image" content="https://lilycestas.com.br/assets/img/og-lily-cestas.jpg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
-<meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Cestas de Presente em Santana de Parnaíba e Alphaville | Lily Cestas"><meta name="twitter:description" content="Cestas de presente, café da manhã, xícaras personalizadas, litofania 3D e fotos Polaroid. Santana de Parnaíba, Alphaville, Barueri e Cajamar."><meta name="twitter:image" content="https://lilycestas.com.br/assets/img/og-lily-cestas.jpg">
+<meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Cestas de Presente em Santana de Parnaíba e Alphaville | Lily Cestas"><meta name="twitter:description" content="Cestas de presente, café da manhã e xícaras personalizadas com nome. Entregas em Santana de Parnaíba, Alphaville, Barueri e Cajamar."><meta name="twitter:image" content="https://lilycestas.com.br/assets/img/og-lily-cestas.jpg">
 <meta name="geo.region" content="BR-SP"><meta name="geo.placename" content="Santana de Parnaíba">
 {{JSONLD}}
   
@@ -176,18 +176,21 @@ html {
 .trustbar span.t3{display:none}@media(min-width:760px){.trustbar span.t3{display:inline}}
 #topo{background:linear-gradient(180deg,#FBEEF1 0%,var(--bg) 100%)}
 .ifd{background:#fff;border-bottom:1px solid var(--line);padding:44px 16px}
-.ifd-in{max-width:1000px;margin:0 auto;display:grid;grid-template-columns:1fr auto;gap:28px;align-items:center;border:1.5px solid #F4C9CD;border-radius:22px;padding:28px;background:linear-gradient(135deg,#FFF6F6,#fff)}
-.ifd-tag{display:inline-block;font:700 11px 'Montserrat',sans-serif;letter-spacing:.12em;text-transform:uppercase;color:#EA1D2C;margin-bottom:8px}
+.ifd-in{max-width:1000px;margin:0 auto}
+.ifd-head{text-align:center;max-width:620px;margin:0 auto 22px}
+.ifd-tag{display:inline-block;font:700 11px 'Montserrat',sans-serif;letter-spacing:.12em;text-transform:uppercase;color:var(--rose-d);margin-bottom:8px}
 .ifd h2{font:700 26px/1.2 'Montserrat',sans-serif;color:var(--ink);margin:0 0 8px}
-.ifd p{color:#6b4a52;margin:0 0 14px;font-size:15px}
-.ifd ul{list-style:none;padding:0;margin:0 0 18px;display:grid;gap:8px;font-size:14px;color:var(--ink)}
-.ifd li{padding-left:24px;position:relative}.ifd li:before{content:"✓";position:absolute;left:0;color:#EA1D2C;font-weight:700}
-.ifd-cta{display:flex;flex-wrap:wrap;align-items:center;gap:14px}
-.ifd-cta span{font-size:13px;color:#6b4a52;flex:1;min-width:200px}.ifd-cta span a{color:var(--rose-d);text-decoration:underline}
-.ifd-btn{background:#EA1D2C;color:#fff;font:700 15px 'Montserrat',sans-serif;padding:14px 26px;border-radius:999px;box-shadow:0 10px 22px -10px rgba(234,29,44,.7);transition:transform .15s}.ifd-btn:hover{transform:translateY(-1px);filter:brightness(1.05)}
-.ifd-badge{width:150px;height:150px;border-radius:50%;background:#EA1D2C;color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;transform:rotate(-6deg);box-shadow:0 14px 30px -12px rgba(234,29,44,.6)}
-.ifd-badge b{font:800 30px 'Montserrat',sans-serif;letter-spacing:-.02em}.ifd-badge small{font-size:11px;line-height:1.3;margin-top:4px;opacity:.95}
-@media(max-width:700px){.ifd-in{grid-template-columns:1fr;padding:22px}.ifd-badge{display:none}.ifd h2{font-size:22px}.ifd-btn{width:100%;text-align:center}}
+.ifd-head p{color:#6b4a52;margin:0;font-size:15px}
+.ifd-cols{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.ifd-col{border:1.5px solid var(--line);border-radius:20px;padding:22px;background:var(--bg);display:flex;flex-direction:column}
+.ifd-if{border-color:#F4C9CD;background:#FFF6F6}
+.ifd-col>b{font:700 17px 'Montserrat',sans-serif;color:var(--ink);margin-bottom:10px}
+.ifd ul{list-style:none;padding:0;margin:0 0 18px;display:grid;gap:8px;font-size:14px;color:var(--ink);flex:1}
+.ifd li{padding-left:24px;position:relative}.ifd li:before{content:"✓";position:absolute;left:0;color:var(--rose-d);font-weight:700}.ifd-if li:before{color:#EA1D2C}
+.ifd-btn,.ifd-btn2{display:inline-block;text-align:center;font:700 14px 'Montserrat',sans-serif;padding:13px 24px;border-radius:999px;transition:transform .15s;align-self:flex-start}
+.ifd-btn{background:#EA1D2C;color:#fff;box-shadow:0 10px 22px -10px rgba(234,29,44,.7)}.ifd-btn:hover{transform:translateY(-1px);filter:brightness(1.05)}
+.ifd-btn2{background:#fff;color:var(--rose-d);border:1.5px solid #E5C2C9}.ifd-btn2:hover{background:#FDF2F5}
+@media(max-width:700px){.ifd-cols{grid-template-columns:1fr}.ifd h2{font-size:22px}.ifd-btn,.ifd-btn2{align-self:stretch}}
 .nh-eyebrow{font:600 11px/1.3 'Montserrat',sans-serif;letter-spacing:.14em;text-transform:uppercase;color:var(--rose-d)}
 .nh h1{font-family:'Montserrat',sans-serif;font-weight:300;letter-spacing:-.02em;color:var(--ink);line-height:1.12;font-size:clamp(30px,6.4vw,50px);margin:.5rem 0 .8rem}
 .nh h1 b{font-weight:600;color:var(--rose-d)}
@@ -216,7 +219,7 @@ html {
 /* catálogo compacto */
 #catalog-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}@media(min-width:900px){#catalog-grid{grid-template-columns:repeat(4,minmax(0,1fr));gap:20px}}
 .pcard{background:#fff;border:1px solid var(--line);border-radius:20px;overflow:hidden;display:flex;flex-direction:column;transition:.25s}.pcard:hover{box-shadow:0 18px 34px -22px rgba(166,83,101,.65);transform:translateY(-2px)}
-.pimg{position:relative}.pimg img{display:block;width:100%;aspect-ratio:4/3;object-fit:cover}
+.pimg{position:relative}.pimg img{display:block;width:100%;aspect-ratio:1/1;object-fit:cover}
 .pbadge{position:absolute;left:8px;top:8px;background:var(--rose);color:#fff;font:700 9.5px 'Montserrat',sans-serif;letter-spacing:.06em;text-transform:uppercase;border-radius:99px;padding:4px 9px}
 .pfav{position:absolute;right:8px;top:8px;width:34px;height:34px;border-radius:99px;background:rgba(255,255,255,.92);border:0;cursor:pointer;font-size:16px;color:#B89CA3}.pfav .on{color:#C87888}
 .pbody{padding:12px;display:flex;flex-direction:column;gap:6px;flex:1}.pcat{font:600 10px 'Montserrat',sans-serif;letter-spacing:.08em;text-transform:uppercase;color:var(--rose-d);margin:0}
@@ -225,10 +228,10 @@ html {
 .pfoot{margin-top:auto;padding-top:6px}.pprice{font:700 18px 'Montserrat',sans-serif;color:var(--ink)}.kw{background:linear-gradient(160deg,#fff 0%,#FBEEF1 100%);border:1px solid var(--line);border-radius:28px;padding:18px;max-width:440px;margin-left:auto;box-shadow:0 30px 60px -34px rgba(166,83,101,.6)}
 .kw-eyebrow{font:700 10px 'Montserrat',sans-serif;letter-spacing:.14em;text-transform:uppercase;color:var(--rose-d)}
 .kw h2{font:600 17px/1.25 'Montserrat',sans-serif;color:var(--ink);margin:4px 0 12px}
-.kw-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.kw-row{display:grid;grid-template-columns:1fr;gap:10px}
 .kw-item{background:#fff;border:1px solid var(--line);border-radius:20px;padding:10px 10px 12px;text-align:center}
 .kw-item.hl{background:linear-gradient(135deg,#EAF2FF,#C9DDF8);border-color:#B7CDF0;color:var(--ink)}
-.kw-item img{display:block;width:100%;height:112px;object-fit:contain;filter:drop-shadow(0 10px 10px rgba(56,33,38,.25))}
+.kw-item img{display:block;width:100%;height:190px;object-fit:contain;filter:drop-shadow(0 10px 10px rgba(56,33,38,.25))}
 .kw-item small{display:block;font:600 11px 'Plus Jakarta Sans',sans-serif;margin-top:8px;color:var(--rose-d)}
 .kw-item.hl small{color:#2F5E9E}
 .kw-item b{display:block;font:600 13px/1.25 'Montserrat',sans-serif;margin-top:2px}
@@ -330,7 +333,7 @@ html {
           </h2>
         </div>
         <span id="catalog-count" class="text-xs font-display font-semibold text-[#785860] bg-white px-4 py-2 rounded-full border border-[#EED9DF]">
-          12 criações disponíveis
+          {{N}} criações disponíveis
         </span>
       </div>
 
@@ -381,21 +384,31 @@ html {
 
   <section id="ifood" class="ifd">
     <div class="ifd-in">
-      <div class="ifd-txt">
-        <span class="ifd-tag">Também estamos no iFood</span>
-        <h2>Prefere comprar pelo iFood?</h2>
-        <p>Já pede por lá? A Lily Cestas está no app. Você compra do jeito que já conhece, com a segurança e a garantia do iFood.</p>
-        <ul>
-          <li><b>Compra protegida</b> pelo iFood, com suporte do app se algo der errado</li>
-          <li><b>Acompanhe o pedido</b> pelo app, do preparo até a entrega</li>
-          <li><b>Pague do seu jeito</b>, com os meios que você já tem salvos no iFood</li>
-        </ul>
-        <div class="ifd-cta">
+      <div class="ifd-head">
+        <span class="ifd-tag">Dois jeitos de pedir</span>
+        <h2>A mesma Lily, no site ou no iFood</h2>
+        <p>Escolha o que for mais prático para você. A cesta, o capricho e a entrega são os mesmos.</p>
+      </div>
+      <div class="ifd-cols">
+        <div class="ifd-col">
+          <b>Pelo site</b>
+          <ul>
+            <li>Personalize com nome e detalhes pelo WhatsApp</li>
+            <li>{{PIX}}% de desconto pagando no Pix</li>
+            <li>Brinde em compras a partir de {{B1V}}</li>
+          </ul>
+          <a class="ifd-btn2" href="#catalogo">Ver presentes</a>
+        </div>
+        <div class="ifd-col ifd-if">
+          <b>Pelo iFood</b>
+          <ul>
+            <li>Peça pelo app que você já usa no dia a dia</li>
+            <li>Seus meios de pagamento e cupons salvos no app</li>
+            <li>Acompanhe o pedido pelo celular</li>
+          </ul>
           <a class="ifd-btn" href="{{IFOOD}}" target="_blank" rel="noopener" data-ifood>Pedir pelo iFood</a>
-          <span>Não conhece a gente ainda? Peça pelo iFood sem medo. <a href="#depoimentos">Veja entregas reais</a>.</span>
         </div>
       </div>
-      <div class="ifd-badge" aria-hidden="true"><b>iFood</b><small>Lily Cestas<br>Santana de Parnaíba</small></div>
     </div>
   </section>
 
@@ -525,7 +538,7 @@ html {
         </div>
 
         <div>
-          <h3 class="text-xs font-display font-bold uppercase tracking-wider text-[#FFE4E9] mb-3">Nossas 4 Linhas</h3>
+          <h3 class="text-xs font-display font-bold uppercase tracking-wider text-[#FFE4E9] mb-3">Nossas linhas</h3>
           <ul class="space-y-2 text-xs sm:text-sm text-white/90">{{FOOTER_CATS}}</ul>
         </div>
 
@@ -592,7 +605,7 @@ html {
   <div id="product-custom-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4">
     <div id="prod-modal-backdrop" class="fixed inset-0 bg-[#382126]/55 backdrop-blur-xs"></div>
     <div class="relative z-10 bg-white rounded-3xl max-w-lg w-full border border-[#EED9DF] shadow-floating overflow-hidden max-h-[92vh] overflow-y-auto">
-      <div class="relative h-52 bg-[#FDF6F8]">
+      <div class="relative aspect-square bg-[#FDF6F8]">
         <img id="modal-prod-img" src="" alt="Produto Lily Cestas" class="w-full h-full object-cover max-w-full" />
         <button type="button" id="close-prod-modal-btn" class="absolute top-3 right-3 w-8 h-8 rounded-full bg-white/90 text-[#382126] font-bold text-sm shadow-sm">✕</button>
         <span id="modal-prod-cat" class="absolute bottom-3 left-3 px-3 py-1 rounded-full bg-[#B36273] text-white text-xs font-display font-semibold">Categoria</span>
@@ -628,7 +641,7 @@ html {
     </div>
   </div>
 
-  <!-- NOVO CHECKOUT UX/UI EM 3 ETAPAS (REVISÃO & MIMOS -> ENTREGA & CÁPSULA QR -> PAGAMENTO PIX/CARTÃO & PROTOCOLO WHATSAPP) -->
+  <!-- CHECKOUT EM 3 ETAPAS: sacola, entrega, pagamento e WhatsApp -->
   <div id="checkout-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4">
     <div id="checkout-backdrop" class="fixed inset-0 bg-[#382126]/60 backdrop-blur-xs"></div>
     <div class="relative z-10 bg-white rounded-3xl max-w-2xl w-full border border-[#EED9DF] shadow-floating overflow-hidden max-h-[94vh] flex flex-col">
@@ -679,7 +692,7 @@ html {
           </div>
         </div>
 
-        <!-- ETAPA 2: DADOS DE QUEM ENVIA, QUEM RECEBE, AGENDAMENTO E CÁPSULA QR -->
+        <!-- ETAPA 2: DADOS DE QUEM ENVIA, QUEM RECEBE, AGENDAMENTO -->
         <div id="checkout-step-2" class="hidden space-y-4">
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
             <div>
@@ -753,7 +766,7 @@ html {
               </button>
               <button type="button" data-pay-method="Combinar no Atendimento WhatsApp" class="p-3 rounded-2xl border border-[#EED9DF] bg-white text-left transition-all">
                 <span class="text-xs font-display font-bold text-[#382126] block">💬 Via WhatsApp</span>
-                <span class="text-[11px] text-[#785860]">Após aprovar a arte</span>
+                <span class="text-[11px] text-[#785860]">Detalhes combinados pelo WhatsApp</span>
               </button>
             </div>
           </div>
@@ -1214,7 +1227,7 @@ html {
     const rewardText = document.getElementById("cart-reward-text");
     const rewardPct = document.getElementById("cart-reward-pct");
     const rewardBar = document.getElementById("cart-reward-bar");
-    const pct = Math.min(100, Math.round((total / CONFIG.brinde2_valor) * 100));
+    const pct = Math.min(100, Math.round((total / CONFIG.brinde1_valor) * 100));
     if (rewardBar) rewardBar.style.width = pct + "%";
     if (rewardPct) rewardPct.textContent = pct + "%";
     if (rewardText) {
@@ -1222,10 +1235,8 @@ html {
         rewardText.textContent = `Compre a partir de ${formatBRL(CONFIG.brinde1_valor)} e ganhe ${CONFIG.brinde1_nome}!`;
       } else if (total < CONFIG.brinde1_valor) {
         rewardText.textContent = `Faltam ${formatBRL(CONFIG.brinde1_valor - total)} para ganhar ${CONFIG.brinde1_nome}!`;
-      } else if (total < CONFIG.brinde2_valor) {
-        rewardText.textContent = `🎉 Você ganhou ${CONFIG.brinde1_nome}! Faltam ${formatBRL(CONFIG.brinde2_valor - total)} para ganhar ${CONFIG.brinde2_nome} no lugar dele.`;
       } else {
-        rewardText.textContent = `👑 Parabéns! Você ganhou ${CONFIG.brinde2_nome}!`;
+        rewardText.textContent = `🎉 Você ganhou ${CONFIG.brinde1_nome}!`;
       }
     }
 
@@ -1288,10 +1299,8 @@ html {
     // Banner de brindes na Etapa 1
     const giftBanner = document.getElementById("checkout-gift-banner");
     if (giftBanner) {
-      if (effectiveSub >= CONFIG.brinde2_valor) {
-        giftBanner.textContent = `👑 Brinde desbloqueado no seu pedido: ${CONFIG.brinde2_nome}!`;
-      } else if (effectiveSub >= CONFIG.brinde1_valor) {
-        giftBanner.textContent = `🎁 Brinde desbloqueado: ${CONFIG.brinde1_nome}! (Adicione mais ${formatBRL(CONFIG.brinde2_valor - effectiveSub)} para ganhar ${CONFIG.brinde2_nome} no lugar dele)`;
+      if (effectiveSub >= CONFIG.brinde1_valor) {
+        giftBanner.textContent = `🎁 Brinde desbloqueado: ${CONFIG.brinde1_nome}!`;
       } else {
         giftBanner.textContent = `✨ Dica Lily: adicione mais ${formatBRL(CONFIG.brinde1_valor - effectiveSub)} para ganhar ${CONFIG.brinde1_nome}!`;
       }
@@ -1372,9 +1381,7 @@ html {
         if (it.details) lines.push(`  ↳ ${it.details}`);
       });
     }
-    if (effectiveSub >= CONFIG.brinde2_valor) {
-      lines.push(`🎁 *Brinde incluso:* ${CONFIG.brinde2_nome} (nome do chaveiro: informar na conversa)`);
-    } else if (effectiveSub >= CONFIG.brinde1_valor) {
+    if (effectiveSub >= CONFIG.brinde1_valor) {
       lines.push(`🎁 *Brinde incluso:* ${CONFIG.brinde1_nome}`);
     }
     lines.push(`----------------------------------------`);

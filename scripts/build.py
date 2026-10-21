@@ -82,15 +82,14 @@ config = {
     'loja_no_ar': False, 'whatsapp': '5511914955434', 'instagram': 'https://www.instagram.com/lilycestas.ofc/',
     'ifood_url': 'https://www.ifood.com.br/delivery/santana-de-parnaiba-sp/lily-cestas--presentes-colinas-da-anhanguera/25073e59-c1d1-43a8-a317-7f5c948f97ab',
     'pix_desconto': 5, 'taxa_entrega': 15, 'brinde1_valor': 150, 'brinde1_nome': 'Chaveiro de brinde',
-    'brinde2_valor': 200, 'brinde2_nome': 'Chaveiro personalizado com o seu nome',
-    'foto_chaveiro_simples': '', 'foto_chaveiro_personalizado': '',
+    'foto_chaveiro_simples': '',
     'foto_estudio_litofania': '', 'foto_estudio_polaroid': '',
 }
 config.update({k: v for k, v in load_json(ROOT / 'data/config.json', {}).items() if v not in (None, '')})
 config['whatsapp'] = re.sub(r'\D', '', str(config['whatsapp']))
 if len(config['whatsapp']) in (10, 11):
     config['whatsapp'] = '55' + config['whatsapp']
-for k in ('pix_desconto', 'taxa_entrega', 'brinde1_valor', 'brinde2_valor'):
+for k in ('pix_desconto', 'taxa_entrega', 'brinde1_valor'):
     config[k] = to_number(config[k], f'Configurações › {k}') or 0
 LOJA_NO_AR = bool(config['loja_no_ar'])
 SHOP = '/' if LOJA_NO_AR else '/home/'   # onde fica a loja completa
@@ -384,7 +383,7 @@ CITIES = [
                  ('Datas em que mais encomendam por aqui', 'Aniversário, Dia das Mães, Dia dos Namorados, Natal, nascimento de bebê, formatura e agradecimento a professores e equipes. Se o prazo estiver curto, chame no WhatsApp para vermos o que dá para fazer.')],
          vizinhas=['alphaville', 'barueri', 'cajamar']),
     dict(slug='cestas-de-presente-alphaville', cidade='Alphaville',
-         title='Cestas de Presente em Alphaville (Barueri e Santana de Parnaíba) | Lily Cestas',
+         title='Cestas de Presente em Alphaville e Barueri | Lily Cestas',
          desc='Cestas de presente, café da manhã e xícaras personalizadas para Alphaville, Tamboré e região. Escolha no site e combine a entrega pelo WhatsApp.',
          h1='Cestas de Presente e Café da Manhã para Alphaville',
          intro='Alphaville fica entre Barueri e Santana de Parnaíba, e é uma das regiões que mais recebe nossos presentes: cestas de café da manhã para casa ou escritório, presentes para o time e cestas para aniversário.',
@@ -424,7 +423,7 @@ for c in cats_with:
     items = [
         (f'Quanto custa {c["nome"].lower()} na Lily Cestas?', f'Os preços do catálogo vão de {brl(min(prices))} a {brl(max(prices))} nesta categoria. O valor final pode variar conforme os detalhes combinados pelo WhatsApp.'),
         ('Vocês entregam em Alphaville, Barueri, Santana de Parnaíba e Cajamar?', 'Atendemos essas cidades. Informe o CEP no checkout para confirmarmos a disponibilidade, o horário e a taxa de entrega.'),
-        ('Posso aprovar a arte antes da produção?', 'Sim. Você recebe a prévia digital pelo WhatsApp e só depois seguimos para a produção.'),
+        ('Posso combinar os detalhes antes da produção?', 'Sim. Nome, frase e demais detalhes são combinados pelo WhatsApp antes de seguirmos com o pedido.'),
     ] + FAQ_COMMON[-1:]
     rel = '<section class="rel"><h2>Outras linhas e cidades atendidas</h2><p>' + ''.join(
         f'<a href="/{o["pagina_url"]}/">{esc(o["nome"])}</a>' for o in cats_with if o is not c and o.get('pagina_url')) + '</p><p>' + ''.join(
@@ -485,7 +484,7 @@ for i, c in enumerate(cats_with):
         'filterKey': c['chave'], 'heroImg': c['_img'], 'caption': f'Foto real: {ps[0]["nome"]}'}
 sim0 = {k: {'chave': v[0]['chave'], 'preco': v[0]['preco'], 'nome': v[0]['nome']} for k, v in
         {'base': SIM['bases'], 'louca': SIM['louca'], 'pecas_3d': SIM['pecas_3d'], 'polaroids': SIM['polaroids']}.items()}
-cfg_js = {k: config[k] for k in ('pix_desconto', 'taxa_entrega', 'brinde1_valor', 'brinde1_nome', 'brinde2_valor', 'brinde2_nome')}
+cfg_js = {k: config[k] for k in ('pix_desconto', 'taxa_entrega', 'brinde1_valor', 'brinde1_nome')}
 cfg_js.update({'foto_estudio_litofania': photo_lit, 'foto_estudio_polaroid': photo_pol})
 dumps = lambda o: json.dumps(o, ensure_ascii=False).replace('</', '<\\/')
 data_js = (f'const CONFIG = {dumps(cfg_js)};\n  const SIM0 = {dumps(sim0)};\n  const HOTSPOTS = {dumps(hotspots)};\n'
@@ -500,22 +499,18 @@ hero_img = f'''<div class="heroimg">
             <div class="tag"><div><small>{esc(hero_p["selo"] or "Destaque")}</small><b>{esc(hero_p["nome"])}</b></div><div style="text-align:right"><span class="pr">{brl(final_price(hero_p))}</span><button type="button" data-customize-prod="{hero_p["id"]}" class="btn1" style="display:block;margin-top:4px;padding:8px 14px">Personalizar</button></div></div>
           </div>'''
 foto_k1 = img_url(config.get('foto_chaveiro_simples'))
-foto_k2 = img_url(config.get('foto_chaveiro_personalizado'))
-if foto_k1 and foto_k2:
+if foto_k1:
     v1 = brl(config["brinde1_valor"]).replace(",00", "")
-    v2 = brl(config["brinde2_valor"]).replace(",00", "")
     hero_img = f'''<div class="kw">
             <span class="kw-eyebrow">Brinde Lily Cestas</span>
-            <h2>Ganhe um chaveiro nas suas compras</h2>
+            <h2>Em compras a partir de {v1}, você ganha um chaveiro de brinde</h2>
             <div class="kw-row">
               <div class="kw-item"><img src="{foto_k1}" alt="{esc(config["brinde1_nome"])}" width="300" height="300" loading="eager"><small>Compras a partir de {v1}</small><b>{esc(config["brinde1_nome"])}</b></div>
-              <div class="kw-item hl"><img src="{foto_k2}" alt="{esc(config["brinde2_nome"])}" width="300" height="300" loading="eager"><small>Compras a partir de {v2}</small><b>{esc(config["brinde2_nome"])}</b></div>
             </div>
             <a class="kw-cta" href="#catalogo">Ver presentes →</a>
           </div>'''
 pills = '\n          '.join(f'<button type="button" data-cat-filter="{c["chave"]}" class="{pill_cls}">\n            {esc(c["icone"])} {esc(c["nome_curto"])} ({len(cat_prods[c["chave"]])})\n          </button>' for c in cats_home)
-mimos = (f'<p class="text-xs text-white/90">Acima de <strong>{brl(config["brinde1_valor"]).replace(",00", "")}</strong> você ganha {esc(config["brinde1_nome"])} • '
-         f'Acima de <strong>{brl(config["brinde2_valor"]).replace(",00", "")}</strong> ganha <strong>{esc(config["brinde2_nome"])}</strong>!</p>')
+mimos = f'<p class="text-xs text-white/90">Em compras a partir de <strong>{brl(config["brinde1_valor"]).replace(",00", "")}</strong> você ganha {esc(config["brinde1_nome"])}!</p>'
 reward_init = f'Compre a partir de {brl(config["brinde1_valor"])} e ganhe {esc(config["brinde1_nome"])}!'
 
 title = 'Cestas de Presente em Santana de Parnaíba e Alphaville | Lily Cestas'

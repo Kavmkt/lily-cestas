@@ -209,12 +209,9 @@ content:
       - { name: ifood_url, label: Link da loja no iFood, type: string, description: Endereço da Lily Cestas no iFood. Aparece no bloco "Prefere comprar pelo iFood?". }
       - { name: pix_desconto, label: Desconto no Pix (%), type: number, description: Exemplo 5 }
       - { name: taxa_entrega, label: Taxa de entrega padrão (R$), type: number }
-      - { name: brinde1_valor, label: Brinde 1 - pedido a partir de (R$), type: number }
-      - { name: brinde1_nome, label: Brinde 1 - nome, type: string }
-      - { name: brinde2_valor, label: Brinde 2 - pedido a partir de (R$), type: number }
-      - { name: brinde2_nome, label: Brinde 2 - nome, type: string }
+      - { name: brinde1_valor, label: Brinde - pedido a partir de (R$), type: number }
+      - { name: brinde1_nome, label: Brinde - nome, type: string }
       - { name: foto_chaveiro_simples, label: Foto do chaveiro de brinde (fundo transparente), type: image, description: Aparece no cartão de brinde da primeira tela. Use foto sem fundo (PNG). }
-      - { name: foto_chaveiro_personalizado, label: Foto do chaveiro personalizado (fundo transparente), type: image, description: Aparece no cartão de brinde da primeira tela. Use foto sem fundo (PNG). }
       - { name: foto_estudio_litofania, label: Foto da prévia da litofania (Estúdio), type: image }
       - { name: foto_estudio_polaroid, label: Foto da prévia da Polaroid (Estúdio), type: image }
       - name: loja_no_ar
