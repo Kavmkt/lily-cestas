@@ -12,6 +12,7 @@ content:
     label: Produtos
     type: collection
     path: data/produtos
+    filename: '{primary}.json'
     extension: json
     format: json
     view:
@@ -108,6 +109,7 @@ content:
     label: Categorias
     type: collection
     path: data/categorias
+    filename: '{primary}.json'
     extension: json
     format: json
     view:
