@@ -1,15 +1,14 @@
 {
+  "nome": "Box Envelope Com Carinho",
+  "categoria": "cestas",
+  "preco": 144.9,
   "status": "ativo",
-  "ordem": 5,
-  "nome": "Caneca 'Afeto em Flor' Alça Coração",
-  "categoria": "xicaras",
-  "preco": 74.9,
-  "preco_promocional": null,
+  "foto": "/assets/produtos/Agrupar 1.png",
+  "alt": "Cesta de presentes e chocolates Box Envelope Com Carinho, a escolha ideal para surpreender em aniversários, momentos românticos e gestos de agradecimento com entrega rápida em Alphaville e região. Um presente delicado montado de forma artesanal no charmoso box em formato de envelope, finalizado com fita de cetim elegante e durabilidade para guardar de recordação.  **O que compõe a Box:**  * 1 Box envelope com carinho * 1 Caixa de bombom Ferrero com 8 unidades * 1 Rosa artificial com folhagem decorativa * 1 metro de fita de cetim * 1 folha de papel celofane e palha para enchimento, entregue na sacola",
   "selo": "Sucesso Absoluto",
-  "foto": "/assets/produtos/caneca-coracao.webp",
   "descricao": "Xícara personalizada com nome ou frase. Combine os detalhes pelo WhatsApp.",
   "personalizacao": "Nome e detalhes combinados pelo WhatsApp",
-  "inclui": [],
+  "ordem": 3,
   "destaque": false,
   "quiz": [
     "louca"
