@@ -8,7 +8,7 @@
   "descricao": "Cesta para surpreender. Combine os itens e a entrega pelo WhatsApp.",
   "personalizacao": "Nome e detalhes combinados pelo WhatsApp",
   "ordem": 4,
-  "destaque": true,
+  "destaque": false,
   "quiz": [
     "amor",
     "amiga"
