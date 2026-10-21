@@ -179,6 +179,8 @@ def final_price(p):
 
 cats_with = [c for c in cats if any(p['_cat'] is c for p in visible)]
 cat_prods = {c['chave']: [p for p in visible if p['_cat'] is c] for c in cats}
+# categorias ativas ainda sem produtos aparecem na home (cartão e filtro), sem página própria
+cats_home = [c for c in cats if c in cats_with or (not cat_prods[c['chave']] and c.get('foto'))]
 
 # estudio
 estudio = load_json(ROOT / 'data/estudio.json', {})
@@ -489,8 +491,8 @@ data_js = (f'const CONFIG = {dumps(cfg_js)};\n  const SIM0 = {dumps(sim0)};\n  c
            f'  const PRODUCTS = {dumps(products_js)};\n  const FAQS = {dumps([{"q": q, "a": a} for q, a in faq])};')
 
 hero_cats = ''.join(
-    f'<button type="button" class="cat" data-hero-cat="{c["chave"]}"><img src="{c["_img"]}" alt="{esc(c["nome_tile"])}" width="760" height="567" loading="lazy"><span class="ct"><b>{esc(c["nome_tile"])}</b><small>a partir de {brl(cat_min(c))}</small></span></button>'
-    for c in cats_with)
+    f'<button type="button" class="cat" data-hero-cat="{c["chave"]}"><img src="{c["_img"]}" alt="{esc(c["nome_tile"])}" width="760" height="567" loading="lazy"><span class="ct"><b>{esc(c["nome_tile"])}</b><small>{("a partir de " + brl(cat_min(c))) if cat_prods[c["chave"]] else "novidades em breve"}</small></span></button>'
+    for c in cats_home)
 hero_cats = f'<div class="cats">\n        {hero_cats}\n      </div>'
 hero_img = f'''<div class="heroimg">
             <img src="{hero_p["_img"]}" alt="{esc(hero_p.get("alt") or hero_p["nome"])}" width="760" height="567" fetchpriority="high">
@@ -510,7 +512,7 @@ if foto_k1 and foto_k2:
             </div>
             <a class="kw-cta" href="#catalogo">Ver presentes →</a>
           </div>'''
-pills = '\n          '.join(f'<button type="button" data-cat-filter="{c["chave"]}" class="{pill_cls}">\n            {esc(c["icone"])} {esc(c["nome_curto"])} ({len(cat_prods[c["chave"]])})\n          </button>' for c in cats_with)
+pills = '\n          '.join(f'<button type="button" data-cat-filter="{c["chave"]}" class="{pill_cls}">\n            {esc(c["icone"])} {esc(c["nome_curto"])} ({len(cat_prods[c["chave"]])})\n          </button>' for c in cats_home)
 mimos = (f'<p class="text-xs text-white/90">Acima de <strong>{brl(config["brinde1_valor"]).replace(",00", "")}</strong> você ganha {esc(config["brinde1_nome"])} • '
          f'Acima de <strong>{brl(config["brinde2_valor"]).replace(",00", "")}</strong> ganha <strong>{esc(config["brinde2_nome"])}</strong>!</p>')
 reward_init = f'Compre a partir de {brl(config["brinde1_valor"])} e ganhe {esc(config["brinde1_nome"])}!'
