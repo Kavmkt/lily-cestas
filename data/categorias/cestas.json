@@ -1,19 +1,14 @@
 {
+  "nome": "Cestas de Presente",
+  "chave": "cestas",
   "ativa": true,
   "ordem": 1,
-  "chave": "cestas",
-  "nome": "Cestas de Presente",
   "nome_curto": "Cestas & Boxes",
   "icone": "🧺",
   "nome_tile": "Cestas de presente",
+  "foto": "/assets/produtos/SaveClip.App_731761276_18114707332819366_2658782273636933924_n.jpg",
   "eh_cesta": true,
-  "foto": "/assets/produtos/hero-imperial.webp",
   "frase_apoio": "Nossas cestas em vime branco com laço de cetim rosé, flores naturais, macarons e chocolates finos — prontas para receber sua xícara personalizada, peça 3D e fotos Polaroid.",
-  "destaques": [
-    "Cestas de Café da Manhã, Macarons, Frutas & Espumante Rosé",
-    "Acabamento em seda blush, fita de cetim rosé e cartão caligrafado",
-    "Integre xícara com nome, palavra 3D e fotos Polaroid na mesma cesta"
-  ],
   "pagina_url": "cestas-de-presente",
   "pagina_titulo": "Cestas de Presente Personalizadas | Lily Cestas",
   "pagina_descricao": "Cestas de presente afetivas e cestas de café da manhã com rosas, bombons, xícara personalizada e Polaroids. Santana de Parnaíba, Alphaville, Barueri e Cajamar.",
