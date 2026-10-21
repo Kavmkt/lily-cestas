@@ -6,7 +6,7 @@
   "nome_curto": "Cestas & Boxes",
   "icone": "🧺",
   "nome_tile": "Cestas de presente",
-  "foto": "/assets/produtos/SaveClip.App_731761276_18114707332819366_2658782273636933924_n.jpg",
+  "foto": "/assets/produtos/Agrupar 1-1.png",
   "eh_cesta": true,
   "frase_apoio": "Cestas de café da manhã e de presente, montadas para surpreender na data especial.",
   "pagina_url": "cestas-de-presente",
@@ -27,10 +27,5 @@
       "titulo": "Entrega de cestas na região",
       "texto": "Atendemos presentes para Santana de Parnaíba, Alphaville, Barueri e Cajamar. Informe o CEP no checkout e confirmamos disponibilidade de horário e taxa de entrega para o seu endereço."
     }
-  ],
-  "destaques": [
-    "Cestas de café da manhã e de presente",
-    "Boxes personalizados",
-    "Entrega agendada a partir das 06h30"
   ]
 }
