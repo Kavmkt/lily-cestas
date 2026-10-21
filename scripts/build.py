@@ -526,6 +526,7 @@ repl = {
     'TITLE': esc(title), 'CANONICAL': f'<link rel="canonical" href="{BASE}{SHOP}">',
     'ROBOTS': f'<meta name="robots" content="{"index, follow, max-image-preview:large" if LOJA_NO_AR else "noindex, nofollow"}">',
     'JSONLD': home_ld, 'WA': WA, 'INSTA': config['instagram'], 'PIX': str(int(config['pix_desconto'])), 'N': str(len(visible)),
+    'FOOTER_CATS': ''.join(f'<li><a href="/{c["pagina_url"]}/" class="hover:text-white hover:underline">{esc(c["nome"])}</a></li>' for c in cats_with if c.get('pagina_url')),
     'B1V': brl(config['brinde1_valor']).replace(',00', ''), 'HERO_CATS': hero_cats, 'HERO_IMG': hero_img, 'CAT_PILLS': pills, 'MIMOS_TEXT': mimos, 'REWARD_INIT': reward_init, 'DATA_JS': data_js,
     'OPT_BASES': ''.join(opt(o) for o in SIM['bases']), 'OPT_LOUCA': ''.join(opt(o) for o in SIM['louca']),
     'OPT_3D': ''.join(opt(o) for o in SIM['pecas_3d']), 'OPT_POL': ''.join(opt(o) for o in SIM['polaroids']),
