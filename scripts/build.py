@@ -348,7 +348,7 @@ def cards_html(plist):
     out = ''
     for p in plist:
         old = f'<span style="text-decoration:line-through;color:#8C6C73;font-size:12px;display:block">{brl(p["preco"])}</span>' if p['_promo'] else ''
-        action = '<span style="font-size:12px;font-weight:600;color:#6E5057">Esgotado</span>' if p['status'] == 'esgotado' else f'<a class="btn sm" href="{SHOP}#catalogo">Personalizar</a>'
+        action = '<span style="font-size:12px;font-weight:600;color:#6E5057">Esgotado</span>' if p['status'] == 'esgotado' else f'<a class="btn sm" href="{SHOP}#p={p["id"]}">Personalizar</a>'
         out += f'''<article class="card"><img src="{p["_img"]}" alt="{esc(p.get("alt") or p["nome"])}" width="760" height="567" loading="lazy"><div class="cb"><h3>{esc(p["nome"])}</h3><p>{esc(p["descricao"])}</p><div class="pr"><span>{old}<b>{brl(final_price(p))}</b></span>{action}</div></div></article>'''
     return out
 
@@ -364,7 +364,7 @@ def page_html(path, title, desc, h1, intro, blocks, plist, faq_items, trail, ext
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/css/pages.css">
 </head><body>''' + top_html() + f'''<main><div class="wrap"><nav class="crumbs" aria-label="Navegação">{crumbs}</nav>
-<div class="lead"><div><h1>{esc(h1)}</h1><p class="intro">{esc(intro)}</p><p><a class="btn" href="{SHOP}#catalogo">{cta}</a> <a class="btn ghost" href="{SHOP}#catalogo">Ver catálogo completo</a></p></div>{img}</div>
+<div class="lead"><div><h1>{esc(h1)}</h1><p class="intro">{esc(intro)}</p><p><a class="btn" href="{SHOP}#catalogo">{cta}</a> <a class="btn ghost" href="/catalogo/">Ver catálogo completo</a></p></div>{img}</div>
 {sec}
 <section><h2>Produtos</h2><div class="cards">{cards_html(plist)}</div></section>
 <section><h2>Perguntas frequentes</h2><div class="faq">{faq_block}</div></section>
@@ -433,6 +433,32 @@ for c in cats_with:
     write_page(path, page_html(path, c.get('pagina_titulo') or c['nome'], c.get('pagina_descricao') or '', c.get('pagina_h1') or c['nome'], c.get('pagina_intro') or '', secoes, ps, items,
                                [('Início', '/'), (c['nome'], path)], extra, rel, (ps[0]['_img'], ps[0].get('alt') or ps[0]['nome'])))
     page_urls.append(path)
+
+# ---- catálogo completo: todos os produtos organizados por categoria
+cat_path = '/catalogo/'
+chips = ''.join(f'<a href="#cat-{c["chave"]}">{esc(c["nome_curto"])} ({len(cat_prods[c["chave"]])})</a>' for c in cats_with)
+sections = ''.join(
+    f'<section id="cat-{c["chave"]}"><h2>{esc(c["nome"])}</h2><p class="sub">{esc(c.get("frase_apoio") or "")}</p>'
+    f'<div class="cards">{cards_html(cat_prods[c["chave"]])}</div>'
+    + (f'<p class="more"><a href="/{c["pagina_url"]}/">Ver página de {esc(c["nome"].lower())} →</a></p>' if c.get('pagina_url') else '') + '</section>'
+    for c in cats_with)
+cat_items = [(f'Como compro no catálogo da Lily Cestas?', 'Escolha o presente e clique em Personalizar. Você finaliza o pedido na loja e combina nome e detalhes pelo WhatsApp.')] + FAQ_COMMON[-2:]
+cat_ld = [{'@type': 'CollectionPage', 'name': 'Catálogo completo Lily Cestas', 'url': BASE + cat_path,
+           'mainEntity': {'@type': 'ItemList', 'itemListElement': [{'@type': 'ListItem', 'position': i + 1, 'item': prod_ld(p)} for i, p in enumerate(visible)]}}]
+rel_cat = '<section class="rel"><h2>Cidades atendidas</h2><p>' + ''.join(f'<a href="/{x["slug"]}/">{x["cidade"]}</a>' for x in CITIES) + '</p></section>'
+faq_cat = ''.join(f'<details><summary>{esc(q)}</summary><p>{esc(a)}</p></details>' for q, a in cat_items)
+write_page(cat_path, head('Catálogo de Cestas e Presentes Personalizados | Lily Cestas', 'Veja todas as cestas de presente, cestas de café da manhã, xícaras e presentes personalizados da Lily Cestas. Entregas em Santana de Parnaíba, Alphaville, Barueri e Cajamar.', cat_path)
+           + jsonld(BUSINESS, crumb_ld([('Início', '/'), ('Catálogo', cat_path)]), faq_ld(cat_items), *cat_ld) + '''
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/pages.css">
+</head><body>''' + top_html() + f'''<main><div class="wrap"><nav class="crumbs" aria-label="Navegação"><a href="/">Início</a> › <span>Catálogo</span></nav>
+<div class="cathead"><h1>Catálogo completo</h1><p class="intro">Todas as cestas de presente, xícaras e presentes personalizados da Lily Cestas, organizados por categoria.</p><nav class="chips" aria-label="Categorias">{chips}</nav></div>
+{sections}
+<section><h2>Perguntas frequentes</h2><div class="faq">{faq_cat}</div></section>
+{rel_cat}
+</div></main>''' + footer_html() + '</body></html>')
+page_urls.append(cat_path)
 
 REDIRECTS = {'/polaroid-quadro-qr-code-musical/': '/polaroid-quadro-shadow-box/'}
 for old_path, new_path in REDIRECTS.items():

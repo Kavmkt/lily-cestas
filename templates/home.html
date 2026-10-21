@@ -379,6 +379,10 @@ html {
 
       <!-- Grid de Cards de Produto -->
       <div id="catalog-grid" class=""></div>
+      <div id="catalog-more" class="mt-8 text-center">
+        <p id="catalog-more-note" class="text-xs text-[#785860] mb-3"></p>
+        <a href="/catalogo/" class="inline-block px-7 py-3 rounded-full bg-white text-[#A65365] border-2 border-[#C87888] font-display font-semibold text-sm hover:bg-[#FDF2F5] transition-all">Ver catálogo completo →</a>
+      </div>
     </div>
   </section>
 
@@ -1137,6 +1141,16 @@ html {
       countEl.textContent = `${filtered.length} ${filtered.length === 1 ? "criação disponível" : "criações disponíveis"}`;
     }
 
+    const CATALOG_LIMIT = 10;
+    const totalFound = filtered.length;
+    if (state.catalogFilter !== "favoritos") filtered = filtered.slice(0, CATALOG_LIMIT);
+    const moreBox = document.getElementById("catalog-more");
+    if (moreBox) {
+      moreBox.classList.toggle("hidden", state.catalogFilter === "favoritos");
+      const note = document.getElementById("catalog-more-note");
+      if (note) note.textContent = totalFound > CATALOG_LIMIT ? `Mostrando ${CATALOG_LIMIT} de ${totalFound} criações` : "";
+    }
+
     document.querySelectorAll("[data-cat-filter]").forEach(btn => {
       const cat = btn.getAttribute("data-cat-filter");
       if (cat === state.catalogFilter) {
@@ -1883,6 +1897,11 @@ html {
     renderFaq();
     renderCart();
     bindEvents();
+    const hp = /^#p=(.+)$/.exec(location.hash);
+    if (hp) {
+      openProductModal(decodeURIComponent(hp[1]));
+      history.replaceState(null, "", location.pathname + "#catalogo");
+    }
   }
 
   if (document.readyState === "loading") {
