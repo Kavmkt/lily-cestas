@@ -8,24 +8,29 @@
   "nome_tile": "Cestas de presente",
   "foto": "/assets/produtos/SaveClip.App_731761276_18114707332819366_2658782273636933924_n.jpg",
   "eh_cesta": true,
-  "frase_apoio": "Nossas cestas em vime branco com laço de cetim rosé, flores naturais, macarons e chocolates finos — prontas para receber sua xícara personalizada, peça 3D e fotos Polaroid.",
+  "frase_apoio": "Cestas de café da manhã e de presente, montadas para surpreender na data especial.",
   "pagina_url": "cestas-de-presente",
   "pagina_titulo": "Cestas de Presente Personalizadas | Lily Cestas",
   "pagina_descricao": "Cestas de presente afetivas e cestas de café da manhã com rosas, bombons, xícara personalizada e Polaroids. Santana de Parnaíba, Alphaville, Barueri e Cajamar.",
   "pagina_h1": "Cestas de Presente Personalizadas e Cestas de Café da Manhã",
-  "pagina_intro": "Nossas cestas de presente são montadas à mão em vime branco e laços de cetim rosé, com flores, delícias e itens personalizados: xícara com nome, palavra em 3D e fotos reveladas estilo Polaroid. Servem para aniversário, namoro, Dia das Mães, agradecimento, nascimento ou para dizer “estou pensando em você”.",
+  "pagina_intro": "Cestas de presente e de café da manhã montadas para surpreender em aniversários, namoro, Dia das Mães, agradecimento, nascimento ou para dizer “estou pensando em você”. Escolha o modelo, informe o endereço e agende a entrega.",
   "pagina_secoes": [
     {
-      "titulo": "Cesta de café da manhã ou cesta romântica: qual escolher?",
-      "texto": "A cesta de café da manhã é perfeita para surpreender logo cedo, com entregas agendadas a partir das 06h30. Já a cesta romântica combina rosas, doces finos e peças em 3D para datas como aniversário de namoro e noivado. Se estiver em dúvida, use o Quiz Concierge da página inicial: em cerca de 15 segundos ele sugere o presente ideal pela ocasião, pela pessoa e pelo orçamento."
+      "titulo": "Cesta de café da manhã ou cesta de presente: qual escolher?",
+      "texto": "A cesta de café da manhã é ótima para surpreender logo cedo, com entregas agendadas a partir das 06h30. Já a cesta de presente e os boxes combinam bem com aniversário, namoro e agradecimento. Se estiver em dúvida, use o Concierge da página inicial: ele sugere o presente pela pessoa e pelo orçamento."
     },
     {
-      "titulo": "O que pode ser personalizado em uma cesta",
-      "texto": "Você pode incluir o nome na xícara, uma palavra ou inicial em 3D e fotos em formato Polaroid com legenda. A arte da xícara e do modelo 3D é enviada pelo WhatsApp para a sua aprovação antes da produção."
+      "titulo": "Personalização do pedido",
+      "texto": "Cada pedido é montado conforme combinado com você. Depois de escolher o presente, informe os detalhes pelo WhatsApp."
     },
     {
       "titulo": "Entrega de cestas na região",
       "texto": "Atendemos presentes para Santana de Parnaíba, Alphaville, Barueri e Cajamar. Informe o CEP no checkout e confirmamos disponibilidade de horário e taxa de entrega para o seu endereço."
     }
+  ],
+  "destaques": [
+    "Cestas de café da manhã e de presente",
+    "Boxes personalizados",
+    "Entrega agendada a partir das 06h30"
   ]
 }

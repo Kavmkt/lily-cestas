@@ -5,7 +5,7 @@ Guia para quem cuida do site. Não precisa saber programar.
 ## Entrar no painel
 1. Abra **https://app.pagescms.org** e clique em **Entrar com GitHub**.
 2. Escolha o repositório **Kavmkt/lily-cestas**.
-3. No menu da esquerda você vê: **Produtos**, **Categorias**, **Estúdio ao vivo**, **Perguntas frequentes** e **Configurações da loja**.
+3. No menu da esquerda você vê: **Produtos**, **Categorias**, **Perguntas frequentes** e **Configurações da loja**.
 
 > O painel está em inglês nos botões: **Save** = Salvar, **Add an entry** = Adicionar, **Add an item** = Adicionar item, **Edit** = Editar. Os campos e as explicações estão em português.
 
@@ -43,9 +43,6 @@ No produto, clique em **Foto principal** e envie outra. **Salvar**.
 4. Depois, ao criar ou editar um produto, escolha essa categoria.
 
 A categoria aparece sozinha no site, nos filtros e no mapa do Google.
-
-## Estúdio ao vivo (montar presente)
-**Estúdio ao vivo** guarda as opções e os preços da montagem: base do presente, xícaras, peças 3D e Polaroids. Mude o **Preço** ou o **Nome** de cada opção. Não mude o **Código interno**.
 
 ## Perguntas frequentes e Configurações
 - **Perguntas frequentes**: adicione, edite ou remova perguntas.
