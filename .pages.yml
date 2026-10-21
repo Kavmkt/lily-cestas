@@ -206,6 +206,7 @@ content:
     fields:
       - { name: whatsapp, label: WhatsApp (com DDD, só números), type: string, description: Exemplo 5511914955434 }
       - { name: instagram, label: Link do Instagram, type: string }
+      - { name: ifood_url, label: Link da loja no iFood, type: string, description: Endereço da Lily Cestas no iFood. Aparece no bloco "Prefere comprar pelo iFood?". }
       - { name: pix_desconto, label: Desconto no Pix (%), type: number, description: Exemplo 5 }
       - { name: taxa_entrega, label: Taxa de entrega padrão (R$), type: number }
       - { name: brinde1_valor, label: Brinde 1 - pedido a partir de (R$), type: number }

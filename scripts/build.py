@@ -80,6 +80,7 @@ def to_number(value, where, required=True):
 # ---------------------------------------------------------------- dados
 config = {
     'loja_no_ar': False, 'whatsapp': '5511914955434', 'instagram': 'https://www.instagram.com/lilycestas.ofc/',
+    'ifood_url': 'https://www.ifood.com.br/delivery/santana-de-parnaiba-sp/lily-cestas--presentes-colinas-da-anhanguera/25073e59-c1d1-43a8-a317-7f5c948f97ab',
     'pix_desconto': 5, 'taxa_entrega': 15, 'brinde1_valor': 150, 'brinde1_nome': 'Chaveiro de brinde',
     'brinde2_valor': 200, 'brinde2_nome': 'Chaveiro personalizado com o seu nome',
     'foto_chaveiro_simples': '', 'foto_chaveiro_personalizado': '',
@@ -526,7 +527,7 @@ home_ld = jsonld(BUSINESS,
 repl = {
     'TITLE': esc(title), 'CANONICAL': f'<link rel="canonical" href="{BASE}{SHOP}">',
     'ROBOTS': f'<meta name="robots" content="{"index, follow, max-image-preview:large" if LOJA_NO_AR else "noindex, nofollow"}">',
-    'JSONLD': home_ld, 'WA': WA, 'INSTA': config['instagram'], 'PIX': str(int(config['pix_desconto'])), 'N': str(len(visible)),
+    'JSONLD': home_ld, 'WA': WA, 'INSTA': config['instagram'], 'IFOOD': config['ifood_url'], 'PIX': str(int(config['pix_desconto'])), 'N': str(len(visible)),
     'FOOTER_CATS': ''.join(f'<li><a href="/{c["pagina_url"]}/" class="hover:text-white hover:underline">{esc(c["nome"])}</a></li>' for c in cats_with if c.get('pagina_url')),
     'B1V': brl(config['brinde1_valor']).replace(',00', ''), 'HERO_CATS': hero_cats, 'HERO_IMG': hero_img, 'CAT_PILLS': pills, 'MIMOS_TEXT': mimos, 'REWARD_INIT': reward_init, 'DATA_JS': data_js,
     'OPT_BASES': ''.join(opt(o) for o in SIM['bases']), 'OPT_LOUCA': ''.join(opt(o) for o in SIM['louca']),
