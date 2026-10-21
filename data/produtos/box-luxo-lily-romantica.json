@@ -1,18 +1,14 @@
 {
-  "status": "ativo",
-  "ordem": 4,
-  "nome": "Box Luxo Lily Romântica",
+  "nome": "Box I Love You",
   "categoria": "cestas",
-  "preco": 224.9,
-  "preco_promocional": null,
+  "preco": 177.9,
+  "status": "ativo",
+  "foto": "/assets/produtos/Agrupar 9-1.png",
   "selo": "Edição Romântica",
-  "foto": "/assets/produtos/box-romantica.webp",
-  "descricao": "Box de presente personalizado para a ocasião. Combine os itens e os detalhes pelo WhatsApp.",
-  "personalizacao": "Nome e detalhes combinados pelo WhatsApp",
-  "inclui": [],
+  "descricao": "Box de presente personalizado",
+  "ordem": 2,
   "destaque": false,
   "quiz": [
-    "amor",
-    "iluminada"
+    "amor"
   ]
 }
