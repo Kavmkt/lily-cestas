@@ -1,19 +1,13 @@
 {
   "nome": "Cesta Pra Te Ver Sorrir ",
   "categoria": "cestas",
-  "preco": 219.9,
+  "preco": 174.9,
   "status": "ativo",
   "foto": "/assets/produtos/Agrupar 4.png",
   "alt": "Cesta Pra Te Ver Sorrir: caixa bolsa rosa e verde com urso de pelúcia, bombons e rosa",
   "selo": "DELICADEZA PURA",
   "descricao": "Cesta de presentes e chocolates com pelúcia, perfeita para surpreender em aniversários, momentos de carinho ou gestos especiais. Uma opção delicada e afetiva, montada à mão na elegante caixa bolsa rosa e verde com acabamento primoroso em fita de cetim.",
   "personalizacao": "Nome e detalhes combinados pelo WhatsApp",
-  "ordem": 4,
-  "destaque": false,
-  "quiz": [
-    "amor",
-    "amiga"
-  ],
   "inclui": [
     "1 Caixa bolsa rosa e verde",
     "1 Urso médio de pelúcia",
@@ -22,5 +16,11 @@
     "1 Rosa artificial",
     "1 metro de fita de cetim",
     "Folha de papel celofane e palha para enchimento, entregue na sacola"
+  ],
+  "ordem": 4,
+  "destaque": false,
+  "quiz": [
+    "amor",
+    "amiga"
   ]
 }
