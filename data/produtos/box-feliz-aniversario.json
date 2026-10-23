@@ -1,0 +1,12 @@
+{
+  "nome": "Box Feliz Aniversário",
+  "categoria": "cestas",
+  "preco": 135.9,
+  "status": "ativo",
+  "foto": "/assets/produtos/Prancheta 2.png",
+  "selo": "Mais Vendida",
+  "descricao": "Box Feliz Aniversário\nUma box cheia de festa para surpreender quem faz aniversário: balões coloridos, cookies, bombons Ferrero, bolo Bauducco, cappuccino e muito carinho em cada detalhe. Já vai pronta para presentear, com sacola.",
+  "personalizacao": "Nome e detalhes combinados pelo WhatsApp",
+  "ordem": 10,
+  "destaque": false
+}
