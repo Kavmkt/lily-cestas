@@ -1,0 +1,21 @@
+{
+  "nome": "Foto Polaroid Revelada",
+  "categoria": "3d-personalizados",
+  "preco": 9.9,
+  "status": "ativo",
+  "foto": "/assets/produtos/foto-polaroid-revelada.webp",
+  "alt": "Foto Polaroid revelada de um casal abraçado, apoiada sobre uma mesa de madeira",
+  "selo": "A PARTIR DE R$ 9,90",
+  "descricao": "Sua foto favorita revelada no clássico formato Polaroid, com moldura branca. Perfeita para guardar uma lembrança, decorar ou acompanhar uma cesta de presente.",
+  "inclui": [
+    "1 foto Polaroid revelada com a sua imagem"
+  ],
+  "personalizacao": "Foto enviada pelo WhatsApp",
+  "ordem": 4,
+  "destaque": false,
+  "quiz": [
+    "amor",
+    "amiga",
+    "iluminada"
+  ]
+}
