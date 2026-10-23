@@ -626,12 +626,7 @@ html {
           <ul id="modal-prod-includes" class="space-y-1"></ul>
         </div>
         <div class="space-y-3 pt-2 border-t border-[#F5E6EA]">
-          <div>
-            <label for="modal-custom-text" class="block text-xs font-display font-semibold text-[#382126] mb-1">
-              Personalização (<span id="modal-prod-hint" class="text-[#A65365]">Nome ou detalhes</span>):
-            </label>
-            <input id="modal-custom-text" type="text" placeholder="Digite o nome, iniciais 3D ou frase..." class="w-full rounded-xl border border-[#E5C2C9] px-3.5 py-2.5 text-xs sm:text-sm text-[#382126] focus:outline-none focus:border-[#C87888]" />
-          </div>
+          <p id="modal-prod-note" class="hidden text-[11px] leading-relaxed text-[#785860] bg-[#FDF8F9] border border-[#EED9DF] rounded-xl px-3 py-2">💬 Nome, frase ou foto da personalização você combina com a gente pelo <b>WhatsApp</b> depois de finalizar o pedido.</p>
           <div>
             <label for="modal-custom-color" class="block text-xs font-display font-semibold text-[#382126] mb-1">
               Observações do pedido (opcional):
@@ -1486,17 +1481,15 @@ html {
     const price = document.getElementById("modal-prod-price");
     const desc = document.getElementById("modal-prod-desc");
     const includesList = document.getElementById("modal-prod-includes");
-    const customHint = document.getElementById("modal-prod-hint");
+    const customNote = document.getElementById("modal-prod-note");
     const img = document.getElementById("modal-prod-img");
-    const inputText = document.getElementById("modal-custom-text");
 
     if (title) title.textContent = prod.name;
     if (cat) cat.textContent = prod.categoryLabel;
     if (price) price.textContent = formatBRL(prod.price);
     if (desc) desc.textContent = prod.shortDesc;
-    if (customHint) customHint.textContent = prod.customizable;
+    if (customNote) customNote.classList.toggle("hidden", !!prod.isBasket);
     if (img) img.src = prod.image;
-    if (inputText) inputText.value = "";
     if (includesList) {
       includesList.innerHTML = prod.includes.map(inc => `<li class="flex items-center gap-2 text-xs text-[#5A3D43]"><span class="text-[#C87888] font-bold">✓</span><span>${inc}</span></li>`).join("");
     }
@@ -1594,7 +1587,7 @@ html {
             name: prod.name,
             price: prod.price,
             qty: 1,
-            details: "Personalização: " + prod.customizable
+            details: prod.isBasket ? "Cesta montada pela Lily" : "Personalização a combinar no WhatsApp"
           });
           saveState();
           renderCart();
@@ -1936,14 +1929,13 @@ html {
     document.getElementById("confirm-prod-modal-btn")?.addEventListener("click", () => {
       const prod = state.activeModalProduct;
       if (!prod) return;
-      const customText = (document.getElementById("modal-custom-text")?.value || "").trim();
       const customColor = (document.getElementById("modal-custom-color")?.value || "").trim();
       state.cart.push({
         id: prod.id + "-" + Date.now(),
         name: prod.name,
         price: prod.price,
         qty: 1,
-        details: `${customText ? `Personalização: "${customText}"` : "Detalhes a combinar no WhatsApp"}${customColor ? ` • Obs.: ${customColor}` : ""}`
+        details: `${prod.isBasket ? "Cesta montada pela Lily" : "Personalização a combinar no WhatsApp"}${customColor ? ` • Obs.: ${customColor}` : ""}`
       });
       document.querySelectorAll("[data-addon-check]:checked").forEach(cb => {
         const id = cb.getAttribute("data-addon-check");
