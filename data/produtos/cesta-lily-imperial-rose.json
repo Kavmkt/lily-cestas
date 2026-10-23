@@ -4,15 +4,25 @@
   "preco": 171.99,
   "status": "ativo",
   "foto": "/assets/produtos/Agrupar 3.png",
-  "alt": "Cesta de presente Box Black Pra Você, pensada para quem busca surpreender com petiscos selecionados, chocolates e uma apresentação moderna em Alphaville e região. Uma opção completa para presentes de aniversário, agradecimento ou momentos especiais, reunindo guloseimas doces, salgadas e itens afetivos preparados com todo o cuidado artesanal da Lily Cestas.  O que compõe a Box:  2 Sujinhos premium  1 Pote de Nutella  1 Biscoito Nutella  1 Chocolate Trento  1 Salgadinho Doritos  1 Mini refrigerante  1 Colher em formato de coração  1 Kit balão colorido grande  1 Cartão personalizado impresso com a sua mensagem  Caixa preta especial com a frase \"Pra Você\", protegida por folha de papel celofane e palha para enchimento, entregue na sacola  Envie sua mensagem no campo de observações do pedido para imprimirmos no cartão.",
+  "alt": "Box Black Pra Você: caixa preta com Nutella, chocolates, salgadinho e balões",
   "selo": "Mais Vendida",
-  "descricao": "Cesta de presente Box Black Pra Você, ideal para surpreender em aniversários e momentos especiais com entrega rápida em Alphaville e região. A montagem artesanal reúne itens selecionados em uma elegante caixa preta de presente",
+  "descricao": "Cesta de presente para quem busca surpreender com petiscos selecionados, chocolates e uma apresentação moderna. Uma opção completa para aniversário, agradecimento ou momentos especiais, reunindo guloseimas doces, salgadas e itens afetivos preparados com todo o cuidado artesanal. Envie sua mensagem no campo de observações do pedido para imprimirmos no cartão.",
   "inclui": [
-    "2 Sujinhos premium  1 Pote de Nutella  1 Biscoito de Nutella  1 Trento  1 Salgadinho Doritos  1 Mini refrigerante  1 Colher em formato de coração  1 Kit balão colorido grande  1 Cartão personalizado impresso com a sua mensagem  Caixa preta especial com acabamento em celofane e palha decorativa, entregue em sacola exclusiva"
+    "2 Sujinhos premium",
+    "1 Pote de Nutella",
+    "1 Biscoito Nutella",
+    "1 Chocolate Trento",
+    "1 Salgadinho Doritos",
+    "1 Mini refrigerante",
+    "1 Colher em formato de coração",
+    "1 Kit balão colorido grande",
+    "1 Cartão personalizado impresso com a sua mensagem",
+    "Caixa preta especial com a frase \"Pra Você\", com celofane e palha decorativa, entregue em sacola"
   ],
   "ordem": 1,
   "destaque": true,
   "quiz": [
     "completa"
-  ]
+  ],
+  "personalizacao": "Nome e detalhes combinados pelo WhatsApp"
 }
