@@ -1,17 +1,13 @@
 {
   "nome": "Box I Love You",
   "categoria": "cestas",
-  "preco": 177.9,
+  "preco": 147.9,
   "status": "ativo",
   "foto": "/assets/produtos/Agrupar 9-1.png",
   "alt": "Box I Love You: caixa branca com acabamento 3D, balões e chocolates",
   "selo": "Edição Romântica",
   "descricao": "Cesta de presentes e chocolates ideal para surpreender a pessoa amada em aniversários de namoro, datas românticas ou momentos a dois. A montagem artesanal reúne guloseimas selecionadas na sofisticada caixa branca com acabamento 3D.",
-  "ordem": 2,
-  "destaque": false,
-  "quiz": [
-    "amor"
-  ],
+  "personalizacao": "Nome e detalhes combinados pelo WhatsApp",
   "inclui": [
     "1 Sujinho premium",
     "1 Box branco I Love You 3D",
@@ -23,5 +19,9 @@
     "1 Cappuccino",
     "Folha de papel celofane e palha para enchimento, entregue na sacola"
   ],
-  "personalizacao": "Nome e detalhes combinados pelo WhatsApp"
+  "ordem": 2,
+  "destaque": false,
+  "quiz": [
+    "amor"
+  ]
 }
