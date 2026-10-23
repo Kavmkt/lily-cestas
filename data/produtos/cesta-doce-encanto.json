@@ -1,19 +1,13 @@
 {
   "nome": "Box Premium Pra Você",
   "categoria": "cestas",
-  "preco": 264.9,
+  "preco": 214.9,
   "status": "ativo",
   "foto": "/assets/produtos/Agrupar 7-1.png",
   "alt": "Box Premium Pra Você: caixa redonda rígida com vinho, taça e chocolates",
   "selo": "PREMIUM",
   "descricao": "Cesta de presentes e vinho, perfeita para celebrar aniversários, conquistas ou momentos especiais. Uma opção sofisticada montada de forma artesanal na caixa redonda rígida, com a combinação clássica de vinho e chocolates finos para brindar e emocionar. Envie sua mensagem no campo de observações do pedido para imprimirmos no cartão.",
   "personalizacao": "Nome e detalhes combinados pelo WhatsApp",
-  "ordem": 3,
-  "destaque": true,
-  "quiz": [
-    "amiga",
-    "amor"
-  ],
   "inclui": [
     "1 Caixa rígida redonda premium",
     "1 Garrafa de vinho",
@@ -23,5 +17,11 @@
     "1 Cartão personalizado impresso com a sua mensagem",
     "2 metros de fita de cetim",
     "Folha de papel celofane e palha para enchimento, entregue na sacola"
+  ],
+  "ordem": 3,
+  "destaque": true,
+  "quiz": [
+    "amiga",
+    "amor"
   ]
 }
