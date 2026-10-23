@@ -217,7 +217,7 @@ html {
 .cat img{display:block;width:100%;aspect-ratio:4/3;object-fit:cover}.cat .ct{display:block;padding:10px 12px 12px}.cat b{display:block;font:600 14px/1.2 'Montserrat',sans-serif;color:var(--ink)}.cat small{font:500 12px 'Plus Jakarta Sans',sans-serif;color:var(--rose-d)}
 .sec-h{font:300 clamp(24px,4.4vw,38px)/1.15 'Montserrat',sans-serif;letter-spacing:-.02em;color:var(--ink)}.sec-h b{font-weight:600;color:var(--rose-d)}
 /* catálogo compacto */
-.ccont{background:#fff;border:1px solid var(--line);border-radius:28px;padding:20px;margin-bottom:24px}@media(min-width:900px){.ccont{padding:28px}}.cgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}@media(min-width:900px){.cgrid{grid-template-columns:repeat(4,minmax(0,1fr));gap:20px}}
+.ccont{background:#fff;border:1px solid var(--line);border-radius:28px;padding:20px;margin-bottom:24px}@media(min-width:900px){.ccont{padding:28px}}@media(max-width:899px){.cap6>.pcard:nth-child(n+7){display:none}}.cgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}@media(min-width:900px){.cgrid{grid-template-columns:repeat(4,minmax(0,1fr));gap:20px}}
 #catalog-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}@media(min-width:900px){#catalog-grid{grid-template-columns:repeat(4,minmax(0,1fr));gap:20px}}
 .pcard{background:#fff;border:1px solid var(--line);border-radius:20px;overflow:hidden;display:flex;flex-direction:column;transition:.25s}.pcard:hover{box-shadow:0 18px 34px -22px rgba(166,83,101,.65);transform:translateY(-2px)}
 .pimg{position:relative}.pimg img{display:block;width:100%;aspect-ratio:1/1;object-fit:cover}
@@ -1133,8 +1133,6 @@ html {
         </article>`;
   }
 
-  const PER_CONTAINER = 4;
-
   function renderCatalog() {
     const grid = document.getElementById("catalog-grid");
     const countEl = document.getElementById("catalog-count");
@@ -1206,14 +1204,21 @@ html {
     if (sections) {
       if (countBox) countBox.classList.add("hidden");
       grid.style.display = "block";
-      grid.innerHTML = CATS.map(c => {
-        const items = PRODUCTS.filter(p => p.category === c.key);
-        const shown = items.slice(0, PER_CONTAINER);
+      const baskets = CATS.filter(c => c.basket);
+      const others = CATS.filter(c => !c.basket);
+      const groups = [
+        ...baskets.map(c => ({ cats: [c.key], icon: c.icon, title: c.label, sub: c.sub, limit: 12, cap: true, moreLabel: c.label })),
+        ...(others.length ? [{ cats: others.map(c => c.key), icon: "✨", title: "3D, Xícaras e Personalizados", sub: "Peças em impressão 3D, xícaras e itens com nome para presentear.", limit: 8, cap: false, moreLabel: "personalizados" }] : [])
+      ];
+      grid.innerHTML = groups.map(g => {
+        const items = PRODUCTS.filter(p => g.cats.includes(p.category));
+        const shown = items.slice(0, g.limit);
         const body = shown.length
-          ? `<div class="cgrid">${shown.map(pcardHtml).join("")}</div>`
-          : `<div class="bg-white rounded-3xl p-8 text-center border border-[#EED9DF]"><p class="font-display font-semibold text-[#382126] mb-1">Novidades chegando em breve</p><p class="text-xs text-[#785860] mb-4">Quer algo desta linha agora? Chame a gente no WhatsApp.</p><a href="https://wa.me/{{WA}}" target="_blank" rel="noopener" class="inline-block px-5 py-2.5 rounded-full bg-[#B36273] text-white text-xs font-display font-semibold">Falar no WhatsApp</a></div>`;
-        const more = items.length ? `<div class="text-center mt-5"><a href="/catalogo/#cat-${c.key}" class="inline-block px-6 py-2.5 rounded-full bg-white text-[#A65365] border-2 border-[#C87888] font-display font-semibold text-xs sm:text-sm hover:bg-[#FDF2F5] transition-all">Ver mais em ${c.label} →</a></div>` : "";
-        return `<div class="ccont"><div class="mb-4"><h3 class="font-display font-semibold text-xl sm:text-2xl text-[#382126]">${c.icon} ${c.label}</h3>${c.sub ? `<p class="text-xs sm:text-sm text-[#785860] mt-1">${c.sub}</p>` : ""}</div>${body}${more}</div>`;
+          ? `<div class="cgrid${g.cap ? " cap6" : ""}">${shown.map(pcardHtml).join("")}</div>`
+          : `<div class="bg-[#FDF8F9] rounded-3xl p-8 text-center border border-[#EED9DF]"><p class="font-display font-semibold text-[#382126] mb-1">Novidades chegando em breve</p><p class="text-xs text-[#785860] mb-4">Quer algo desta linha agora? Chame a gente no WhatsApp.</p><a href="https://wa.me/{{WA}}" target="_blank" rel="noopener" class="inline-block px-5 py-2.5 rounded-full bg-[#B36273] text-white text-xs font-display font-semibold">Falar no WhatsApp</a></div>`;
+        const first = (items[0] && items[0].category) || g.cats[0];
+        const more = items.length ? `<div class="text-center mt-5"><a href="/catalogo/#cat-${first}" class="inline-block px-6 py-2.5 rounded-full bg-white text-[#A65365] border-2 border-[#C87888] font-display font-semibold text-xs sm:text-sm hover:bg-[#FDF2F5] transition-all">Ver mais ${g.moreLabel} →</a></div>` : "";
+        return `<div class="ccont"><div class="mb-4"><h3 class="font-display font-semibold text-xl sm:text-2xl text-[#382126]">${g.icon} ${g.title}</h3>${g.sub ? `<p class="text-xs sm:text-sm text-[#785860] mt-1">${g.sub}</p>` : ""}</div>${body}${more}</div>`;
       }).join("");
       return;
     }

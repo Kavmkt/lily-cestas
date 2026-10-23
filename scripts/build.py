@@ -542,7 +542,7 @@ for p in visible:
         'order': p['ordem'], 'soldOut': p['status'] == 'esgotado', 'isBasket': bool(p['_cat'].get('eh_cesta'))})
 addons_js = [{'id': a['id'], 'name': a['nome'], 'desc': a['descricao'], 'price': a['_promo'] or a['preco'],
               'priceOriginal': a['preco'] if a['_promo'] else None, 'image': a['_img'], 'ask': a['pede']} for a in addons]
-cats_js = [{'key': c['chave'], 'label': c['nome'], 'sub': c.get('frase_apoio') or '', 'icon': c.get('icone') or ''} for c in cats_home]
+cats_js = [{'key': c['chave'], 'label': c['nome'], 'sub': c.get('frase_apoio') or '', 'icon': c.get('icone') or '', 'basket': bool(c.get('eh_cesta'))} for c in cats_home]
 hotspots = {}
 for i, c in enumerate(cats_with):
     ps = cat_prods[c['chave']]
