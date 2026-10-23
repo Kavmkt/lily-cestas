@@ -1,0 +1,22 @@
+{
+  "nome": "Kit 2 Porta-Retratos Polaroid + 2 Fotos Reveladas",
+  "categoria": "3d-personalizados",
+  "preco": 39.9,
+  "status": "ativo",
+  "foto": "/assets/produtos/kit-porta-retratos-polaroid.webp",
+  "alt": "Dois porta-retratos vermelhos para mini Polaroid, um com coração e outro com I Love You, com fotos de casal",
+  "selo": "COMBO",
+  "descricao": "Combo com 2 porta-retratos para mini Polaroid em impressão 3D, um com coração e outro com a frase I Love You, acompanhados de 2 fotos Polaroid reveladas com as suas lembranças. Um presente romântico para deixar em qualquer cantinho.",
+  "inclui": [
+    "2 porta-retratos para mini Polaroid (coração e I Love You)",
+    "2 fotos Polaroid reveladas"
+  ],
+  "personalizacao": "Fotos enviadas pelo WhatsApp",
+  "ordem": 3,
+  "destaque": false,
+  "quiz": [
+    "amor",
+    "amiga",
+    "iluminada"
+  ]
+}
