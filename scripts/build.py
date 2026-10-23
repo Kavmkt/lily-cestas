@@ -296,12 +296,12 @@ BUSINESS = {
     '@type': ['Store', 'LocalBusiness'], '@id': BASE + '/#negocio', 'name': 'Lily Cestas',
     'alternateName': 'Lily Cestas & Atelier Personalizados', 'url': BASE + '/',
     'image': BASE + '/assets/img/og-lily-cestas.jpg', 'logo': BASE + '/assets/img/icon-512.png',
-    'description': 'Atelier de cestas de presente, cestas de café da manhã e xícaras e canecas personalizadas em Santana de Parnaíba, SP.',
+    'description': 'Atelier de cestas de presente, cestas de café da manhã, canecas personalizadas e presentes em 3D em Santana de Parnaíba, SP. Entregas em Santana de Parnaíba, Alphaville, Barueri, Cajamar, Osasco e Carapicuíba.',
     'priceRange': f'R${int(PRECO_MIN)} - R${int(max(final_price(p) for p in visible))}',
     'telephone': phone,
     'contactPoint': {'@type': 'ContactPoint', 'telephone': phone, 'contactType': 'customer service', 'availableLanguage': 'Portuguese', 'url': f'https://wa.me/{WA}'},
     'address': {'@type': 'PostalAddress', 'addressLocality': 'Santana de Parnaíba', 'addressRegion': 'SP', 'addressCountry': 'BR'},
-    'areaServed': [{'@type': 'City', 'name': n} for n in ['Santana de Parnaíba', 'Barueri', 'Cajamar']] + [{'@type': 'Place', 'name': 'Alphaville'}],
+    'areaServed': [{'@type': 'City', 'name': n} for n in ['Santana de Parnaíba', 'Barueri', 'Cajamar', 'Osasco', 'Carapicuíba']] + [{'@type': 'Place', 'name': 'Alphaville'}],
     'sameAs': [config['instagram']],
     'openingHoursSpecification': [{'@type': 'OpeningHoursSpecification', 'dayOfWeek': ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'], 'opens': '08:00', 'closes': '19:00'}],
 }
@@ -359,7 +359,7 @@ def footer_html():
     cat_li = ''.join(f'<li><a href="/{c["pagina_url"]}/">{esc(c["nome"])}</a></li>' for c in cats_with if c.get('pagina_url'))
     city_li = ''.join(f'<li><a href="/{x["slug"]}/">Presentes em {x["cidade"]}</a></li>' for x in CITIES)
     return f'''<footer class="foot"><div class="wrap grid">
-<div><strong>Lily Cestas</strong><p>Atelier de cestas de presente e xícaras personalizadas. Santana de Parnaíba, SP.</p><p><a href="https://wa.me/{WA}" rel="noopener" target="_blank">WhatsApp {phone}</a><br><a href="{config['instagram']}" rel="noopener" target="_blank">Instagram @lilycestas.ofc</a></p></div>
+<div><strong>Lily Cestas</strong><p>Atelier de cestas de presente, canecas e peças personalizadas. Santana de Parnaíba, SP.</p><p><a href="https://wa.me/{WA}" rel="noopener" target="_blank">WhatsApp {phone}</a><br><a href="{config['instagram']}" rel="noopener" target="_blank">Instagram @lilycestas.ofc</a></p></div>
 <div><strong>Nossos presentes</strong><ul>{cat_li}</ul></div>
 <div><strong>Onde entregamos</strong><ul>{city_li}</ul></div>
 </div><p class="copy">© {datetime.date.today().year} Lily Cestas &amp; Atelier Personalizados.</p></footer>
@@ -401,14 +401,16 @@ def page_html(path, title, desc, h1, intro, blocks, plist, faq_items, trail, ext
 
 CITIES = [
     dict(slug='cestas-de-presente-santana-de-parnaiba', cidade='Santana de Parnaíba',
-         title='Cestas de Presente em Santana de Parnaíba | Lily Cestas',
-         desc='Cestas de presente, café da manhã e xícaras personalizadas em Santana de Parnaíba, SP. Entregamos em Santana de Parnaíba e região. Peça pelo site.',
+         title='Cestas de Presente em Santana de Parnaíba | Café da Manhã e Personalizados',
+         desc='Cestas de presente, café da manhã, canecas personalizadas e presentes em 3D em Santana de Parnaíba, SP. Atelier local, pedido pelo site e Pix com desconto.',
          h1='Cestas de Presente e Café da Manhã em Santana de Parnaíba',
-         intro='A Lily Cestas é um atelier de presentes de Santana de Parnaíba, em São Paulo. Montamos cestas de presente, cestas de café da manhã e xícaras e canecas personalizadas.',
-         blocks=[('Presentes para o Centro Histórico, Fazendinha e outras regiões da cidade', 'Atendemos moradores de Santana de Parnaíba que querem surpreender família, amigos e quem mora longe, e também quem trabalha na cidade. Para o Centro Histórico, a Fazendinha, o Suru e demais bairros, informe o CEP no checkout para confirmarmos a entrega.'),
-                 ('Entrega combinada pelo WhatsApp', 'Depois de escolher o presente, combinamos a data e o horário da entrega pelo WhatsApp, conforme a disponibilidade. Para pedidos com personalização, combine também os detalhes e o prazo.'),
-                 ('Datas em que mais encomendam por aqui', 'Aniversário, Dia das Mães, Dia dos Namorados, Natal, nascimento de bebê, formatura e agradecimento a professores e equipes. Se o prazo estiver curto, chame no WhatsApp para vermos o que dá para fazer.')],
-         vizinhas=['alphaville', 'barueri', 'cajamar']),
+         intro='A Lily Cestas nasceu em Santana de Parnaíba. Aqui o atelier monta cestas de presente, cestas de café da manhã, boxes com chocolates, canecas com nome e peças personalizadas em 3D, tudo feito à mão e entregue com carinho.',
+         blocks=[('Um atelier da cidade, perto de você', 'Somos de Santana de Parnaíba e conhecemos a região: do Centro Histórico à Fazendinha, do Suru ao Colinas da Anhanguera e aos condomínios do entorno. Informe o CEP no checkout e confirmamos a entrega para o seu endereço.'),
+                 ('Presentes para quem mora aqui e para quem mora longe', 'Quer surpreender a família em Santana de Parnaíba estando em outra cidade? Escolha a cesta, informe o endereço de quem vai receber e a mensagem do cartão, e a gente cuida do resto.'),
+                 ('Cesta de café da manhã, box com chocolates ou algo personalizado', 'Cestas de café da manhã para aniversário e agradecimento, boxes com chocolates e pelúcia para namorados e amigos, canecas com nome e peças em 3D, como luminária com foto e kits Polaroid. Veja tudo abaixo e adicione ao pedido em poucos cliques.'),
+                 ('Como pedir', 'Escolha o presente, clique em Adicionar e finalize em 3 etapas. Nome, frase e fotos da personalização são combinados pelo WhatsApp depois do pedido. Pagando no Pix, você tem desconto automático.'),
+                 ('Datas em que mais encomendam por aqui', 'Aniversário, Dia das Mães, Dia dos Namorados, Natal, nascimento de bebê, formatura e agradecimento a professores e equipes. Em datas especiais, peça com antecedência; se o prazo estiver curto, chame no WhatsApp para vermos o que dá para fazer.')],
+         vizinhas=['alphaville', 'barueri', 'cajamar', 'osasco', 'carapicuiba']),
     dict(slug='cestas-de-presente-alphaville', cidade='Alphaville',
          title='Cestas de Presente em Alphaville e Barueri | Lily Cestas',
          desc='Cestas de presente, café da manhã e xícaras personalizadas para Alphaville, Tamboré e região. Escolha no site e combine a entrega pelo WhatsApp.',
@@ -435,8 +437,26 @@ CITIES = [
          blocks=[('Como pedir de Cajamar', 'Escolha o presente e finalize o checkout em 3 etapas. Informe o bairro e o CEP, como Polvilho, Jordanésia ou outras regiões, e confirmamos a entrega e a taxa antes de seguir com o pedido.'),
                  ('Atendimento pelo WhatsApp', 'Dúvidas sobre prazo, personalização ou entrega? Chame no WhatsApp. Respondemos e combinamos os detalhes do seu pedido.')],
          vizinhas=['santana-de-parnaiba', 'alphaville', 'barueri']),
+    dict(slug='cestas-de-presente-osasco', cidade='Osasco',
+         title='Cestas de Presente em Osasco | Café da Manhã e Personalizados',
+         desc='Cestas de presente, café da manhã, canecas personalizadas e presentes em 3D para Osasco, SP. Escolha no site e confirme a entrega pelo CEP.',
+         h1='Cestas de Presente e Café da Manhã em Osasco',
+         intro='Atendemos Osasco com cestas de presente, cestas de café da manhã, boxes com chocolates, canecas com nome e presentes personalizados. Você escolhe no site e combina os detalhes pelo WhatsApp.',
+         blocks=[('Como receber em Osasco', 'Escolha o presente, finalize o pedido e informe o CEP no checkout. Conferimos na hora se entregamos no seu endereço e combinamos o horário pelo WhatsApp.'),
+                 ('Presente para quem você ama, do jeito que ela merece', 'De cestas de café da manhã a boxes românticos e canecas com nome, temos opções para aniversário, namoro, agradecimento e datas como Dia das Mães e Natal.'),
+                 ('Personalização combinada pelo WhatsApp', 'Nome na caneca, frase no cartão ou foto Polaroid: depois do pedido, você envia os detalhes pelo WhatsApp e confirmamos tudo antes de produzir.')],
+         vizinhas=['carapicuiba', 'barueri', 'santana-de-parnaiba']),
+    dict(slug='cestas-de-presente-carapicuiba', cidade='Carapicuíba',
+         title='Cestas de Presente em Carapicuíba | Café da Manhã e Personalizados',
+         desc='Cestas de presente, café da manhã, canecas personalizadas e presentes em 3D para Carapicuíba, SP. Escolha no site e confirme a entrega pelo CEP.',
+         h1='Cestas de Presente e Café da Manhã em Carapicuíba',
+         intro='Atendemos Carapicuíba com cestas de presente, café da manhã, boxes com chocolates, canecas com nome e presentes personalizados, feitos à mão pelo atelier.',
+         blocks=[('Como receber em Carapicuíba', 'Escolha o presente, finalize o pedido e informe o CEP no checkout. Conferimos na hora se entregamos no seu endereço e combinamos o horário pelo WhatsApp.'),
+                 ('Opções para todos os orçamentos', f'O catálogo tem presentes a partir de {brl(PRECO_MIN)}. Use o Concierge para receber uma indicação pela pessoa e pelo valor que você quer investir.'),
+                 ('Personalização combinada pelo WhatsApp', 'Nome na caneca, frase no cartão ou foto Polaroid: depois do pedido, você envia os detalhes pelo WhatsApp e confirmamos tudo antes de produzir.')],
+         vizinhas=['osasco', 'barueri', 'santana-de-parnaiba']),
 ]
-CITIES[3]['vizinhas'] = ['santana-de-parnaiba', 'alphaville', 'barueri']
+CITIES[3]['vizinhas'] = ['santana-de-parnaiba', 'alphaville', 'barueri', 'osasco']
 CITY_BY = {c['slug'].replace('cestas-de-presente-', ''): c for c in CITIES}
 FAQ_COMMON = faq
 
@@ -449,7 +469,7 @@ for c in cats_with:
     prices = [final_price(p) for p in ps]
     items = [
         (f'Quanto custa {c["nome"].lower()} na Lily Cestas?', f'Os preços do catálogo vão de {brl(min(prices))} a {brl(max(prices))} nesta categoria. O valor final pode variar conforme os detalhes combinados pelo WhatsApp.'),
-        ('Vocês entregam em Alphaville, Barueri, Santana de Parnaíba e Cajamar?', 'Atendemos essas cidades. Informe o CEP no checkout para confirmarmos a disponibilidade, o horário e a taxa de entrega.'),
+        ('Vocês entregam na minha região?', 'Atendemos Santana de Parnaíba, Alphaville, Barueri, Cajamar, Osasco e Carapicuíba. Informe o CEP no checkout e conferimos na hora a entrega e a taxa.'),
         ('Posso combinar os detalhes antes da produção?', 'Sim. Nome, frase e demais detalhes são combinados pelo WhatsApp antes de seguirmos com o pedido.'),
     ] + FAQ_COMMON[-1:]
     rel = '<section class="rel"><h2>Outras linhas e cidades atendidas</h2><p>' + ''.join(
@@ -485,7 +505,7 @@ cat_ld = [{'@type': 'CollectionPage', 'name': 'Catálogo completo Lily Cestas', 
            'mainEntity': {'@type': 'ItemList', 'itemListElement': [{'@type': 'ListItem', 'position': i + 1, 'item': prod_ld(p)} for i, p in enumerate(visible)]}}]
 rel_cat = '<section class="rel"><h2>Cidades atendidas</h2><p>' + ''.join(f'<a href="/{x["slug"]}/">{x["cidade"]}</a>' for x in CITIES) + '</p></section>'
 faq_cat = ''.join(f'<details><summary>{esc(q)}</summary><p>{esc(a)}</p></details>' for q, a in cat_items)
-write_page(cat_path, head('Catálogo de Cestas e Presentes Personalizados | Lily Cestas', 'Veja todas as cestas de presente, cestas de café da manhã, xícaras e presentes personalizados da Lily Cestas. Entregas em Santana de Parnaíba, Alphaville, Barueri e Cajamar.', cat_path)
+write_page(cat_path, head('Catálogo de Cestas e Presentes Personalizados | Lily Cestas', 'Veja todas as cestas de presente, cestas de café da manhã, xícaras e presentes personalizados da Lily Cestas. Entregas em Santana de Parnaíba, Alphaville, Barueri, Cajamar, Osasco e Carapicuíba.', cat_path)
            + jsonld(BUSINESS, crumb_ld([('Início', '/'), ('Catálogo', cat_path)]), faq_ld(cat_items), *cat_ld) + '''
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap" rel="stylesheet">
@@ -582,8 +602,8 @@ pills = '\n          '.join(f'<button type="button" data-cat-filter="{c["chave"]
 mimos = f'<p class="text-xs text-white/90">Em compras a partir de <strong>{brl(config["brinde1_valor"]).replace(",00", "")}</strong> você ganha {esc(config["brinde1_nome"])}!</p>'
 reward_init = f'Compre a partir de {brl(config["brinde1_valor"])} e ganhe {esc(config["brinde1_nome"])}!'
 
-title = 'Cestas de Presente em Santana de Parnaíba e Alphaville | Lily Cestas'
-desc_home = 'Cestas de presente, cestas de café da manhã e xícaras personalizadas. Santana de Parnaíba, Alphaville, Barueri e Cajamar.'
+title = 'Cestas de Presente e Presentes Personalizados | Lily Cestas'
+desc_home = 'Cestas de presente, café da manhã, canecas com nome e presentes em 3D. Escolha no site, personalize pelo WhatsApp e receba em casa.'
 home_ld = jsonld(BUSINESS,
                  {'@type': 'WebSite', '@id': BASE + '/#site', 'url': BASE + '/', 'name': 'Lily Cestas', 'inLanguage': 'pt-BR', 'publisher': {'@id': BASE + '/#negocio'}},
                  {'@type': 'ItemList', 'name': 'Catálogo Lily Cestas', 'itemListElement': [{'@type': 'ListItem', 'position': i + 1, 'item': prod_ld(p)} for i, p in enumerate(visible)]},
@@ -592,6 +612,8 @@ repl = {
     'TITLE': esc(title), 'CANONICAL': f'<link rel="canonical" href="{BASE}{SHOP}">',
     'ROBOTS': f'<meta name="robots" content="{"index, follow, max-image-preview:large" if LOJA_NO_AR else "noindex, nofollow"}">',
     'JSONLD': home_ld, 'WA': WA, 'INSTA': config['instagram'], 'IFOOD': config['ifood_url'], 'PIX': str(int(config['pix_desconto'])), 'N': str(len(visible)),
+    'HOME_LINKS': ''.join(f'<a href="/{c["pagina_url"]}/" class="p-4 rounded-2xl border border-[#EED9DF] bg-[#FDF8F9] hover:bg-white text-sm font-display font-semibold text-[#A65365]">{esc(c["nome"])} →</a>' for c in cats_with if c.get('pagina_url')) + '<a href="/catalogo/" class="p-4 rounded-2xl border border-[#EED9DF] bg-[#FDF8F9] hover:bg-white text-sm font-display font-semibold text-[#A65365]">Catálogo completo →</a>',
+    'CIDADES_JSON': json.dumps([x for x in (config.get('cidades_entrega') or []) if x], ensure_ascii=False),
     'FOOTER_CATS': ''.join(f'<li><a href="/{c["pagina_url"]}/" class="hover:text-white hover:underline">{esc(c["nome"])}</a></li>' for c in cats_with if c.get('pagina_url')),
     'B1V': brl(config['brinde1_valor']).replace(',00', ''), 'HERO_CATS': hero_cats, 'HERO_IMG': hero_img, 'CAT_PILLS': pills, 'MIMOS_TEXT': mimos, 'REWARD_INIT': reward_init, 'DATA_JS': data_js,
     'OPT_BASES': ''.join(opt(o) for o in SIM['bases']), 'OPT_LOUCA': ''.join(opt(o) for o in SIM['louca']),

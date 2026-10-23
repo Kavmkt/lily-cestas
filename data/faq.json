@@ -1,20 +1,24 @@
 {
   "perguntas": [
     {
-      "pergunta": "Posso comprar só a xícara ou caneca, sem a cesta?",
-      "resposta": "Pode. Você escolhe entre as cestas e boxes prontos ou as xícaras e canecas personalizadas avulsas. Fale com a gente pelo WhatsApp para combinar nome e detalhes."
+      "pergunta": "Posso comprar só a caneca, sem a cesta?",
+      "resposta": "Pode. Você escolhe entre as cestas e boxes prontos ou as canecas e presentes personalizados avulsos. Nome e detalhes são combinados pelo WhatsApp depois do pedido."
     },
     {
-      "pergunta": "Como funcionam as entregas agendadas?",
-      "resposta": "Fazemos entregas agendadas a partir das 06h30 da manhã, inclusive para o mesmo dia ou dia seguinte, conforme a disponibilidade. Informe o CEP no checkout e confirmamos horário e taxa para o seu endereço."
+      "pergunta": "Como funciona a entrega?",
+      "resposta": "Informe o CEP no checkout e conferimos na hora se entregamos no seu endereço. O dia e o horário são combinados pelo WhatsApp, conforme a agenda do atelier."
     },
     {
-      "pergunta": "Vocês entregam em Santana de Parnaíba, Alphaville, Barueri e Cajamar?",
-      "resposta": "Sim. Atendemos essas cidades. Informe o CEP no checkout para confirmarmos a disponibilidade, o horário e a taxa de entrega."
+      "pergunta": "Em quais cidades vocês entregam?",
+      "resposta": "Atendemos Santana de Parnaíba, Alphaville, Barueri, Cajamar, Osasco e Carapicuíba. Se a sua cidade não estiver na lista, chame no WhatsApp para vermos o que é possível."
     },
     {
       "pergunta": "Como faço o pedido e o pagamento?",
-      "resposta": "Escolha o presente, finalize o checkout em 3 etapas e envie o protocolo do pedido pelo WhatsApp. O pagamento pode ser feito por Pix, com desconto, ou combinado no atendimento."
+      "resposta": "Escolha o presente, finalize o checkout em 3 etapas e envie o pedido pelo WhatsApp. No Pix você tem desconto automático; outras formas de pagamento são combinadas no atendimento."
+    },
+    {
+      "pergunta": "Como funciona a personalização?",
+      "resposta": "Depois do pedido, você envia pelo WhatsApp o nome, a frase ou as fotos, e confirmamos tudo antes de produzir."
     }
   ]
 }
