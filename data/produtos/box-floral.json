@@ -1,15 +1,13 @@
 {
   "nome": "Box Floral",
   "categoria": "cestas",
-  "preco": 199.9,
+  "preco": 163.9,
   "status": "ativo",
   "foto": "/assets/produtos/Agrupar 6-1.png",
   "alt": "Box Floral: caixa em formato envelope com estampa floral, chocolates e ursinho chaveiro de pelúcia",
   "selo": "DELICADEZA PURA",
-  "personalizacao": "Nome e detalhes combinados pelo WhatsApp",
-  "ordem": 6,
-  "destaque": false,
   "descricao": "Cesta de presentes e chocolates com mini chaveiro de pelúcia, perfeita para surpreender em aniversários, momentos de carinho ou gestos especiais. Um mimo delicado e afetuoso, montado à mão na elegante caixa em formato envelope com estampa floral, reunindo chocolates selecionados e uma lembrança adorável.",
+  "personalizacao": "Nome e detalhes combinados pelo WhatsApp",
   "inclui": [
     "1 Caixa envelope floral",
     "1 Ursinho chaveirinho de pelúcia",
@@ -19,5 +17,7 @@
     "1 Chocolate KitKat",
     "2 Chocolates Trento",
     "Folha de papel celofane e palha para enchimento, entregue na sacola"
-  ]
+  ],
+  "ordem": 6,
+  "destaque": false
 }
