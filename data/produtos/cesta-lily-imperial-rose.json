@@ -1,12 +1,13 @@
 {
   "nome": "Box black pra você",
   "categoria": "cestas",
-  "preco": 171.99,
+  "preco": 143.9,
   "status": "ativo",
   "foto": "/assets/produtos/Agrupar 3.png",
   "alt": "Box Black Pra Você: caixa preta com Nutella, chocolates, salgadinho e balões",
   "selo": "Mais Vendida",
   "descricao": "Cesta de presente para quem busca surpreender com petiscos selecionados, chocolates e uma apresentação moderna. Uma opção completa para aniversário, agradecimento ou momentos especiais, reunindo guloseimas doces, salgadas e itens afetivos preparados com todo o cuidado artesanal. Envie sua mensagem no campo de observações do pedido para imprimirmos no cartão.",
+  "personalizacao": "Nome e detalhes combinados pelo WhatsApp",
   "inclui": [
     "2 Sujinhos premium",
     "1 Pote de Nutella",
@@ -23,6 +24,5 @@
   "destaque": true,
   "quiz": [
     "completa"
-  ],
-  "personalizacao": "Nome e detalhes combinados pelo WhatsApp"
+  ]
 }
