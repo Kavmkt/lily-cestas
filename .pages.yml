@@ -242,6 +242,7 @@ content:
       - { name: instagram, label: Link do Instagram, type: string }
       - { name: ifood_url, label: Link da loja no iFood, type: string, description: Endereço da Lily Cestas no iFood. Aparece no bloco "Prefere comprar pelo iFood?". }
       - { name: pix_desconto, label: Desconto no Pix (%), type: number, description: Exemplo 5 }
+      - { name: cidades_entrega, label: Cidades atendidas na entrega, type: string, list: true, description: "Usadas para validar o CEP no checkout. Alphaville e Polvilho entram em Barueri, Santana de Parnaíba e Cajamar." }
       - { name: taxa_entrega, label: Taxa de entrega padrão (R$), type: number }
       - { name: brinde1_valor, label: Brinde - pedido a partir de (R$), type: number }
       - { name: brinde1_nome, label: Brinde - nome, type: string }

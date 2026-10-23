@@ -217,6 +217,7 @@ html {
 .cat img{display:block;width:100%;aspect-ratio:4/3;object-fit:cover}.cat .ct{display:block;padding:10px 12px 12px}.cat b{display:block;font:600 14px/1.2 'Montserrat',sans-serif;color:var(--ink)}.cat small{font:500 12px 'Plus Jakarta Sans',sans-serif;color:var(--rose-d)}
 .sec-h{font:300 clamp(24px,4.4vw,38px)/1.15 'Montserrat',sans-serif;letter-spacing:-.02em;color:var(--ink)}.sec-h b{font-weight:600;color:var(--rose-d)}
 /* catálogo compacto */
+.ccont{background:#fff;border:1px solid var(--line);border-radius:28px;padding:20px;margin-bottom:24px}@media(min-width:900px){.ccont{padding:28px}}.cgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}@media(min-width:900px){.cgrid{grid-template-columns:repeat(4,minmax(0,1fr));gap:20px}}
 #catalog-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}@media(min-width:900px){#catalog-grid{grid-template-columns:repeat(4,minmax(0,1fr));gap:20px}}
 .pcard{background:#fff;border:1px solid var(--line);border-radius:20px;overflow:hidden;display:flex;flex-direction:column;transition:.25s}.pcard:hover{box-shadow:0 18px 34px -22px rgba(166,83,101,.65);transform:translateY(-2px)}
 .pimg{position:relative}.pimg img{display:block;width:100%;aspect-ratio:1/1;object-fit:cover}
@@ -254,7 +255,7 @@ html {
 </head>
 <body class="min-h-screen antialiased selection:bg-[#F2D5DC] selection:text-[#382126]">
 
-  <div class="trustbar"><span>🚚 Entrega agendada a partir das 06h30</span><span>💳 Pix com 5% off</span><span class="t3">🎁 Chaveiro de brinde a partir de {{B1V}}</span></div>
+  <div class="trustbar"><span>🚚 Entregamos em Santana de Parnaíba, Alphaville e região</span><span>💳 Pix com 5% off</span><span class="t3">🎁 Chaveiro de brinde a partir de {{B1V}}</span></div>
 
   <!-- Cabeçalho Delicado Fixo com Logo Oficial Lily Cestas -->
   <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-[#EED9DF]">
@@ -550,7 +551,7 @@ html {
           <h3 class="text-xs font-display font-bold uppercase tracking-wider text-[#FFE4E9] mb-3">Atendimento &amp; Entregas</h3>
           <p class="text-xs sm:text-sm text-white/90 leading-relaxed mb-4">
             Segunda a Sábado: 08h às 19h<br />
-            Entregas Agendadas de Cestas a partir das 06h30.
+            Entregamos em Santana de Parnaíba, Alphaville, Barueri, Cajamar, Osasco e Carapicuíba.
           </p>
           <a href="#catalogo" class="inline-block px-5 py-2.5 rounded-full bg-white text-[#9B4C5D] text-xs font-display font-bold hover:bg-[#FFF5F7] shadow-sm transition-colors">
             Ver presentes →
@@ -713,41 +714,29 @@ html {
             </div>
           </div>
 
-          <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
-            <div>
-              <label for="checkout-delivery" class="block text-xs font-display font-semibold text-[#382126] mb-1">Modalidade de Entrega</label>
-              <select id="checkout-delivery" class="w-full rounded-xl border border-[#E5C2C9] px-3 py-2.5 text-xs sm:text-sm bg-white">
-                <option value="Entrega Agendada (Hora Marcada)" data-fee="15.00">🚗 Entrega Hora Marcada (+R$ 15)</option>
-                <option value="Entrega Surpresa Matinal (06h30-08h30)" data-fee="20.00">🌅 Surpresa Matinal 06h30 (+R$ 20)</option>
-                <option value="Retirada no Atelier Lily (Grátis)" data-fee="0.00">🏪 Retirada no Atelier Lily (R$ 0)</option>
-                <option value="Envio Correios / Transportadora" data-fee="22.00">📦 Correios / Sedex (+R$ 22)</option>
-              </select>
-            </div>
-            <div>
-              <label for="checkout-date" class="block text-xs font-display font-semibold text-[#382126] mb-1">Data Desejada</label>
-              <input id="checkout-date" type="text" value="Sábado (Manhã)" placeholder="Ex: 18/10 ou Sábado" class="w-full rounded-xl border border-[#E5C2C9] px-3.5 py-2.5 text-xs sm:text-sm" />
-            </div>
-            <div>
-              <label for="checkout-slot" class="block text-xs font-display font-semibold text-[#382126] mb-1">Janela de Horário</label>
-              <select id="checkout-slot" class="w-full rounded-xl border border-[#E5C2C9] px-3 py-2.5 text-xs sm:text-sm bg-white">
-                <option value="Manhã • 06h30 às 09h00">06h30 às 09h00</option>
-                <option value="Manhã • 09h00 às 12h00">09h00 às 12h00</option>
-                <option value="Tarde • 14h00 às 18h00">14h00 às 18h00</option>
-                <option value="Noite • 18h30 às 21h00">18h30 às 21h00</option>
-              </select>
-            </div>
-          </div>
-
           <div class="grid grid-cols-1 sm:grid-cols-12 gap-3">
             <div class="sm:col-span-4">
               <label for="checkout-cep" class="block text-xs font-display font-semibold text-[#382126] mb-1">CEP de Entrega</label>
-              <input id="checkout-cep" type="text" placeholder="Ex: 06500-000" class="w-full rounded-xl border border-[#E5C2C9] px-3.5 py-2.5 text-xs sm:text-sm" />
+              <input id="checkout-cep" type="text" inputmode="numeric" maxlength="9" autocomplete="postal-code" placeholder="Ex: 06500-000" class="w-full rounded-xl border border-[#E5C2C9] px-3.5 py-2.5 text-xs sm:text-sm" />
             </div>
             <div class="sm:col-span-8">
-              <label for="checkout-address" class="block text-xs font-display font-semibold text-[#382126] mb-1">Endereço / Bairro ou Observação</label>
-              <input id="checkout-address" type="text" placeholder="Rua, número, condomínio ou referência..." class="w-full rounded-xl border border-[#E5C2C9] px-3.5 py-2.5 text-xs sm:text-sm" />
+              <label for="checkout-address" class="block text-xs font-display font-semibold text-[#382126] mb-1">Rua e bairro</label>
+              <input id="checkout-address" type="text" autocomplete="street-address" placeholder="Preenchemos pelo CEP, se quiser ajuste" class="w-full rounded-xl border border-[#E5C2C9] px-3.5 py-2.5 text-xs sm:text-sm" />
             </div>
           </div>
+          <p id="checkout-cep-status" class="hidden text-xs rounded-xl px-3.5 py-2.5"></p>
+
+          <div class="grid grid-cols-1 sm:grid-cols-12 gap-3">
+            <div class="sm:col-span-4">
+              <label for="checkout-number" class="block text-xs font-display font-semibold text-[#382126] mb-1">Número / Apto</label>
+              <input id="checkout-number" type="text" placeholder="Ex: 120, apto 32" class="w-full rounded-xl border border-[#E5C2C9] px-3.5 py-2.5 text-xs sm:text-sm" />
+            </div>
+            <div class="sm:col-span-8">
+              <label for="checkout-ref" class="block text-xs font-display font-semibold text-[#382126] mb-1">Ponto de referência (opcional)</label>
+              <input id="checkout-ref" type="text" placeholder="Ex: portão azul, ao lado da padaria" class="w-full rounded-xl border border-[#E5C2C9] px-3.5 py-2.5 text-xs sm:text-sm" />
+            </div>
+          </div>
+          <p class="text-[11px] text-[#785860]">A data e o horário da entrega a gente combina com você pelo WhatsApp.</p>
 
           <div class="flex items-center justify-between pt-2">
             <button type="button" id="back-to-step-1-btn" class="px-4 py-2.5 rounded-full border border-[#E5C2C9] text-xs font-display font-semibold text-[#5A3D43]">
@@ -844,6 +833,8 @@ html {
     checkoutStep: 1,
     paymentMethod: "PIX com " + CONFIG.pix_desconto + "% de Desconto",
     deliveryFee: CONFIG.taxa_entrega,
+    cepOk: null,
+    cepCity: "",
     msgSuggestionIdx: 0,
     sim: {
       base: SIM0.base.chave,
@@ -1118,6 +1109,32 @@ html {
   }
 
   // Renderizar Catálogo de 12 Produtos (Com cards destacados alternando estilo)
+  function pcardHtml(p) {
+      const isFav = state.favorites.includes(p.id);
+      const imgSrc = p.image;
+      return `
+        <article class="pcard"${p.soldOut ? "" : ` data-open-prod="${p.id}" style="cursor:pointer"`}>
+          <div class="pimg">
+            <img src="${imgSrc}" alt="${p.name}" loading="lazy" width="760" height="567" />
+            ${p.soldOut ? `<span class="pbadge" style="background:#6E5057">Esgotado</span>` : (p.badge ? `<span class="pbadge">${p.badge}</span>` : "")}
+            <button type="button" data-fav-btn="${p.id}" aria-label="Favoritar ${p.name}" class="pfav"><span class="${isFav ? "on" : ""}">${isFav ? "♥" : "♡"}</span></button>
+          </div>
+          <div class="pbody">
+            <p class="pcat">${p.categoryLabel}</p>
+            <h3>${p.name}</h3>
+            <p class="pwhat">${p.customizable}</p>
+            <div class="pfoot">${p.priceOriginal ? `<span class="pold">${formatBRL(p.priceOriginal)}</span>` : ""}<span class="pprice">${formatBRL(p.price)}</span><span class="pnote">${formatBRL(p.price * (1 - CONFIG.pix_desconto / 100))} no Pix</span></div>
+            <div class="pbtns">
+              ${p.soldOut
+                ? `<span class="psold">Esgotado no momento</span>`
+                : `<button type="button" data-customize-prod="${p.id}" class="btn1" style="grid-column:1/-1">Adicionar</button>`}
+            </div>
+          </div>
+        </article>`;
+  }
+
+  const PER_CONTAINER = 4;
+
   function renderCatalog() {
     const grid = document.getElementById("catalog-grid");
     const countEl = document.getElementById("catalog-count");
@@ -1184,29 +1201,27 @@ html {
       return;
     }
 
-    grid.innerHTML = filtered.map((p) => {
-      const isFav = state.favorites.includes(p.id);
-      const imgSrc = p.image;
-      return `
-        <article class="pcard">
-          <div class="pimg">
-            <img src="${imgSrc}" alt="${p.name}" loading="lazy" width="760" height="567" />
-            ${p.soldOut ? `<span class="pbadge" style="background:#6E5057">Esgotado</span>` : (p.badge ? `<span class="pbadge">${p.badge}</span>` : "")}
-            <button type="button" data-fav-btn="${p.id}" aria-label="Favoritar ${p.name}" class="pfav"><span class="${isFav ? "on" : ""}">${isFav ? "♥" : "♡"}</span></button>
-          </div>
-          <div class="pbody">
-            <p class="pcat">${p.categoryLabel}</p>
-            <h3>${p.name}</h3>
-            <p class="pwhat">${p.customizable}</p>
-            <div class="pfoot">${p.priceOriginal ? `<span class="pold">${formatBRL(p.priceOriginal)}</span>` : ""}<span class="pprice">${formatBRL(p.price)}</span><span class="pnote">${formatBRL(p.price * (1 - CONFIG.pix_desconto / 100))} no Pix</span></div>
-            <div class="pbtns">
-              ${p.soldOut
-                ? `<span class="psold">Esgotado no momento</span>`
-                : `<button type="button" data-customize-prod="${p.id}" class="btn1" style="grid-column:1/-1">Adicionar</button>`}
-            </div>
-          </div>
-        </article>`;
-    }).join("");
+    const sections = state.catalogFilter === "todos" && !state.searchQuery.trim() && state.sortBy === "destaques";
+    const countBox = document.getElementById("catalog-more");
+    if (sections) {
+      if (countBox) countBox.classList.add("hidden");
+      grid.style.display = "block";
+      grid.innerHTML = CATS.map(c => {
+        const items = PRODUCTS.filter(p => p.category === c.key);
+        const shown = items.slice(0, PER_CONTAINER);
+        const body = shown.length
+          ? `<div class="cgrid">${shown.map(pcardHtml).join("")}</div>`
+          : `<div class="bg-white rounded-3xl p-8 text-center border border-[#EED9DF]"><p class="font-display font-semibold text-[#382126] mb-1">Novidades chegando em breve</p><p class="text-xs text-[#785860] mb-4">Quer algo desta linha agora? Chame a gente no WhatsApp.</p><a href="https://wa.me/{{WA}}" target="_blank" rel="noopener" class="inline-block px-5 py-2.5 rounded-full bg-[#B36273] text-white text-xs font-display font-semibold">Falar no WhatsApp</a></div>`;
+        const more = items.length ? `<div class="text-center mt-5"><a href="/catalogo/#cat-${c.key}" class="inline-block px-6 py-2.5 rounded-full bg-white text-[#A65365] border-2 border-[#C87888] font-display font-semibold text-xs sm:text-sm hover:bg-[#FDF2F5] transition-all">Ver mais em ${c.label} →</a></div>` : "";
+        return `<div class="ccont"><div class="mb-4"><h3 class="font-display font-semibold text-xl sm:text-2xl text-[#382126]">${c.icon} ${c.label}</h3>${c.sub ? `<p class="text-xs sm:text-sm text-[#785860] mt-1">${c.sub}</p>` : ""}</div>${body}${more}</div>`;
+      }).join("");
+      return;
+    }
+    grid.style.display = "";
+    if (countBox && state.catalogFilter !== "favoritos") countBox.classList.remove("hidden");
+
+    grid.innerHTML = filtered.map(pcardHtml
+    ).join("");
   }
 
   // Renderizar FAQ
@@ -1371,21 +1386,67 @@ html {
     }
   }
 
+  function normCity(s) {
+    return (s || "").normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().trim();
+  }
+
+  async function checkCep(cep) {
+    const box = document.getElementById("checkout-cep-status");
+    const set = (cls, html) => {
+      if (!box) return;
+      box.className = "text-xs rounded-xl px-3.5 py-2.5 " + cls;
+      box.innerHTML = html;
+    };
+    state.cepOk = null;
+    state.cepCity = "";
+    if (cep.length < 8) {
+      box?.classList.add("hidden");
+      return;
+    }
+    set("bg-[#FDF8F9] text-[#785860]", "Conferindo o CEP...");
+    try {
+      const r = await fetch(`https://viacep.com.br/ws/${cep}/json/`);
+      const d = await r.json();
+      if (document.getElementById("checkout-cep").value.replace(/\D/g, "") !== cep) return;
+      if (d.erro) {
+        set("bg-[#FFF4E5] text-[#8A5A00]", "Não encontramos esse CEP. Confira os números ou siga e combinamos o endereço pelo WhatsApp.");
+        return;
+      }
+      state.cepCity = d.localidade;
+      const ok = (CONFIG.cidades_entrega || []).some(c => normCity(c) === normCity(d.localidade));
+      state.cepOk = ok;
+      const street = document.getElementById("checkout-address");
+      if (ok && street && !street.value.trim()) {
+        street.value = [d.logradouro, d.bairro].filter(Boolean).join(", ");
+      }
+      if (ok) {
+        set("bg-[#EAF6EE] text-[#1F6B3A]", `✓ Entregamos em ${d.localidade}${d.bairro ? " (" + d.bairro + ")" : ""}.`);
+      } else {
+        set("bg-[#FDECEC] text-[#9B2C2C]", `Ainda não entregamos em ${d.localidade}/${d.uf}. Atendemos ${(CONFIG.cidades_entrega || []).join(", ")}. <a class="underline font-semibold" href="https://wa.me/{{WA}}" target="_blank" rel="noopener">Fale com a gente no WhatsApp</a> se quiser tentar.`);
+      }
+    } catch (err) {
+      state.cepOk = null;
+      set("bg-[#FFF4E5] text-[#8A5A00]", "Não deu para conferir o CEP agora. Siga e confirmamos a entrega pelo WhatsApp.");
+    }
+    renderCheckoutModal();
+  }
+
   function generateOrderSummaryText(effectiveSub, discount, finalTotal) {
     const clientName = (document.getElementById("checkout-name")?.value || "Cliente Lily").trim();
     const recipient = (document.getElementById("checkout-recipient")?.value || "Pessoa Especial").trim();
-    const deliveryDate = (document.getElementById("checkout-date")?.value || "A combinar").trim();
-    const deliverySlot = (document.getElementById("checkout-slot")?.value || "Manhã").trim();
-    const deliveryType = (document.getElementById("checkout-delivery")?.value || "Entrega Agendada").trim();
     const cep = (document.getElementById("checkout-cep")?.value || "").trim();
-    const address = (document.getElementById("checkout-address")?.value || "A confirmar no atendimento").trim();
+    const street = (document.getElementById("checkout-address")?.value || "").trim();
+    const num = (document.getElementById("checkout-number")?.value || "").trim();
+    const ref = (document.getElementById("checkout-ref")?.value || "").trim();
+    const addrParts = [street, num].filter(Boolean).join(", ");
+    const address = (addrParts || "A confirmar no atendimento") + (state.cepCity ? ` — ${state.cepCity}` : "");
 
     let lines = [
       `🌸 *PROTOCOLO DE ENCOMENDA — LILY CESTAS & ATELIER 3D* 🌸`,
       `• *De:* ${clientName}  ➔  *Para:* ${recipient}`,
-      `• *Modalidade:* ${deliveryType}`,
-      `• *Data & Janela:* ${deliveryDate} (${deliverySlot})`,
-      `• *Endereço/CEP:* ${address} ${cep ? `| CEP: ${cep}` : ""}`,
+      `• *Endereço:* ${address}${cep ? ` | CEP: ${cep}` : ""}`,
+      ...(ref ? [`• *Referência:* ${ref}`] : []),
+      `• *Data e horário:* combinar aqui no WhatsApp`,
       `----------------------------------------`,
       `*ITENS PERSONALIZADOS:*`
     ];
@@ -1537,6 +1598,12 @@ html {
         return;
       }
 
+      const openCard = e.target.closest("[data-open-prod]");
+      if (openCard && !e.target.closest("button, a")) {
+        openProductModal(openCard.getAttribute("data-open-prod"));
+        return;
+      }
+
       const custProd = e.target.closest("[data-customize-prod]");
       if (custProd) {
         openProductModal(custProd.getAttribute("data-customize-prod"));
@@ -1617,7 +1684,12 @@ html {
 
       const stepBtn = e.target.closest("[data-checkout-step-btn]");
       if (stepBtn) {
-        state.checkoutStep = Number(stepBtn.getAttribute("data-checkout-step-btn"));
+        const want = Number(stepBtn.getAttribute("data-checkout-step-btn"));
+        if (want === 3 && state.cepOk === false) {
+          showToast("Ainda não entregamos nesse CEP. Fale com a gente no WhatsApp.");
+          return;
+        }
+        state.checkoutStep = want;
         renderCheckoutModal();
         return;
       }
@@ -1907,6 +1979,10 @@ html {
       renderCheckoutModal();
     });
     document.getElementById("to-step-3-btn")?.addEventListener("click", () => {
+      if (state.cepOk === false) {
+        showToast("Ainda não entregamos nesse CEP. Fale com a gente no WhatsApp.");
+        return;
+      }
       state.checkoutStep = 3;
       renderCheckoutModal();
     });
@@ -1915,13 +1991,14 @@ html {
       renderCheckoutModal();
     });
 
-    document.getElementById("checkout-delivery")?.addEventListener("change", (e) => {
-      const opt = e.target.selectedOptions[0];
-      state.deliveryFee = Number(opt.getAttribute("data-fee") || 0);
-      renderCheckoutModal();
+    document.getElementById("checkout-cep")?.addEventListener("input", (e) => {
+      let v = e.target.value.replace(/\D/g, "").slice(0, 8);
+      if (v.length > 5) v = v.slice(0, 5) + "-" + v.slice(5);
+      e.target.value = v;
+      checkCep(v.replace(/\D/g, ""));
     });
 
-    ["checkout-name", "checkout-recipient", "checkout-date", "checkout-slot", "checkout-cep", "checkout-address", "checkout-qr-link"].forEach(id => {
+    ["checkout-name", "checkout-recipient", "checkout-number", "checkout-ref", "checkout-cep", "checkout-address", "checkout-qr-link"].forEach(id => {
       document.getElementById(id)?.addEventListener("input", renderCheckoutModal);
     });
 

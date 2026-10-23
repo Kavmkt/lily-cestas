@@ -402,11 +402,11 @@ def page_html(path, title, desc, h1, intro, blocks, plist, faq_items, trail, ext
 CITIES = [
     dict(slug='cestas-de-presente-santana-de-parnaiba', cidade='Santana de Parnaíba',
          title='Cestas de Presente em Santana de Parnaíba | Lily Cestas',
-         desc='Cestas de presente, café da manhã e xícaras personalizadas em Santana de Parnaíba, SP. Entrega agendada a partir das 06h30. Peça pelo site.',
+         desc='Cestas de presente, café da manhã e xícaras personalizadas em Santana de Parnaíba, SP. Entregamos em Santana de Parnaíba e região. Peça pelo site.',
          h1='Cestas de Presente e Café da Manhã em Santana de Parnaíba',
          intro='A Lily Cestas é um atelier de presentes de Santana de Parnaíba, em São Paulo. Montamos cestas de presente, cestas de café da manhã e xícaras e canecas personalizadas.',
-         blocks=[('Presentes para o Centro Histórico, Fazendinha e outras regiões da cidade', 'Atendemos moradores de Santana de Parnaíba que querem surpreender família, amigos e quem mora longe, e também quem trabalha na cidade. Para o Centro Histórico, a Fazendinha, o Suru e demais bairros, informe o CEP no checkout para confirmarmos a entrega no horário escolhido.'),
-                 ('Entrega agendada a partir das 06h30', 'As cestas podem ser agendadas para chegar logo cedo, inclusive para o mesmo dia ou dia seguinte, conforme a disponibilidade. Para pedidos com personalização, combine os detalhes e o prazo pelo WhatsApp.'),
+         blocks=[('Presentes para o Centro Histórico, Fazendinha e outras regiões da cidade', 'Atendemos moradores de Santana de Parnaíba que querem surpreender família, amigos e quem mora longe, e também quem trabalha na cidade. Para o Centro Histórico, a Fazendinha, o Suru e demais bairros, informe o CEP no checkout para confirmarmos a entrega.'),
+                 ('Entrega combinada pelo WhatsApp', 'Depois de escolher o presente, combinamos a data e o horário da entrega pelo WhatsApp, conforme a disponibilidade. Para pedidos com personalização, combine também os detalhes e o prazo.'),
                  ('Datas em que mais encomendam por aqui', 'Aniversário, Dia das Mães, Dia dos Namorados, Natal, nascimento de bebê, formatura e agradecimento a professores e equipes. Se o prazo estiver curto, chame no WhatsApp para vermos o que dá para fazer.')],
          vizinhas=['alphaville', 'barueri', 'cajamar']),
     dict(slug='cestas-de-presente-alphaville', cidade='Alphaville',
@@ -422,9 +422,9 @@ CITIES = [
          title='Cestas de Presente em Barueri | Lily Cestas',
          desc='Cestas de presente, café da manhã e xícaras personalizadas para Barueri, SP. Escolha no site e agende a entrega.',
          h1='Cestas de Presente e Café da Manhã em Barueri',
-         intro='Atendemos Barueri com cestas de presente, cestas de café da manhã e xícaras e canecas personalizadas. Você escolhe no site e agenda a entrega no horário que preferir.',
-         blocks=[('Entrega em Barueri', 'Para o Centro, o Jardim Silveira, o Tamboré, a Aldeia da Serra e demais bairros, informe o CEP no checkout. Confirmamos a disponibilidade, o horário e a taxa de entrega para o seu endereço antes de fechar o pedido.'),
-                 ('Presente de última hora?', 'As cestas podem ser agendadas para o mesmo dia ou dia seguinte, conforme a agenda do atelier. Para pedidos com personalização, combine os detalhes e o prazo pelo WhatsApp.'),
+         intro='Atendemos Barueri com cestas de presente, cestas de café da manhã e xícaras e canecas personalizadas. Você escolhe no site e combina a entrega pelo WhatsApp.',
+         blocks=[('Entrega em Barueri', 'Para o Centro, o Jardim Silveira, o Tamboré, a Aldeia da Serra e demais bairros, informe o CEP no checkout. Confirmamos a disponibilidade e a entrega para o seu endereço antes de fechar o pedido.'),
+                 ('Presente de última hora?', 'Chame no WhatsApp para combinar o prazo e a entrega, conforme a agenda do atelier. Para pedidos com personalização, combine também os detalhes.'),
                  ('Opções para todos os orçamentos', f'O catálogo tem presentes a partir de {brl(PRECO_MIN)}. O Concierge ajuda a escolher pelo valor que você quer investir.')],
          vizinhas=['alphaville', 'santana-de-parnaiba', 'cajamar']),
     dict(slug='cestas-de-presente-cajamar', cidade='Cajamar',
@@ -511,8 +511,8 @@ for c in CITIES:
     path = f'/{c["slug"]}/'
     cid = c['cidade']
     items = [
-        (f'A Lily Cestas entrega em {cid}?', f'Sim, atendemos {cid}. Informe o CEP no checkout e confirmamos a disponibilidade, o horário e a taxa de entrega para o seu endereço.'),
-        (f'Qual o prazo para receber uma cesta de presente em {cid}?', 'As cestas podem ser agendadas para o mesmo dia ou dia seguinte, conforme a agenda, com entregas a partir das 06h30. Para pedidos com personalização, combine o prazo pelo WhatsApp.'),
+        (f'A Lily Cestas entrega em {cid}?', f'Sim, atendemos {cid}. Informe o CEP no checkout e veja na hora se entregamos no seu endereço.'),
+        (f'Qual o prazo para receber uma cesta de presente em {cid}?', 'Combinamos a data e o horário pelo WhatsApp, conforme a agenda do atelier. Para pedidos com personalização, combine também o prazo.'),
         ('Posso personalizar o pedido?', 'Pode. Depois de escolher o presente, combine nome e detalhes pelo WhatsApp.'),
     ] + FAQ_COMMON[-2:]
     viz = ''.join(f'<a href="/{CITY_BY[v]["slug"]}/">{CITY_BY[v]["cidade"]}</a>' for v in c['vizinhas'])
@@ -542,6 +542,7 @@ for p in visible:
         'order': p['ordem'], 'soldOut': p['status'] == 'esgotado', 'isBasket': bool(p['_cat'].get('eh_cesta'))})
 addons_js = [{'id': a['id'], 'name': a['nome'], 'desc': a['descricao'], 'price': a['_promo'] or a['preco'],
               'priceOriginal': a['preco'] if a['_promo'] else None, 'image': a['_img'], 'ask': a['pede']} for a in addons]
+cats_js = [{'key': c['chave'], 'label': c['nome'], 'sub': c.get('frase_apoio') or '', 'icon': c.get('icone') or ''} for c in cats_home]
 hotspots = {}
 for i, c in enumerate(cats_with):
     ps = cat_prods[c['chave']]
@@ -552,10 +553,11 @@ for i, c in enumerate(cats_with):
 sim0 = {k: {'chave': v[0]['chave'], 'preco': v[0]['preco'], 'nome': v[0]['nome']} for k, v in
         {'base': SIM['bases'], 'louca': SIM['louca'], 'pecas_3d': SIM['pecas_3d'], 'polaroids': SIM['polaroids']}.items()}
 cfg_js = {k: config[k] for k in ('pix_desconto', 'taxa_entrega', 'brinde1_valor', 'brinde1_nome')}
+cfg_js['cidades_entrega'] = [x for x in (config.get('cidades_entrega') or []) if x]
 cfg_js.update({'foto_estudio_litofania': photo_lit, 'foto_estudio_polaroid': photo_pol})
 dumps = lambda o: json.dumps(o, ensure_ascii=False).replace('</', '<\\/')
 data_js = (f'const CONFIG = {dumps(cfg_js)};\n  const SIM0 = {dumps(sim0)};\n  const HOTSPOTS = {dumps(hotspots)};\n'
-           f'  const PRODUCTS = {dumps(products_js)};\n  const ADDONS = {dumps(addons_js)};\n  const FAQS = {dumps([{"q": q, "a": a} for q, a in faq])};')
+           f'  const PRODUCTS = {dumps(products_js)};\n  const ADDONS = {dumps(addons_js)};\n  const CATS = {dumps(cats_js)};\n  const FAQS = {dumps([{"q": q, "a": a} for q, a in faq])};')
 
 hero_cats = ''.join(
     f'<button type="button" class="cat" data-hero-cat="{c["chave"]}"><img src="{c["_img"]}" alt="{esc(c["nome_tile"])}" width="760" height="567" loading="lazy"><span class="ct"><b>{esc(c["nome_tile"])}</b><small>{("a partir de " + brl(cat_min(c))) if cat_prods[c["chave"]] else "novidades em breve"}</small></span></button>'

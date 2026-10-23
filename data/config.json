@@ -9,5 +9,12 @@
   "foto_estudio_litofania": "/assets/produtos/litofania-3d.webp",
   "foto_estudio_polaroid": "/assets/produtos/polaroid-led.webp",
   "foto_chaveiro_simples": "/assets/produtos/chaveiro-simples.webp",
-  "ifood_url": "https://www.ifood.com.br/delivery/santana-de-parnaiba-sp/lily-cestas--presentes-colinas-da-anhanguera/25073e59-c1d1-43a8-a317-7f5c948f97ab"
+  "ifood_url": "https://www.ifood.com.br/delivery/santana-de-parnaiba-sp/lily-cestas--presentes-colinas-da-anhanguera/25073e59-c1d1-43a8-a317-7f5c948f97ab",
+  "cidades_entrega": [
+    "Santana de Parnaíba",
+    "Cajamar",
+    "Osasco",
+    "Barueri",
+    "Carapicuíba"
+  ]
 }
