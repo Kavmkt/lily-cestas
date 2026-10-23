@@ -33,3 +33,5 @@ section[id^=cat-]{scroll-margin-top:90px}
 .cb .pr{margin-top:auto;display:flex;flex-direction:column;align-items:stretch;gap:10px}
 .cb .pr>span{display:block}.cb .pr b{font-size:18px}
 .cb .pr .btn{text-align:center;width:100%}
+
+.tag{display:inline-block;font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#A65365;background:#F9EBEE;border-radius:99px;padding:3px 10px;margin-bottom:8px}

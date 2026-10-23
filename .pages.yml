@@ -184,6 +184,38 @@ content:
           - { name: titulo, label: Título da seção, type: string }
           - { name: texto, label: Texto, type: text }
 
+  # ------------------------------------------------------------------ ADICIONAIS
+  - name: adicionais
+    label: Adicionais (cartão, Polaroid)
+    type: collection
+    path: data/adicionais
+    filename: '{primary}.json'
+    extension: json
+    format: json
+    view:
+      fields: [nome, preco, preco_promocional, status]
+      primary: nome
+    fields:
+      - { name: nome, label: Nome do adicional, type: string, required: true }
+      - { name: preco, label: Preço normal (R$), type: number, required: true, description: "Exemplo 8.00" }
+      - { name: preco_promocional, label: Preço promocional (R$), type: number, description: "Opcional. O site mostra o preço normal riscado e vende por este valor." }
+      - name: status
+        label: Situação
+        type: select
+        default: ativo
+        options:
+          values: [{ value: ativo, label: Ativo }, { value: oculto, label: Oculto }]
+      - name: pede
+        label: O que pedir ao cliente
+        type: select
+        default: nada
+        description: Frase = campo para escrever a mensagem. Foto = avisa que a foto vai pelo WhatsApp.
+        options:
+          values: [{ value: frase, label: Frase }, { value: foto, label: Foto pelo WhatsApp }, { value: nada, label: Nada }]
+      - { name: descricao, label: Descrição, type: text }
+      - { name: foto, label: Foto, type: image }
+      - { name: ordem, label: Ordem, type: number, default: 50 }
+
   # ------------------------------------------------------------------ PERGUNTAS FREQUENTES
   - name: faq
     label: Perguntas frequentes

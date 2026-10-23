@@ -182,6 +182,31 @@ cat_prods = {c['chave']: [p for p in visible if p['_cat'] is c] for c in cats}
 # categorias ativas ainda sem produtos aparecem na home (cartão e filtro), sem página própria
 cats_home = [c for c in cats if c in cats_with or (not cat_prods[c['chave']] and c.get('foto'))]
 
+# adicionais (upsell: cartao com frase, polaroid...)
+addons = []
+for f in sorted((ROOT / 'data/adicionais').glob('*.json')):
+    a = load_json(f)
+    if not a:
+        continue
+    where = f'Adicional "{a.get("nome") or f.name}"'
+    if not a.get('nome'):
+        fail(f'Adicional {f.name}: falta o nome.')
+        continue
+    a['id'] = f.stem
+    a['preco'] = to_number(a.get('preco'), f'{where} › preço')
+    promo = to_number(a.get('preco_promocional'), f'{where} › preço promocional', False)
+    if promo and a['preco'] and promo >= a['preco']:
+        fail(f'{where}: o preço promocional precisa ser menor que o preço normal.')
+        promo = None
+    a['_promo'] = promo
+    a['status'] = (a.get('status') or 'ativo').strip().lower()
+    a['ordem'] = to_number(a.get('ordem'), f'{where} › ordem', False) or 999
+    a['pede'] = a.get('pede') or 'nada'
+    a.setdefault('descricao', '')
+    if a['status'] == 'ativo' and a['preco']:
+        addons.append(a)
+addons.sort(key=lambda a: (a['ordem'], a['nome']))
+
 # estudio
 estudio = load_json(ROOT / 'data/estudio.json', {})
 SIM = {}
@@ -253,6 +278,8 @@ for p in visible:
 for c in cats:
     first = (cat_prods.get(c['chave']) or [None])[0]
     c['_img'] = img_url(c.get('foto')) or (first['_img'] if first else '')
+for a in addons:
+    a['_img'] = img_url(a.get('foto'))
 photo_lit = img_url(config.get('foto_estudio_litofania')) or next((p['_img'] for p in visible if 'litofania' in slugify(p['nome'])), visible[0]['_img'])
 photo_pol = img_url(config.get('foto_estudio_polaroid')) or visible[0]['_img']
 
@@ -348,7 +375,7 @@ def cards_html(plist):
     out = ''
     for p in plist:
         old = f'<span style="text-decoration:line-through;color:#8C6C73;font-size:12px;display:block">{brl(p["preco"])}</span>' if p['_promo'] else ''
-        action = '<span style="font-size:12px;font-weight:600;color:#6E5057">Esgotado</span>' if p['status'] == 'esgotado' else f'<a class="btn sm" href="{SHOP}#p={p["id"]}">Personalizar</a>'
+        action = '<span style="font-size:12px;font-weight:600;color:#6E5057">Esgotado</span>' if p['status'] == 'esgotado' else f'<a class="btn sm" href="{SHOP}#p={p["id"]}">Adicionar</a>'
         out += f'''<article class="card"><img src="{p["_img"]}" alt="{esc(p.get("alt") or p["nome"])}" width="760" height="567" loading="lazy"><div class="cb"><h3>{esc(p["nome"])}</h3><p>{esc(p["descricao"])}</p><div class="pr"><span>{old}<b>{brl(final_price(p))}</b></span>{action}</div></div></article>'''
     return out
 
@@ -442,7 +469,18 @@ sections = ''.join(
     f'<div class="cards">{cards_html(cat_prods[c["chave"]])}</div>'
     + (f'<p class="more"><a href="/{c["pagina_url"]}/">Ver página de {esc(c["nome"].lower())} →</a></p>' if c.get('pagina_url') else '') + '</section>'
     for c in cats_with)
-cat_items = [(f'Como compro no catálogo da Lily Cestas?', 'Escolha o presente e clique em Personalizar. Você finaliza o pedido na loja e combina nome e detalhes pelo WhatsApp.')] + FAQ_COMMON[-2:]
+def addon_cards():
+    out = ''
+    for a in addons:
+        old = f'<span style="text-decoration:line-through;color:#8C6C73;font-size:12px;display:block">{brl(a["preco"])}</span>' if a['_promo'] else ''
+        out += f'''<article class="card"><img src="{a["_img"]}" alt="{esc(a["nome"])}" width="760" height="760" loading="lazy"><div class="cb"><span class="tag">Adicional</span><h3>{esc(a["nome"])}</h3><p>{esc(a["descricao"])}</p><div class="pr"><span>{old}<b>{brl(a["_promo"] or a["preco"])}</b></span><a class="btn sm" href="{SHOP}#a={a["id"]}">Adicionar</a></div></div></article>'''
+    return out
+
+
+addon_section = (f'<section id="adicionais"><h2>Adicionais</h2><p class="sub">Capriche no presente: cartão com a sua mensagem e Polaroid com a sua foto.</p><div class="cards">{addon_cards()}</div></section>') if addons else ''
+if addons:
+    chips += f'<a href="#adicionais">Adicionais ({len(addons)})</a>'
+cat_items = [(f'Como compro no catálogo da Lily Cestas?', 'Escolha o presente e clique em Adicionar. Você finaliza o pedido na loja e combina nome e detalhes pelo WhatsApp.')] + FAQ_COMMON[-2:]
 cat_ld = [{'@type': 'CollectionPage', 'name': 'Catálogo completo Lily Cestas', 'url': BASE + cat_path,
            'mainEntity': {'@type': 'ItemList', 'itemListElement': [{'@type': 'ListItem', 'position': i + 1, 'item': prod_ld(p)} for i, p in enumerate(visible)]}}]
 rel_cat = '<section class="rel"><h2>Cidades atendidas</h2><p>' + ''.join(f'<a href="/{x["slug"]}/">{x["cidade"]}</a>' for x in CITIES) + '</p></section>'
@@ -455,6 +493,7 @@ write_page(cat_path, head('Catálogo de Cestas e Presentes Personalizados | Lily
 </head><body>''' + top_html() + f'''<main><div class="wrap"><nav class="crumbs" aria-label="Navegação"><a href="/">Início</a> › <span>Catálogo</span></nav>
 <div class="cathead"><h1>Catálogo completo</h1><p class="intro">Todas as cestas de presente, xícaras e presentes personalizados da Lily Cestas, organizados por categoria.</p><nav class="chips" aria-label="Categorias">{chips}</nav></div>
 {sections}
+{addon_section}
 <section><h2>Perguntas frequentes</h2><div class="faq">{faq_cat}</div></section>
 {rel_cat}
 </div></main>''' + footer_html() + '</body></html>')
@@ -501,6 +540,8 @@ for p in visible:
         'price': final_price(p), 'priceOriginal': p['preco'] if p['_promo'] else None, 'badge': p['selo'], 'image': p['_img'],
         'shortDesc': p['descricao'], 'customizable': p['personalizacao'], 'includes': p['inclui'], 'quiz': p['quiz'],
         'order': p['ordem'], 'soldOut': p['status'] == 'esgotado', 'isBasket': bool(p['_cat'].get('eh_cesta'))})
+addons_js = [{'id': a['id'], 'name': a['nome'], 'desc': a['descricao'], 'price': a['_promo'] or a['preco'],
+              'priceOriginal': a['preco'] if a['_promo'] else None, 'image': a['_img'], 'ask': a['pede']} for a in addons]
 hotspots = {}
 for i, c in enumerate(cats_with):
     ps = cat_prods[c['chave']]
@@ -514,7 +555,7 @@ cfg_js = {k: config[k] for k in ('pix_desconto', 'taxa_entrega', 'brinde1_valor'
 cfg_js.update({'foto_estudio_litofania': photo_lit, 'foto_estudio_polaroid': photo_pol})
 dumps = lambda o: json.dumps(o, ensure_ascii=False).replace('</', '<\\/')
 data_js = (f'const CONFIG = {dumps(cfg_js)};\n  const SIM0 = {dumps(sim0)};\n  const HOTSPOTS = {dumps(hotspots)};\n'
-           f'  const PRODUCTS = {dumps(products_js)};\n  const FAQS = {dumps([{"q": q, "a": a} for q, a in faq])};')
+           f'  const PRODUCTS = {dumps(products_js)};\n  const ADDONS = {dumps(addons_js)};\n  const FAQS = {dumps([{"q": q, "a": a} for q, a in faq])};')
 
 hero_cats = ''.join(
     f'<button type="button" class="cat" data-hero-cat="{c["chave"]}"><img src="{c["_img"]}" alt="{esc(c["nome_tile"])}" width="760" height="567" loading="lazy"><span class="ct"><b>{esc(c["nome_tile"])}</b><small>{("a partir de " + brl(cat_min(c))) if cat_prods[c["chave"]] else "novidades em breve"}</small></span></button>'

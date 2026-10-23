@@ -638,8 +638,12 @@ html {
             <input id="modal-custom-color" type="text" maxlength="140" placeholder="Cores, itens preferidos, restrições..." class="w-full rounded-xl border border-[#E5C2C9] px-3.5 py-2.5 text-xs sm:text-sm text-[#382126] focus:outline-none focus:border-[#C87888]" />
           </div>
         </div>
+        <div id="modal-addons-wrap" class="hidden pt-2 border-t border-[#F5E6EA]">
+          <span class="text-[10px] font-display font-bold uppercase tracking-wider text-[#A65365] block mb-2">Capriche no presente · promoção</span>
+          <div id="modal-addons" class="space-y-2"></div>
+        </div>
         <button type="button" id="confirm-prod-modal-btn" class="w-full py-3.5 rounded-full bg-rosegold-gradient text-white text-xs sm:text-sm font-display font-semibold uppercase tracking-wider shadow-sm hover:opacity-95 transition-all">
-          Salvar Personalização &amp; Adicionar à Sacola
+          <span id="confirm-prod-label">Adicionar à Sacola</span>
         </button>
       </div>
     </div>
@@ -1198,8 +1202,7 @@ html {
             <div class="pbtns">
               ${p.soldOut
                 ? `<span class="psold">Esgotado no momento</span>`
-                : `<button type="button" data-customize-prod="${p.id}" class="btn2">Personalizar</button>
-              <button type="button" data-quick-add="${p.id}" class="btn1">Adicionar</button>`}
+                : `<button type="button" data-customize-prod="${p.id}" class="btn1" style="grid-column:1/-1">Adicionar</button>`}
             </div>
           </div>
         </article>`;
@@ -1431,7 +1434,35 @@ html {
     if (includesList) {
       includesList.innerHTML = prod.includes.map(inc => `<li class="flex items-center gap-2 text-xs text-[#5A3D43]"><span class="text-[#C87888] font-bold">✓</span><span>${inc}</span></li>`).join("");
     }
+    const wrap = document.getElementById("modal-addons-wrap");
+    const box = document.getElementById("modal-addons");
+    if (wrap && box) {
+      wrap.classList.toggle("hidden", !ADDONS.length);
+      box.innerHTML = ADDONS.map(a => `
+        <div class="rounded-2xl border border-[#EED9DF] p-2.5">
+          <label class="flex items-center gap-3 cursor-pointer">
+            <input type="checkbox" data-addon-check="${a.id}" class="w-4 h-4 accent-[#B36273] shrink-0" />
+            <img src="${a.image}" alt="" width="48" height="48" class="w-12 h-12 rounded-xl object-cover shrink-0" />
+            <span class="flex-1 min-w-0"><b class="block text-xs font-display text-[#382126]">${a.name}</b><span class="block text-[11px] text-[#785860] leading-snug">${a.desc}</span></span>
+            <span class="text-right shrink-0">${a.priceOriginal ? `<s class="block text-[10px] text-[#8C6C73]">${formatBRL(a.priceOriginal)}</s>` : ""}<b class="text-xs font-display text-[#A65365]">${formatBRL(a.price)}</b></span>
+          </label>
+          ${a.ask === "frase" ? `<input type="text" data-addon-text="${a.id}" maxlength="160" placeholder="Escreva a frase do cartão" class="hidden mt-2 w-full rounded-xl border border-[#E5C2C9] px-3 py-2 text-xs" />` : ""}
+          ${a.ask === "foto" ? `<p data-addon-text="${a.id}" class="hidden mt-2 text-[11px] text-[#785860]">Você envia a foto pelo WhatsApp depois do pedido.</p>` : ""}
+        </div>`).join("");
+    }
+    updateModalTotal();
     if (modal) modal.classList.remove("hidden");
+  }
+
+  function updateModalTotal() {
+    const prod = state.activeModalProduct;
+    if (!prod) return;
+    let total = prod.price;
+    document.querySelectorAll("[data-addon-check]:checked").forEach(cb => {
+      total += ADDONS.find(a => a.id === cb.getAttribute("data-addon-check")).price;
+    });
+    const l = document.getElementById("confirm-prod-label");
+    if (l) l.textContent = `Adicionar à Sacola · ${formatBRL(total)}`;
   }
 
   function closeProductModal() {
@@ -1816,6 +1847,13 @@ html {
     document.getElementById("cart-backdrop")?.addEventListener("click", () => cartDrawer?.classList.add("hidden"));
 
     // Modal de Produto Individual
+    document.getElementById("modal-addons")?.addEventListener("change", (e) => {
+      const cb = e.target.closest("[data-addon-check]");
+      if (cb) {
+        document.querySelector(`[data-addon-text="${cb.getAttribute("data-addon-check")}"]`)?.classList.toggle("hidden", !cb.checked);
+        updateModalTotal();
+      }
+    });
     document.getElementById("close-prod-modal-btn")?.addEventListener("click", closeProductModal);
     document.getElementById("prod-modal-backdrop")?.addEventListener("click", closeProductModal);
     document.getElementById("confirm-prod-modal-btn")?.addEventListener("click", () => {
@@ -1830,10 +1868,22 @@ html {
         qty: 1,
         details: `${customText ? `Personalização: "${customText}"` : "Detalhes a combinar no WhatsApp"}${customColor ? ` • Obs.: ${customColor}` : ""}`
       });
+      document.querySelectorAll("[data-addon-check]:checked").forEach(cb => {
+        const id = cb.getAttribute("data-addon-check");
+        const a = ADDONS.find(x => x.id === id);
+        const txt = (document.querySelector(`input[data-addon-text="${id}"]`)?.value || "").trim();
+        state.cart.push({
+          id: "addon-" + id + "-" + Date.now(),
+          name: "Adicional: " + a.name,
+          price: a.price,
+          qty: 1,
+          details: a.ask === "frase" ? (txt ? `Frase: "${txt}"` : "Frase a combinar no WhatsApp") : (a.ask === "foto" ? "Foto enviada pelo WhatsApp" : "Para: " + prod.name)
+        });
+      });
       saveState();
       renderCart();
       closeProductModal();
-      showToast(`"${prod.name}" salvo na sacola Lily!`);
+      showToast(`"${prod.name}" adicionado à sacola Lily!`);
     });
 
     // Novo Checkout em 3 Etapas
@@ -1897,6 +1947,17 @@ html {
     renderFaq();
     renderCart();
     bindEvents();
+    const ha = /^#a=(.+)$/.exec(location.hash);
+    if (ha) {
+      const a = ADDONS.find(x => x.id === decodeURIComponent(ha[1]));
+      if (a) {
+        state.cart.push({ id: "addon-" + a.id + "-" + Date.now(), name: "Adicional: " + a.name, price: a.price, qty: 1, details: a.ask === "frase" ? "Frase a combinar no WhatsApp" : "Foto enviada pelo WhatsApp" });
+        saveState();
+        renderCart();
+        showToast(`"${a.name}" adicionado à sacola Lily!`);
+      }
+      history.replaceState(null, "", location.pathname + "#catalogo");
+    }
     const hp = /^#p=(.+)$/.exec(location.hash);
     if (hp) {
       openProductModal(decodeURIComponent(hp[1]));

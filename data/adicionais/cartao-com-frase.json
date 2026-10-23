@@ -1,0 +1,10 @@
+{
+  "nome": "Cartão com frase",
+  "status": "ativo",
+  "preco": 8,
+  "preco_promocional": 5.9,
+  "descricao": "Cartãozinho escrito com a sua mensagem, para acompanhar o presente.",
+  "pede": "frase",
+  "foto": "/assets/produtos/adicional-cartao.webp",
+  "ordem": 1
+}
