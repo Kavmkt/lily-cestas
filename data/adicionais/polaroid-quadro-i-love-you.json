@@ -1,10 +1,10 @@
 {
   "nome": "Polaroid + Quadro I Love You",
-  "status": "ativo",
   "preco": 25,
   "preco_promocional": 19.99,
-  "descricao": "Quadrinho de mesa com a sua foto revelada no estilo Polaroid. Você envia a foto pelo WhatsApp.",
+  "status": "ativo",
   "pede": "foto",
-  "foto": "/assets/produtos/adicional-polaroid.webp",
+  "descricao": "Quadrinho de mesa com a sua foto revelada no estilo Polaroid. Você envia a foto pelo WhatsApp.",
+  "foto": "/assets/produtos/IMG_0007.jpeg",
   "ordem": 2
 }
