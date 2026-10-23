@@ -1,0 +1,19 @@
+{
+  "nome": "Combo Natal Encantado 3D",
+  "categoria": "3d-personalizados",
+  "preco": 89.9,
+  "preco_promocional": 74.99,
+  "status": "ativo",
+  "foto": "/assets/produtos/combo-natal-encantado.webp",
+  "alt": "Combo Natal Encantado 3D com letreiro Feliz Natal, árvore de Natal e quadro com foto, impressos em 3D",
+  "selo": "COMBO DE NATAL",
+  "descricao": "Letreiro Feliz Natal, árvore de Natal e quadrinho com a sua foto, tudo em impressão 3D. Um presente completo para decorar e emocionar.",
+  "inclui": [
+    "Letreiro \"Feliz Natal\" com floco de neve em 3D",
+    "Árvore de Natal com estrela dourada em 3D",
+    "Quadro de mesa com a sua foto no estilo Polaroid"
+  ],
+  "personalizacao": "Foto do quadro enviada pelo WhatsApp",
+  "ordem": 1,
+  "destaque": false
+}
