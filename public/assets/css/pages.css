@@ -35,3 +35,8 @@ section[id^=cat-]{scroll-margin-top:90px}
 .cb .pr .btn{text-align:center;width:100%}
 
 .tag{display:inline-block;font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#A65365;background:#F9EBEE;border-radius:99px;padding:3px 10px;margin-bottom:8px}
+
+/* páginas de produto */
+.cb h3 a{color:inherit;text-decoration:none}.card>a{display:block}
+.price{font-size:26px;margin:.2em 0 .6em}.price .old{text-decoration:line-through;color:#8C6C73;font-size:16px;margin-right:6px}
+.buy{display:flex;flex-wrap:wrap;gap:10px}.inc{padding-left:20px;margin:0}.inc li{margin:4px 0}

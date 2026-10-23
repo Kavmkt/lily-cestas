@@ -246,6 +246,7 @@ content:
       - { name: taxa_entrega, label: Taxa de entrega padrão (R$), type: number }
       - { name: brinde1_valor, label: Brinde - pedido a partir de (R$), type: number }
       - { name: brinde1_nome, label: Brinde - nome, type: string }
+      - { name: ga4_id, label: Código do Google Analytics (G-XXXXXXXXXX), type: string, description: "Opcional. Cole aqui o ID de métricas do Google Analytics 4 (começa com G-). Vazio = sem medição." }
       - { name: foto_chaveiro_simples, label: Foto do chaveiro de brinde (fundo transparente), type: image, description: Aparece no cartão de brinde da primeira tela. Use foto sem fundo (PNG). }
       - { name: foto_estudio_litofania, label: Foto da prévia da litofania (Estúdio), type: image }
       - { name: foto_estudio_polaroid, label: Foto da prévia da Polaroid (Estúdio), type: image }

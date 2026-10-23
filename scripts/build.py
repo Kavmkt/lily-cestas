@@ -12,6 +12,7 @@ import re
 import shutil
 import sys
 import unicodedata
+import urllib.parse
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -83,7 +84,7 @@ config = {
     'ifood_url': 'https://www.ifood.com.br/delivery/santana-de-parnaiba-sp/lily-cestas--presentes-colinas-da-anhanguera/25073e59-c1d1-43a8-a317-7f5c948f97ab',
     'pix_desconto': 5, 'taxa_entrega': 15, 'brinde1_valor': 150, 'brinde1_nome': 'Chaveiro de brinde',
     'foto_chaveiro_simples': '',
-    'foto_estudio_litofania': '', 'foto_estudio_polaroid': '',
+    'foto_estudio_litofania': '', 'foto_estudio_polaroid': '', 'ga4_id': '',
 }
 config.update({k: v for k, v in load_json(ROOT / 'data/config.json', {}).items() if v not in (None, '')})
 config['whatsapp'] = re.sub(r'\D', '', str(config['whatsapp']))
@@ -307,11 +308,22 @@ BUSINESS = {
 }
 
 
+def prod_url(p):
+    return f'/produto/{p["id"]}/'
+
+
+def prod_desc(p):
+    if p.get('descricao'):
+        return p['descricao']
+    return f'{p["nome"]}: {p["_cat"]["nome"].lower()} da Lily Cestas por {brl(final_price(p))}. Escolha no site e combine os detalhes pelo WhatsApp.'
+
+
 def prod_ld(p):
-    offer = {'@type': 'Offer', 'url': BASE + SHOP + '#catalogo', 'priceCurrency': 'BRL', 'price': '%.2f' % final_price(p),
+    offer = {'@type': 'Offer', 'url': BASE + prod_url(p), 'priceCurrency': 'BRL', 'price': '%.2f' % final_price(p),
+             'itemCondition': 'https://schema.org/NewCondition',
              'availability': 'https://schema.org/OutOfStock' if p['status'] == 'esgotado' else 'https://schema.org/InStock',
              'seller': {'@id': BASE + '/#negocio'}}
-    return {'@type': 'Product', 'name': p['nome'], 'image': BASE + p['_img'], 'description': p['descricao'],
+    return {'@type': 'Product', 'name': p['nome'], 'url': BASE + prod_url(p), 'sku': p['id'], 'image': BASE + p['_img'], 'description': prod_desc(p),
             'brand': {'@type': 'Brand', 'name': 'Lily Cestas'}, 'category': p['_cat']['nome'], 'offers': offer}
 
 
@@ -357,6 +369,7 @@ def write_page(path, content):
 
 def footer_html():
     cat_li = ''.join(f'<li><a href="/{c["pagina_url"]}/">{esc(c["nome"])}</a></li>' for c in cats_with if c.get('pagina_url'))
+    cat_li += ''.join(f'<li><a href="/{o["slug"]}/">{esc(o["nome"])}</a></li>' for o in OCCASIONS_OK)
     city_li = ''.join(f'<li><a href="/{x["slug"]}/">Presentes em {x["cidade"]}</a></li>' for x in CITIES)
     return f'''<footer class="foot"><div class="wrap grid">
 <div><strong>Lily Cestas</strong><p>Atelier de cestas de presente, canecas e peças personalizadas. Santana de Parnaíba, SP.</p><p><a href="https://wa.me/{WA}" rel="noopener" target="_blank">WhatsApp {phone}</a><br><a href="{config['instagram']}" rel="noopener" target="_blank">Instagram @lilycestas.ofc</a></p></div>
@@ -376,7 +389,7 @@ def cards_html(plist):
     for p in plist:
         old = f'<span style="text-decoration:line-through;color:#8C6C73;font-size:12px;display:block">{brl(p["preco"])}</span>' if p['_promo'] else ''
         action = '<span style="font-size:12px;font-weight:600;color:#6E5057">Esgotado</span>' if p['status'] == 'esgotado' else f'<a class="btn sm" href="{SHOP}#p={p["id"]}">Adicionar</a>'
-        out += f'''<article class="card"><img src="{p["_img"]}" alt="{esc(p.get("alt") or p["nome"])}" width="760" height="567" loading="lazy"><div class="cb"><h3>{esc(p["nome"])}</h3><p>{esc(p["descricao"])}</p><div class="pr"><span>{old}<b>{brl(final_price(p))}</b></span>{action}</div></div></article>'''
+        out += f'''<article class="card"><a href="{prod_url(p)}"><img src="{p["_img"]}" alt="{esc(p.get("alt") or p["nome"])}" width="760" height="567" loading="lazy"></a><div class="cb"><h3><a href="{prod_url(p)}">{esc(p["nome"])}</a></h3><p>{esc(p["descricao"])}</p><div class="pr"><span>{old}<b>{brl(final_price(p))}</b></span>{action}</div></div></article>'''
     return out
 
 
@@ -460,6 +473,80 @@ CITIES[3]['vizinhas'] = ['santana-de-parnaiba', 'alphaville', 'barueri', 'osasco
 CITY_BY = {c['slug'].replace('cestas-de-presente-', ''): c for c in CITIES}
 FAQ_COMMON = faq
 
+# ---- páginas por ocasião (busca por "cesta de aniversário", "presente dia das mães"...)
+# "ids" é a lista de preferência; só entram produtos que estão visíveis no site. Se faltar, completa com os mais bem colocados.
+OCCASIONS = [
+    dict(slug='cesta-de-aniversario', nome='Cesta de aniversário', cat_filter=None,
+         ids=['box-feliz-aniversario', 'cesta-lily-imperial-rose', 'cesta-despertar-delicado', 'box-floral', 'cesta-doce-encanto', 'caneca-personalizada-chaveiro', 'kit-porta-retratos-polaroid', 'luminaria-litofania-3d-foto'],
+         title='Cesta de Aniversário e Presentes Personalizados | Lily Cestas',
+         desc='Cestas de aniversário com chocolates, balões e mimos, além de presentes personalizados. Escolha no site, combine o cartão pelo WhatsApp e receba em casa.',
+         h1='Cesta de Aniversário: presentes que fazem a diferença',
+         intro='Aniversário pede um presente que mostre carinho de verdade. Nossas cestas e boxes saem do atelier montados à mão, com chocolates, balões, pelúcias e a mensagem que você escolher.',
+         blocks=[('Como escolher a cesta de aniversário', 'Pense em quem vai receber: para quem gosta de chocolate, as boxes com bombons e Nutella; para quem ama decoração, peças personalizadas; para surpreender de manhã, a cesta de café. Se tiver dúvida, o Concierge do site indica pela pessoa e pelo valor.'),
+                 ('Cartão com a sua mensagem', 'Nas cestas com cartão personalizado, a frase é combinada pelo WhatsApp antes da produção. Dá para escrever o nome, a idade ou uma lembrança só de vocês.'),
+                 ('Personalizado também vale', 'Canecas com nome, porta-retratos Polaroid e luminária com foto são ótimas para quem já tem tudo. A personalização (nome, frase ou foto) é combinada pelo WhatsApp depois do pedido.')],
+         faq=[('Dá para colocar o nome do aniversariante?', 'Dá. Nome, idade e frase são combinados pelo WhatsApp depois que você finaliza o pedido.'),
+              ('Posso agendar para o dia do aniversário?', 'Combinamos a data e o horário pelo WhatsApp, conforme a agenda do atelier. Quanto mais cedo você pedir, melhor.')]),
+    dict(slug='cesta-de-cafe-da-manha', nome='Cesta de café da manhã', cat_filter=None,
+         ids=['cesta-cafe-especial', 'cesta-despertar-delicado', 'cesta-com-amor', 'cesta-lily-imperial-rose', 'box-floral', 'box-feliz-aniversario'],
+         title='Cesta de Café da Manhã para Presente | Lily Cestas',
+         desc='Cestas de café da manhã para aniversário, agradecimento e surpresa. Montadas à mão, com cartão personalizado. Peça pelo site e combine a entrega no WhatsApp.',
+         h1='Cesta de Café da Manhã para presentear',
+         intro='Acordar com uma cesta de café da manhã na porta é daqueles carinhos que ficam na memória. Montamos cada cesta no atelier, com itens selecionados e acabamento caprichado.',
+         blocks=[('Para quem enviar', 'Funciona para aniversário, namorados, nascimento de bebê, boas-vindas, agradecimento e para quem simplesmente merece uma manhã especial. Também vai bem em escritórios, para celebrar a equipe.'),
+                 ('O que costuma vir', 'Cada cesta tem a sua composição, que fica descrita na página do produto. Em geral combinam chocolates, petiscos, bebida, mimos e um toque de decoração.'),
+                 ('Horário e combinação', 'A data e o horário da entrega são combinados pelo WhatsApp, conforme a agenda do atelier. Se for para uma surpresa, avise e alinhamos o melhor momento.')],
+         faq=[('As cestas de café da manhã têm itens perecíveis?', 'A composição de cada cesta está descrita na página do produto. Se tiver restrição alimentar, avise pelo WhatsApp antes de finalizar.'),
+              ('Dá para enviar para o escritório?', 'Dá. Informe o endereço, o nome de quem recebe e um contato da recepção no checkout.')]),
+    dict(slug='presente-dia-das-maes', nome='Presente de Dia das Mães', cat_filter=None,
+         ids=['cesta-doce-encanto', 'box-floral', 'caneca-afeto-em-flor', 'cesta-despertar-delicado', 'buque-de-flores-artificial', 'luminaria-litofania-3d-foto', 'caneca-personalizada-chaveiro', 'trio-decorativo-3d-vaso'],
+         title='Presente de Dia das Mães: Cestas e Personalizados | Lily Cestas',
+         desc='Cestas de presente, flores artificiais e peças personalizadas para o Dia das Mães. Escolha no site, personalize pelo WhatsApp e receba em casa.',
+         h1='Presente de Dia das Mães com carinho de verdade',
+         intro='Mãe merece um presente pensado com cuidado. Reunimos cestas, boxes, flores e peças personalizadas feitas à mão para dizer obrigada do jeito certo.',
+         blocks=[('Ideias para presentear', 'Cestas com chocolates e bebida para celebrar, boxes delicadas com flores, canecas com nome e peças em 3D com foto da família. Escolha pelo estilo dela e pelo valor que você quer investir.'),
+                 ('Peça com antecedência', 'O Dia das Mães concentra muitos pedidos. Para garantir o presente personalizado e o horário que você quer, faça o pedido com antecedência e combine os detalhes pelo WhatsApp.'),
+                 ('Mensagem no cartão', 'Algumas cestas incluem cartão com a sua mensagem. Conte o que quer dizer e a gente cuida do acabamento.')],
+         faq=[('Posso mandar o presente para a casa da minha mãe?', 'Pode. Informe o endereço dela, o nome de quem vai receber e o recado do cartão no checkout.'),
+              ('Dá para personalizar com foto?', 'Dá. Luminária com foto e porta-retratos Polaroid usam fotos enviadas pelo WhatsApp depois do pedido.')]),
+    dict(slug='presente-dia-dos-namorados', nome='Presente de Dia dos Namorados', cat_filter=None,
+         ids=['box-luxo-lily-romantica', 'com-todo-meu-amor', 'caneca-afeto-em-flor', 'kit-memorias-polaroid-iluminado', 'quadro-shadow-box-3d', 'luminaria-litofania-3d-foto', 'kit-letras-palavras-esculturais', 'buque-de-flores-artificial', 'kit-porta-retratos-polaroid'],
+         title='Presente de Dia dos Namorados: Cestas Românticas | Lily Cestas',
+         desc='Cestas românticas, boxes com chocolates e presentes personalizados com foto para o Dia dos Namorados. Peça pelo site e combine os detalhes no WhatsApp.',
+         h1='Presentes para o Dia dos Namorados',
+         intro='Um presente romântico fica melhor quando conta a história de vocês. Temos boxes com chocolates e pelúcia, flores, porta-retratos e peças personalizadas com as fotos do casal.',
+         blocks=[('Cestas e boxes românticas', 'Boxes com chocolates, balões, flores e frases carinhosas são pedidas clássicas para surpreender. A composição de cada uma está na página do produto.'),
+                 ('Presentes com a foto de vocês', 'Porta-retratos Polaroid, luminária com foto e quadro com fotos transformam uma lembrança em decoração. As fotos são enviadas pelo WhatsApp depois do pedido.'),
+                 ('Combine a surpresa', 'Quer que chegue em um horário específico ou com um recado secreto? Avise pelo WhatsApp e alinhamos tudo com você.')],
+         faq=[('Dá para escolher a mensagem do cartão?', 'Dá. A frase é combinada pelo WhatsApp antes de seguirmos com a produção.'),
+              ('Quanto antes devo pedir?', 'Quanto antes, melhor, principalmente para presentes personalizados. Em datas especiais a agenda lota rápido.')]),
+    dict(slug='cesta-de-natal', nome='Cesta de Natal', cat_filter=None,
+         ids=['cesta-natal-magico', 'combo-natal-encantado', 'cesta-doce-encanto', 'trio-decorativo-3d-vaso', 'box-floral'],
+         title='Cesta de Natal e Presentes Natalinos | Lily Cestas',
+         desc='Cestas de Natal e presentes natalinos personalizados: letreiro, árvore 3D e quadro com foto. Escolha no site e combine a entrega pelo WhatsApp.',
+         h1='Cestas de Natal e presentes natalinos',
+         intro='Para presentear família, amigos e equipe no fim do ano, o atelier prepara cestas de Natal e peças decorativas personalizadas, com acabamento capricho e entrega combinada.',
+         blocks=[('Para a família e para a equipe', 'Cestas de Natal são uma boa escolha para amigo secreto, agradecimento a clientes e presente de equipe. Se for um pedido com várias unidades, chame no WhatsApp para combinar.'),
+                 ('Decoração personalizada', 'O combo com letreiro, árvore em 3D e quadro com a sua foto enfeita a casa e serve de lembrança. A foto do quadro é enviada pelo WhatsApp.'),
+                 ('Pedidos de fim de ano', 'Dezembro enche a agenda do atelier. Faça o pedido com antecedência para garantir o produto e o horário.')],
+         faq=[('Vocês fazem pedidos em quantidade para empresas?', 'Fazemos. Chame no WhatsApp com a quantidade e a data desejada para combinarmos valores e prazo.'),
+              ('As peças de Natal ficam disponíveis o ano todo?', 'São produtos sazonais. Quando saem de linha, aparecem como esgotados ou deixam de ser exibidos no catálogo.')]),
+]
+OCC_MIN = 3
+
+
+def occ_products(o):
+    byid = {p['id']: p for p in visible}
+    chosen = [byid[i] for i in o['ids'] if i in byid]
+    if len(chosen) < OCC_MIN:
+        chosen += [p for p in (active or visible) if p not in chosen][:OCC_MIN - len(chosen)]
+    return chosen
+
+
+for o in OCCASIONS:
+    o['_prods'] = occ_products(o)
+OCCASIONS_OK = [o for o in OCCASIONS if len(o['_prods']) >= OCC_MIN]
+
 page_urls = []
 for c in cats_with:
     if not c.get('pagina_url'):
@@ -542,6 +629,83 @@ for c in CITIES:
                                (featured[0]['_img'], featured[0].get('alt') or featured[0]['nome']) if featured else None))
     page_urls.append(path)
 
+
+# ---- páginas de ocasião
+for o in OCCASIONS_OK:
+    path = f'/{o["slug"]}/'
+    ps = o['_prods']
+    prices = [final_price(p) for p in ps]
+    items = [(f'Quanto custa {o["nome"].lower()} na Lily Cestas?', f'Os presentes desta página custam de {brl(min(prices))} a {brl(max(prices))}.'),
+             ('Vocês entregam na minha região?', 'Atendemos Santana de Parnaíba, Alphaville, Barueri, Cajamar, Osasco e Carapicuíba. Informe o CEP no checkout e conferimos na hora a entrega e a taxa.')] + o['faq'] + FAQ_COMMON[-1:]
+    rel = '<section class="rel"><h2>Mais ideias de presente</h2><p>' + ''.join(
+        f'<a href="/{x["slug"]}/">{esc(x["nome"])}</a>' for x in OCCASIONS_OK if x is not o) + '</p><p>' + ''.join(
+        f'<a href="/{c["pagina_url"]}/">{esc(c["nome"])}</a>' for c in cats_with if c.get('pagina_url')) + '</p></section>'
+    extra = [{'@type': 'CollectionPage', 'name': o['h1'], 'url': BASE + path, 'mainEntity': {'@type': 'ItemList', 'itemListElement': [{'@type': 'ListItem', 'position': i + 1, 'item': prod_ld(p)} for i, p in enumerate(ps)]}}]
+    write_page(path, page_html(path, o['title'], o['desc'], o['h1'], o['intro'], o['blocks'], ps, items, [('Início', '/'), (o['nome'], path)], extra, rel,
+                               (ps[0]['_img'], ps[0].get('alt') or ps[0]['nome'])))
+    page_urls.append(path)
+
+# ---- página de cada produto
+def product_page(p):
+    path = prod_url(p)
+    c = p['_cat']
+    title = f'{p["nome"]} | {c["nome_curto"]} | Lily Cestas'
+    desc = (prod_desc(p) + f' {brl(final_price(p))}. Peça pelo site e combine os detalhes pelo WhatsApp.')[:300]
+    wa_text = f'Oi! Vim pelo site da Lily Cestas e quero o produto: {p["nome"]} ({brl(final_price(p))}).'
+    old = f'<span class="old">{brl(p["preco"])}</span> ' if p['_promo'] else ''
+    sold = p['status'] == 'esgotado'
+    buy = ('<p><strong>Esgotado no momento.</strong> Chame no WhatsApp para saber quando volta ou escolher algo parecido.</p>'
+           f'<p><a class="btn" href="https://wa.me/{WA}?text={esc(urllib.parse.quote(wa_text))}" target="_blank" rel="noopener">Perguntar no WhatsApp</a></p>') if sold else (
+           f'<p class="buy"><a class="btn" data-ga="add_to_cart_click" data-ga-item="{p["id"]}" href="{SHOP}#p={p["id"]}">Adicionar ao pedido</a> '
+           f'<a class="btn ghost" href="https://wa.me/{WA}?text={esc(urllib.parse.quote(wa_text))}" target="_blank" rel="noopener">Pedir pelo WhatsApp</a></p>')
+    inc = ('<section><h2>O que vem</h2><ul class="inc">' + ''.join(f'<li>{esc(x)}</li>' for x in p['inclui']) + '</ul></section>') if p['inclui'] else ''
+    pers = f'<section><h2>Personalização</h2><p>{esc(p["personalizacao"])}. Depois de finalizar o pedido, você combina tudo pelo WhatsApp antes da produção.</p></section>' if p['personalizacao'] else ''
+    entrega = (f'<section><h2>Entrega e pagamento</h2><p>Entregamos em {", ".join(config.get("cidades_entrega") or [])}. Informe o CEP no checkout para conferir a entrega e a taxa'
+               f' ({brl(config["taxa_entrega"])}, somada no fechamento do pedido). Pagando no Pix, você tem {int(config["pix_desconto"])}% de desconto nos produtos.</p></section>')
+    items = [(f'Quanto custa {p["nome"]}?', f'{p["nome"]} custa {brl(final_price(p))}. A taxa de entrega é calculada no checkout.'),
+             ('Dá para personalizar?', 'Dá. Nome, frase ou foto são combinados pelo WhatsApp depois que você finaliza o pedido.'),
+             ('Vocês entregam na minha região?', 'Atendemos Santana de Parnaíba, Alphaville, Barueri, Cajamar, Osasco e Carapicuíba. Informe o CEP no checkout e conferimos na hora.')]
+    faq_block = ''.join(f'<details><summary>{esc(q)}</summary><p>{esc(a)}</p></details>' for q, a in items)
+    others = [x for x in visible if x is not p and x['_cat'] is c][:4]
+    if len(others) < 4:
+        others += [x for x in (active or visible) if x is not p and x not in others][:4 - len(others)]
+    trail = [('Início', '/')] + ([(c['nome'], f'/{c["pagina_url"]}/')] if c.get('pagina_url') and c in cats_with else []) + [(p['nome'], path)]
+    crumbs = ' › '.join(f'<a href="{u}">{esc(n)}</a>' if i < len(trail) - 1 else f'<span>{esc(n)}</span>' for i, (n, u) in enumerate(trail))
+    badge = f'<span class="tag">{esc(p["selo"])}</span>' if p['selo'] else ''
+    return (head(title, desc, path).replace('<meta property="og:type" content="website">', '<meta property="og:type" content="product">') + jsonld(BUSINESS, crumb_ld(trail), faq_ld(items), prod_ld(p)) + '''
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/pages.css">
+</head><body>''' + top_html() + f'''<main><div class="wrap"><nav class="crumbs" aria-label="Navegação">{crumbs}</nav>
+<div class="lead"><div>{badge}<h1>{esc(p["nome"])}</h1><p class="intro">{esc(prod_desc(p))}</p><p class="price">{old}<b>{brl(final_price(p))}</b></p>{buy}</div>
+<img class="hero" src="{p["_img"]}" alt="{esc(p.get("alt") or p["nome"])}" width="760" height="567" fetchpriority="high"></div>
+{inc}{pers}{entrega}
+<section><h2>Perguntas frequentes</h2><div class="faq">{faq_block}</div></section>
+<section><h2>Você também pode gostar</h2><div class="cards">{cards_html(others)}</div></section>
+</div></main>''' + footer_html() + '</body></html>')
+
+
+for p in visible:
+    write_page(prod_url(p), product_page(p))
+    page_urls.append(prod_url(p))
+
+# ---- feed gratuito do Google Shopping (Merchant Center)
+def xml(t):
+    return html.escape(str(t), quote=False)
+
+
+feed_items = ''
+for p in visible:
+    price = f'{p["preco"]:.2f} BRL'
+    sale = f'<g:sale_price>{final_price(p):.2f} BRL</g:sale_price>' if p['_promo'] else ''
+    feed_items += (f'<item><g:id>{xml(p["id"])}</g:id><g:title>{xml(p["nome"])}</g:title><g:description>{xml(prod_desc(p))}</g:description>'
+                   f'<g:link>{BASE}{prod_url(p)}</g:link><g:image_link>{BASE}{p["_img"]}</g:image_link>'
+                   f'<g:availability>{"out_of_stock" if p["status"] == "esgotado" else "in_stock"}</g:availability>'
+                   f'<g:price>{price}</g:price>{sale}<g:condition>new</g:condition><g:brand>Lily Cestas</g:brand>'
+                   f'<g:identifier_exists>no</g:identifier_exists><g:product_type>{xml(p["_cat"]["nome"])}</g:product_type></item>\n')
+(OUT / 'feed-google.xml').write_text('<?xml version="1.0" encoding="UTF-8"?>\n<rss version="2.0" xmlns:g="http://base.google.com/ns/1.0"><channel>'
+                                     f'<title>Lily Cestas</title><link>{BASE}/</link><description>Cestas de presente e presentes personalizados</description>\n{feed_items}</channel></rss>\n', encoding='utf-8')
+
 # ---------------------------------------------------------------- home (loja completa)
 tpl = (ROOT / 'templates/home.html').read_text(encoding='utf-8')
 hero_p = next((p for p in active if p.get('destaque')), active[0] if active else visible[0])
@@ -612,9 +776,9 @@ repl = {
     'TITLE': esc(title), 'CANONICAL': f'<link rel="canonical" href="{BASE}{SHOP}">',
     'ROBOTS': f'<meta name="robots" content="{"index, follow, max-image-preview:large" if LOJA_NO_AR else "noindex, nofollow"}">',
     'JSONLD': home_ld, 'WA': WA, 'INSTA': config['instagram'], 'IFOOD': config['ifood_url'], 'PIX': str(int(config['pix_desconto'])), 'N': str(len(visible)),
-    'HOME_LINKS': ''.join(f'<a href="/{c["pagina_url"]}/" class="p-4 rounded-2xl border border-[#EED9DF] bg-[#FDF8F9] hover:bg-white text-sm font-display font-semibold text-[#A65365]">{esc(c["nome"])} →</a>' for c in cats_with if c.get('pagina_url')) + '<a href="/catalogo/" class="p-4 rounded-2xl border border-[#EED9DF] bg-[#FDF8F9] hover:bg-white text-sm font-display font-semibold text-[#A65365]">Catálogo completo →</a>',
+    'HOME_LINKS': ''.join(f'<a href="/{c["pagina_url"]}/" class="p-4 rounded-2xl border border-[#EED9DF] bg-[#FDF8F9] hover:bg-white text-sm font-display font-semibold text-[#A65365]">{esc(c["nome"])} →</a>' for c in cats_with if c.get('pagina_url')) + ''.join(f'<a href="/{o["slug"]}/" class="p-4 rounded-2xl border border-[#EED9DF] bg-[#FDF8F9] hover:bg-white text-sm font-display font-semibold text-[#A65365]">{esc(o["nome"])} →</a>' for o in OCCASIONS_OK) + '<a href="/catalogo/" class="p-4 rounded-2xl border border-[#EED9DF] bg-[#FDF8F9] hover:bg-white text-sm font-display font-semibold text-[#A65365]">Catálogo completo →</a>',
     'CIDADES_JSON': json.dumps([x for x in (config.get('cidades_entrega') or []) if x], ensure_ascii=False),
-    'FOOTER_CATS': ''.join(f'<li><a href="/{c["pagina_url"]}/" class="hover:text-white hover:underline">{esc(c["nome"])}</a></li>' for c in cats_with if c.get('pagina_url')),
+    'FOOTER_CATS': ''.join(f'<li><a href="/{c["pagina_url"]}/" class="hover:text-white hover:underline">{esc(c["nome"])}</a></li>' for c in cats_with if c.get('pagina_url')) + ''.join(f'<li><a href="/{o["slug"]}/" class="hover:text-white hover:underline">{esc(o["nome"])}</a></li>' for o in OCCASIONS_OK),
     'B1V': brl(config['brinde1_valor']).replace(',00', ''), 'HERO_CATS': hero_cats, 'HERO_IMG': hero_img, 'CAT_PILLS': pills, 'MIMOS_TEXT': mimos, 'REWARD_INIT': reward_init, 'DATA_JS': data_js,
     'OPT_BASES': ''.join(opt(o) for o in SIM['bases']), 'OPT_LOUCA': ''.join(opt(o) for o in SIM['louca']),
     'OPT_3D': ''.join(opt(o) for o in SIM['pecas_3d']), 'OPT_POL': ''.join(opt(o) for o in SIM['polaroids']),
@@ -646,11 +810,32 @@ for key, c in zip(('cesta_macarons', 'caneca_coracao', 'quadro_shadowbox'), (cat
     legacy[key] = c['_img']
 (OUT / 'lily-images.js').write_text('window.LILY_IMAGES=' + json.dumps(legacy) + ';\n', encoding='utf-8')
 
+
+# ---------------------------------------------------------------- analytics (GA4) e rastreio de cliques
+GA4 = str(config.get('ga4_id') or '').strip().upper()
+if GA4 and not re.fullmatch(r'G-[A-Z0-9]{6,14}', GA4):
+    print(f'Aviso: o código do Google Analytics "{GA4}" não parece válido (deve ser como G-ABC123XYZ). Analytics não foi ligado.')
+    GA4 = ''
+ga_snippet = ''
+if GA4:
+    ga_snippet = (f'<script async src="https://www.googletagmanager.com/gtag/js?id={GA4}"></script>'
+                  "<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}"
+                  "gtag('consent','default',{ad_storage:'denied',ad_user_data:'denied',ad_personalization:'denied',analytics_storage:'granted'});"
+                  f"gtag('js',new Date());gtag('config','{GA4}');</script>")
+ga_snippet += '<script defer src="/assets/js/track.js"></script>'
+for f in OUT.rglob('*.html'):
+    if f.name.startswith('google') or '/assets/' in str(f):
+        continue
+    t = f.read_text(encoding='utf-8')
+    if 'http-equiv="refresh"' in t or '</head>' not in t:
+        continue
+    f.write_text(t.replace('</head>', ga_snippet + '</head>', 1), encoding='utf-8')
+
 # ---------------------------------------------------------------- sitemap e robots
 urls = ['/'] + page_urls
 today = datetime.date.today().isoformat()
 (OUT / 'sitemap.xml').write_text('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' + ''.join(
-    f'  <url><loc>{BASE}{u}</loc><lastmod>{today}</lastmod><changefreq>{"weekly" if u == "/" else "monthly"}</changefreq><priority>{"1.0" if u == "/" else "0.8"}</priority></url>\n' for u in urls) + '</urlset>\n', encoding='utf-8')
+    f'  <url><loc>{BASE}{u}</loc><lastmod>{today}</lastmod><changefreq>{"weekly" if u == "/" else "monthly"}</changefreq><priority>{"1.0" if u == "/" else ("0.6" if u.startswith("/produto/") else "0.8")}</priority></url>\n' for u in urls) + '</urlset>\n', encoding='utf-8')
 (OUT / 'robots.txt').write_text(f'User-agent: *\nAllow: /\n\nSitemap: {BASE}/sitemap.xml\n', encoding='utf-8')
 
 print(f'Site gerado em _site/: {len(visible)} produtos ({len(active)} ativos), {len(cats_with)} categorias, {len(page_urls)} páginas de SEO. '

@@ -65,3 +65,8 @@ A categoria aparece sozinha no site, nos filtros e no mapa do Google.
 - `scripts/build.py` valida tudo e gera o site em `_site/`. `templates/home.html` é o modelo da loja. `public/` guarda os arquivos fixos (página de links, logos, CSS).
 - O deploy é feito pelo GitHub Actions (`.github/workflows/deploy.yml`) a cada alteração na branch `main`.
 - Rodar localmente: `pip install pillow pillow-heif && python3 scripts/build.py`.
+
+## Páginas novas geradas sozinhas
+- Cada produto visível ganha uma página própria (`/produto/nome-do-produto/`) e entra no feed do Google Shopping (`/feed-google.xml`). Preço, foto, descrição e situação vêm do painel, então não há nada extra para preencher.
+- As páginas por ocasião (aniversário, café da manhã, Dia das Mães, Dia dos Namorados e Natal) escolhem os produtos pela lista dentro de `scripts/build.py`. Produto oculto ou fora de linha some delas sozinho.
+- **Google Analytics:** em **Configurações da loja**, cole o código `G-XXXXXXXXXX` no campo do Google Analytics. Sem código, nada é medido.
