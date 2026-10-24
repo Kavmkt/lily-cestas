@@ -77,3 +77,10 @@ Em **Configurações da loja**:
 - **Pedido mínimo (R$)**: hoje 35. Abaixo disso o site não deixa finalizar.
 - **Taxa de entrega**: só é cobrada em pedidos abaixo do valor de entrega grátis.
 Os selos "Entrega grátis" nos produtos, o carrinho, o checkout e as páginas de SEO usam esses valores sozinhos.
+
+## Banners da home
+No painel, menu **Banners da home**:
+- **Trocar a imagem:** abra o banner e envie as duas versões: **computador 1600 x 320 px** e **celular 750 x 300 px** (JPG, PNG ou WebP). Sem imagem, o site monta um banner de texto com o título e o emoji.
+- **Esconder:** desligue **Mostrar na home**. **Ordem:** número menor aparece primeiro.
+- **Novo banner:** **Add an entry**. Em **Para onde o banner leva**, use `#catalogo`, uma página do site (`/cesta-de-natal/`) ou um link completo.
+- Nos textos dá para usar `{frete}`, `{minimo}`, `{brinde}` e `{pix}`; o site troca pelos valores das Configurações.

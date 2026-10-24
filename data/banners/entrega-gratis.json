@@ -1,0 +1,14 @@
+{
+  "nome": "Entrega grátis",
+  "titulo": "Entrega grátis a partir de {frete}",
+  "subtitulo": "Pedido mínimo de {minimo} • Pix com {pix}% de desconto",
+  "botao": "Ver presentes",
+  "link": "#catalogo",
+  "cor": "rose",
+  "icone": "🚚",
+  "ativo": true,
+  "ordem": 1,
+  "alt": "",
+  "imagem_web": "",
+  "imagem_mobile": ""
+}

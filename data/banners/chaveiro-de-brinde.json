@@ -1,0 +1,14 @@
+{
+  "nome": "Chaveiro de brinde",
+  "titulo": "Compras a partir de {brinde} ganham chaveiro de brinde",
+  "subtitulo": "Escolha seu presente e leve um mimo junto",
+  "botao": "Escolher presente",
+  "link": "#catalogo",
+  "cor": "vinho",
+  "icone": "🎁",
+  "ativo": true,
+  "ordem": 2,
+  "alt": "",
+  "imagem_web": "",
+  "imagem_mobile": ""
+}

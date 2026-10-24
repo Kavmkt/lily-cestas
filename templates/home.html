@@ -282,6 +282,23 @@ html {
   #catalog-grid{order:3}.cat-more{order:4}.mimos-band{order:5;margin:22px 0 0!important}
   .cat-head>div>span{display:none}.cat-head h2{font-size:19px!important;line-height:1.25}#catalog-count{display:none}
 }
+
+/* ===== banners da home ===== */
+.nh-banners{position:relative;margin-top:18px}
+.bn-track{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;-webkit-overflow-scrolling:touch;border-radius:22px}.bn-track::-webkit-scrollbar{display:none}
+.bn-slide{flex:0 0 100%;scroll-snap-align:start;display:flex;align-items:center;gap:16px;aspect-ratio:5/1;text-decoration:none;position:relative;overflow:hidden;min-width:0;color:#fff}
+.bn-img{display:block}.bn-img picture,.bn-img img{display:block;width:100%;height:100%}.bn-img img{object-fit:cover}
+.bn-txt{padding:0 clamp(18px,3vw,38px)}
+.bn-rose{background:linear-gradient(120deg,#C87888,#A65365)}.bn-vinho{background:linear-gradient(120deg,#5A2A35,#382126)}.bn-creme{background:linear-gradient(120deg,#FBEEF1,#F5DCE2);color:#A65365}
+.bn-ic{font-size:clamp(26px,4vw,44px);line-height:1;flex:none}
+.bn-t{display:flex;flex-direction:column;gap:4px;min-width:0;flex:1}.bn-t b{font:600 clamp(15px,2.1vw,24px)/1.2 'Montserrat',sans-serif}.bn-t small{font:500 clamp(11.5px,1.4vw,15px)/1.35 'Plus Jakarta Sans',sans-serif;opacity:.92}
+.bn-btn{flex:none;font:600 13px 'Montserrat',sans-serif;font-style:normal;border:1.5px solid currentColor;border-radius:99px;padding:9px 18px;white-space:nowrap}
+.bn-dots{display:flex;justify-content:center;gap:6px;margin-top:8px}.bn-dot{width:7px;height:7px;border-radius:99px;border:0;background:#E5C2C9;padding:0;cursor:pointer;transition:.2s}.bn-dot.on{width:20px;background:#A65365}
+@media(max-width:767px){
+  .bn-slide{aspect-ratio:5/2;gap:10px}.bn-txt{padding:0 16px}.bn-btn{display:none}.bn-track{border-radius:18px}
+  #topo>.nh-wrap>.nh-banners{order:2;margin-top:2px}#topo>.nh-wrap>.cats{order:3}#topo>.nh-wrap>.nh-cep{order:4}
+  .kw{display:none}
+}
 </style>
 </head>
 <body class="min-h-screen antialiased selection:bg-[#F2D5DC] selection:text-[#382126]">
@@ -340,6 +357,7 @@ html {
           {{HERO_IMG}}
         </div>
       </div>
+      {{BANNERS}}
       <div class="nh-cep lg:flex lg:items-start lg:gap-8" style="margin-top:6px">
         <form class="cep" id="cep-form" autocomplete="off" style="flex:1;max-width:none">
           <label for="cep-input">Entregamos no seu endereço? Informe o CEP</label>

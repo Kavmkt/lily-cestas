@@ -719,6 +719,74 @@ for p in visible:
 (OUT / 'feed-google.xml').write_text('<?xml version="1.0" encoding="UTF-8"?>\n<rss version="2.0" xmlns:g="http://base.google.com/ns/1.0"><channel>'
                                      f'<title>Lily Cestas</title><link>{BASE}/</link><description>Cestas de presente e presentes personalizados</description>\n{feed_items}</channel></rss>\n', encoding='utf-8')
 
+# ---------------------------------------------------------------- banners da home
+def resize_to(path, maxw):
+    """Reduz uma imagem de banner (largura max maxw, WebP) e devolve a URL publica."""
+    rel = (path or '').lstrip('/')
+    src = ROOT / rel
+    if not rel or not src.is_file():
+        return ''
+    data = src.read_bytes()
+    h = hashlib.sha1(data).hexdigest()[:8]
+    dest = OUT / 'assets/p' / f'bn-{slugify(src.stem)[:30]}-{maxw}-{h}.webp'
+    try:
+        im = ImageOps.exif_transpose(Image.open(src))
+        if im.width > maxw:
+            im = im.resize((maxw, round(im.height * maxw / im.width)), Image.LANCZOS)
+        im.convert('RGB').save(dest, 'WEBP', quality=84, method=6)
+        return '/assets/p/' + dest.name
+    except Exception as e:
+        print(f'Aviso: não foi possível usar o banner {rel} ({e}).')
+        return ''
+
+
+def fill_vars(t):
+    return (str(t or '').replace('{frete}', FRETE_TXT).replace('{minimo}', MIN_TXT)
+            .replace('{brinde}', brl(config['brinde1_valor']).replace(',00', '')).replace('{pix}', str(int(config['pix_desconto']))))
+
+
+banners = []
+for f in sorted((ROOT / 'data/banners').glob('*.json')):
+    b = load_json(f, {})
+    if not b or b.get('ativo') is False:
+        continue
+    b['_ordem'] = to_number(b.get('ordem'), f'Banner {f.name} › ordem', False) or 999
+    banners.append(b)
+banners.sort(key=lambda b: (b['_ordem'], str(b.get('nome'))))
+
+
+def banner_html(b):
+    web = resize_to(b.get('imagem_web'), 1600)
+    mob = resize_to(b.get('imagem_mobile'), 900)
+    link = (b.get('link') or '').strip()
+    ext = link.startswith('http')
+    attrs = f' href="{esc(link)}"' + (' target="_blank" rel="noopener"' if ext else '') + f' data-ga="banner_click" data-ga-item="{esc(slugify(b.get("nome") or b.get("titulo") or ""))}"' if link else ''
+    tag = 'a' if link else 'div'
+    if web or mob:
+        alt = esc(b.get('alt') or fill_vars(b.get('titulo')) or b.get('nome') or 'Banner Lily Cestas')
+        src_web = web or mob
+        picture = (f'<picture>{f"<source media=(max-width:767px) srcset={mob}>" if mob else ""}'
+                   f'<img src="{src_web}" alt="{alt}" width="1600" height="320" loading="lazy" decoding="async"></picture>')
+        return f'<{tag} class="bn-slide bn-img"{attrs}>{picture}</{tag}>'
+    cor = b.get('cor') if b.get('cor') in ('rose', 'vinho', 'creme') else 'rose'
+    icone = f'<span class="bn-ic">{esc(b["icone"])}</span>' if b.get('icone') else ''
+    sub = f'<small>{esc(fill_vars(b.get("subtitulo")))}</small>' if b.get('subtitulo') else ''
+    btn = f'<em class="bn-btn">{esc(b["botao"])} →</em>' if b.get('botao') and link else ''
+    return (f'<{tag} class="bn-slide bn-txt bn-{cor}"{attrs}>{icone}<span class="bn-t"><b>{esc(fill_vars(b.get("titulo") or b.get("nome")))}</b>{sub}</span>{btn}</{tag}>')
+
+
+BANNERS_HTML = ''
+if banners:
+    slides = ''.join(banner_html(b) for b in banners)
+    dots = ''.join(f'<button type="button" class="bn-dot" aria-label="Banner {i + 1}"></button>' for i in range(len(banners))) if len(banners) > 1 else ''
+    BANNERS_HTML = (f'<div class="nh-banners" aria-label="Destaques"><div class="bn-track">{slides}</div>' + (f'<div class="bn-dots">{dots}</div>' if dots else '') + '</div>'
+                    + ('<script>(function(){var w=document.querySelector(".nh-banners");if(!w)return;var t=w.querySelector(".bn-track"),d=[].slice.call(w.querySelectorAll(".bn-dot")),n=t.children.length,i=0,timer;'
+                       'function go(k){i=(k+n)%n;t.scrollTo({left:t.children[i].offsetLeft-t.offsetLeft,behavior:"smooth"});}'
+                       'function mark(){var k=Math.round(t.scrollLeft/t.clientWidth);i=Math.max(0,Math.min(n-1,k));d.forEach(function(e,j){e.classList.toggle("on",j===i)});}'
+                       'if(n>1){t.addEventListener("scroll",mark,{passive:true});d.forEach(function(e,j){e.addEventListener("click",function(){stop();go(j)})});'
+                       'function start(){timer=setInterval(function(){go(i+1)},5500)}function stop(){clearInterval(timer)}'
+                       'w.addEventListener("touchstart",stop,{passive:true});w.addEventListener("mouseenter",stop);w.addEventListener("mouseleave",start);start();}mark();})();</script>' if len(banners) > 1 else ''))
+
 # ---------------------------------------------------------------- home (loja completa)
 tpl = (ROOT / 'templates/home.html').read_text(encoding='utf-8')
 hero_p = next((p for p in active if p.get('destaque')), active[0] if active else visible[0])
@@ -792,6 +860,7 @@ repl = {
     'HOME_LINKS': ''.join(f'<a href="/{c["pagina_url"]}/" class="p-4 rounded-2xl border border-[#EED9DF] bg-[#FDF8F9] hover:bg-white text-sm font-display font-semibold text-[#A65365]">{esc(c["nome"])} →</a>' for c in cats_with if c.get('pagina_url')) + ''.join(f'<a href="/{o["slug"]}/" class="p-4 rounded-2xl border border-[#EED9DF] bg-[#FDF8F9] hover:bg-white text-sm font-display font-semibold text-[#A65365]">{esc(o["nome"])} →</a>' for o in OCCASIONS_OK) + '<a href="/catalogo/" class="p-4 rounded-2xl border border-[#EED9DF] bg-[#FDF8F9] hover:bg-white text-sm font-display font-semibold text-[#A65365]">Catálogo completo →</a>',
     'CIDADES_JSON': json.dumps([x for x in (config.get('cidades_entrega') or []) if x], ensure_ascii=False),
     'FOOTER_CATS': ''.join(f'<li><a href="/{c["pagina_url"]}/" class="hover:text-white hover:underline">{esc(c["nome"])}</a></li>' for c in cats_with if c.get('pagina_url')) + ''.join(f'<li><a href="/{o["slug"]}/" class="hover:text-white hover:underline">{esc(o["nome"])}</a></li>' for o in OCCASIONS_OK),
+    'BANNERS': BANNERS_HTML,
     'B1V': brl(config['brinde1_valor']).replace(',00', ''), 'FRETE_MIN': brl(FRETE_MIN).replace(',00', ''), 'HERO_CATS': hero_cats, 'HERO_IMG': hero_img, 'CAT_PILLS': pills, 'MIMOS_TEXT': mimos, 'REWARD_INIT': reward_init, 'DATA_JS': data_js,
     'OPT_BASES': ''.join(opt(o) for o in SIM['bases']), 'OPT_LOUCA': ''.join(opt(o) for o in SIM['louca']),
     'OPT_3D': ''.join(opt(o) for o in SIM['pecas_3d']), 'OPT_POL': ''.join(opt(o) for o in SIM['polaroids']),

@@ -1,0 +1,14 @@
+{
+  "nome": "Natal",
+  "titulo": "Natal na Lily Cestas",
+  "subtitulo": "Cestas e presentes natalinos personalizados",
+  "botao": "Ver presentes de Natal",
+  "link": "/cesta-de-natal/",
+  "cor": "creme",
+  "icone": "🎄",
+  "ativo": true,
+  "ordem": 3,
+  "alt": "",
+  "imagem_web": "",
+  "imagem_mobile": ""
+}
