@@ -243,7 +243,9 @@ content:
       - { name: ifood_url, label: Link da loja no iFood, type: string, description: Endereço da Lily Cestas no iFood. Aparece no bloco "Prefere comprar pelo iFood?". }
       - { name: pix_desconto, label: Desconto no Pix (%), type: number, description: Exemplo 5 }
       - { name: cidades_entrega, label: Cidades atendidas na entrega, type: string, list: true, description: "Usadas para validar o CEP no checkout. Alphaville e Polvilho entram em Barueri, Santana de Parnaíba e Cajamar." }
-      - { name: taxa_entrega, label: Taxa de entrega padrão (R$), type: number }
+      - { name: entrega_gratis_a_partir, label: Entrega grátis a partir de (R$), type: number, description: "Pedidos com este valor ou mais (soma dos produtos, sem o desconto do Pix) não pagam entrega. Exemplo 125." }
+      - { name: pedido_minimo, label: Pedido mínimo (R$), type: number, description: "Abaixo disso o site não deixa finalizar o pedido. Exemplo 35." }
+      - { name: taxa_entrega, label: Taxa de entrega abaixo do valor de entrega grátis (R$), type: number, description: "Cobrada só em pedidos menores que o valor de entrega grátis. Exemplo 15." }
       - { name: brinde1_valor, label: Brinde - pedido a partir de (R$), type: number }
       - { name: brinde1_nome, label: Brinde - nome, type: string }
       - { name: ga4_id, label: Código do Google Analytics (G-XXXXXXXXXX), type: string, description: "Opcional. Cole aqui o ID de métricas do Google Analytics 4 (começa com G-). Vazio = sem medição." }

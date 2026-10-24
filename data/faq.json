@@ -6,7 +6,11 @@
     },
     {
       "pergunta": "Como funciona a entrega?",
-      "resposta": "Informe o CEP no checkout e conferimos na hora se entregamos no seu endereço. O dia e o horário são combinados pelo WhatsApp, conforme a agenda do atelier."
+      "resposta": "Informe o CEP no checkout e conferimos na hora se entregamos no seu endereço. O dia e o horário são combinados pelo WhatsApp, conforme a agenda do atelier. A entrega é grátis em pedidos a partir de R$ 125; abaixo disso, a taxa aparece no checkout antes de você finalizar."
+    },
+    {
+      "pergunta": "Existe pedido mínimo?",
+      "resposta": "Sim, o pedido mínimo é de R$ 35. Em pedidos a partir de R$ 125 a entrega é grátis."
     },
     {
       "pergunta": "Em quais cidades vocês entregam?",

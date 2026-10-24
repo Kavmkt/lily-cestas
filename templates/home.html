@@ -4,15 +4,15 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>{{TITLE}}</title>
-<meta name="description" content="Cestas de presente, café da manhã, xícaras com nome e presentes em 3D. Escolha no site, personalize pelo WhatsApp e receba em casa. Pix com desconto.">
+<meta name="description" content="Cestas de presente, café da manhã, xícaras com nome e presentes em 3D. Escolha no site, personalize pelo WhatsApp e receba em casa. Entrega grátis a partir de {{FRETE_MIN}} e Pix com desconto.">
 {{CANONICAL}}
 {{ROBOTS}}
 <meta name="theme-color" content="#B76E79">
 <link rel="icon" href="/favicon.ico" sizes="any"><link rel="icon" type="image/png" sizes="192x192" href="/assets/img/icon-192.png"><link rel="apple-touch-icon" href="/assets/img/icon-180.png">
 <meta property="og:locale" content="pt_BR"><meta property="og:type" content="website"><meta property="og:site_name" content="Lily Cestas">
-<meta property="og:title" content="Cestas de Presente e Presentes Personalizados | Lily Cestas"><meta property="og:description" content="Cestas de presente, café da manhã, xícaras com nome e presentes em 3D. Escolha no site, personalize pelo WhatsApp e receba em casa. Pix com desconto."><meta property="og:url" content="https://lilycestas.com.br/">
+<meta property="og:title" content="Cestas de Presente e Presentes Personalizados | Lily Cestas"><meta property="og:description" content="Cestas de presente, café da manhã, xícaras com nome e presentes em 3D. Escolha no site, personalize pelo WhatsApp e receba em casa. Entrega grátis a partir de {{FRETE_MIN}} e Pix com desconto."><meta property="og:url" content="https://lilycestas.com.br/">
 <meta property="og:image" content="https://lilycestas.com.br/assets/img/og-lily-cestas.jpg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
-<meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Cestas de Presente e Presentes Personalizados | Lily Cestas"><meta name="twitter:description" content="Cestas de presente, café da manhã, xícaras com nome e presentes em 3D. Escolha no site, personalize pelo WhatsApp e receba em casa. Pix com desconto."><meta name="twitter:image" content="https://lilycestas.com.br/assets/img/og-lily-cestas.jpg">
+<meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Cestas de Presente e Presentes Personalizados | Lily Cestas"><meta name="twitter:description" content="Cestas de presente, café da manhã, xícaras com nome e presentes em 3D. Escolha no site, personalize pelo WhatsApp e receba em casa. Entrega grátis a partir de {{FRETE_MIN}} e Pix com desconto."><meta name="twitter:image" content="https://lilycestas.com.br/assets/img/og-lily-cestas.jpg">
 <meta name="geo.region" content="BR-SP"><meta name="geo.placename" content="Santana de Parnaíba">
 {{JSONLD}}
   
@@ -222,6 +222,7 @@ html {
 .pcard{background:#fff;border:1px solid var(--line);border-radius:20px;overflow:hidden;display:flex;flex-direction:column;transition:.25s}.pcard:hover{box-shadow:0 18px 34px -22px rgba(166,83,101,.65);transform:translateY(-2px)}
 .pimg{position:relative}.pimg img{display:block;width:100%;aspect-ratio:1/1;object-fit:cover}
 .pbadge{position:absolute;left:8px;top:8px;background:var(--rose);color:#fff;font:700 9.5px 'Montserrat',sans-serif;letter-spacing:.06em;text-transform:uppercase;border-radius:99px;padding:4px 9px}
+.pship{position:absolute;left:8px;bottom:8px;background:rgba(255,255,255,.95);color:#1F6B3A;font:700 9.5px/1.2 'Montserrat',sans-serif;border-radius:99px;padding:4px 9px;box-shadow:0 2px 8px rgba(56,33,38,.12)}
 .pfav{position:absolute;right:8px;top:8px;width:34px;height:34px;border-radius:99px;background:rgba(255,255,255,.92);border:0;cursor:pointer;font-size:16px;color:#B89CA3}.pfav .on{color:#C87888}
 .pbody{padding:12px;display:flex;flex-direction:column;gap:6px;flex:1}.pcat{font:600 10px 'Montserrat',sans-serif;letter-spacing:.08em;text-transform:uppercase;color:var(--rose-d);margin:0}
 .pbody h3{font:600 14px/1.3 'Montserrat',sans-serif;color:var(--ink);margin:0;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
@@ -285,7 +286,7 @@ html {
 </head>
 <body class="min-h-screen antialiased selection:bg-[#F2D5DC] selection:text-[#382126]">
 
-  <div class="trustbar"><span>🚚 Entrega na sua região: confira pelo CEP</span><span>💳 Pix com 5% off</span><span class="t3">🎁 Chaveiro de brinde a partir de {{B1V}}</span></div>
+  <div class="trustbar"><span>🚚 Entrega grátis a partir de {{FRETE_MIN}}</span><span>💳 Pix com 5% off</span><span class="t3">🎁 Chaveiro de brinde a partir de {{B1V}}</span></div>
 
   <!-- Cabeçalho Delicado Fixo com Logo Oficial Lily Cestas -->
   <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-[#EED9DF]">
@@ -346,7 +347,7 @@ html {
           <div class="res" id="cep-res" role="status"></div>
         </form>
         <script>if(window.matchMedia&&matchMedia("(max-width:767px)").matches){document.getElementById("cep-input").placeholder="Seu CEP: confira a entrega"}</script>
-        <div class="chips" style="flex:1"><span>🎁 Chaveiro de brinde a partir de {{B1V}}</span><span>💳 Pix com {{PIX}}% de desconto</span></div>
+        <div class="chips" style="flex:1"><span>🚚 Entrega grátis a partir de {{FRETE_MIN}}</span><span>🎁 Chaveiro de brinde a partir de {{B1V}}</span><span>💳 Pix com {{PIX}}% de desconto</span></div>
       </div>
       {{HERO_CATS}}
     </div>
@@ -579,7 +580,7 @@ html {
           <h3 class="text-xs font-display font-bold uppercase tracking-wider text-[#FFE4E9] mb-3">Atendimento &amp; Entregas</h3>
           <p class="text-xs sm:text-sm text-white/90 leading-relaxed mb-4">
             Segunda a Sábado: 08h às 19h<br />
-            Entregas na região de Santana de Parnaíba. Informe o CEP no checkout e confirmamos.
+            Entregas em Santana de Parnaíba e região, grátis a partir de {{FRETE_MIN}}. Informe o CEP no checkout e confirmamos.
           </p>
           <a href="#catalogo" class="inline-block px-5 py-2.5 rounded-full bg-white text-[#9B4C5D] text-xs font-display font-bold hover:bg-[#FFF5F7] shadow-sm transition-colors">
             Ver presentes →
@@ -618,6 +619,7 @@ html {
         <div class="w-full h-2 rounded-full bg-white overflow-hidden border border-[#EBCAD2]">
           <div id="cart-reward-bar" class="h-full bg-rosegold-gradient transition-all duration-500" style="width: 0%"></div>
         </div>
+        <p id="cart-ship-text" class="text-[11px] font-display font-semibold text-[#1F6B3A] mt-2"></p>
       </div>
 
       <div id="cart-items-list" class="p-5 flex-1 overflow-y-auto space-y-3"></div>
@@ -710,6 +712,7 @@ html {
         <div id="checkout-step-1" class="space-y-4">
           <div class="p-3.5 rounded-2xl bg-[#FDF8F9] border border-[#EED9DF]">
             <p id="checkout-gift-banner" class="text-xs font-display font-semibold text-[#A65365]"></p>
+            <p id="checkout-ship-banner" class="text-xs font-display font-semibold text-[#1F6B3A] mt-1.5"></p>
           </div>
 
           <div>
@@ -798,8 +801,8 @@ html {
               <span id="checkout-sub-val" class="font-semibold">R$ 0,00</span>
             </div>
             <div class="flex justify-between text-[#5A3D43]">
-              <span>Taxa de Entrega / Modalidade:</span>
-              <span id="checkout-ship-val" class="font-semibold">R$ 15,00</span>
+              <span>Entrega:</span>
+              <span id="checkout-ship-val" class="font-semibold">Grátis</span>
             </div>
             <div class="flex justify-between text-[#A65365]">
               <span>Desconto PIX / Mimos Desbloqueados:</span>
@@ -1140,6 +1143,7 @@ html {
           <div class="pimg">
             <img src="${imgSrc}" alt="${p.name}" loading="lazy" width="760" height="567" />
             ${p.soldOut ? `<span class="pbadge" style="background:#6E5057">Esgotado</span>` : (p.badge ? `<span class="pbadge">${p.badge}</span>` : "")}
+            ${p.soldOut ? "" : `<span class="pship">${p.price >= CONFIG.entrega_gratis_a_partir ? "🚚 Entrega grátis" : "🚚 Grátis acima de " + money0(CONFIG.entrega_gratis_a_partir)}</span>`}
             <button type="button" data-fav-btn="${p.id}" aria-label="Favoritar ${p.name}" class="pfav"><span class="${isFav ? "on" : ""}">${isFav ? "♥" : "♡"}</span></button>
           </div>
           <div class="pbody">
@@ -1270,6 +1274,11 @@ html {
   }
 
   // Renderizar Sacola & Barra de Progresso de Mimos
+  function shippingFor(sub) {
+    return sub >= CONFIG.entrega_gratis_a_partir ? 0 : CONFIG.taxa_entrega;
+  }
+  function money0(v) { return formatBRL(v).replace(",00", ""); }
+
   function renderCart() {
     const count = state.cart.reduce((acc, item) => acc + item.qty, 0);
     const total = state.cart.reduce((acc, item) => acc + item.price * item.qty, 0);
@@ -1299,6 +1308,22 @@ html {
         rewardText.textContent = `🎉 Você ganhou ${CONFIG.brinde1_nome}!`;
       }
     }
+
+    const shipText = document.getElementById("cart-ship-text");
+    if (shipText) {
+      const free = CONFIG.entrega_gratis_a_partir, min = CONFIG.pedido_minimo;
+      if (total === 0) {
+        shipText.textContent = `🚚 Entrega grátis a partir de ${money0(free)} • Pedido mínimo ${money0(min)}`;
+      } else if (total < min) {
+        shipText.textContent = `⚠️ Pedido mínimo ${money0(min)}: faltam ${formatBRL(min - total)}`;
+      } else if (total < free) {
+        shipText.textContent = `🚚 Faltam ${formatBRL(free - total)} para a entrega ser grátis`;
+      } else {
+        shipText.textContent = "🚚 Entrega grátis neste pedido!";
+      }
+    }
+    const checkoutBtn = document.getElementById("open-checkout-modal-btn");
+    if (checkoutBtn) checkoutBtn.style.opacity = total < CONFIG.pedido_minimo ? "0.6" : "";
 
     const cartItemsEl = document.getElementById("cart-items-list");
     if (!cartItemsEl) return;
@@ -1365,6 +1390,12 @@ html {
         giftBanner.textContent = `✨ Dica Lily: adicione mais ${formatBRL(CONFIG.brinde1_valor - effectiveSub)} para ganhar ${CONFIG.brinde1_nome}!`;
       }
     }
+    const shipBanner = document.getElementById("checkout-ship-banner");
+    if (shipBanner) {
+      shipBanner.textContent = effectiveSub >= CONFIG.entrega_gratis_a_partir
+        ? "🚚 Entrega grátis neste pedido!"
+        : `🚚 Adicione mais ${formatBRL(CONFIG.entrega_gratis_a_partir - effectiveSub)} e a entrega fica grátis (abaixo de ${money0(CONFIG.entrega_gratis_a_partir)}, taxa de ${formatBRL(CONFIG.taxa_entrega)}).`;
+    }
 
     // Lista de itens na Etapa 1
     const step1Items = document.getElementById("checkout-step1-items");
@@ -1392,6 +1423,7 @@ html {
     // Cálculo financeiro da Etapa 3
     const isPix = state.paymentMethod.includes("PIX");
     const discount = isPix ? effectiveSub * (CONFIG.pix_desconto / 100) : 0;
+    state.deliveryFee = shippingFor(effectiveSub);
     const finalTotal = effectiveSub + state.deliveryFee - discount;
 
     const subEl = document.getElementById("checkout-sub-val");
@@ -1448,7 +1480,7 @@ html {
         street.value = [d.logradouro, d.bairro].filter(Boolean).join(", ");
       }
       if (ok) {
-        set("bg-[#EAF6EE] text-[#1F6B3A]", `✓ Entregamos em ${d.localidade}${d.bairro ? " (" + d.bairro + ")" : ""}.`);
+        set("bg-[#EAF6EE] text-[#1F6B3A]", `✓ Entregamos em ${d.localidade}${d.bairro ? " (" + d.bairro + ")" : ""}. Entrega grátis a partir de ${money0(CONFIG.entrega_gratis_a_partir)}.`);
       } else {
         set("bg-[#FDECEC] text-[#9B2C2C]", `Ainda não entregamos em ${d.localidade}/${d.uf}. Atendemos ${(CONFIG.cidades_entrega || []).join(", ")}. <a class="underline font-semibold" href="https://wa.me/{{WA}}" target="_blank" rel="noopener">Fale com a gente no WhatsApp</a> se quiser tentar.`);
       }
@@ -1492,6 +1524,7 @@ html {
     }
     lines.push(`----------------------------------------`);
     lines.push(`• *Pagamento escolhido:* ${state.paymentMethod}`);
+    lines.push(`• *Entrega:* ${shippingFor(effectiveSub) === 0 ? "Grátis" : formatBRL(shippingFor(effectiveSub))}`);
     if (discount > 0) lines.push(`• *Desconto PIX (${CONFIG.pix_desconto}%):* - ${formatBRL(discount)}`);
     lines.push(`• *TOTAL FINAL:* ${formatBRL(finalTotal)}`);
     lines.push(`✨ Vou enviar as fotos das Polaroids/Litofania 3D aqui na conversa!`);
@@ -1986,6 +2019,11 @@ html {
     // Novo Checkout em 3 Etapas
     const checkoutModal = document.getElementById("checkout-modal");
     document.getElementById("open-checkout-modal-btn")?.addEventListener("click", () => {
+      const cartNow = state.cart.reduce((acc, item) => acc + item.price * item.qty, 0);
+      if (cartNow < CONFIG.pedido_minimo) {
+        showToast(`Pedido mínimo de ${money0(CONFIG.pedido_minimo)}. Faltam ${formatBRL(CONFIG.pedido_minimo - cartNow)}.`);
+        return;
+      }
       cartDrawer?.classList.add("hidden");
       state.checkoutStep = 1;
       renderCheckoutModal();
@@ -2105,9 +2143,9 @@ html {
         var list = {{CIDADES_JSON}}.map(norm);
         if (!j || j.erro) throw new Error("cep");
         if (list.indexOf(norm(j.localidade)) >= 0) {
-          var msg = "Oi! Meu CEP é " + cepTxt + " (" + j.localidade + "). Qual o horário e a taxa de entrega?";
+          var msg = "Oi! Meu CEP é " + cepTxt + " (" + j.localidade + "). Qual o horário de entrega?";
           res.className = "res ok";
-          res.innerHTML = "<strong>Entregamos em " + j.localidade + "!</strong> Combinamos o horário pelo WhatsApp. <a href=\"https://wa.me/" + WA + "?text=" + encodeURIComponent(msg) + "\" target=\"_blank\" rel=\"noopener\">Falar no WhatsApp →</a>";
+          res.innerHTML = "<strong>Entregamos em " + j.localidade + "!</strong> Entrega grátis em compras a partir de {{FRETE_MIN}}. Combinamos o horário pelo WhatsApp. <a href=\"https://wa.me/" + WA + "?text=" + encodeURIComponent(msg) + "\" target=\"_blank\" rel=\"noopener\">Falar no WhatsApp →</a>";
         } else {
           var msg2 = "Oi! Meu CEP é " + cepTxt + " (" + j.localidade + "). Vocês entregam na minha região?";
           res.className = "res ask";

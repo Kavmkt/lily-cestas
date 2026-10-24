@@ -70,3 +70,10 @@ A categoria aparece sozinha no site, nos filtros e no mapa do Google.
 - Cada produto visível ganha uma página própria (`/produto/nome-do-produto/`) e entra no feed do Google Shopping (`/feed-google.xml`). Preço, foto, descrição e situação vêm do painel, então não há nada extra para preencher.
 - As páginas por ocasião (aniversário, café da manhã, Dia das Mães, Dia dos Namorados e Natal) escolhem os produtos pela lista dentro de `scripts/build.py`. Produto oculto ou fora de linha some delas sozinho.
 - **Google Analytics:** em **Configurações da loja**, cole o código `G-XXXXXXXXXX` no campo do Google Analytics. Sem código, nada é medido.
+
+## Entrega grátis e pedido mínimo
+Em **Configurações da loja**:
+- **Entrega grátis a partir de (R$)**: hoje 125. Vale para a soma dos produtos (sem o desconto do Pix).
+- **Pedido mínimo (R$)**: hoje 35. Abaixo disso o site não deixa finalizar.
+- **Taxa de entrega**: só é cobrada em pedidos abaixo do valor de entrega grátis.
+Os selos "Entrega grátis" nos produtos, o carrinho, o checkout e as páginas de SEO usam esses valores sozinhos.

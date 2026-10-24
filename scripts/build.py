@@ -82,7 +82,7 @@ def to_number(value, where, required=True):
 config = {
     'loja_no_ar': False, 'whatsapp': '5511914955434', 'instagram': 'https://www.instagram.com/lilycestas.ofc/',
     'ifood_url': 'https://www.ifood.com.br/delivery/santana-de-parnaiba-sp/lily-cestas--presentes-colinas-da-anhanguera/25073e59-c1d1-43a8-a317-7f5c948f97ab',
-    'pix_desconto': 5, 'taxa_entrega': 15, 'brinde1_valor': 150, 'brinde1_nome': 'Chaveiro de brinde',
+    'pix_desconto': 5, 'taxa_entrega': 15, 'entrega_gratis_a_partir': 125, 'pedido_minimo': 35, 'brinde1_valor': 150, 'brinde1_nome': 'Chaveiro de brinde',
     'foto_chaveiro_simples': '',
     'foto_estudio_litofania': '', 'foto_estudio_polaroid': '', 'ga4_id': '',
 }
@@ -90,11 +90,16 @@ config.update({k: v for k, v in load_json(ROOT / 'data/config.json', {}).items()
 config['whatsapp'] = re.sub(r'\D', '', str(config['whatsapp']))
 if len(config['whatsapp']) in (10, 11):
     config['whatsapp'] = '55' + config['whatsapp']
-for k in ('pix_desconto', 'taxa_entrega', 'brinde1_valor'):
+for k in ('pix_desconto', 'taxa_entrega', 'brinde1_valor', 'entrega_gratis_a_partir', 'pedido_minimo'):
     config[k] = to_number(config[k], f'Configurações › {k}') or 0
 LOJA_NO_AR = bool(config['loja_no_ar'])
 SHOP = '/' if LOJA_NO_AR else '/home/'   # onde fica a loja completa
 WA = config['whatsapp']
+FRETE_MIN = config['entrega_gratis_a_partir']
+PED_MIN = config['pedido_minimo']
+FRETE_TXT = brl(FRETE_MIN).replace(',00', '')
+MIN_TXT = brl(PED_MIN).replace(',00', '')
+ENTREGA_TXT = f'Entrega grátis em pedidos a partir de {FRETE_TXT}; pedido mínimo de {MIN_TXT}.'
 phone = f"+{WA[:2]} {WA[2:4]} {WA[4:-4]}-{WA[-4:]}" if len(WA) >= 12 else '+' + WA
 
 # categorias
@@ -297,7 +302,7 @@ BUSINESS = {
     '@type': ['Store', 'LocalBusiness'], '@id': BASE + '/#negocio', 'name': 'Lily Cestas',
     'alternateName': 'Lily Cestas & Atelier Personalizados', 'url': BASE + '/',
     'image': BASE + '/assets/img/og-lily-cestas.jpg', 'logo': BASE + '/assets/img/icon-512.png',
-    'description': 'Atelier de cestas de presente, cestas de café da manhã, canecas personalizadas e presentes em 3D em Santana de Parnaíba, SP. Entregas em Santana de Parnaíba, Alphaville, Barueri, Cajamar, Osasco e Carapicuíba.',
+    'description': 'Atelier de cestas de presente, cestas de café da manhã, canecas personalizadas e presentes em 3D em Santana de Parnaíba, SP. Entregas em Santana de Parnaíba, Alphaville, Barueri, Cajamar, Osasco e Carapicuíba, com entrega grátis a partir de ' + FRETE_TXT + '.',
     'priceRange': f'R${int(PRECO_MIN)} - R${int(max(final_price(p) for p in visible))}',
     'telephone': phone,
     'contactPoint': {'@type': 'ContactPoint', 'telephone': phone, 'contactType': 'customer service', 'availableLanguage': 'Portuguese', 'url': f'https://wa.me/{WA}'},
@@ -322,7 +327,9 @@ def prod_ld(p):
     offer = {'@type': 'Offer', 'url': BASE + prod_url(p), 'priceCurrency': 'BRL', 'price': '%.2f' % final_price(p),
              'itemCondition': 'https://schema.org/NewCondition',
              'availability': 'https://schema.org/OutOfStock' if p['status'] == 'esgotado' else 'https://schema.org/InStock',
-             'seller': {'@id': BASE + '/#negocio'}}
+             'seller': {'@id': BASE + '/#negocio'},
+             'shippingDetails': {'@type': 'OfferShippingDetails', 'shippingRate': {'@type': 'MonetaryAmount', 'value': '0.00' if final_price(p) >= FRETE_MIN else '%.2f' % config['taxa_entrega'], 'currency': 'BRL'},
+                                 'shippingDestination': {'@type': 'DefinedRegion', 'addressCountry': 'BR', 'addressRegion': 'SP'}}}
     return {'@type': 'Product', 'name': p['nome'], 'url': BASE + prod_url(p), 'sku': p['id'], 'image': BASE + p['_img'], 'description': prod_desc(p),
             'brand': {'@type': 'Brand', 'name': 'Lily Cestas'}, 'category': p['_cat']['nome'], 'offers': offer}
 
@@ -384,12 +391,18 @@ def top_html():
 <nav><a href="{SHOP}#catalogo">Catálogo</a><a class="btn sm" href="https://wa.me/{WA}" target="_blank" rel="noopener">WhatsApp</a></nav></div></header>'''
 
 
+def ship_pill(p):
+    if p['status'] == 'esgotado':
+        return ''
+    return '<span class="pship">🚚 Entrega grátis</span>' if final_price(p) >= FRETE_MIN else f'<span class="pship">🚚 Grátis acima de {FRETE_TXT}</span>'
+
+
 def cards_html(plist):
     out = ''
     for p in plist:
         old = f'<span style="text-decoration:line-through;color:#8C6C73;font-size:12px;display:block">{brl(p["preco"])}</span>' if p['_promo'] else ''
         action = '<span style="font-size:12px;font-weight:600;color:#6E5057">Esgotado</span>' if p['status'] == 'esgotado' else f'<a class="btn sm" href="{SHOP}#p={p["id"]}">Adicionar</a>'
-        out += f'''<article class="card"><a href="{prod_url(p)}"><img src="{p["_img"]}" alt="{esc(p.get("alt") or p["nome"])}" width="760" height="567" loading="lazy"></a><div class="cb"><h3><a href="{prod_url(p)}">{esc(p["nome"])}</a></h3><p>{esc(p["descricao"])}</p><div class="pr"><span>{old}<b>{brl(final_price(p))}</b></span>{action}</div></div></article>'''
+        out += f'''<article class="card"><a href="{prod_url(p)}"><img src="{p["_img"]}" alt="{esc(p.get("alt") or p["nome"])}" width="760" height="567" loading="lazy">{ship_pill(p)}</a><div class="cb"><h3><a href="{prod_url(p)}">{esc(p["nome"])}</a></h3><p>{esc(p["descricao"])}</p><div class="pr"><span>{old}<b>{brl(final_price(p))}</b></span>{action}</div></div></article>'''
     return out
 
 
@@ -447,7 +460,7 @@ CITIES = [
          desc='Cestas de presente, café da manhã e xícaras personalizadas para Cajamar, SP. Peça pelo site e combine a entrega pelo WhatsApp.',
          h1='Cestas de Presente e Café da Manhã em Cajamar',
          intro='Também atendemos Cajamar. Escolha a cesta ou a xícara no site, informe o CEP no checkout e combinamos a entrega pelo WhatsApp.',
-         blocks=[('Como pedir de Cajamar', 'Escolha o presente e finalize o checkout em 3 etapas. Informe o bairro e o CEP, como Polvilho, Jordanésia ou outras regiões, e confirmamos a entrega e a taxa antes de seguir com o pedido.'),
+         blocks=[('Como pedir de Cajamar', 'Escolha o presente e finalize o checkout em 3 etapas. Informe o bairro e o CEP, como Polvilho, Jordanésia ou outras regiões, e confirmamos a entrega antes de seguir com o pedido. A entrega é grátis em pedidos a partir de ' + FRETE_TXT + '.'),
                  ('Atendimento pelo WhatsApp', 'Dúvidas sobre prazo, personalização ou entrega? Chame no WhatsApp. Respondemos e combinamos os detalhes do seu pedido.')],
          vizinhas=['santana-de-parnaiba', 'alphaville', 'barueri']),
     dict(slug='cestas-de-presente-osasco', cidade='Osasco',
@@ -556,7 +569,7 @@ for c in cats_with:
     prices = [final_price(p) for p in ps]
     items = [
         (f'Quanto custa {c["nome"].lower()} na Lily Cestas?', f'Os preços do catálogo vão de {brl(min(prices))} a {brl(max(prices))} nesta categoria. O valor final pode variar conforme os detalhes combinados pelo WhatsApp.'),
-        ('Vocês entregam na minha região?', 'Atendemos Santana de Parnaíba, Alphaville, Barueri, Cajamar, Osasco e Carapicuíba. Informe o CEP no checkout e conferimos na hora a entrega e a taxa.'),
+        ('Vocês entregam na minha região?', 'Atendemos Santana de Parnaíba, Alphaville, Barueri, Cajamar, Osasco e Carapicuíba. Informe o CEP no checkout e conferimos na hora. ' + ENTREGA_TXT),
         ('Posso combinar os detalhes antes da produção?', 'Sim. Nome, frase e demais detalhes são combinados pelo WhatsApp antes de seguirmos com o pedido.'),
     ] + FAQ_COMMON[-1:]
     rel = '<section class="rel"><h2>Outras linhas e cidades atendidas</h2><p>' + ''.join(
@@ -636,7 +649,7 @@ for o in OCCASIONS_OK:
     ps = o['_prods']
     prices = [final_price(p) for p in ps]
     items = [(f'Quanto custa {o["nome"].lower()} na Lily Cestas?', f'Os presentes desta página custam de {brl(min(prices))} a {brl(max(prices))}.'),
-             ('Vocês entregam na minha região?', 'Atendemos Santana de Parnaíba, Alphaville, Barueri, Cajamar, Osasco e Carapicuíba. Informe o CEP no checkout e conferimos na hora a entrega e a taxa.')] + o['faq'] + FAQ_COMMON[-1:]
+             ('Vocês entregam na minha região?', 'Atendemos Santana de Parnaíba, Alphaville, Barueri, Cajamar, Osasco e Carapicuíba. Informe o CEP no checkout e conferimos na hora. ' + ENTREGA_TXT)] + o['faq'] + FAQ_COMMON[-1:]
     rel = '<section class="rel"><h2>Mais ideias de presente</h2><p>' + ''.join(
         f'<a href="/{x["slug"]}/">{esc(x["nome"])}</a>' for x in OCCASIONS_OK if x is not o) + '</p><p>' + ''.join(
         f'<a href="/{c["pagina_url"]}/">{esc(c["nome"])}</a>' for c in cats_with if c.get('pagina_url')) + '</p></section>'
@@ -660,9 +673,9 @@ def product_page(p):
            f'<a class="btn ghost" href="https://wa.me/{WA}?text={esc(urllib.parse.quote(wa_text))}" target="_blank" rel="noopener">Pedir pelo WhatsApp</a></p>')
     inc = ('<section><h2>O que vem</h2><ul class="inc">' + ''.join(f'<li>{esc(x)}</li>' for x in p['inclui']) + '</ul></section>') if p['inclui'] else ''
     pers = f'<section><h2>Personalização</h2><p>{esc(p["personalizacao"])}. Depois de finalizar o pedido, você combina tudo pelo WhatsApp antes da produção.</p></section>' if p['personalizacao'] else ''
-    entrega = (f'<section><h2>Entrega e pagamento</h2><p>Entregamos em {", ".join(config.get("cidades_entrega") or [])}. Informe o CEP no checkout para conferir a entrega e a taxa'
-               f' ({brl(config["taxa_entrega"])}, somada no fechamento do pedido). Pagando no Pix, você tem {int(config["pix_desconto"])}% de desconto nos produtos.</p></section>')
-    items = [(f'Quanto custa {p["nome"]}?', f'{p["nome"]} custa {brl(final_price(p))}. A taxa de entrega é calculada no checkout.'),
+    entrega = (f'<section><h2>Entrega e pagamento</h2><p>Entregamos em {", ".join(config.get("cidades_entrega") or [])}. Informe o CEP no checkout para conferir a entrega. {ENTREGA_TXT}'
+               f' Pagando no Pix, você tem {int(config["pix_desconto"])}% de desconto nos produtos.</p></section>')
+    items = [(f'Quanto custa {p["nome"]}?', f'{p["nome"]} custa {brl(final_price(p))}. ' + ('A entrega é grátis.' if final_price(p) >= FRETE_MIN else f'A entrega é grátis em pedidos a partir de {FRETE_TXT}.') + f' Pedido mínimo de {MIN_TXT}.'),
              ('Dá para personalizar?', 'Dá. Nome, frase ou foto são combinados pelo WhatsApp depois que você finaliza o pedido.'),
              ('Vocês entregam na minha região?', 'Atendemos Santana de Parnaíba, Alphaville, Barueri, Cajamar, Osasco e Carapicuíba. Informe o CEP no checkout e conferimos na hora.')]
     faq_block = ''.join(f'<details><summary>{esc(q)}</summary><p>{esc(a)}</p></details>' for q, a in items)
@@ -677,7 +690,7 @@ def product_page(p):
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/css/pages.css">
 </head><body>''' + top_html() + f'''<main><div class="wrap"><nav class="crumbs" aria-label="Navegação">{crumbs}</nav>
-<div class="lead"><div>{badge}<h1>{esc(p["nome"])}</h1><p class="intro">{esc(prod_desc(p))}</p><p class="price">{old}<b>{brl(final_price(p))}</b></p>{buy}</div>
+<div class="lead"><div>{badge}<h1>{esc(p["nome"])}</h1><p class="intro">{esc(prod_desc(p))}</p><p class="price">{old}<b>{brl(final_price(p))}</b></p><p class="shipnote">{"🚚 Entrega grátis neste produto" if final_price(p) >= FRETE_MIN else f"🚚 Entrega grátis em pedidos a partir de {FRETE_TXT}"} · Pedido mínimo {MIN_TXT}</p>{buy}</div>
 <img class="hero" src="{p["_img"]}" alt="{esc(p.get("alt") or p["nome"])}" width="760" height="567" fetchpriority="high"></div>
 {inc}{pers}{entrega}
 <section><h2>Perguntas frequentes</h2><div class="faq">{faq_block}</div></section>
@@ -736,7 +749,7 @@ for i, c in enumerate(cats_with):
         'filterKey': c['chave'], 'heroImg': c['_img'], 'caption': f'Foto real: {ps[0]["nome"]}'}
 sim0 = {k: {'chave': v[0]['chave'], 'preco': v[0]['preco'], 'nome': v[0]['nome']} for k, v in
         {'base': SIM['bases'], 'louca': SIM['louca'], 'pecas_3d': SIM['pecas_3d'], 'polaroids': SIM['polaroids']}.items()}
-cfg_js = {k: config[k] for k in ('pix_desconto', 'taxa_entrega', 'brinde1_valor', 'brinde1_nome')}
+cfg_js = {k: config[k] for k in ('pix_desconto', 'taxa_entrega', 'brinde1_valor', 'brinde1_nome', 'entrega_gratis_a_partir', 'pedido_minimo')}
 cfg_js['cidades_entrega'] = [x for x in (config.get('cidades_entrega') or []) if x]
 cfg_js.update({'foto_estudio_litofania': photo_lit, 'foto_estudio_polaroid': photo_pol})
 dumps = lambda o: json.dumps(o, ensure_ascii=False).replace('</', '<\\/')
@@ -767,7 +780,7 @@ mimos = f'<p class="text-xs text-white/90">Em compras a partir de <strong>{brl(c
 reward_init = f'Compre a partir de {brl(config["brinde1_valor"])} e ganhe {esc(config["brinde1_nome"])}!'
 
 title = 'Cestas de Presente e Presentes Personalizados | Lily Cestas'
-desc_home = 'Cestas de presente, café da manhã, canecas com nome e presentes em 3D. Escolha no site, personalize pelo WhatsApp e receba em casa.'
+desc_home = 'Cestas de presente, café da manhã e presentes personalizados. Personalize pelo WhatsApp e receba em casa. Entrega grátis a partir de ' + FRETE_TXT + '.'
 home_ld = jsonld(BUSINESS,
                  {'@type': 'WebSite', '@id': BASE + '/#site', 'url': BASE + '/', 'name': 'Lily Cestas', 'inLanguage': 'pt-BR', 'publisher': {'@id': BASE + '/#negocio'}},
                  {'@type': 'ItemList', 'name': 'Catálogo Lily Cestas', 'itemListElement': [{'@type': 'ListItem', 'position': i + 1, 'item': prod_ld(p)} for i, p in enumerate(visible)]},
@@ -779,7 +792,7 @@ repl = {
     'HOME_LINKS': ''.join(f'<a href="/{c["pagina_url"]}/" class="p-4 rounded-2xl border border-[#EED9DF] bg-[#FDF8F9] hover:bg-white text-sm font-display font-semibold text-[#A65365]">{esc(c["nome"])} →</a>' for c in cats_with if c.get('pagina_url')) + ''.join(f'<a href="/{o["slug"]}/" class="p-4 rounded-2xl border border-[#EED9DF] bg-[#FDF8F9] hover:bg-white text-sm font-display font-semibold text-[#A65365]">{esc(o["nome"])} →</a>' for o in OCCASIONS_OK) + '<a href="/catalogo/" class="p-4 rounded-2xl border border-[#EED9DF] bg-[#FDF8F9] hover:bg-white text-sm font-display font-semibold text-[#A65365]">Catálogo completo →</a>',
     'CIDADES_JSON': json.dumps([x for x in (config.get('cidades_entrega') or []) if x], ensure_ascii=False),
     'FOOTER_CATS': ''.join(f'<li><a href="/{c["pagina_url"]}/" class="hover:text-white hover:underline">{esc(c["nome"])}</a></li>' for c in cats_with if c.get('pagina_url')) + ''.join(f'<li><a href="/{o["slug"]}/" class="hover:text-white hover:underline">{esc(o["nome"])}</a></li>' for o in OCCASIONS_OK),
-    'B1V': brl(config['brinde1_valor']).replace(',00', ''), 'HERO_CATS': hero_cats, 'HERO_IMG': hero_img, 'CAT_PILLS': pills, 'MIMOS_TEXT': mimos, 'REWARD_INIT': reward_init, 'DATA_JS': data_js,
+    'B1V': brl(config['brinde1_valor']).replace(',00', ''), 'FRETE_MIN': brl(FRETE_MIN).replace(',00', ''), 'HERO_CATS': hero_cats, 'HERO_IMG': hero_img, 'CAT_PILLS': pills, 'MIMOS_TEXT': mimos, 'REWARD_INIT': reward_init, 'DATA_JS': data_js,
     'OPT_BASES': ''.join(opt(o) for o in SIM['bases']), 'OPT_LOUCA': ''.join(opt(o) for o in SIM['louca']),
     'OPT_3D': ''.join(opt(o) for o in SIM['pecas_3d']), 'OPT_POL': ''.join(opt(o) for o in SIM['polaroids']),
 }
