@@ -251,6 +251,36 @@ html {
 @media(max-width:767px){body{padding-bottom:76px}#toast-container{bottom:88px!important}section[class*="py-16"]{padding-top:2.75rem!important;padding-bottom:2.75rem!important}}
 .igblock{background:linear-gradient(135deg,#C87888,var(--rose-d));color:#fff;border-radius:26px;padding:26px;text-align:center}
 .igblock a{display:inline-block;margin-top:12px;background:#fff;color:var(--rose-d);font:600 14px 'Montserrat',sans-serif;border-radius:99px;padding:12px 22px;text-decoration:none}
+
+/* ===== mobile compacto: produtos mais perto do topo (so telas < 768px; computador nao muda) ===== */
+@media(max-width:767px){
+  #topo>.nh-wrap{display:flex;flex-direction:column;padding-top:14px!important;padding-bottom:16px!important}
+  #topo>.nh-wrap>.grid{order:1;gap:14px}
+  #topo>.nh-wrap>.cats{order:2}
+  #topo>.nh-wrap>.nh-cep{order:3}
+  .nh h1{font-size:27px;margin:.3rem 0 .5rem}
+  .nh .sub{font-size:14px;line-height:1.45;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+  .hero-btns{display:none!important}
+  .kw{display:grid;grid-template-columns:64px 1fr;grid-template-rows:auto auto;column-gap:12px;row-gap:2px;align-items:center;padding:10px 14px;border-radius:18px;max-width:none;margin:0;box-shadow:none}
+  .kw-eyebrow{display:none}
+  .kw h2{grid-column:2;grid-row:1;font-size:13.5px;line-height:1.3;margin:0}
+  .kw-row{grid-column:1;grid-row:1/3}
+  .kw-item{padding:0;border:0;background:none;border-radius:0}
+  .kw-item img{height:56px;filter:drop-shadow(0 4px 5px rgba(56,33,38,.25))}
+  .kw-item small,.kw-item b{display:none}
+  .kw-cta{grid-column:2;grid-row:2;margin:0;text-align:left;font-size:12px}
+  .cats{display:flex;overflow-x:auto;gap:10px;margin-top:14px;padding-bottom:4px;scrollbar-width:none;-webkit-overflow-scrolling:touch}.cats::-webkit-scrollbar{display:none}
+  .cat{flex:0 0 138px;border-radius:16px}.cat img{aspect-ratio:21/9}.cat .ct{padding:7px 9px 9px}.cat b{font-size:12.5px}.cat small{font-size:11px}
+  .nh-cep{margin-top:10px!important}.nh-cep .chips{display:none}
+  .nh-cep .cep{margin-top:0;padding:8px;border-radius:16px}
+  .nh-cep .cep label{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);margin:0}
+  .nh-cep .cep input{padding:10px 12px}
+  #catalogo{padding-top:18px!important;padding-bottom:28px!important}
+  .cat-wrap{display:flex;flex-direction:column}
+  .cat-head{order:1;margin-bottom:12px!important}.cat-filters{order:2;margin-bottom:12px!important;padding:10px!important}
+  #catalog-grid{order:3}.cat-more{order:4}.mimos-band{order:5;margin:22px 0 0!important}
+  .cat-head>div>span{display:none}.cat-head h2{font-size:19px!important;line-height:1.25}#catalog-count{display:none}
+}
 </style>
 </head>
 <body class="min-h-screen antialiased selection:bg-[#F2D5DC] selection:text-[#382126]">
@@ -297,24 +327,25 @@ html {
   <!-- HERO DE ALTO IMPACTO & AUTOEXPLICATIVO ("NA CARA DA HOME") -->
   
   <section id="topo" class="nh">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-7 pb-10 sm:pt-12 sm:pb-14">
+    <div class="nh-wrap max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-7 pb-10 sm:pt-12 sm:pb-14">
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
         <div class="lg:col-span-6">
           <span class="nh-eyebrow">Atelier de presentes · feito à mão com carinho</span>
           <h1>Cestas e presentes <b>personalizados</b> que emocionam de verdade</h1>
           <p class="sub">Cestas de café da manhã, boxes com chocolates, canecas com nome e peças em 3D. Você escolhe, personaliza pelo WhatsApp e a gente entrega em casa.</p>
-          <p style="margin-top:20px;display:flex;flex-wrap:wrap;gap:10px"><a class="cta1" href="#catalogo">Ver cestas e presentes</a><a class="cta2" href="https://wa.me/{{WA}}?text=Oi%21%20Vim%20pelo%20site%20da%20Lily%20Cestas%20e%20quero%20ajuda%20para%20escolher%20um%20presente." target="_blank" rel="noopener">Falar no WhatsApp</a></p>
+          <p class="hero-btns" style="margin-top:20px;display:flex;flex-wrap:wrap;gap:10px"><a class="cta1" href="#catalogo">Ver cestas e presentes</a><a class="cta2" href="https://wa.me/{{WA}}?text=Oi%21%20Vim%20pelo%20site%20da%20Lily%20Cestas%20e%20quero%20ajuda%20para%20escolher%20um%20presente." target="_blank" rel="noopener">Falar no WhatsApp</a></p>
         </div>
         <div class="lg:col-span-6">
           {{HERO_IMG}}
         </div>
       </div>
-      <div class="lg:flex lg:items-start lg:gap-8" style="margin-top:6px">
+      <div class="nh-cep lg:flex lg:items-start lg:gap-8" style="margin-top:6px">
         <form class="cep" id="cep-form" autocomplete="off" style="flex:1;max-width:none">
           <label for="cep-input">Entregamos no seu endereço? Informe o CEP</label>
           <div class="row"><input id="cep-input" inputmode="numeric" maxlength="9" placeholder="00000-000" aria-describedby="cep-res"><button type="submit">Verificar</button></div>
           <div class="res" id="cep-res" role="status"></div>
         </form>
+        <script>if(window.matchMedia&&matchMedia("(max-width:767px)").matches){document.getElementById("cep-input").placeholder="Seu CEP: confira a entrega"}</script>
         <div class="chips" style="flex:1"><span>🎁 Chaveiro de brinde a partir de {{B1V}}</span><span>💳 Pix com {{PIX}}% de desconto</span></div>
       </div>
       {{HERO_CATS}}
@@ -325,8 +356,8 @@ html {
 
   <!-- SEÇÃO AUTOEXPLICATIVA: AS 3 FORMAS DE COMPRAR (COM INVERSÃO DE CONTAINER CENTRAL EM ROSÉ) -->
   <section id="catalogo" class="py-12 bg-[#FDF8F9] border-b border-[#EED9DF]">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex flex-col md:flex-row md:items-end justify-between mb-6 gap-4">
+    <div class="cat-wrap max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="cat-head flex flex-col md:flex-row md:items-end justify-between mb-6 gap-4">
         <div>
           <span class="text-xs font-display font-semibold uppercase tracking-[0.2em] text-[#B36273] block mb-2">Escolha seu presente</span>
           <h2 class="font-display font-light text-2xl sm:text-4xl text-[#382126]">
@@ -339,7 +370,7 @@ html {
       </div>
 
       <!-- FAIXA CLUBE DE MIMOS LILY (CONTAINER ROSÉ INVERTIDO COM TEXTO BRANCO) -->
-      <div class="bg-lily-rose-inverted text-white rounded-3xl p-4 sm:p-5 mb-8 shadow-delicate flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div class="mimos-band bg-lily-rose-inverted text-white rounded-3xl p-4 sm:p-5 mb-8 shadow-delicate flex flex-col sm:flex-row items-center justify-between gap-4">
         <div class="flex items-center gap-3.5">
           <span class="w-11 h-11 rounded-2xl bg-white/20 flex items-center justify-center text-xl shrink-0">🎁</span>
           <div>
@@ -353,7 +384,7 @@ html {
       </div>
 
       <!-- Barra de Filtros e Pesquisa -->
-      <div class="bg-white p-4 rounded-3xl border border-[#EED9DF] shadow-xs mb-8 space-y-4">
+      <div class="cat-filters bg-white p-4 rounded-3xl border border-[#EED9DF] shadow-xs mb-8 space-y-4">
         <div class="catpills flex items-center gap-2">
           <button type="button" data-cat-filter="todos" class="px-4 py-2 rounded-full text-xs font-display font-semibold bg-[#B36273] text-white shadow-xs transition-all">
             Todos ({{N}})
@@ -380,7 +411,7 @@ html {
 
       <!-- Grid de Cards de Produto -->
       <div id="catalog-grid" class=""></div>
-      <div id="catalog-more" class="mt-8 text-center">
+      <div id="catalog-more" class="cat-more mt-8 text-center">
         <p id="catalog-more-note" class="text-xs text-[#785860] mb-3"></p>
         <a href="/catalogo/" class="inline-block px-7 py-3 rounded-full bg-white text-[#A65365] border-2 border-[#C87888] font-display font-semibold text-sm hover:bg-[#FDF2F5] transition-all">Ver catálogo completo →</a>
       </div>
