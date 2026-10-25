@@ -290,6 +290,7 @@ content:
       - { name: brinde1_valor, label: Brinde - pedido a partir de (R$), type: number }
       - { name: brinde1_nome, label: Brinde - nome, type: string }
       - { name: ga4_id, label: Código do Google Analytics (G-XXXXXXXXXX), type: string, description: "Opcional. Cole aqui o ID de métricas do Google Analytics 4 (começa com G-). Vazio = sem medição." }
+      - { name: clarity_id, label: Código do Microsoft Clarity, type: string, description: "Opcional. ID do projeto no Clarity (letras e números, ex. z2zt388utc). Mostra gravações e mapas de calor do uso do site. Vazio = desligado." }
       - { name: foto_chaveiro_simples, label: Foto do chaveiro de brinde (fundo transparente), type: image, description: Aparece no cartão de brinde da primeira tela. Use foto sem fundo (PNG). }
       - { name: foto_estudio_litofania, label: Foto da prévia da litofania (Estúdio), type: image }
       - { name: foto_estudio_polaroid, label: Foto da prévia da Polaroid (Estúdio), type: image }

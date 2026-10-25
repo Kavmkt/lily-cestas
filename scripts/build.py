@@ -84,7 +84,7 @@ config = {
     'ifood_url': 'https://www.ifood.com.br/delivery/santana-de-parnaiba-sp/lily-cestas--presentes-colinas-da-anhanguera/25073e59-c1d1-43a8-a317-7f5c948f97ab',
     'pix_desconto': 5, 'taxa_entrega': 15, 'entrega_gratis_a_partir': 125, 'pedido_minimo': 35, 'brinde1_valor': 150, 'brinde1_nome': 'Chaveiro de brinde',
     'foto_chaveiro_simples': '',
-    'foto_estudio_litofania': '', 'foto_estudio_polaroid': '', 'ga4_id': '',
+    'foto_estudio_litofania': '', 'foto_estudio_polaroid': '', 'ga4_id': '', 'clarity_id': '',
 }
 config.update({k: v for k, v in load_json(ROOT / 'data/config.json', {}).items() if v not in (None, '')})
 config['whatsapp'] = re.sub(r'\D', '', str(config['whatsapp']))
@@ -904,6 +904,18 @@ if GA4:
                   "<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}"
                   "gtag('consent','default',{ad_storage:'denied',ad_user_data:'denied',ad_personalization:'denied',analytics_storage:'granted'});"
                   f"gtag('js',new Date());gtag('config','{GA4}');</script>")
+CLARITY = str(config.get('clarity_id') or '').strip().lower()
+if CLARITY and not re.fullmatch(r'[a-z0-9]{8,12}', CLARITY):
+    print(f'Aviso: o código do Microsoft Clarity "{CLARITY}" não parece válido. Clarity não foi ligado.')
+    CLARITY = ''
+if CLARITY:
+    # carrega só depois da página pronta e ociosa, para não pesar no carregamento
+    ga_snippet += ("<script>(function(c,l,a,r,i){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};"
+                   "function go(){var t=l.createElement(r);t.async=1;t.src='https://www.clarity.ms/tag/'+i;"
+                   "var y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);}"
+                   "function idle(){(window.requestIdleCallback||function(f){setTimeout(f,1500)})(go)}"
+                   "if(l.readyState==='complete')idle();else c.addEventListener('load',idle);"
+                   f"}})(window,document,'clarity','script','{CLARITY}');</script>")
 ga_snippet += '<script defer src="/assets/js/track.js"></script>'
 for f in OUT.rglob('*.html'):
     if f.name.startswith('google') or '/assets/' in str(f):
