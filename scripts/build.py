@@ -86,7 +86,7 @@ config = {
     'foto_chaveiro_simples': '',
     'popup_brinde_ativo': True, 'popup_brinde_segundos': 5,
     'brinde_opcao1_nome': 'Coração 3D', 'brinde_opcao2_nome': 'Mãozinha de coração', 'foto_chaveiro_2': '/assets/brinde/chaveiro-maozinha-coracao.webp',
-    'nome_proprietaria': 'Alycia Lima', 'cargo_proprietaria': 'Proprietária e criadora da Lily Cestas', 'foto_proprietaria': '/assets/equipe/alycia-lima.webp',
+    'nome_proprietaria': 'Alicya Lima', 'cargo_proprietaria': 'Proprietária e criadora da Lily Cestas', 'foto_proprietaria': '/assets/equipe/alycia-lima.webp',
     'foto_estudio_litofania': '', 'foto_estudio_polaroid': '', 'ga4_id': '', 'clarity_id': '',
 }
 config.update({k: v for k, v in load_json(ROOT / 'data/config.json', {}).items() if v not in (None, '')})
