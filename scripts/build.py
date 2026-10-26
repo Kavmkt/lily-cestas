@@ -853,6 +853,11 @@ _secs = int(to_number(config.get('popup_brinde_segundos'), 'Configurações › 
 BRINDE_POPUP = ''
 if config.get('popup_brinde_ativo') is not False and _f1 and _f2:
     _v = brl(config['brinde1_valor']).replace(',00', '')
+    _fm = brl(FRETE_MIN).replace(',00', '')
+    _cids = [c for c in (config.get('cidades_entrega') or []) if c]
+    if 'Alphaville' not in _cids:
+        _cids.append('Alphaville')
+    _cid = ', '.join(_cids[:-1]) + ' e ' + _cids[-1] if len(_cids) > 1 else _cids[0]
     BRINDE_POPUP = f'''<div id="brinde-pop" class="bp-ov" role="dialog" aria-modal="true" aria-labelledby="bp-title" hidden>
     <div class="bp">
       <button type="button" class="bp-x" id="bp-close" aria-label="Fechar">&times;</button>
@@ -864,6 +869,7 @@ if config.get('popup_brinde_ativo') is not False and _f1 and _f2:
         <div class="bp-opt"><img src="{_f2}" alt="Chaveiro {esc(config["brinde_opcao2_nome"])}" width="150" height="150" loading="lazy" decoding="async"><b>{esc(config["brinde_opcao2_nome"])}</b></div>
       </div>
       <p class="bp-note">Você escolhe na hora de finalizar o pedido, pelo WhatsApp. Sem custo.</p>
+      <div class="bp-ship"><b>🚚 Entrega grátis* a partir de {_fm}</b><span>{esc(_cid)}</span><small>*Consulte seu endereço pelo WhatsApp. Locais mais distantes podem ter taxa de entrega.</small></div>
       <a class="bp-cta" href="#catalogo" id="bp-cta" data-ga="brinde_popup_cta">Ver presentes →</a>
       <button type="button" class="bp-no" id="bp-no">Agora não</button>
     </div>
