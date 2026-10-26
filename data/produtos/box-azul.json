@@ -1,0 +1,22 @@
+{
+  "nome": "Box Azul",
+  "categoria": "cestas",
+  "preco": 139.9,
+  "status": "ativo",
+  "foto": "/assets/produtos/box-azul.webp",
+  "alt": "Box Azul: caixa redonda rígida preta com balão azul, chocolates, biscoitos e refrigerante Pepsi lata",
+  "descricao": "Cesta de presentes com chocolates, petiscos e balão Box Azul, perfeita para comemorar aniversários, conquistas ou momentos especiais com entrega rápida em Alphaville e região. Uma opção marcante e festiva montada artesanalmente na sofisticada caixa redonda rígida premium, combinando guloseimas doces e salgadas para surpreender com elegância.",
+  "inclui": [
+    "1 Caixa rígida redonda premium",
+    "1 Kit balão colorido grande",
+    "1 Barra de chocolate Lacta",
+    "3 Chocolates Trento",
+    "1 Pacote de biscoito Oreo mini",
+    "1 Pacote de bolacha Club Social",
+    "1 Refrigerante Pepsi lata",
+    "2 Sujinhos",
+    "1 folha de papel celofane e palha para enchimento, entregue na sacola"
+  ],
+  "ordem": 16,
+  "destaque": false
+}
