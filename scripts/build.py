@@ -384,12 +384,25 @@ def write_page(path, content):
     (d / 'index.html').write_text(content, encoding='utf-8')
 
 
+OWNER_BLOCK = ''
+_of = img_url(config.get('foto_proprietaria'))
+_on = str(config.get('nome_proprietaria') or '').strip()
+if _of and _on:
+    OWNER_BLOCK = (f'<div class="owner"><img src="{_of}" alt="{esc(_on)}, {esc(str(config.get("cargo_proprietaria") or "").lower())}" width="56" height="56" loading="lazy" decoding="async">'
+                   f'<div><b>{esc(_on)}</b><span>{esc(config.get("cargo_proprietaria") or "")}</span></div></div>')
+    BUSINESS['founder'] = {'@type': 'Person', 'name': _on, 'jobTitle': str(config.get('cargo_proprietaria') or 'Proprietária'), 'image': BASE + _of if _of.startswith('/') else _of}
+
+IG_SVG = '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>'
+IG_HANDLE = '@' + config['instagram'].rstrip('/').split('/')[-1]
+IG_BTN = f'<a class="igbtn" href="{esc(config["instagram"])}" target="_blank" rel="noopener" data-ga="instagram_click" data-ga-item="rodape">{IG_SVG}<span>Siga {esc(IG_HANDLE)} no Instagram</span></a>'
+
+
 def footer_html():
     cat_li = ''.join(f'<li><a href="/{c["pagina_url"]}/">{esc(c["nome"])}</a></li>' for c in cats_with if c.get('pagina_url'))
     cat_li += ''.join(f'<li><a href="/{o["slug"]}/">{esc(o["nome"])}</a></li>' for o in OCCASIONS_OK)
     city_li = ''.join(f'<li><a href="/{x["slug"]}/">Presentes em {x["cidade"]}</a></li>' for x in CITIES)
     return f'''<footer class="foot"><div class="wrap grid">
-<div><strong>Lily Cestas</strong><p>Atelier de cestas de presente, canecas e peças personalizadas. Santana de Parnaíba, SP.</p><p><a href="https://wa.me/{WA}" rel="noopener" target="_blank">WhatsApp {phone}</a><br><a href="{config['instagram']}" rel="noopener" target="_blank">Instagram @lilycestas.ofc</a></p></div>
+<div><strong>Lily Cestas</strong><p>Atelier de cestas de presente, canecas e peças personalizadas. Santana de Parnaíba, SP.</p><p><a href="https://wa.me/{WA}" rel="noopener" target="_blank">WhatsApp {phone}</a></p>{OWNER_BLOCK}{IG_BTN}</div>
 <div><strong>Nossos presentes</strong><ul>{cat_li}</ul></div>
 <div><strong>Onde entregamos</strong><ul>{city_li}</ul></div>
 </div><p class="copy">© {datetime.date.today().year} Lily Cestas &amp; Atelier Personalizados.</p></footer>
@@ -1001,14 +1014,6 @@ if config.get('popup_brinde_ativo') is not False and _f1 and _f2:
         if(e.shiftKey&&document.activeElement===a){{e.preventDefault();z.focus();}}else if(!e.shiftKey&&document.activeElement===z){{e.preventDefault();a.focus();}}}}}});
     setTimeout(show,{_secs * 1000});}})();</script>'''
 
-OWNER_BLOCK = ''
-_of = img_url(config.get('foto_proprietaria'))
-_on = str(config.get('nome_proprietaria') or '').strip()
-if _of and _on:
-    OWNER_BLOCK = (f'<div class="owner"><img src="{_of}" alt="{esc(_on)}, {esc(str(config.get("cargo_proprietaria") or "").lower())}" width="56" height="56" loading="lazy" decoding="async">'
-                   f'<div><b>{esc(_on)}</b><span>{esc(config.get("cargo_proprietaria") or "")}</span></div></div>')
-    BUSINESS['founder'] = {'@type': 'Person', 'name': _on, 'jobTitle': str(config.get('cargo_proprietaria') or 'Proprietária'), 'image': BASE + _of if _of.startswith('/') else _of}
-
 pills = '\n          '.join(f'<button type="button" data-cat-filter="{c["chave"]}" class="{pill_cls}">\n            {esc(c["icone"])} {esc(c["nome_curto"])} ({len(cat_prods[c["chave"]])})\n          </button>' for c in cats_home)
 mimos = f'<p class="text-xs text-white/90">Em compras a partir de <strong>{brl(config["brinde1_valor"]).replace(",00", "")}</strong> você ganha {esc(config["brinde1_nome"])}!</p>'
 reward_init = f'Compre a partir de {brl(config["brinde1_valor"])} e ganhe {esc(config["brinde1_nome"])}!'
@@ -1026,7 +1031,7 @@ repl = {
     'HOME_LINKS': ''.join(f'<a href="/{c["pagina_url"]}/" class="p-4 rounded-2xl border border-[#EED9DF] bg-[#FDF8F9] hover:bg-white text-sm font-display font-semibold text-[#A65365]">{esc(c["nome"])} →</a>' for c in cats_with if c.get('pagina_url')) + ''.join(f'<a href="/{o["slug"]}/" class="p-4 rounded-2xl border border-[#EED9DF] bg-[#FDF8F9] hover:bg-white text-sm font-display font-semibold text-[#A65365]">{esc(o["nome"])} →</a>' for o in OCCASIONS_OK) + '<a href="/catalogo/" class="p-4 rounded-2xl border border-[#EED9DF] bg-[#FDF8F9] hover:bg-white text-sm font-display font-semibold text-[#A65365]">Catálogo completo →</a>',
     'CIDADES_JSON': json.dumps([x for x in (config.get('cidades_entrega') or []) if x], ensure_ascii=False),
     'FOOTER_CATS': ''.join(f'<li><a href="/{c["pagina_url"]}/" class="hover:text-white hover:underline">{esc(c["nome"])}</a></li>' for c in cats_with if c.get('pagina_url')) + ''.join(f'<li><a href="/{o["slug"]}/" class="hover:text-white hover:underline">{esc(o["nome"])}</a></li>' for o in OCCASIONS_OK),
-    'BANNERS': BANNERS_HTML, 'BRINDE_POPUP': BRINDE_POPUP, 'OWNER_BLOCK': OWNER_BLOCK,
+    'BANNERS': BANNERS_HTML, 'IG_BTN': IG_BTN, 'BRINDE_POPUP': BRINDE_POPUP, 'OWNER_BLOCK': OWNER_BLOCK,
     'FAST_TOP': (f'<span class="fast">⚡ {FAST_TXT}*</span>' if FAST_TXT else ''), 'FAST_CHIP': (f'<span class="fastchip">⚡ {FAST_TXT}*</span>' if FAST_TXT else ''), 'FAST_FOOT': (f' {FAST_TXT}* em produtos prontos.' if FAST_TXT else ''),
     'B1V': brl(config['brinde1_valor']).replace(',00', ''), 'FRETE_MIN': brl(FRETE_MIN).replace(',00', ''), 'HERO_CATS': hero_cats, 'HERO_IMG': hero_img, 'CAT_PILLS': pills, 'MIMOS_TEXT': mimos, 'REWARD_INIT': reward_init, 'DATA_JS': data_js,
     'OPT_BASES': ''.join(opt(o) for o in SIM['bases']), 'OPT_LOUCA': ''.join(opt(o) for o in SIM['louca']),
