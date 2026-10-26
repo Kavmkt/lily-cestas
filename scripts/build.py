@@ -84,6 +84,9 @@ config = {
     'ifood_url': 'https://www.ifood.com.br/delivery/santana-de-parnaiba-sp/lily-cestas--presentes-colinas-da-anhanguera/25073e59-c1d1-43a8-a317-7f5c948f97ab',
     'pix_desconto': 5, 'taxa_entrega': 15, 'entrega_gratis_a_partir': 125, 'pedido_minimo': 35, 'brinde1_valor': 150, 'brinde1_nome': 'Chaveiro de brinde',
     'foto_chaveiro_simples': '',
+    'popup_brinde_ativo': True, 'popup_brinde_segundos': 5,
+    'brinde_opcao1_nome': 'Coração 3D', 'brinde_opcao2_nome': 'Mãozinha de coração', 'foto_chaveiro_2': '/assets/brinde/chaveiro-maozinha-coracao.webp',
+    'nome_proprietaria': 'Alycia Lima', 'cargo_proprietaria': 'Proprietária e criadora da Lily Cestas', 'foto_proprietaria': '/assets/equipe/alycia-lima.webp',
     'foto_estudio_litofania': '', 'foto_estudio_polaroid': '', 'ga4_id': '', 'clarity_id': '',
 }
 config.update({k: v for k, v in load_json(ROOT / 'data/config.json', {}).items() if v not in (None, '')})
@@ -817,7 +820,7 @@ for i, c in enumerate(cats_with):
         'filterKey': c['chave'], 'heroImg': c['_img'], 'caption': f'Foto real: {ps[0]["nome"]}'}
 sim0 = {k: {'chave': v[0]['chave'], 'preco': v[0]['preco'], 'nome': v[0]['nome']} for k, v in
         {'base': SIM['bases'], 'louca': SIM['louca'], 'pecas_3d': SIM['pecas_3d'], 'polaroids': SIM['polaroids']}.items()}
-cfg_js = {k: config[k] for k in ('pix_desconto', 'taxa_entrega', 'brinde1_valor', 'brinde1_nome', 'entrega_gratis_a_partir', 'pedido_minimo')}
+cfg_js = {k: config[k] for k in ('pix_desconto', 'taxa_entrega', 'brinde1_valor', 'brinde1_nome', 'brinde_opcao1_nome', 'brinde_opcao2_nome', 'entrega_gratis_a_partir', 'pedido_minimo')}
 cfg_js['cidades_entrega'] = [x for x in (config.get('cidades_entrega') or []) if x]
 cfg_js.update({'foto_estudio_litofania': photo_lit, 'foto_estudio_polaroid': photo_pol})
 dumps = lambda o: json.dumps(o, ensure_ascii=False).replace('</', '<\\/')
@@ -843,6 +846,55 @@ if foto_k1:
             </div>
             <a class="kw-cta" href="#catalogo">Ver presentes →</a>
           </div>'''
+
+# ---------------------------------------------------------------- pop-up do brinde e proprietaria (rodape)
+_f1, _f2 = img_url(config.get('foto_chaveiro_simples')), img_url(config.get('foto_chaveiro_2'))
+_secs = int(to_number(config.get('popup_brinde_segundos'), 'Configurações › popup_brinde_segundos', False) or 5)
+BRINDE_POPUP = ''
+if config.get('popup_brinde_ativo') is not False and _f1 and _f2:
+    _v = brl(config['brinde1_valor']).replace(',00', '')
+    BRINDE_POPUP = f'''<div id="brinde-pop" class="bp-ov" role="dialog" aria-modal="true" aria-labelledby="bp-title" hidden>
+    <div class="bp">
+      <button type="button" class="bp-x" id="bp-close" aria-label="Fechar">&times;</button>
+      <span class="bp-eyebrow">🎁 Brinde Lily Cestas</span>
+      <h2 id="bp-title">Em compras a partir de {_v}, você ganha um chaveiro de brinde</h2>
+      <p class="bp-sub">Escolha o seu favorito:</p>
+      <div class="bp-row">
+        <div class="bp-opt"><img src="{_f1}" alt="Chaveiro {esc(config["brinde_opcao1_nome"])}" width="150" height="150" loading="lazy" decoding="async"><b>{esc(config["brinde_opcao1_nome"])}</b></div>
+        <div class="bp-opt"><img src="{_f2}" alt="Chaveiro {esc(config["brinde_opcao2_nome"])}" width="150" height="150" loading="lazy" decoding="async"><b>{esc(config["brinde_opcao2_nome"])}</b></div>
+      </div>
+      <p class="bp-note">Você escolhe na hora de finalizar o pedido, pelo WhatsApp. Sem custo.</p>
+      <a class="bp-cta" href="#catalogo" id="bp-cta" data-ga="brinde_popup_cta">Ver presentes →</a>
+      <button type="button" class="bp-no" id="bp-no">Agora não</button>
+    </div>
+  </div>
+  <script>(function(){{var ov=document.getElementById('brinde-pop');if(!ov)return;var KEY='lily_brinde_pop',DAYS=7,tries=0,prev=null;
+    try{{var t=+localStorage.getItem(KEY)||0;if(Date.now()-t<DAYS*864e5)return;}}catch(e){{}}
+    function ev(n){{try{{if(window.gtag)window.gtag('event',n,{{page_path:location.pathname}});}}catch(e){{}}}}
+    function busy(){{return !!document.querySelector('#cart-drawer:not(.hidden),#product-custom-modal:not(.hidden),#checkout-modal:not(.hidden)')||/^(INPUT|TEXTAREA|SELECT)$/.test((document.activeElement||{{}}).tagName||'');}}
+    function show(){{if(busy()&&tries++<8){{setTimeout(show,4000);return;}}if(busy())return;
+      try{{localStorage.setItem(KEY,String(Date.now()));}}catch(e){{}}
+      prev=document.activeElement;ov.hidden=false;ov.classList.add('on');requestAnimationFrame(function(){{ov.classList.add('vis');}});
+      document.getElementById('bp-close').focus({{preventScroll:true}});ev('brinde_popup_view');}}
+    function hide(why){{ov.classList.remove('vis');setTimeout(function(){{ov.classList.remove('on');ov.hidden=true;}},250);
+      if(why)ev(why);try{{if(prev&&prev.focus)prev.focus({{preventScroll:true}});}}catch(e){{}}}}
+    document.getElementById('bp-close').addEventListener('click',function(){{hide('brinde_popup_close');}});
+    document.getElementById('bp-no').addEventListener('click',function(){{hide('brinde_popup_close');}});
+    document.getElementById('bp-cta').addEventListener('click',function(){{hide('');}});
+    ov.addEventListener('click',function(e){{if(e.target===ov)hide('brinde_popup_close');}});
+    document.addEventListener('keydown',function(e){{if(ov.hidden)return;if(e.key==='Escape')hide('brinde_popup_close');
+      if(e.key==='Tab'){{var f=ov.querySelectorAll('button,a[href]'),a=f[0],z=f[f.length-1];
+        if(e.shiftKey&&document.activeElement===a){{e.preventDefault();z.focus();}}else if(!e.shiftKey&&document.activeElement===z){{e.preventDefault();a.focus();}}}}}});
+    setTimeout(show,{_secs * 1000});}})();</script>'''
+
+OWNER_BLOCK = ''
+_of = img_url(config.get('foto_proprietaria'))
+_on = str(config.get('nome_proprietaria') or '').strip()
+if _of and _on:
+    OWNER_BLOCK = (f'<div class="owner"><img src="{_of}" alt="{esc(_on)}, {esc(str(config.get("cargo_proprietaria") or "").lower())}" width="56" height="56" loading="lazy" decoding="async">'
+                   f'<div><b>{esc(_on)}</b><span>{esc(config.get("cargo_proprietaria") or "")}</span></div></div>')
+    BUSINESS['founder'] = {'@type': 'Person', 'name': _on, 'jobTitle': str(config.get('cargo_proprietaria') or 'Proprietária'), 'image': BASE + _of if _of.startswith('/') else _of}
+
 pills = '\n          '.join(f'<button type="button" data-cat-filter="{c["chave"]}" class="{pill_cls}">\n            {esc(c["icone"])} {esc(c["nome_curto"])} ({len(cat_prods[c["chave"]])})\n          </button>' for c in cats_home)
 mimos = f'<p class="text-xs text-white/90">Em compras a partir de <strong>{brl(config["brinde1_valor"]).replace(",00", "")}</strong> você ganha {esc(config["brinde1_nome"])}!</p>'
 reward_init = f'Compre a partir de {brl(config["brinde1_valor"])} e ganhe {esc(config["brinde1_nome"])}!'
@@ -860,7 +912,7 @@ repl = {
     'HOME_LINKS': ''.join(f'<a href="/{c["pagina_url"]}/" class="p-4 rounded-2xl border border-[#EED9DF] bg-[#FDF8F9] hover:bg-white text-sm font-display font-semibold text-[#A65365]">{esc(c["nome"])} →</a>' for c in cats_with if c.get('pagina_url')) + ''.join(f'<a href="/{o["slug"]}/" class="p-4 rounded-2xl border border-[#EED9DF] bg-[#FDF8F9] hover:bg-white text-sm font-display font-semibold text-[#A65365]">{esc(o["nome"])} →</a>' for o in OCCASIONS_OK) + '<a href="/catalogo/" class="p-4 rounded-2xl border border-[#EED9DF] bg-[#FDF8F9] hover:bg-white text-sm font-display font-semibold text-[#A65365]">Catálogo completo →</a>',
     'CIDADES_JSON': json.dumps([x for x in (config.get('cidades_entrega') or []) if x], ensure_ascii=False),
     'FOOTER_CATS': ''.join(f'<li><a href="/{c["pagina_url"]}/" class="hover:text-white hover:underline">{esc(c["nome"])}</a></li>' for c in cats_with if c.get('pagina_url')) + ''.join(f'<li><a href="/{o["slug"]}/" class="hover:text-white hover:underline">{esc(o["nome"])}</a></li>' for o in OCCASIONS_OK),
-    'BANNERS': BANNERS_HTML,
+    'BANNERS': BANNERS_HTML, 'BRINDE_POPUP': BRINDE_POPUP, 'OWNER_BLOCK': OWNER_BLOCK,
     'B1V': brl(config['brinde1_valor']).replace(',00', ''), 'FRETE_MIN': brl(FRETE_MIN).replace(',00', ''), 'HERO_CATS': hero_cats, 'HERO_IMG': hero_img, 'CAT_PILLS': pills, 'MIMOS_TEXT': mimos, 'REWARD_INIT': reward_init, 'DATA_JS': data_js,
     'OPT_BASES': ''.join(opt(o) for o in SIM['bases']), 'OPT_LOUCA': ''.join(opt(o) for o in SIM['louca']),
     'OPT_3D': ''.join(opt(o) for o in SIM['pecas_3d']), 'OPT_POL': ''.join(opt(o) for o in SIM['polaroids']),

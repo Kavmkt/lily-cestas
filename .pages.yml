@@ -290,6 +290,14 @@ content:
       - { name: brinde1_valor, label: Brinde - pedido a partir de (R$), type: number }
       - { name: brinde1_nome, label: Brinde - nome, type: string }
       - { name: ga4_id, label: Código do Google Analytics (G-XXXXXXXXXX), type: string, description: "Opcional. Cole aqui o ID de métricas do Google Analytics 4 (começa com G-). Vazio = sem medição." }
+      - { name: popup_brinde_ativo, label: Pop-up do brinde (ligado), type: boolean, description: "Mostra um aviso do chaveiro de brinde alguns segundos depois da pessoa entrar. Aparece uma vez a cada 7 dias para cada visitante." }
+      - { name: popup_brinde_segundos, label: Pop-up do brinde - esperar quantos segundos, type: number }
+      - { name: brinde_opcao1_nome, label: Brinde - nome do chaveiro 1 (foto do chaveiro de brinde acima), type: string }
+      - { name: brinde_opcao2_nome, label: Brinde - nome do chaveiro 2, type: string }
+      - { name: foto_chaveiro_2, label: Brinde - foto do chaveiro 2, type: image, options: { path: assets/brinde }, description: Aparece no pop-up do brinde. }
+      - { name: nome_proprietaria, label: Proprietária - nome (rodapé), type: string }
+      - { name: cargo_proprietaria, label: Proprietária - descrição curta (rodapé), type: string }
+      - { name: foto_proprietaria, label: Proprietária - foto (rodapé, círculo), type: image, options: { path: assets/equipe }, description: Foto de rosto, quadrada ou vertical. }
       - { name: clarity_id, label: Código do Microsoft Clarity, type: string, description: "Opcional. ID do projeto no Clarity (letras e números, ex. z2zt388utc). Mostra gravações e mapas de calor do uso do site. Vazio = desligado." }
       - { name: foto_chaveiro_simples, label: Foto do chaveiro de brinde (fundo transparente), type: image, description: Aparece no cartão de brinde da primeira tela. Use foto sem fundo (PNG). }
       - { name: foto_estudio_litofania, label: Foto da prévia da litofania (Estúdio), type: image }

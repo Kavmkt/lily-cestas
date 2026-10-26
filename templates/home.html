@@ -299,6 +299,18 @@ html {
   #topo>.nh-wrap>.nh-banners{order:2;margin-top:2px}#topo>.nh-wrap>.cats{order:3}#topo>.nh-wrap>.nh-cep{order:4}
   .kw{display:none}
 }
+.bp-ov{position:fixed;inset:0;z-index:60;background:rgba(56,33,38,.5);display:none;align-items:center;justify-content:center;padding:16px;opacity:0;transition:opacity .25s}.bp-ov.on{display:flex}.bp-ov.vis{opacity:1}
+.bp{background:#fff;border-radius:26px;max-width:470px;width:100%;padding:28px 22px 18px;position:relative;text-align:center;box-shadow:0 40px 80px -30px rgba(56,33,38,.6);transform:translateY(14px);transition:transform .25s;max-height:calc(100vh - 32px);overflow:auto}.bp-ov.vis .bp{transform:none}
+.bp-x{position:absolute;top:8px;right:10px;width:36px;height:36px;border:0;background:transparent;font-size:26px;line-height:1;color:#7a5560;cursor:pointer;border-radius:99px}.bp-x:hover{background:#FBEEF1}
+.bp-eyebrow{display:inline-block;font:700 11px 'Montserrat',sans-serif;letter-spacing:.12em;text-transform:uppercase;color:var(--rose-d)}
+.bp h2{font:700 21px/1.25 'Montserrat',sans-serif;color:var(--ink);margin:8px 0 6px}.bp-sub{font:500 13px 'Plus Jakarta Sans',sans-serif;color:#7a5560;margin:0 0 12px}
+.bp-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}.bp-opt{background:#fff;border:1px solid var(--line);border-radius:18px;padding:10px 8px 12px}.bp-opt img{display:block;width:100%;height:150px;object-fit:contain;margin:0 auto 6px}.bp-opt b{font:700 13px 'Plus Jakarta Sans',sans-serif;color:var(--ink)}
+.bp-note{font:500 12px/1.4 'Plus Jakarta Sans',sans-serif;color:#7a5560;margin:12px 0 14px}
+.bp-cta{display:block;background:var(--rose-d);color:#fff;font:700 15px 'Plus Jakarta Sans',sans-serif;border-radius:99px;padding:14px 18px;text-decoration:none}.bp-cta:hover{background:#8f4455}
+.bp-no{display:block;margin:8px auto 0;border:0;background:transparent;color:#7a5560;font:600 13px 'Plus Jakarta Sans',sans-serif;padding:10px 14px;cursor:pointer;text-decoration:underline}
+@media(max-width:767px){.bp-ov{align-items:flex-end;padding:0;background:rgba(56,33,38,.35)}.bp{border-radius:24px 24px 0 0;max-width:none;padding:24px 14px calc(10px + env(safe-area-inset-bottom));transform:translateY(40px)}.bp h2{font-size:18px}.bp-opt img{height:118px}.bp-note{margin:10px 0 12px}}
+@media(prefers-reduced-motion:reduce){.bp-ov,.bp{transition:none}}
+.owner{display:flex;align-items:center;gap:12px;margin-top:6px}.owner img{width:56px;height:56px;border-radius:50%;object-fit:cover;border:2px solid rgba(255,255,255,.8);flex:none}.owner b{display:block;font:700 14px 'Plus Jakarta Sans',sans-serif;color:#fff}.owner span{display:block;font:500 12px/1.3 'Plus Jakarta Sans',sans-serif;color:#FFE4E9}
 </style>
 </head>
 <body class="min-h-screen antialiased selection:bg-[#F2D5DC] selection:text-[#382126]">
@@ -587,6 +599,7 @@ html {
             </div>
           </div>
           <p class="text-xs sm:text-sm text-white/90 max-w-md leading-relaxed">Atelier de cestas de presente, canecas e peças personalizadas. Santana de Parnaíba, SP.</p>
+          {{OWNER_BLOCK}}
         </div>
 
         <div>
@@ -855,6 +868,8 @@ html {
       </div>
     </div>
   </div>
+
+  {{BRINDE_POPUP}}
 
   <!-- Container de Notificações Toast -->
   <div id="toast-container" class="fixed bottom-5 right-5 z-50 flex flex-col gap-2 max-w-sm"></div>
@@ -1538,7 +1553,7 @@ html {
       });
     }
     if (effectiveSub >= CONFIG.brinde1_valor) {
-      lines.push(`🎁 *Brinde incluso:* ${CONFIG.brinde1_nome}`);
+      lines.push(`🎁 *Brinde incluso:* ${CONFIG.brinde1_nome} (${CONFIG.brinde_opcao1_nome} ou ${CONFIG.brinde_opcao2_nome}: me diga qual prefere)`);
     }
     lines.push(`----------------------------------------`);
     lines.push(`• *Pagamento escolhido:* ${state.paymentMethod}`);
