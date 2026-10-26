@@ -1,0 +1,203 @@
+{
+  "ativa": true,
+  "noindex": true,
+  "titulo_seo": "Canecas Personalizadas com Foto, Nome e Música | Lily Cestas",
+  "descricao_seo": "Canecas personalizadas com foto, nome, música, caneca mágica e muitos temas. Escolha o tema, envie os detalhes pelo WhatsApp e receba em Santana de Parnaíba, Alphaville e região.",
+  "h1": "Canecas Personalizadas do Seu Jeito",
+  "intro": "Canecas com foto, nome, música e muitos temas para presentear ou para você. Escolha a ideia, envie os detalhes pelo WhatsApp e confirmamos tudo antes de produzir.",
+  "botao_principal": "Escolher meu tema",
+  "banners": [
+    {
+      "ativo": true,
+      "imagem_web": "/assets/produtos/Xícaras personalizadas_Web.png",
+      "imagem_mobile": "/assets/produtos/Xícaras personalizadas_Mobile.png",
+      "alt": "Xícaras personalizadas do seu jeito, com entrega grátis",
+      "link": "#temas"
+    }
+  ],
+  "temas_titulo": "Escolha um tema",
+  "temas_texto": "Algumas ideias para começar. Não achou o seu? Dá para criar do zero: é só chamar no WhatsApp.",
+  "temas": [
+    {
+      "ativo": true,
+      "emoji": "📸",
+      "nome": "Caneca com Foto",
+      "descricao": "Sua foto favorita (casal, família, amigos ou pet) impressa com nitidez, com nome e frase se quiser."
+    },
+    {
+      "ativo": true,
+      "emoji": "🎵",
+      "nome": "Caneca com Música",
+      "descricao": "O código da música de vocês (estilo Spotify) ao lado da foto e de uma frase especial."
+    },
+    {
+      "ativo": true,
+      "emoji": "✨",
+      "nome": "Caneca Mágica",
+      "descricao": "Preta por fora; a estampa aparece quando a bebida quente é servida."
+    },
+    {
+      "ativo": true,
+      "emoji": "🔤",
+      "nome": "Nome e Monograma",
+      "descricao": "Seu nome ou inicial em letras delicadas, com fundo floral ou liso."
+    },
+    {
+      "ativo": true,
+      "emoji": "💕",
+      "nome": "Casal e Namorados",
+      "descricao": "Foto do casal, data especial e uma frase para guardar a história de vocês."
+    },
+    {
+      "ativo": true,
+      "emoji": "👨‍👩‍👧",
+      "nome": "Família",
+      "descricao": "Para mãe, pai, avós e filhos: fotos, nomes e mensagens de carinho."
+    },
+    {
+      "ativo": true,
+      "emoji": "🤝",
+      "nome": "Amizade",
+      "descricao": "Para amiga, amigo secreto e quem está sempre junto, com foto e frase divertida."
+    },
+    {
+      "ativo": true,
+      "emoji": "🐾",
+      "nome": "Pet",
+      "descricao": "O rostinho do seu pet estampado, com o nome dele ou um recado de tutor orgulhoso."
+    },
+    {
+      "ativo": true,
+      "emoji": "🎨",
+      "nome": "Caricatura",
+      "descricao": "Seu desenho em estilo caricatura, pensado em detalhes que combinam com a pessoa."
+    },
+    {
+      "ativo": true,
+      "emoji": "🩺",
+      "nome": "Profissões",
+      "descricao": "Medicina, enfermagem, direito, professores, engenharia e muito mais."
+    },
+    {
+      "ativo": true,
+      "emoji": "♈",
+      "nome": "Signos",
+      "descricao": "O signo da pessoa com símbolos, cores e uma frase para combinar."
+    },
+    {
+      "ativo": true,
+      "emoji": "⚽",
+      "nome": "Futebol e Times",
+      "descricao": "Escudo, nome e número do time do coração, para torcedor de carteirinha."
+    },
+    {
+      "ativo": true,
+      "emoji": "🙏",
+      "nome": "Fé e Cristã",
+      "descricao": "Versículos, orações e mensagens de fé em artes delicadas."
+    },
+    {
+      "ativo": true,
+      "emoji": "😂",
+      "nome": "Divertidas",
+      "descricao": "Frases bem-humoradas e artes engraçadas para dar risada de manhã."
+    },
+    {
+      "ativo": true,
+      "emoji": "☕",
+      "nome": "Café e Bebidas",
+      "descricao": "Artes para quem não vive sem café, chá ou chocolate quente."
+    },
+    {
+      "ativo": true,
+      "emoji": "🎂",
+      "nome": "Aniversário",
+      "descricao": "Nome, idade e mensagem para o aniversariante, para ir sozinha ou numa cesta."
+    },
+    {
+      "ativo": true,
+      "emoji": "🌷",
+      "nome": "Dia das Mães",
+      "descricao": "Foto, nome dos filhos e um recado que ela vai guardar para sempre."
+    },
+    {
+      "ativo": true,
+      "emoji": "🥂",
+      "nome": "Padrinhos e Madrinhas",
+      "descricao": "O convite mais fofo para pedir ou agradecer padrinhos e madrinhas."
+    },
+    {
+      "ativo": true,
+      "emoji": "🎄",
+      "nome": "Natal",
+      "descricao": "Artes natalinas com nome e mensagem, para presentear em família ou na equipe."
+    },
+    {
+      "ativo": true,
+      "emoji": "🎮",
+      "nome": "Geek e Games",
+      "descricao": "Para fãs de jogos, animes, filmes e séries, com arte e nome do seu jeito."
+    }
+  ],
+  "passos": [
+    {
+      "titulo": "Escolha o tema",
+      "texto": "Veja as ideias acima ou conte o que você imagina. Dá para misturar temas."
+    },
+    {
+      "titulo": "Envie os detalhes",
+      "texto": "Nome, frase, foto ou música pelo WhatsApp, do jeito mais simples para você."
+    },
+    {
+      "titulo": "Confirmamos tudo",
+      "texto": "Alinhamos a arte e os detalhes com você antes de seguir para a produção."
+    },
+    {
+      "titulo": "Produção e entrega",
+      "texto": "O prazo é combinado no pedido. Entrega grátis a partir de {frete}* na nossa região."
+    }
+  ],
+  "produtos": [
+    "caneca-personalizada-chaveiro",
+    "caneca-afeto-em-flor"
+  ],
+  "produtos_titulo": "Canecas prontas para pedir",
+  "secoes": [
+    {
+      "titulo": "Presente que a pessoa usa todos os dias",
+      "texto": "Uma caneca personalizada aparece no café da manhã, no trabalho e nas fotos do dia a dia. Funciona para aniversário, Dia das Mães, namorados, amigo secreto, padrinhos, formatura e lembrancinhas."
+    },
+    {
+      "titulo": "Foto, nome, música ou tudo junto",
+      "texto": "Você pode usar só o nome, uma foto marcante, o código de uma música especial ou combinar tudo numa arte feita para a ocasião. Se tiver uma ideia diferente, conte pelo WhatsApp."
+    },
+    {
+      "titulo": "Junte a caneca a uma cesta",
+      "texto": "A caneca pode ir sozinha ou dentro de uma cesta de presente. Fale com a gente para montar o conjunto que combina com a ocasião."
+    }
+  ],
+  "faq": [
+    {
+      "pergunta": "Como faço para personalizar minha caneca?",
+      "resposta": "Escolha o tema ou o produto, finalize o pedido e envie nome, frase, foto ou música pelo WhatsApp. Confirmamos os detalhes antes de produzir."
+    },
+    {
+      "pergunta": "Posso colocar foto na caneca?",
+      "resposta": "Pode. Envie a foto pelo WhatsApp, de preferência em boa qualidade, e combinamos o enquadramento com você."
+    },
+    {
+      "pergunta": "Qual é o prazo de produção?",
+      "resposta": "O prazo é combinado no pedido, conforme a agenda do atelier. Em datas especiais, peça com antecedência."
+    },
+    {
+      "pergunta": "Vocês entregam na minha região?",
+      "resposta": "Atendemos Santana de Parnaíba, Alphaville, Barueri, Cajamar, Osasco e Carapicuíba. A entrega é grátis em pedidos a partir de {frete}. Locais mais distantes podem ter taxa: informe o CEP no checkout ou consulte pelo WhatsApp."
+    },
+    {
+      "pergunta": "Dá para pedir várias canecas iguais ou diferentes?",
+      "resposta": "Dá. Para pedidos em quantidade, como lembrancinhas e presentes de equipe, chame no WhatsApp e combinamos valores e prazo."
+    }
+  ],
+  "cta_titulo": "Não achou o seu tema?",
+  "cta_texto": "Conte a ideia pelo WhatsApp e criamos uma caneca só sua."
+}

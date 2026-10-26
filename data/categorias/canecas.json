@@ -1,0 +1,22 @@
+{
+  "ativa": true,
+  "ordem": 6,
+  "chave": "canecas",
+  "nome": "Canecas Personalizadas",
+  "nome_curto": "Canecas",
+  "icone": "☕",
+  "nome_tile": "Canecas personalizadas",
+  "eh_cesta": false,
+  "frase_apoio": "Canecas personalizadas com foto, nome, música e muitos temas.",
+  "destaques": [
+    "Foto, nome e música",
+    "Muitos temas",
+    "Combine os detalhes pelo WhatsApp"
+  ],
+  "pagina_url": "canecas",
+  "pagina_titulo": "Canecas Personalizadas | Lily Cestas",
+  "pagina_descricao": "Canecas personalizadas com foto, nome e música.",
+  "pagina_h1": "Canecas Personalizadas",
+  "pagina_intro": "Canecas personalizadas.",
+  "pagina_secoes": []
+}

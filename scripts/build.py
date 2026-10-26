@@ -564,9 +564,12 @@ for o in OCCASIONS:
 OCCASIONS_OK = [o for o in OCCASIONS if len(o['_prods']) >= OCC_MIN]
 
 page_urls = []
+CANECAS = load_json(ROOT / 'data/canecas.json', {}) or {}
 for c in cats_with:
     if not c.get('pagina_url'):
         continue
+    if CANECAS.get('ativa', True) and c['pagina_url'] == 'canecas':
+        continue  # a página /canecas/ é montada mais abaixo, a partir de data/canecas.json
     path = f'/{c["pagina_url"]}/'
     ps = cat_prods[c['chave']]
     prices = [final_price(p) for p in ps]
@@ -789,6 +792,100 @@ if banners:
                        'if(n>1){t.addEventListener("scroll",mark,{passive:true});d.forEach(function(e,j){e.addEventListener("click",function(){stop();go(j)})});'
                        'function start(){timer=setInterval(function(){go(i+1)},5500)}function stop(){clearInterval(timer)}'
                        'w.addEventListener("touchstart",stop,{passive:true});w.addEventListener("mouseenter",stop);w.addEventListener("mouseleave",start);start();}mark();})();</script>' if len(banners) > 1 else ''))
+
+# ---------------------------------------------------------------- página dedicada de canecas (/canecas/)
+def canecas_page():
+    C = CANECAS
+    path = '/canecas/'
+    ids = [str(i).strip() for i in (C.get('produtos') or [])]
+    byid = {p['id']: p for p in visible}
+    byid.update({slugify(p['nome']): p for p in visible})  # o painel guarda o nome; o arquivo usa o código
+    ids = [slugify(i) if i not in byid else i for i in ids]
+    plist = [p for p in visible if p['_cat']['chave'] == 'canecas']
+    plist += [byid[i] for i in ids if i in byid and byid[i] not in plist]
+    plist.sort(key=lambda p: (p['ordem'], p['nome']))
+    v = fill_vars
+
+    def wa(t):
+        return f'https://wa.me/{WA}?text={urllib.parse.quote(t)}'
+
+    h1 = v(C.get('h1') or 'Canecas Personalizadas')
+    title = C.get('titulo_seo') or f'{h1} | Lily Cestas'
+    desc = v(C.get('descricao_seo') or '')
+    # banners próprios da página
+    slides = ''
+    n = 0
+    for b in (C.get('banners') or []):
+        if b.get('ativo', True) is False:
+            continue
+        web = resize_to(b.get('imagem_web'), 1600)
+        mob = resize_to(b.get('imagem_mobile'), 900)
+        if not (web or mob):
+            continue
+        link = (b.get('link') or '').strip()
+        ext = link.startswith('http')
+        attrs = (f' href="{esc(link)}"' + (' target="_blank" rel="noopener"' if ext else '') + ' data-ga="banner_click" data-ga-item="canecas"') if link else ''
+        tag = 'a' if link else 'div'
+        src_mob = f'<source media="(max-width:767px)" srcset="{mob}">' if mob else ''
+        pic = (f'<picture>{src_mob}<img src="{web or mob}" alt="{esc(b.get("alt") or "Canecas personalizadas")}" '
+               f'width="1600" height="320" loading="lazy" decoding="async"></picture>')
+        slides += f'<{tag} class="cn-slide"{attrs}>{pic}</{tag}>'
+        n += 1
+    banners_blk = ''
+    if n:
+        dots = ''.join(f'<button type="button" class="cn-dot" aria-label="Banner {i + 1}"></button>' for i in range(n)) if n > 1 else ''
+        banners_blk = f'<div class="cn-banners" aria-label="Destaques"><div class="cn-track">{slides}</div>' + (f'<div class="cn-dots">{dots}</div>' if dots else '') + '</div>'
+        if n > 1:
+            banners_blk += ('<script>(function(){var w=document.querySelector(".cn-banners"),t=w.querySelector(".cn-track"),d=[].slice.call(w.querySelectorAll(".cn-dot")),n=t.children.length,i=0,tm;'
+                            'function go(k){i=(k+n)%n;t.scrollTo({left:t.children[i].offsetLeft-t.offsetLeft,behavior:"smooth"})}'
+                            'function mark(){i=Math.max(0,Math.min(n-1,Math.round(t.scrollLeft/t.clientWidth)));d.forEach(function(e,j){e.classList.toggle("on",j===i)})}'
+                            'function stop(){clearInterval(tm)}function start(){tm=setInterval(function(){go(i+1)},5500)}'
+                            't.addEventListener("scroll",mark,{passive:true});d.forEach(function(e,j){e.addEventListener("click",function(){stop();go(j)})});'
+                            'w.addEventListener("touchstart",stop,{passive:true});w.addEventListener("mouseenter",stop);w.addEventListener("mouseleave",start);start();mark()})();</script>')
+    # temas
+    tcards = ''
+    for t in (C.get('temas') or []):
+        if t.get('ativo', True) is False or not t.get('nome'):
+            continue
+        foto = resize_to(t.get('foto'), 700) if t.get('foto') else ''
+        top = (f'<img src="{foto}" alt="{esc(t.get("alt") or t["nome"])}" width="350" height="350" loading="lazy">' if foto
+               else f'<span class="tm-e" aria-hidden="true">{esc(t.get("emoji") or "☕")}</span>')
+        msg = f'Oi! Vim pelo site da Lily Cestas e quero uma caneca personalizada no tema: {t["nome"]}.'
+        tcards += (f'<a class="tema{" has-img" if foto else ""}" href="{esc(wa(msg))}" target="_blank" rel="noopener" data-ga="caneca_tema_click" data-ga-item="{esc(slugify(t["nome"]))}">'
+                   f'{top}<h3>{esc(t["nome"])}</h3><p>{esc(v(t.get("descricao") or ""))}</p><em>Quero este →</em></a>')
+    steps = ''.join(f'<li><b>{i + 1}</b><h3>{esc(s.get("titulo", ""))}</h3><p>{esc(v(s.get("texto", "")))}</p></li>'
+                    for i, s in enumerate(C.get('passos') or []) if s.get('titulo'))
+    secs = ''.join(f'<section><h2>{esc(s["titulo"])}</h2><p>{esc(v(s.get("texto", "")))}</p></section>' for s in (C.get('secoes') or []) if s.get('titulo'))
+    faq_items = [(q['pergunta'], v(q.get('resposta', ''))) for q in (C.get('faq') or []) if q.get('pergunta')]
+    faq_block = ''.join(f'<details><summary>{esc(q)}</summary><p>{esc(a)}</p></details>' for q, a in faq_items)
+    trail = [('Início', '/'), ('Canecas personalizadas', path)]
+    crumbs = ' › '.join(f'<a href="{u}">{esc(nm)}</a>' if i < len(trail) - 1 else f'<span>{esc(nm)}</span>' for i, (nm, u) in enumerate(trail))
+    extra = [{'@type': 'CollectionPage', 'name': h1, 'url': BASE + path, 'about': 'Canecas personalizadas'}]
+    robots = 'noindex, nofollow' if C.get('noindex', True) else 'index, follow, max-image-preview:large'
+    prods_blk = (f'<section id="produtos"><h2>{esc(C.get("produtos_titulo") or "Canecas prontas para pedir")}</h2><div class="cards">{cards_html(plist)}</div></section>') if plist else ''
+    cta_msg = 'Oi! Vim pelo site da Lily Cestas e quero criar uma caneca personalizada do meu jeito.'
+    fonts = ('<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>'
+             '<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap" rel="stylesheet">'
+             '<link rel="stylesheet" href="/assets/css/pages.css"><link rel="stylesheet" href="/assets/css/canecas.css">\n</head><body>')
+    body = f'''<main><div class="wrap"><nav class="crumbs" aria-label="Navegação">{crumbs}</nav>
+<header class="cn-hero"><span class="tag">☕ Canecas personalizadas</span><h1>{esc(h1)}</h1><p class="intro">{esc(v(C.get("intro") or ""))}</p>
+<p><a class="btn" href="#temas">{esc(C.get("botao_principal") or "Escolher meu tema")}</a> <a class="btn ghost" href="{esc(wa(cta_msg))}" target="_blank" rel="noopener" data-ga="whatsapp_click" data-ga-item="canecas_hero">Falar no WhatsApp</a></p></header>
+{banners_blk}
+<section id="temas"><h2>{esc(C.get("temas_titulo") or "Escolha um tema")}</h2><p class="sub">{esc(v(C.get("temas_texto") or ""))}</p><div class="temas">{tcards}</div></section>
+<section><h2>Como funciona</h2><ol class="passos">{steps}</ol><p class="nota">*Locais mais distantes podem ter taxa de entrega. Confira pelo CEP no checkout ou pelo WhatsApp.</p></section>
+{prods_blk}
+{secs}
+<section class="cn-cta"><h2>{esc(C.get("cta_titulo") or "Não achou o seu tema?")}</h2><p>{esc(v(C.get("cta_texto") or ""))}</p><p><a class="btn" href="{esc(wa(cta_msg))}" target="_blank" rel="noopener" data-ga="whatsapp_click" data-ga-item="canecas_cta">Criar minha caneca no WhatsApp</a></p></section>
+<section><h2>Perguntas frequentes</h2><div class="faq">{faq_block}</div></section>
+</div></main>'''
+    write_page(path, head(title, desc, path, robots) + jsonld(BUSINESS, crumb_ld(trail), faq_ld(faq_items), *extra) + fonts + top_html() + body + footer_html() + '</body></html>')
+    if C.get('noindex', True) is False:
+        page_urls.append(path)
+
+
+if CANECAS.get('ativa', True):
+    canecas_page()
+
 
 # ---------------------------------------------------------------- home (loja completa)
 tpl = (ROOT / 'templates/home.html').read_text(encoding='utf-8')
