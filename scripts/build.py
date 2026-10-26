@@ -84,6 +84,7 @@ config = {
     'ifood_url': 'https://www.ifood.com.br/delivery/santana-de-parnaiba-sp/lily-cestas--presentes-colinas-da-anhanguera/25073e59-c1d1-43a8-a317-7f5c948f97ab',
     'pix_desconto': 5, 'taxa_entrega': 15, 'entrega_gratis_a_partir': 125, 'pedido_minimo': 35, 'brinde1_valor': 150, 'brinde1_nome': 'Chaveiro de brinde',
     'foto_chaveiro_simples': '',
+    'entrega_rapida_horas': 2,
     'popup_brinde_ativo': True, 'popup_brinde_segundos': 5,
     'brinde_opcao1_nome': 'Coração 3D', 'brinde_opcao2_nome': 'Mãozinha de coração', 'foto_chaveiro_2': '/assets/brinde/chaveiro-maozinha-coracao.webp',
     'nome_proprietaria': 'Alicya Lima', 'cargo_proprietaria': 'Proprietária e criadora da Lily Cestas', 'foto_proprietaria': '/assets/equipe/alycia-lima.webp',
@@ -102,6 +103,12 @@ FRETE_MIN = config['entrega_gratis_a_partir']
 PED_MIN = config['pedido_minimo']
 FRETE_TXT = brl(FRETE_MIN).replace(',00', '')
 MIN_TXT = brl(PED_MIN).replace(',00', '')
+try:
+    _fh = int(float(config.get('entrega_rapida_horas') or 0))
+except (TypeError, ValueError):
+    _fh = 0
+FAST_TXT = f'Entrega rápida em até {_fh}h' if _fh > 0 else ''
+FAST_NOTE = f'*Entrega em até {_fh}h para produtos prontos, conforme região e horário. Personalizados têm prazo combinado no pedido.' if _fh > 0 else ''
 ENTREGA_TXT = f'Entrega grátis em pedidos a partir de {FRETE_TXT}; pedido mínimo de {MIN_TXT}.'
 phone = f"+{WA[:2]} {WA[2:4]} {WA[4:-4]}-{WA[-4:]}" if len(WA) >= 12 else '+' + WA
 
@@ -415,12 +422,13 @@ def page_html(path, title, desc, h1, intro, blocks, plist, faq_items, trail, ext
     sec = ''.join(f'<section><h2>{esc(h)}</h2><p>{esc(t)}</p></section>' for h, t in blocks)
     img = f'<img class="hero" src="{hero_img[0]}" alt="{esc(hero_img[1])}" width="760" height="567">' if hero_img else ''
     faq_block = ''.join(f'<details><summary>{esc(q)}</summary><p>{esc(a)}</p></details>' for q, a in faq_items)
+    fast_pill = f'<p class="fastnote">⚡ <b>{FAST_TXT}*</b><small>{FAST_NOTE}</small></p>' if FAST_TXT else ''
     return (head(title, desc, path) + jsonld(*nodes) + '''
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/css/pages.css">
 </head><body>''' + top_html() + f'''<main><div class="wrap"><nav class="crumbs" aria-label="Navegação">{crumbs}</nav>
-<div class="lead"><div><h1>{esc(h1)}</h1><p class="intro">{esc(intro)}</p><p><a class="btn" href="{SHOP}#catalogo">{cta}</a> <a class="btn ghost" href="/catalogo/">Ver catálogo completo</a></p></div>{img}</div>
+<div class="lead"><div><h1>{esc(h1)}</h1><p class="intro">{esc(intro)}</p>{fast_pill}<p><a class="btn" href="{SHOP}#catalogo">{cta}</a> <a class="btn ghost" href="/catalogo/">Ver catálogo completo</a></p></div>{img}</div>
 {sec}
 <section><h2>Produtos</h2><div class="cards">{cards_html(plist)}</div></section>
 <section><h2>Perguntas frequentes</h2><div class="faq">{faq_block}</div></section>
@@ -691,12 +699,13 @@ def product_page(p):
     trail = [('Início', '/')] + ([(c['nome'], f'/{c["pagina_url"]}/')] if c.get('pagina_url') and c in cats_with else []) + [(p['nome'], path)]
     crumbs = ' › '.join(f'<a href="{u}">{esc(n)}</a>' if i < len(trail) - 1 else f'<span>{esc(n)}</span>' for i, (n, u) in enumerate(trail))
     badge = f'<span class="tag">{esc(p["selo"])}</span>' if p['selo'] else ''
+    fast_line = f'<p class="fastnote">⚡ <b>{FAST_TXT}*</b><small>{FAST_NOTE}</small></p>' if FAST_TXT and not p['personalizacao'] else ''
     return (head(title, desc, path).replace('<meta property="og:type" content="website">', '<meta property="og:type" content="product">') + jsonld(BUSINESS, crumb_ld(trail), faq_ld(items), prod_ld(p)) + '''
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/css/pages.css">
 </head><body>''' + top_html() + f'''<main><div class="wrap"><nav class="crumbs" aria-label="Navegação">{crumbs}</nav>
-<div class="lead"><div>{badge}<h1>{esc(p["nome"])}</h1><p class="intro">{esc(prod_desc(p))}</p><p class="price">{old}<b>{brl(final_price(p))}</b></p><p class="shipnote">{"🚚 Entrega grátis neste produto" if final_price(p) >= FRETE_MIN else f"🚚 Entrega grátis em pedidos a partir de {FRETE_TXT}"} · Pedido mínimo {MIN_TXT}</p>{buy}</div>
+<div class="lead"><div>{badge}<h1>{esc(p["nome"])}</h1><p class="intro">{esc(prod_desc(p))}</p><p class="price">{old}<b>{brl(final_price(p))}</b></p>{fast_line}<p class="shipnote">{"🚚 Entrega grátis neste produto" if final_price(p) >= FRETE_MIN else f"🚚 Entrega grátis em pedidos a partir de {FRETE_TXT}"} · Pedido mínimo {MIN_TXT}</p>{buy}</div>
 <img class="hero" src="{p["_img"]}" alt="{esc(p.get("alt") or p["nome"])}" width="760" height="567" fetchpriority="high"></div>
 {inc}{pers}{entrega}
 <section><h2>Perguntas frequentes</h2><div class="faq">{faq_block}</div></section>
@@ -948,6 +957,8 @@ if foto_k1:
 _f1, _f2 = img_url(config.get('foto_chaveiro_simples')), img_url(config.get('foto_chaveiro_2'))
 _secs = int(to_number(config.get('popup_brinde_segundos'), 'Configurações › popup_brinde_segundos', False) or 5)
 BRINDE_POPUP = ''
+_fast = f'<b>⚡ {FAST_TXT}*</b>' if FAST_TXT else ''
+_fnote = f' e prazo maior. {FAST_TXT} vale para produtos prontos' if FAST_TXT else ''
 if config.get('popup_brinde_ativo') is not False and _f1 and _f2:
     _v = brl(config['brinde1_valor']).replace(',00', '')
     _fm = brl(FRETE_MIN).replace(',00', '')
@@ -966,7 +977,7 @@ if config.get('popup_brinde_ativo') is not False and _f1 and _f2:
         <div class="bp-opt"><img src="{_f2}" alt="Chaveiro {esc(config["brinde_opcao2_nome"])}" width="150" height="150" loading="lazy" decoding="async"><b>{esc(config["brinde_opcao2_nome"])}</b></div>
       </div>
       <p class="bp-note">Você escolhe na hora de finalizar o pedido, pelo WhatsApp. Sem custo.</p>
-      <div class="bp-ship"><b>🚚 Entrega grátis* a partir de {_fm}</b><span>{esc(_cid)}</span><small>*Consulte seu endereço pelo WhatsApp. Locais mais distantes podem ter taxa de entrega.</small></div>
+      <div class="bp-ship">{_fast}<b>🚚 Entrega grátis* a partir de {_fm}</b><span>{esc(_cid)}</span><small>*Consulte seu endereço pelo WhatsApp. Locais mais distantes podem ter taxa de entrega{_fnote}.</small></div>
       <a class="bp-cta" href="#catalogo" id="bp-cta" data-ga="brinde_popup_cta">Ver presentes →</a>
       <button type="button" class="bp-no" id="bp-no">Agora não</button>
     </div>
@@ -1016,6 +1027,7 @@ repl = {
     'CIDADES_JSON': json.dumps([x for x in (config.get('cidades_entrega') or []) if x], ensure_ascii=False),
     'FOOTER_CATS': ''.join(f'<li><a href="/{c["pagina_url"]}/" class="hover:text-white hover:underline">{esc(c["nome"])}</a></li>' for c in cats_with if c.get('pagina_url')) + ''.join(f'<li><a href="/{o["slug"]}/" class="hover:text-white hover:underline">{esc(o["nome"])}</a></li>' for o in OCCASIONS_OK),
     'BANNERS': BANNERS_HTML, 'BRINDE_POPUP': BRINDE_POPUP, 'OWNER_BLOCK': OWNER_BLOCK,
+    'FAST_TOP': (f'<span class="fast">⚡ {FAST_TXT}*</span>' if FAST_TXT else ''), 'FAST_CHIP': (f'<span class="fastchip">⚡ {FAST_TXT}*</span>' if FAST_TXT else ''), 'FAST_FOOT': (f' {FAST_TXT}* em produtos prontos.' if FAST_TXT else ''),
     'B1V': brl(config['brinde1_valor']).replace(',00', ''), 'FRETE_MIN': brl(FRETE_MIN).replace(',00', ''), 'HERO_CATS': hero_cats, 'HERO_IMG': hero_img, 'CAT_PILLS': pills, 'MIMOS_TEXT': mimos, 'REWARD_INIT': reward_init, 'DATA_JS': data_js,
     'OPT_BASES': ''.join(opt(o) for o in SIM['bases']), 'OPT_LOUCA': ''.join(opt(o) for o in SIM['louca']),
     'OPT_3D': ''.join(opt(o) for o in SIM['pecas_3d']), 'OPT_POL': ''.join(opt(o) for o in SIM['polaroids']),

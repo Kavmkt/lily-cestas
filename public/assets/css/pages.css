@@ -44,3 +44,6 @@ section[id^=cat-]{scroll-margin-top:90px}
 /* entrega gratis */
 .card>a{position:relative}.pship{position:absolute;left:10px;bottom:10px;background:rgba(255,255,255,.95);color:#1F6B3A;font:700 11px/1.2 'Montserrat',sans-serif;border-radius:99px;padding:5px 10px;box-shadow:0 2px 8px rgba(56,33,38,.12)}
 .shipnote{font-size:13px;font-weight:600;color:#1F6B3A;margin:0 0 .9em}
+
+/* entrega rápida */
+.fastnote{margin:0 0 .9em;font-size:14px;color:#A65365;background:#FBEEF1;border:1px solid #E5C2C9;border-radius:14px;padding:10px 14px;display:inline-block}.fastnote b{font-family:'Montserrat',sans-serif}.fastnote small{display:block;font-size:11px;color:#785860;margin-top:2px}

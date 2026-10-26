@@ -350,6 +350,7 @@ content:
       - { name: pix_desconto, label: Desconto no Pix (%), type: number, description: Exemplo 5 }
       - { name: cidades_entrega, label: Cidades atendidas na entrega, type: string, list: true, description: "Usadas para validar o CEP no checkout. Alphaville e Polvilho entram em Barueri, Santana de Parnaíba e Cajamar." }
       - { name: entrega_gratis_a_partir, label: Entrega grátis a partir de (R$), type: number, description: "Pedidos com este valor ou mais (soma dos produtos, sem o desconto do Pix) não pagam entrega. Exemplo 125." }
+      - { name: entrega_rapida_horas, label: Entrega rápida em até (horas), type: number, description: "Aparece em destaque no site como 'Entrega rápida em até 2h*'. Coloque 0 para esconder." }
       - { name: pedido_minimo, label: Pedido mínimo (R$), type: number, description: "Abaixo disso o site não deixa finalizar o pedido. Exemplo 35." }
       - { name: taxa_entrega, label: Taxa de entrega abaixo do valor de entrega grátis (R$), type: number, description: "Cobrada só em pedidos menores que o valor de entrega grátis. Exemplo 15." }
       - { name: brinde1_valor, label: Brinde - pedido a partir de (R$), type: number }
