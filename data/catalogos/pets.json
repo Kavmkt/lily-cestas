@@ -58,5 +58,29 @@
       "numero": "10",
       "nome": "Gatinhos Pastel"
     }
+  ],
+  "seo_titulo": "Caneca Personalizada Pet: Mãe de Gato, Mãe de Cachorro | Lily Cestas",
+  "seo_descricao": "Caneca personalizada pet com {n} modelos: mãe de gato, mãe de cachorro, tutor orgulhoso e mais. Com nome ou foto do seu bichinho. Entrega na região de Alphaville e Santana de Parnaíba.",
+  "h1": "Caneca Personalizada Pet: Mãe de Gato, Mãe de Cachorro e Mais",
+  "intro": "Para quem trata o pet como parte da família. Escolha entre {n} artes prontas com gatinhos, cachorros e frases de tutor apaixonado, e personalize com o nome, a foto ou as cores que combinam com o seu bichinho.",
+  "secoes": [
+    {
+      "titulo": "Presente para mãe e pai de pet",
+      "texto": "A caneca pet agrada quem tem gato ou cachorro em casa e vira lembrança de aniversário, Dia das Mães, amigo secreto e até de adoção. Dá para colocar o nome do pet, uma foto dele ou uma frase que tenha a ver com vocês."
+    },
+    {
+      "titulo": "Como pedir a sua caneca pet",
+      "texto": "Anote o número do modelo que mais gostou, adicione ao pedido e envie o nome ou a foto do seu pet pelo WhatsApp. Antes de produzir, confirmamos os detalhes com você."
+    }
+  ],
+  "faq": [
+    {
+      "pergunta": "Posso colocar a foto do meu pet na caneca?",
+      "resposta": "Pode. Envie uma foto nítida pelo WhatsApp depois de finalizar o pedido e combinamos o enquadramento e a arte antes de produzir."
+    },
+    {
+      "pergunta": "Tem caneca de gato e de cachorro?",
+      "resposta": "Tem. O catálogo traz modelos de gatinhos, cachorros e frases para tutores, como \"Mãe de Gato\", \"Mãe de Cachorro\" e \"Meu Melhor Cãopanheiro\"."
+    }
   ]
 }

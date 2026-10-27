@@ -58,5 +58,29 @@
       "numero": "10",
       "nome": "Melhores Amigas é Pouco, Somos Irmãs"
     }
+  ],
+  "seo_titulo": "Caneca Personalizada para Amiga: Best Friend e Mais | Lily Cestas",
+  "seo_descricao": "Caneca personalizada para amiga com {n} modelos: \"Best Friend Forever\", \"Amigas para Sempre\", irmãs de coração e mais. Com nome e foto. Peça pelo site.",
+  "h1": "Caneca Personalizada para Amiga: Best Friend e Amigas para Sempre",
+  "intro": "Presente de amiga para amiga com carinho e bom humor. São {n} modelos, de ilustrações delicadas a artes divertidas como \"Miga, Sua Loka!\", todos personalizáveis com nome e foto.",
+  "secoes": [
+    {
+      "titulo": "Para amiga, amigo secreto ou irmã de coração",
+      "texto": "A caneca de amizade serve para aniversário, formatura, despedida e amigo secreto. Dá para fazer um par para vocês duas usarem juntas."
+    },
+    {
+      "titulo": "Personalize do seu jeito",
+      "texto": "Escolha o modelo e envie nome, foto ou frase pelo WhatsApp. Confirmamos os detalhes antes de produzir."
+    }
+  ],
+  "faq": [
+    {
+      "pergunta": "Dá para fazer duas canecas iguais, uma para cada amiga?",
+      "resposta": "Dá. Escolha o mesmo modelo e informe as duas versões de nome ou foto pelo WhatsApp."
+    },
+    {
+      "pergunta": "Tem modelos engraçados?",
+      "resposta": "Tem. \"Miga, Sua Loka!\" e \"Melhores Amigas é Pouco, Somos Irmãs\" são os mais divertidos."
+    }
   ]
 }

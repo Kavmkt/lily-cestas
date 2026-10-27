@@ -1,8 +1,8 @@
 {
   "ativa": true,
-  "noindex": true,
-  "titulo_seo": "Canecas Personalizadas com Foto, Nome e Música | Lily Cestas",
-  "descricao_seo": "Canecas personalizadas com foto, nome, música, caneca mágica e muitos temas. Escolha o tema, envie os detalhes pelo WhatsApp e receba em Santana de Parnaíba, Alphaville e região.",
+  "noindex": false,
+  "titulo_seo": "Caneca Personalizada com Foto e Nome: +150 Modelos | Lily Cestas",
+  "descricao_seo": "Caneca personalizada com foto, nome e frase em +150 modelos: namorados, Natal, pai, pet, signos e mais. Atelier em Santana de Parnaíba, com atendimento em Alphaville, Barueri, Osasco e Cajamar.",
   "h1": "Canecas Personalizadas do Seu Jeito",
   "intro": "Canecas com foto, nome, música e muitos temas para presentear ou para você. Escolha a ideia, envie os detalhes pelo WhatsApp e confirmamos tudo antes de produzir.",
   "botao_principal": "Escolher meu tema",
@@ -155,40 +155,50 @@
   "produtos_titulo": "Canecas prontas para pedir",
   "secoes": [
     {
+      "titulo": "Caneca personalizada em Santana de Parnaíba, Alphaville e região",
+      "texto": "A Lily Cestas é um atelier de Santana de Parnaíba (SP) e entrega canecas personalizadas em Alphaville, Barueri, Cajamar, Osasco e Carapicuíba. Você escolhe o modelo no site, finaliza o pedido e combina nome, foto ou frase pelo WhatsApp. A entrega é grátis em pedidos a partir de {frete}*."
+    },
+    {
+      "titulo": "Caneca personalizada com foto, nome, música ou frase",
+      "texto": "Cada catálogo reúne artes prontas que você personaliza do seu jeito: uma foto de família, o nome do presenteado, o código de uma música especial ou uma frase que só vocês entendem. Mais de 150 modelos para namorados, Natal, Dia dos Pais, aniversário, amizade, pets, signos e muito mais."
+    },
+    {
       "titulo": "Presente que a pessoa usa todos os dias",
-      "texto": "Uma caneca personalizada aparece no café da manhã, no trabalho e nas fotos do dia a dia. Funciona para aniversário, Dia das Mães, namorados, amigo secreto, padrinhos, formatura e lembrancinhas."
-    },
-    {
-      "titulo": "Foto, nome, música ou tudo junto",
-      "texto": "Você pode usar só o nome, uma foto marcante, o código de uma música especial ou combinar tudo numa arte feita para a ocasião. Se tiver uma ideia diferente, conte pelo WhatsApp."
-    },
-    {
-      "titulo": "Junte a caneca a uma cesta",
-      "texto": "A caneca pode ir sozinha ou dentro de uma cesta de presente. Fale com a gente para montar o conjunto que combina com a ocasião."
+      "texto": "Uma caneca personalizada aparece no café da manhã, no trabalho e nas fotos do dia a dia. Funciona para aniversário, Dia das Mães, Dia dos Namorados, Dia dos Pais, amigo secreto, padrinhos e lembrancinhas. Também pode ir dentro de uma cesta de presente."
     }
   ],
   "faq": [
     {
-      "pergunta": "Como faço para personalizar minha caneca?",
-      "resposta": "Escolha o tema ou o produto, finalize o pedido e envie nome, frase, foto ou música pelo WhatsApp. Confirmamos os detalhes antes de produzir."
+      "pergunta": "Como faço para personalizar uma caneca?",
+      "resposta": "Escolha o catálogo do tema, anote o número do modelo, finalize o pedido e envie nome, frase, foto ou música pelo WhatsApp. Confirmamos os detalhes antes de produzir."
+    },
+    {
+      "pergunta": "Quanto custa uma caneca personalizada?",
+      "resposta": "O valor aparece em cada catálogo e já inclui a personalização com nome, foto ou frase. Pagando no Pix você ainda tem desconto."
     },
     {
       "pergunta": "Posso colocar foto na caneca?",
-      "resposta": "Pode. Envie a foto pelo WhatsApp, de preferência em boa qualidade, e combinamos o enquadramento com você."
+      "resposta": "Pode. Vários modelos aceitam de 1 a 6 fotos. Envie as imagens pelo WhatsApp, de preferência em boa qualidade, e combinamos o enquadramento com você."
     },
     {
       "pergunta": "Qual é o prazo de produção?",
-      "resposta": "O prazo é combinado no pedido, conforme a agenda do atelier. Em datas especiais, peça com antecedência."
+      "resposta": "O prazo é combinado no pedido, conforme a agenda do atelier. Em datas como Natal, Dia das Mães e Dia dos Namorados, peça com antecedência."
     },
     {
-      "pergunta": "Vocês entregam na minha região?",
-      "resposta": "Atendemos Santana de Parnaíba, Alphaville, Barueri, Cajamar, Osasco e Carapicuíba. A entrega é grátis em pedidos a partir de {frete}. Locais mais distantes podem ter taxa: informe o CEP no checkout ou consulte pelo WhatsApp."
+      "pergunta": "Vocês entregam em Alphaville, Barueri e Osasco?",
+      "resposta": "Atendemos Santana de Parnaíba, Alphaville, Barueri, Cajamar, Osasco e Carapicuíba. A entrega é grátis em pedidos a partir de {frete}; locais mais distantes podem ter taxa. Informe o CEP no checkout ou consulte pelo WhatsApp."
     },
     {
-      "pergunta": "Dá para pedir várias canecas iguais ou diferentes?",
-      "resposta": "Dá. Para pedidos em quantidade, como lembrancinhas e presentes de equipe, chame no WhatsApp e combinamos valores e prazo."
+      "pergunta": "Dá para pedir várias canecas, para lembrancinha ou equipe?",
+      "resposta": "Dá. Para pedidos em quantidade, chame no WhatsApp e combinamos valores e prazo."
+    },
+    {
+      "pergunta": "Vocês fazem xícaras personalizadas também?",
+      "resposta": "Fazemos. Caneca e xícara personalizadas seguem o mesmo processo: escolha a arte e combine nome, foto ou frase pelo WhatsApp."
     }
   ],
   "cta_titulo": "Não achou o seu tema?",
-  "cta_texto": "Conte a ideia pelo WhatsApp e criamos uma caneca só sua."
+  "cta_texto": "Conte a ideia pelo WhatsApp e criamos uma caneca só sua.",
+  "catalogos_titulo": "Caneca Personalizada com Foto, Nome e Frase",
+  "catalogos_texto": "Escolha o catálogo do seu tema, anote o número do modelo e personalize. Atendemos Santana de Parnaíba, Alphaville, Barueri, Cajamar, Osasco e Carapicuíba."
 }

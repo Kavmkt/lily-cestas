@@ -150,5 +150,29 @@
       "numero": "30",
       "nome": "Melhor Namorado do Mundo"
     }
+  ],
+  "seo_titulo": "Caneca Personalizada Dia dos Namorados com Foto | Lily Cestas",
+  "seo_descricao": "Caneca personalizada para namorados com foto do casal, nome e frase: {n} modelos românticos, de \"Meu Par\" a \"Amor da Minha Vida\". Peça pelo site e combine os detalhes no WhatsApp.",
+  "h1": "Caneca Personalizada para Namorados com Foto do Casal",
+  "intro": "A caneca perfeita para o Dia dos Namorados, aniversário de namoro ou só para dizer \"eu te amo\". São {n} modelos com 1 a 4 fotos do casal, lettering romântico e frases carinhosas, todos personalizáveis.",
+  "secoes": [
+    {
+      "titulo": "Presente romântico que vai todo dia à mesa",
+      "texto": "Diferente de um presente que fica na gaveta, a caneca acompanha o café da manhã e lembra de vocês a cada gole. Escolha o modelo, envie as fotos e a frase e a gente cuida da arte."
+    },
+    {
+      "titulo": "Combine com uma cesta ou box romântico",
+      "texto": "Quer um presente completo? A caneca pode acompanhar um box com chocolates, flores ou pelúcia. Fale pelo WhatsApp para montar o conjunto."
+    }
+  ],
+  "faq": [
+    {
+      "pergunta": "Quantas fotos cabem na caneca de casal?",
+      "resposta": "Depende do modelo: há artes com 1, 2, 3 ou 4 fotos. A quantidade aparece no catálogo."
+    },
+    {
+      "pergunta": "Tem caneca para namorado e para namorada?",
+      "resposta": "Tem. Há modelos como \"Melhor Namorada do Mundo\", \"Melhor Namorado do Mundo\" e a dupla \"Sra. Dona da Verdade\" e \"Sr. Sempre Certo\"."
+    }
   ]
 }

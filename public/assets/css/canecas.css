@@ -72,3 +72,8 @@ body.cn-page{background:linear-gradient(180deg,#FFF3F6 0%,#FDF8F9 35%,#F6F0FA 70
 .cn-top .cn-banners{margin:6px 0 22px}.cn-top .cn-track{box-shadow:0 20px 40px -22px rgba(60,10,30,.7)}
 .cn-top .cn-dot{background:rgba(255,255,255,.55)}.cn-top .cn-dot.on{background:#fff}
 .cn-top .cn-h1{color:#fff;margin:0 0 .25em}.cn-sub{color:#FFF1F4;font-size:15px;margin:0}
+
+/* texto indexável das páginas de catálogo */
+.cv-mlist{list-style:none;padding:0;margin:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:8px 18px}
+.cv-mlist li{font-size:14px;color:#5A3D43;padding:6px 0;border-bottom:1px dashed #EED9DF}.cv-mlist b{display:inline-block;min-width:28px;color:#A65365;font-family:'Montserrat',sans-serif}
+.cv-models .sub{margin:0 0 12px}

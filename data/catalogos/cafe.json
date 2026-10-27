@@ -58,5 +58,29 @@
       "numero": "10",
       "nome": "Com Café · Sem Café"
     }
+  ],
+  "seo_titulo": "Caneca de Café Personalizada: Frases e Ilustrações | Lily Cestas",
+  "seo_descricao": "Caneca de café personalizada com {n} modelos: corujinhas, \"Eu Amo Café\", cafeteria e frases motivacionais. Presente para quem não vive sem café. Peça pelo site.",
+  "h1": "Caneca de Café Personalizada com Frases e Ilustrações",
+  "intro": "Para quem só funciona depois do primeiro café. São {n} modelos de caneca com frases divertidas, xícaras ilustradas e a corujinha de pijama que é a cara da manhã.",
+  "secoes": [
+    {
+      "titulo": "Um clássico para presentear",
+      "texto": "Caneca de café é daqueles presentes que nunca erram: serve para colegas de trabalho, amigo secreto, aniversário e quem acabou de montar a casa nova."
+    },
+    {
+      "titulo": "Coloque nome ou frase",
+      "texto": "Todos os modelos aceitam o nome da pessoa ou uma frase especial. Combine pelo WhatsApp e confirmamos tudo antes da produção."
+    }
+  ],
+  "faq": [
+    {
+      "pergunta": "A caneca serve para chá e chocolate quente também?",
+      "resposta": "Serve. A arte é só decoração; use a caneca para a bebida que preferir."
+    },
+    {
+      "pergunta": "Dá para pedir várias canecas diferentes?",
+      "resposta": "Dá. Escolha os números dos modelos e combine as quantidades pelo WhatsApp."
+    }
   ]
 }

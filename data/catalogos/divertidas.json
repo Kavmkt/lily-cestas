@@ -58,5 +58,29 @@
       "numero": "10",
       "nome": "Turma dos Polvinhos"
     }
+  ],
+  "seo_titulo": "Caneca Divertida Personalizada: Frases Engraçadas e Polvinhos | Lily Cestas",
+  "seo_descricao": "Caneca divertida personalizada com {n} modelos: \"Que Se Dane\", \"Com TPM e Sem TPM\", polvinhos e mais. Presente bem-humorado para amigo secreto. Peça pelo site.",
+  "h1": "Caneca Divertida Personalizada com Frases Engraçadas",
+  "intro": "Para quem prefere o humor ao romance. São {n} modelos com frases de atitude, versões \"com e sem\", polvinhos descolados, gamers e piratas.",
+  "secoes": [
+    {
+      "titulo": "Amigo secreto e presente de colega",
+      "texto": "A caneca divertida quebra o gelo e arranca risada. Escolha o modelo pelo número e coloque o nome da pessoa."
+    },
+    {
+      "titulo": "Dá para criar uma frase sua",
+      "texto": "Tem uma frase que é a cara do presenteado? Conte pelo WhatsApp e montamos a arte do seu jeito."
+    }
+  ],
+  "faq": [
+    {
+      "pergunta": "Dá para pedir uma frase própria?",
+      "resposta": "Dá. Envie a frase pelo WhatsApp e adaptamos a arte."
+    },
+    {
+      "pergunta": "Qual o melhor modelo para amigo secreto?",
+      "resposta": "Os polvinhos e as versões \"Com e Sem\" costumam agradar a todos."
+    }
   ]
 }

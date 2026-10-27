@@ -293,6 +293,24 @@ content:
       - { name: descricao, label: Texto de apresentação, type: text }
       - { name: capa, label: Capa do anúncio, type: image, options: { path: assets/catalogos } }
       - { name: paginas, label: Páginas do catálogo (na ordem), type: image, list: true, options: { path: assets/catalogos }, description: "Envie as páginas como imagem (JPG, PNG ou WebP), de preferência com até 1400 px de largura." }
+      - { name: seo_titulo, label: Título no Google (até 60 caracteres), type: string, description: "Comece pela palavra que a pessoa digita. Exemplo - Caneca Personalizada Pet: Mãe de Gato | Lily Cestas." }
+      - { name: seo_descricao, label: Descrição no Google (até 155 caracteres), type: text, description: "Pode usar {n} para o número de modelos." }
+      - { name: h1, label: Título da página (H1), type: string }
+      - { name: intro, label: Texto de abertura (ao lado do preço), type: text, description: "Pode usar {n} para o número de modelos." }
+      - name: secoes
+        label: Textos da página (ajudam no Google)
+        type: object
+        list: true
+        fields:
+          - { name: titulo, label: Título, type: string, required: true }
+          - { name: texto, label: Texto, type: text }
+      - name: faq
+        label: Perguntas frequentes deste tema
+        type: object
+        list: true
+        fields:
+          - { name: pergunta, label: Pergunta, type: string, required: true }
+          - { name: resposta, label: Resposta, type: text, required: true }
       - name: modelos
         label: Modelos (número e nome)
         type: object
@@ -381,6 +399,8 @@ content:
           - { name: resposta, label: Resposta, type: text, required: true }
       - { name: cta_titulo, label: Título da faixa final, type: string }
       - { name: cta_texto, label: Texto da faixa final, type: text }
+      - { name: catalogos_titulo, label: Título principal da página (H1), type: string, description: "Aparece na faixa rosé, acima dos catálogos. Use a palavra principal - Caneca Personalizada." }
+      - { name: catalogos_texto, label: Frase abaixo do título, type: text }
       - { name: titulo_seo, label: Título no Google, type: string }
       - { name: descricao_seo, label: Descrição no Google, type: text }
 

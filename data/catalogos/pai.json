@@ -104,5 +104,29 @@
       "numero": "20",
       "nome": "Meu Super-Herói Favorito"
     }
+  ],
+  "seo_titulo": "Caneca Personalizada para Pai: Dia dos Pais com Foto | Lily Cestas",
+  "seo_descricao": "Caneca personalizada para pai com foto e nome: {n} modelos de \"Melhor Pai do Mundo\", pai de pet, super-herói e mais. Presente de Dia dos Pais pelo site, com atendimento no WhatsApp.",
+  "h1": "Caneca Personalizada para o Pai: Presente de Dia dos Pais",
+  "intro": "Um presente de Dia dos Pais que emociona sem pesar no bolso. São {n} modelos de caneca para pai com foto, nome e frases como \"Melhor Pai do Mundo\", \"Meu Pai, Meu Herói\" e \"Pai de Pet Também é Pai\".",
+  "secoes": [
+    {
+      "titulo": "Modelos para cada tipo de pai",
+      "texto": "Tem arte clássica com foto em polaroid, versões divertidas para o pai fortão ou pai pra toda obra, modelos emocionantes com o significado da palavra pai e artes especiais para o pai de pet."
+    },
+    {
+      "titulo": "Presente além do Dia dos Pais",
+      "texto": "A caneca também funciona para aniversário, Natal e para agradecer o pai ou padrasto em qualquer época do ano."
+    }
+  ],
+  "faq": [
+    {
+      "pergunta": "Posso colocar fotos dos filhos na caneca do pai?",
+      "resposta": "Pode. Vários modelos têm de 1 a 3 fotos. Envie as imagens pelo WhatsApp e ajustamos na arte."
+    },
+    {
+      "pergunta": "Tem caneca para pai de pet?",
+      "resposta": "Tem. O catálogo traz quatro versões \"Pai de Pet\", com foto, nome ou pegadas."
+    }
   ]
 }

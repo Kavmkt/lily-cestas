@@ -58,5 +58,29 @@
       "numero": "10",
       "nome": "Safari Baby"
     }
+  ],
+  "seo_titulo": "Caneca Infantil Personalizada com Nome | Lily Cestas",
+  "seo_descricao": "Caneca infantil personalizada com nome: {n} modelos de princesa, bailarina, sereia, bombeiro e animais. Ideais para lembrancinha e presente de aniversário. Peça pelo site.",
+  "h1": "Caneca Infantil Personalizada com Nome da Criança",
+  "intro": "Caneca para as crianças usarem com orgulho. São {n} modelos com princesas, bailarinas, sereias, bombeiro, policial e bichinhos, todos com espaço para o nome.",
+  "secoes": [
+    {
+      "titulo": "Presente e lembrancinha de aniversário",
+      "texto": "A caneca infantil funciona como presente e como lembrancinha de festa. Para pedidos em quantidade, fale pelo WhatsApp."
+    },
+    {
+      "titulo": "Modelos para colorir",
+      "texto": "Alguns modelos são para colorir, ótimos para entreter a criançada depois de pintar a própria caneca."
+    }
+  ],
+  "faq": [
+    {
+      "pergunta": "Dá para colocar o nome da criança?",
+      "resposta": "Dá. Envie o nome pelo WhatsApp depois do pedido."
+    },
+    {
+      "pergunta": "Vocês fazem lembrancinhas em quantidade?",
+      "resposta": "Fazemos. Chame no WhatsApp com a quantidade e a data da festa para combinarmos valor e prazo."
+    }
   ]
 }

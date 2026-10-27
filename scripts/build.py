@@ -400,6 +400,7 @@ IG_BTN = f'<a class="igbtn" href="{esc(config["instagram"])}" target="_blank" re
 def footer_html():
     cat_li = ''.join(f'<li><a href="/{c["pagina_url"]}/">{esc(c["nome"])}</a></li>' for c in cats_with if c.get('pagina_url'))
     cat_li += ''.join(f'<li><a href="/{o["slug"]}/">{esc(o["nome"])}</a></li>' for o in OCCASIONS_OK)
+    cat_li += '<li><a href="/canecas/">Canecas Personalizadas</a></li>' if (ROOT / 'data/canecas.json').exists() else ''
     city_li = ''.join(f'<li><a href="/{x["slug"]}/">Presentes em {x["cidade"]}</a></li>' for x in CITIES)
     return f'''<footer class="foot"><div class="wrap grid">
 <div><strong>Lily Cestas</strong><p>Atelier de cestas de presente, canecas e peças personalizadas. Santana de Parnaíba, SP.</p><p><a href="https://wa.me/{WA}" rel="noopener" target="_blank">WhatsApp {phone}</a></p>{OWNER_BLOCK}{IG_BTN}</div>
@@ -411,7 +412,7 @@ def footer_html():
 
 def top_html():
     return f'''<header class="top"><div class="wrap bar"><a class="brand" href="/"><img src="/assets/img/logo.webp" alt="Logo Lily Cestas" width="56" height="54"><span>Lily Cestas<small>Atelier de Presentes</small></span></a>
-<nav><a href="{SHOP}#catalogo">Catálogo</a><a class="btn sm" href="https://wa.me/{WA}" target="_blank" rel="noopener">WhatsApp</a></nav></div></header>'''
+<nav>{'<a href="/canecas/">Canecas</a>' if (ROOT / 'data/canecas.json').exists() else ''}<a href="{SHOP}#catalogo">Catálogo</a><a class="btn sm" href="https://wa.me/{WA}" target="_blank" rel="noopener">WhatsApp</a></nav></div></header>'''
 
 
 def ship_pill(p):
@@ -862,8 +863,11 @@ def catalogo_page(c):
     path = c['_url']
     nome = c['nome']
     v = fill_vars
-    h1 = f'Canecas Personalizadas: {nome}'
-    desc = v(c.get('descricao') or '')[:300]
+    nmod = len(c.get('modelos') or [])
+    sv = lambda t: v(str(t or '')).replace('{n}', str(nmod))
+    h1 = sv(c.get('h1')) or f'Canecas Personalizadas: {nome}'
+    desc = sv(c.get('seo_descricao') or c.get('descricao'))[:320]
+    title = c.get('seo_titulo') or f'Canecas Personalizadas {nome} | Catálogo | Lily Cestas'
     robots = 'noindex, nofollow' if CANECAS.get('noindex', True) else 'index, follow, max-image-preview:large'
     trail = [('Início', '/'), ('Canecas personalizadas', '/canecas/'), (nome, path)]
     crumbs = ' › '.join(f'<a href="{u}">{esc(nm)}</a>' if i < len(trail) - 1 else f'<span>{esc(nm)}</span>' for i, (nm, u) in enumerate(trail))
@@ -895,25 +899,39 @@ document.addEventListener("keydown",function(e){if(e.target.closest&&e.target.cl
     fonts = ('<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>'
              '<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap" rel="stylesheet">'
              '<link rel="stylesheet" href="/assets/css/pages.css"><link rel="stylesheet" href="/assets/css/canecas.css">\n</head><body class="cat-page">')
-    faq = [('Como escolho o modelo?', 'Folheie o catálogo, anote o número do modelo que você gostou e escolha-o na lista ao lado. Para outro tema ou uma arte diferente, é só combinar pelo WhatsApp.'),
+    faq = [(q['pergunta'], sv(q.get('resposta'))) for q in (c.get('faq') or []) if q.get('pergunta')] + [('Como escolho o modelo?', 'Folheie o catálogo, anote o número do modelo que você gostou e escolha-o na lista ao lado. Para outro tema ou uma arte diferente, é só combinar pelo WhatsApp.'),
            ('Posso colocar foto, nome e frase?', 'Pode. Depois de finalizar o pedido, você envia nome, frase, foto ou as cores que preferir pelo WhatsApp e confirmamos tudo antes de produzir.'),
            ('Qual é o prazo?', c.get('prazo') or 'O prazo de produção é combinado no pedido, conforme a agenda do atelier.'),
            ('Vocês entregam na minha região?', v('Atendemos Santana de Parnaíba, Alphaville, Barueri, Cajamar, Osasco e Carapicuíba. Entrega grátis a partir de {frete}; locais mais distantes podem ter taxa.'))]
     faq_block = ''.join(f'<details><summary>{esc(q)}</summary><p>{esc(a)}</p></details>' for q, a in faq)
+    modelos_blk = (f'<section class="cv-models"><h2>Modelos de caneca personalizada {esc(nome.lower())}</h2><p class="sub">São {nmod} artes prontas. Anote o número do que mais gostar e escolha na lista acima.</p><ul class="cv-mlist">'
+                   + ''.join(f'<li><b>{esc(m["numero"])}</b> {esc(m["nome"])}</li>' for m in modelos) + '</ul></section>') if modelos else ''
+    secs_blk = ''.join(f'<section><h2>{esc(sv(x.get("titulo")))}</h2><p>{esc(sv(x.get("texto")))}</p></section>' for x in (c.get('secoes') or []) if x.get('titulo'))
+    rel_blk = ('<section class="rel"><h2>Veja também outras canecas personalizadas</h2><p>' + ''.join(
+        f'<a href="{o["_url"]}">Caneca personalizada {esc(o["nome"].lower())}</a>' for o in CATALOGOS if o is not c) + '</p></section>') if len(CATALOGOS) > 1 else ''
+    prod_ld = {'@type': 'Product', 'name': h1, 'description': desc, 'sku': f'caneca-{c["slug"]}', 'brand': {'@type': 'Brand', 'name': 'Lily Cestas'},
+               'image': BASE + (c['_capa'] or c['_pages'][0]), 'category': 'Canecas personalizadas',
+               'offers': {'@type': 'Offer', 'url': BASE + path, 'priceCurrency': 'BRL', 'price': f'{c["_preco"]:.2f}', 'availability': 'https://schema.org/InStock', 'itemCondition': 'https://schema.org/NewCondition',
+                          'seller': {'@type': 'Organization', 'name': 'Lily Cestas'}}} if c['_preco'] else None
     body = f'''<main><div class="wrap"><nav class="crumbs" aria-label="Navegação">{crumbs}</nav>
 <div class="cv"><div class="cv-view"><div class="cv-track" id="cv-track" aria-label="Páginas do catálogo">{imgs}</div>
 <button type="button" class="cv-nav cv-prev" id="cv-prev" aria-label="Página anterior">‹</button><button type="button" class="cv-nav cv-next" id="cv-next" aria-label="Próxima página">›</button><span class="cv-count" id="cv-count">1 / {len(pages)}</span></div>
-<aside class="cv-buybox"><span class="tag">☕ Catálogo</span><h1>{esc(h1)}</h1><p class="cv-sub">{esc(v(c.get("descricao") or ""))}</p>
+<aside class="cv-buybox"><span class="tag">☕ Catálogo</span><h1>{esc(h1)}</h1><p class="cv-sub">{esc(sv(c.get("intro") or c.get("descricao")))}</p>
 {cat_price_html(c, "cp cp-lg")}<p class="cv-prazo">⏱ {prazo}</p>
 <label class="cv-lbl" for="cv-model">Qual modelo você quer?</label><select id="cv-model" class="cv-sel">{opts}</select><p class="cv-msg" id="cv-msg" hidden></p>
 {buy_btn}<a class="btn ghost cv-wa" id="cv-wa" href="#" target="_blank" rel="noopener">Pedir pelo WhatsApp</a>
 <p class="nota">Nome, foto ou frase são combinados pelo WhatsApp depois do pedido. *Entrega grátis a partir de {FRETE_TXT}; locais mais distantes podem ter taxa.</p></aside></div>
-<section><h2>Perguntas frequentes</h2><div class="faq">{faq_block}</div></section>
-<p class="more"><a href="/canecas/#catalogos">← Ver outros catálogos de canecas</a></p>
+{modelos_blk}{secs_blk}
+<section><h2>Perguntas frequentes sobre caneca personalizada {esc(nome.lower())}</h2><div class="faq">{faq_block}</div></section>
+{rel_blk}
+<p class="more"><a href="/canecas/#catalogos">← Ver todos os catálogos de canecas personalizadas</a></p>
 </div></main>'''
     bar = (f'<div class="cv-bar">{cat_price_html(c, "cp")}<a class="btn" href="#cv-model" id="cv-bar-btn">Escolher modelo</a></div>')
-    write_page(path, head(f'Canecas Personalizadas {nome} | Catálogo | Lily Cestas', desc, path, robots)
-               + jsonld(BUSINESS, crumb_ld(trail), faq_ld(faq), {'@type': 'CollectionPage', 'name': h1, 'url': BASE + path}) + fonts + top_html() + body + bar + js
+    ogimg = BASE + (c['_capa'] or c['_pages'][0])
+    hd = head(title, desc, path, robots)
+    hd = hd.replace(f'{BASE}/assets/img/og-lily-cestas.jpg', ogimg)
+    write_page(path, hd
+               + jsonld(*[x for x in (BUSINESS, crumb_ld(trail), faq_ld(faq), {'@type': 'CollectionPage', 'name': h1, 'url': BASE + path}, prod_ld) if x]) + fonts + top_html() + body + bar + js
                + footer_html() + '</body></html>')
     if CANECAS.get('noindex', True) is False:
         page_urls.append(path)
@@ -1000,12 +1018,13 @@ def canecas_page():
     faq_block = ''.join(f'<details><summary>{esc(q)}</summary><p>{esc(a)}</p></details>' for q, a in faq_items)
     trail = [('Início', '/'), ('Canecas personalizadas', path)]
     crumbs = ' › '.join(f'<a href="{u}">{esc(nm)}</a>' if i < len(trail) - 1 else f'<span>{esc(nm)}</span>' for i, (nm, u) in enumerate(trail))
-    extra = [{'@type': 'CollectionPage', 'name': h1, 'url': BASE + path, 'about': 'Canecas personalizadas'}]
+    extra = [{'@type': 'CollectionPage', 'name': v(C.get('catalogos_titulo') or h1), 'url': BASE + path, 'about': 'Canecas personalizadas',
+              'mainEntity': {'@type': 'ItemList', 'itemListElement': [{'@type': 'ListItem', 'position': i + 1, 'name': f'Caneca personalizada {c["nome"]}', 'url': BASE + c['_url']} for i, c in enumerate(CATALOGOS)]}}]
     robots = 'noindex, nofollow' if C.get('noindex', True) else 'index, follow, max-image-preview:large'
     prods_blk = (f'<section id="produtos"><h2>{esc(C.get("produtos_titulo") or "Canecas prontas para pedir")}</h2><div class="cards">{cards_html(plist)}</div></section>') if plist else ''
     cta_msg = 'Oi! Vim pelo site da Lily Cestas e quero criar uma caneca personalizada do meu jeito.'
     topo_cor = TOPO.get('cor') if TOPO.get('cor') in ('rose', 'vinho', 'lilas') else 'rose'
-    cat_head = (f'<h1 class="cn-h1">{esc(C.get("catalogos_titulo") or "Catálogos por tema")}</h1><p class="cn-sub">{esc(v(C.get("catalogos_texto") or "Folheie o catálogo, escolha o número do modelo e personalize."))}</p>') if CATALOGOS else ''
+    cat_head = (f'<h1 class="cn-h1">{esc(v(C.get("catalogos_titulo") or "Catálogos por tema"))}</h1><p class="cn-sub">{esc(v(C.get("catalogos_texto") or "Folheie o catálogo, escolha o número do modelo e personalize."))}</p>') if CATALOGOS else ''
     catalogos_blk = f'<section id="catalogos"><div class="ctcards">{catalogo_cards()}</div></section>' if CATALOGOS else ''
     fonts = ('<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>'
              '<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap" rel="stylesheet">'
@@ -1150,9 +1169,9 @@ repl = {
     'TITLE': esc(title), 'CANONICAL': f'<link rel="canonical" href="{BASE}{SHOP}">',
     'ROBOTS': f'<meta name="robots" content="{"index, follow, max-image-preview:large" if LOJA_NO_AR else "noindex, nofollow"}">',
     'JSONLD': home_ld, 'WA': WA, 'INSTA': config['instagram'], 'IFOOD': config['ifood_url'], 'PIX': str(int(config['pix_desconto'])), 'N': str(len(visible)),
-    'HOME_LINKS': ''.join(f'<a href="/{c["pagina_url"]}/" class="p-4 rounded-2xl border border-[#EED9DF] bg-[#FDF8F9] hover:bg-white text-sm font-display font-semibold text-[#A65365]">{esc(c["nome"])} →</a>' for c in cats_with if c.get('pagina_url')) + ''.join(f'<a href="/{o["slug"]}/" class="p-4 rounded-2xl border border-[#EED9DF] bg-[#FDF8F9] hover:bg-white text-sm font-display font-semibold text-[#A65365]">{esc(o["nome"])} →</a>' for o in OCCASIONS_OK) + '<a href="/catalogo/" class="p-4 rounded-2xl border border-[#EED9DF] bg-[#FDF8F9] hover:bg-white text-sm font-display font-semibold text-[#A65365]">Catálogo completo →</a>',
+    'HOME_LINKS': ''.join(f'<a href="/{c["pagina_url"]}/" class="p-4 rounded-2xl border border-[#EED9DF] bg-[#FDF8F9] hover:bg-white text-sm font-display font-semibold text-[#A65365]">{esc(c["nome"])} →</a>' for c in cats_with if c.get('pagina_url')) + ''.join(f'<a href="/{o["slug"]}/" class="p-4 rounded-2xl border border-[#EED9DF] bg-[#FDF8F9] hover:bg-white text-sm font-display font-semibold text-[#A65365]">{esc(o["nome"])} →</a>' for o in OCCASIONS_OK) + ('<a href="/canecas/" class="p-4 rounded-2xl border border-[#EED9DF] bg-[#FDF8F9] hover:bg-white text-sm font-display font-semibold text-[#A65365]">Canecas personalizadas →</a>' if (ROOT / 'data/canecas.json').exists() else '') + '<a href="/catalogo/" class="p-4 rounded-2xl border border-[#EED9DF] bg-[#FDF8F9] hover:bg-white text-sm font-display font-semibold text-[#A65365]">Catálogo completo →</a>',
     'CIDADES_JSON': json.dumps([x for x in (config.get('cidades_entrega') or []) if x], ensure_ascii=False),
-    'FOOTER_CATS': ''.join(f'<li><a href="/{c["pagina_url"]}/" class="hover:text-white hover:underline">{esc(c["nome"])}</a></li>' for c in cats_with if c.get('pagina_url')) + ''.join(f'<li><a href="/{o["slug"]}/" class="hover:text-white hover:underline">{esc(o["nome"])}</a></li>' for o in OCCASIONS_OK),
+    'FOOTER_CATS': ''.join(f'<li><a href="/{c["pagina_url"]}/" class="hover:text-white hover:underline">{esc(c["nome"])}</a></li>' for c in cats_with if c.get('pagina_url')) + ''.join(f'<li><a href="/{o["slug"]}/" class="hover:text-white hover:underline">{esc(o["nome"])}</a></li>' for o in OCCASIONS_OK) + ('<li><a href="/canecas/" class="hover:text-white hover:underline">Canecas Personalizadas</a></li>' if (ROOT / 'data/canecas.json').exists() else ''),
     'BANNERS': BANNERS_HTML, 'IG_BTN': IG_BTN, 'BRINDE_POPUP': BRINDE_POPUP, 'OWNER_BLOCK': OWNER_BLOCK,
     'FAST_TOP': (f'<span class="fast">⚡ {FAST_TXT}*</span>' if FAST_TXT else ''), 'FAST_CHIP': (f'<span class="fastchip">⚡ {FAST_TXT}*</span>' if FAST_TXT else ''), 'FAST_FOOT': (f' {FAST_TXT}* em produtos prontos.' if FAST_TXT else ''),
     'B1V': brl(config['brinde1_valor']).replace(',00', ''), 'FRETE_MIN': brl(FRETE_MIN).replace(',00', ''), 'HERO_CATS': hero_cats, 'HERO_IMG': hero_img, 'CAT_PILLS': pills, 'MIMOS_TEXT': mimos, 'REWARD_INIT': reward_init, 'DATA_JS': data_js,
@@ -1223,7 +1242,7 @@ for f in OUT.rglob('*.html'):
 urls = ['/'] + page_urls
 today = datetime.date.today().isoformat()
 (OUT / 'sitemap.xml').write_text('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' + ''.join(
-    f'  <url><loc>{BASE}{u}</loc><lastmod>{today}</lastmod><changefreq>{"weekly" if u == "/" else "monthly"}</changefreq><priority>{"1.0" if u == "/" else ("0.6" if u.startswith("/produto/") else "0.8")}</priority></url>\n' for u in urls) + '</urlset>\n', encoding='utf-8')
+    f'  <url><loc>{BASE}{u}</loc><lastmod>{today}</lastmod><changefreq>{"weekly" if u == "/" else "monthly"}</changefreq><priority>{"1.0" if u == "/" else ("0.9" if u == "/canecas/" else ("0.7" if u.startswith("/canecas/") else ("0.6" if u.startswith("/produto/") else "0.8")))}</priority></url>\n' for u in urls) + '</urlset>\n', encoding='utf-8')
 (OUT / 'robots.txt').write_text(f'User-agent: *\nAllow: /\n\nSitemap: {BASE}/sitemap.xml\n', encoding='utf-8')
 
 print(f'Site gerado em _site/: {len(visible)} produtos ({len(active)} ativos), {len(cats_with)} categorias, {len(page_urls)} páginas de SEO. '

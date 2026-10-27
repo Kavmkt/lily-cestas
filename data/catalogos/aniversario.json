@@ -104,5 +104,29 @@
       "numero": "20",
       "nome": "Aniversário de Amiga"
     }
+  ],
+  "seo_titulo": "Caneca de Aniversário Personalizada com Foto e Nome | Lily Cestas",
+  "seo_descricao": "Caneca de aniversário personalizada com foto, nome e idade: {n} modelos de parabéns para mãe, amiga, namorado e crianças. Peça pelo site e receba na região de Alphaville.",
+  "h1": "Caneca de Aniversário Personalizada com Foto e Nome",
+  "intro": "Presente de aniversário que a pessoa usa todo dia. São {n} modelos de parabéns com foto, nome e mensagem, de artes elegantes em dourado a versões divertidas com balões, doodles e dinossauro.",
+  "secoes": [
+    {
+      "titulo": "Para todas as idades e estilos",
+      "texto": "Tem modelo delicado para mãe e vó, divertido para amiga, com tema de futebol, dinossauro para as crianças e opções mais sóbrias para colegas de trabalho."
+    },
+    {
+      "titulo": "Foto e frase do seu jeito",
+      "texto": "Os modelos aceitam de uma a três fotos, nome e uma mensagem personalizada. Depois de pedir, é só enviar tudo pelo WhatsApp e confirmamos antes de produzir."
+    }
+  ],
+  "faq": [
+    {
+      "pergunta": "Dá para colocar o nome e a idade na caneca?",
+      "resposta": "Dá. Nome, idade e frase são combinados pelo WhatsApp junto com as fotos."
+    },
+    {
+      "pergunta": "A caneca pode ir dentro de uma cesta de aniversário?",
+      "resposta": "Pode. Fale com a gente para montar uma cesta ou box de aniversário com a caneca personalizada."
+    }
   ]
 }

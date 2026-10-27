@@ -67,5 +67,29 @@
       "numero": "12",
       "nome": "Peixes"
     }
+  ],
+  "seo_titulo": "Caneca de Signos Personalizada: Áries a Peixes | Lily Cestas",
+  "seo_descricao": "Caneca de signo personalizada com nome: {n} modelos, de Áries a Peixes, com ilustração, constelação e características do signo. Presente de aniversário diferente. Peça pelo site.",
+  "h1": "Caneca de Signos Personalizada: Áries, Touro, Leão e Todos os Outros",
+  "intro": "Uma caneca para cada signo, com ilustração, constelação e as características mais conhecidas de cada um. São {n} modelos, de Áries a Peixes, que podem levar o nome da pessoa.",
+  "secoes": [
+    {
+      "titulo": "Presente de aniversário para quem ama astrologia",
+      "texto": "Descubra o signo de quem você vai presentear e escolha a caneca correspondente. É uma lembrança bem-humorada que cai bem em aniversário, amigo secreto e Dia das Mães."
+    },
+    {
+      "titulo": "Personalize com o nome",
+      "texto": "Envie o nome ou a frase desejada pelo WhatsApp depois de finalizar o pedido, e confirmamos o resultado antes de produzir."
+    }
+  ],
+  "faq": [
+    {
+      "pergunta": "Tem caneca para todos os signos?",
+      "resposta": "Tem. São 12 modelos, de Áries a Peixes."
+    },
+    {
+      "pergunta": "Dá para colocar o nome na caneca de signo?",
+      "resposta": "Dá. O nome ou uma frase curta são combinados pelo WhatsApp."
+    }
   ]
 }
