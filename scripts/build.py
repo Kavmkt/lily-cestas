@@ -886,7 +886,8 @@ def catalogo_page(c):
     cb_on = bool(CANECAS.get('combo_ativo', True) and cb_preco and c['_preco'])
     cb_brinde = str(config.get('brinde_opcao2_nome') or 'Mãozinha de coração')
     cfg = json.dumps({'tema': nome, 'slug': c['slug'], 'preco': c['_preco'], 'shop': SHOP, 'wa': WA, 'wabase': wa_base,
-                      'cbPreco': cb_preco, 'cbQtd': cb_qtd, 'cbBrinde': cb_brinde}, ensure_ascii=False).replace('</', '<\\/')
+                      'cbPreco': cb_preco, 'cbQtd': cb_qtd, 'cbBrinde': cb_brinde,
+                      'cbTemas': sorted([{'t': o['nome'], 'm': [[m['numero'], m['nome']] for m in (o.get('modelos') or [])]} for o in CATALOGOS if o.get('modelos')], key=lambda x: x['t'] != nome)}, ensure_ascii=False).replace('</', '<\\/')
     js = '''<script>(function(){var C=%s,sel=document.getElementById("cv-model"),msg=document.getElementById("cv-msg"),b=document.getElementById("cv-buy"),w=document.getElementById("cv-wa");
 function pick(){var v=sel.value;if(!v){msg.textContent="Escolha o número do modelo primeiro 😉";msg.hidden=false;sel.focus();return null}msg.hidden=true;var p=v.split("|");return{n:p[0],t:p[1]}}
 function ev(n,m){try{window.gtag&&gtag("event",n,{item_name:C.tema,model:m})}catch(e){}}
@@ -896,10 +897,11 @@ cart.push({id:"catalogo-"+C.slug+"-"+m.n+"-"+Date.now(),name:nm,price:C.preco,qt
 try{localStorage.setItem("lily_cart_v2",JSON.stringify(cart))}catch(e){}ev("catalogo_comprar_agora",m.n);location.href=C.shop+"#sacola"});
 if(w)w.addEventListener("click",function(e){var m=pick();if(!m){e.preventDefault();return}var t=C.wabase+(m.n==="x"?" Quero combinar um modelo.":" Quero o modelo "+m.n+" ("+m.t+").");w.href="https://wa.me/"+C.wa+"?text="+encodeURIComponent(t);ev("catalogo_whatsapp",m.n)});
 var cb=document.getElementById("cv-combo-buy");
+[].slice.call(document.querySelectorAll(".cv-cs")).forEach(function(sl){C.cbTemas.forEach(function(t){var g=document.createElement("optgroup");g.label=t.t;t.m.forEach(function(m){var o=document.createElement("option");o.value=t.t+"|"+m[0]+"|"+m[1];o.textContent=m[0]+" · "+m[1];g.appendChild(o)});sl.appendChild(g)});var o=document.createElement("option");o.value="x";o.textContent="Outro modelo (conto pelo WhatsApp)";sl.appendChild(o)});
 if(cb)cb.addEventListener("click",function(){var sels=[].slice.call(document.querySelectorAll(".cv-cs")),cm=document.getElementById("cv-cmsg"),ps=[];
-for(var i=0;i<sels.length;i++){if(!sels[i].value){cm.textContent="Escolha os "+C.cbQtd+" modelos do combo 😉";cm.hidden=false;sels[i].focus();return}var q=sels[i].value.split("|");ps.push(q[0]==="x"?"modelo a combinar":q[0]+" "+q[1])}
+for(var i=0;i<sels.length;i++){if(!sels[i].value){cm.textContent="Escolha os "+C.cbQtd+" modelos do combo 😉";cm.hidden=false;sels[i].focus();return}var v=sels[i].value;if(v==="x"){ps.push("modelo a combinar")}else{var q=v.split("|");ps.push(q[0]+" "+q[1]+" "+q[2])}}
 cm.hidden=true;var cart=[];try{cart=JSON.parse(localStorage.getItem("lily_cart_v2")||"[]")}catch(e){}
-cart.push({id:"combo-"+C.slug+"-"+Date.now(),name:"Combo "+C.cbQtd+" canecas personalizadas · "+C.tema+" · Modelos: "+ps.join(" | "),price:C.cbPreco,qty:1,freeShip:true,brinde:true,details:"🎁 Brinde: chaveiro "+C.cbBrinde+" • 🚚 Frete grátis* • Nome, foto ou frase de cada caneca combinados no WhatsApp"});
+cart.push({id:"combo-"+Date.now(),name:"Combo "+C.cbQtd+" canecas personalizadas · "+ps.join(" | "),price:C.cbPreco,qty:1,freeShip:true,brinde:true,details:"🎁 Brinde: chaveiro "+C.cbBrinde+" • 🚚 Frete grátis* • Nome, foto ou frase de cada caneca combinados no WhatsApp"});
 try{localStorage.setItem("lily_cart_v2",JSON.stringify(cart))}catch(e){}ev("catalogo_combo_comprar",C.slug);location.href=C.shop+"#sacola"});
 var tr=document.getElementById("cv-track"),ct=document.getElementById("cv-count"),n=tr.children.length;
 function cur(){return Math.max(0,Math.min(n-1,Math.round(tr.scrollLeft/tr.clientWidth)))}
@@ -914,9 +916,8 @@ document.addEventListener("keydown",function(e){if(e.target.closest&&e.target.cl
            ('Posso colocar foto, nome e frase?', 'Pode. Depois de finalizar o pedido, você envia nome, frase, foto ou as cores que preferir pelo WhatsApp e confirmamos tudo antes de produzir.'),
            ('Qual é o prazo?', c.get('prazo') or 'O prazo de produção é combinado no pedido, conforme a agenda do atelier.'),
            ('Vocês entregam na minha região?', v('Atendemos Santana de Parnaíba, Alphaville, Barueri, Cajamar, Osasco e Carapicuíba. Entrega grátis a partir de {frete}; locais mais distantes podem ter taxa.'))]
-    cb_opts = ''.join(f'<option value="{esc(m["numero"])}|{esc(m["nome"])}">{esc(m["numero"])} · {esc(m["nome"])}</option>' for m in modelos) + '<option value="x|x">Outro modelo (conto pelo WhatsApp)</option>'
-    cb_sels = ''.join(f'<select class="cv-sel cv-cs" aria-label="Modelo {i + 1} do combo"><option value="">Modelo {i + 1}…</option>{cb_opts}</select>' for i in range(cb_qtd))
-    combo_blk = (f'<div class="cv-combo"><b>🎁 Combo {cb_qtd} canecas por {brl(cb_preco)}</b><span>{brl(cb_preco / cb_qtd)} cada · frete grátis* · chaveirinho {esc(cb_brinde.lower())} de brinde</span>'
+    cb_sels = ''.join(f'<select class="cv-sel cv-cs" aria-label="Caneca {i + 1} do combo"><option value="">Caneca {i + 1}: escolha o modelo…</option></select>' for i in range(cb_qtd))
+    combo_blk = (f'<div class="cv-combo"><b>🎁 Combo {cb_qtd} canecas por {brl(cb_preco)}</b><span>{brl(cb_preco / cb_qtd)} cada · frete grátis* · chaveirinho {esc(cb_brinde.lower())} de brinde. Misture temas à vontade: uma romântica, uma de aniversário, o que quiser.</span>'
                  f'{cb_sels}<p class="cv-msg" id="cv-cmsg" hidden></p><button type="button" class="btn cv-buy" id="cv-combo-buy">Comprar combo</button></div>') if cb_on else ''
     faq_block = ''.join(f'<details><summary>{esc(q)}</summary><p>{esc(a)}</p></details>' for q, a in faq)
     modelos_blk = (f'<section class="cv-models"><h2>Modelos de caneca personalizada {esc(nome.lower())}</h2><p class="sub">São {nmod} artes prontas. Anote o número do que mais gostar e escolha na lista acima.</p><ul class="cv-mlist">'
