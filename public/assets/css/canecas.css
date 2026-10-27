@@ -30,10 +30,10 @@
 .ctcard{display:flex;flex-direction:column;background:#fff;border:1px solid #EED9DF;border-radius:22px;overflow:hidden;text-decoration:none;color:#382126;transition:transform .15s,box-shadow .15s}
 .ctcard:hover{transform:translateY(-3px);box-shadow:0 16px 30px -18px rgba(166,83,101,.55)}
 .ct-img{position:relative;display:block}.ct-img img{display:block;width:100%;height:auto;aspect-ratio:1/1;object-fit:cover}
-.ct-badge{position:absolute;top:10px;left:10px;background:#D93A57;color:#fff;font:700 12px 'Montserrat',sans-serif;border-radius:99px;padding:5px 11px;box-shadow:0 4px 10px rgba(0,0,0,.18)}
+.ct-badge{position:absolute;top:10px;left:10px;background:#1F7A45;color:#fff;font:700 12px 'Montserrat',sans-serif;border-radius:99px;padding:5px 11px;box-shadow:0 4px 10px rgba(0,0,0,.18)}
 .ct-body{display:flex;flex-direction:column;gap:6px;padding:14px 16px 16px;flex:1}.ct-body h3{margin:0;font-size:17px}.ct-n{font-size:12px;color:#785860}
 .cp{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;margin-top:2px}.cp b{font:700 20px 'Montserrat',sans-serif;color:#A65365}.cp s{color:#8C6C73;font-size:13px}
-.cp-off{font-style:normal;background:#D93A57;color:#fff;font:700 11px 'Montserrat',sans-serif;border-radius:99px;padding:3px 9px}
+.cp-off{font-style:normal;background:#1F7A45;color:#fff;font:700 11px 'Montserrat',sans-serif;border-radius:99px;padding:3px 9px}
 .ct-btn{margin-top:auto;font-style:normal;text-align:center;background:linear-gradient(135deg,#C87888,#A65365);color:#fff;font:600 14px 'Montserrat',sans-serif;border-radius:99px;padding:11px}
 /* página de catálogo */
 .cv{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(300px,1fr);gap:28px;align-items:start;padding:14px 0 10px}
