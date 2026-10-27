@@ -1008,6 +1008,7 @@ def canecas_page():
              '<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap" rel="stylesheet">'
              '<link rel="stylesheet" href="/assets/css/pages.css"><link rel="stylesheet" href="/assets/css/canecas.css">\n</head><body class="cn-page">' + cn_bg())
     body = f'''<main><div class="wrap"><nav class="crumbs" aria-label="Navegação">{crumbs}</nav>
+{banners_blk}
 {catalogos_blk}
 <section><h2>Como funciona</h2><ol class="passos">{steps}</ol><p class="nota">*Locais mais distantes podem ter taxa de entrega. Confira pelo CEP no checkout ou pelo WhatsApp.</p></section>
 {prods_blk}
