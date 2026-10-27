@@ -126,3 +126,10 @@ body.cb-body{padding-bottom:120px;background:#FDF8F9}body.cb-body .wafab{bottom:
 .cb-zbox{position:relative;background:#fff;border-radius:22px;padding:16px;max-width:760px;width:100%;text-align:center}.cb-zbox img{width:100%;height:auto;border-radius:14px;display:block}.cb-zbox p{font:600 14px 'Montserrat',sans-serif;margin:10px 0}
 .cb-zx{position:absolute;top:8px;right:8px;width:34px;height:34px;border-radius:50%;border:0;background:#fff;box-shadow:0 2px 8px rgba(0,0,0,.25);font-size:22px;cursor:pointer;z-index:2}
 @media(max-width:640px){.cb-top{padding-bottom:16px}.cb-top .cn-h1{font-size:20px;margin:2px 0 4px}.cb-top .cn-sub{font-size:12.5px;line-height:1.4}.cb-top .crumbs{padding-top:12px;font-size:11px}}
+
+/* outros temas na página de catálogo: carrossel horizontal */
+.cv-others{margin:34px 0 8px}.cv-others h2{margin:0 0 4px}.cv-others .sub{margin:0 0 14px;color:#785860}
+.ctrow{display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;padding:4px 2px 14px;-webkit-overflow-scrolling:touch;scrollbar-width:thin}
+.ctrow .ctcard{flex:0 0 min(240px,68vw);scroll-snap-align:start}
+.cv-others .more{margin:6px 0 0;text-align:center}
+.cv-cbbn{display:block;margin:26px 0 0;border-radius:20px;overflow:hidden;box-shadow:0 18px 36px -22px rgba(60,10,30,.55)}.cv-cbbn img{display:block;width:100%;height:auto}

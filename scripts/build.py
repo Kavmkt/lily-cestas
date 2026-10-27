@@ -846,9 +846,13 @@ def cat_price_html(c, cls='cp'):
     return f'<span class="{cls}">{old}<b>{brl(c["_preco"])}</b>{off}</span>'
 
 
-def catalogo_cards():
+def catalogo_cards(atual=None):
     out = ''
-    for c in CATALOGOS:
+    lista = CATALOGOS
+    if atual is not None:  # nas páginas de catálogo: os outros temas, começando pelo seguinte ao atual
+        i = next((k for k, x in enumerate(CATALOGOS) if x is atual), 0)
+        lista = CATALOGOS[i + 1:] + CATALOGOS[:i]
+    for c in lista:
         n = len(c.get('modelos') or [])
         badge = f'<span class="ct-badge">-{c["_off"]}%</span>' if c['_off'] else ''
         capa = c['_capa'] or c['_pages'][0]
@@ -917,6 +921,16 @@ document.addEventListener("keydown",function(e){if(e.target.closest&&e.target.cl
     secs_blk = ''.join(f'<section><h2>{esc(sv(x.get("titulo")))}</h2><p>{esc(sv(x.get("texto")))}</p></section>' for x in (c.get('secoes') or []) if x.get('titulo'))
     rel_blk = ('<section class="rel"><h2>Veja também outras canecas personalizadas</h2><p>' + ''.join(
         f'<a href="{o["_url"]}">Caneca personalizada {esc(o["nome"].lower())}</a>' for o in CATALOGOS if o is not c) + '</p></section>') if len(CATALOGOS) > 1 else ''
+    cb_banner = ''
+    if cb_on:  # banner do combo (o mesmo do slide de /canecas/), logo abaixo do produto
+        bw, bm = resize_to('/assets/banners/canecas-combo-web.png', 1600), resize_to('/assets/banners/canecas-combo-mobile.png', 900)
+        if bw or bm:
+            cb_banner = (f'<a class="cv-cbbn" href="/canecas/combo/?de={c["slug"]}" data-ga="combo_banner_click" data-ga-item="{c["slug"]}"><picture>'
+                         + (f'<source media="(max-width:767px)" srcset="{bm}">' if bm else '')
+                         + f'<img src="{bw or bm}" alt="Combo de {cb_qtd} canecas personalizadas por {brl(cb_preco)} com frete grátis e chaveirinho de brinde" width="1600" height="320" loading="lazy" decoding="async"></picture></a>')
+    outros_blk = (f'<section class="cv-others"><h2>Procurando outro tema de caneca?</h2><p class="sub">Veja os outros catálogos e escolha o que combina mais com quem vai ganhar.</p>'
+                  f'<div class="ctcards ctrow">{catalogo_cards(c)}</div>'
+                  f'<p class="more"><a href="/canecas/#catalogos">Ver todos os catálogos de canecas personalizadas →</a></p></section>') if len(CATALOGOS) > 1 else ''
     prod_ld = {'@type': 'Product', 'name': h1, 'description': desc, 'sku': f'caneca-{c["slug"]}', 'brand': {'@type': 'Brand', 'name': 'Lily Cestas'},
                'image': BASE + (c['_capa'] or c['_pages'][0]), 'category': 'Canecas personalizadas',
                'offers': {'@type': 'Offer', 'url': BASE + path, 'priceCurrency': 'BRL', 'price': f'{c["_preco"]:.2f}', 'availability': 'https://schema.org/InStock', 'itemCondition': 'https://schema.org/NewCondition',
@@ -929,7 +943,7 @@ document.addEventListener("keydown",function(e){if(e.target.closest&&e.target.cl
 <label class="cv-lbl" for="cv-model">Qual modelo você quer?</label><select id="cv-model" class="cv-sel">{opts}</select><p class="cv-msg" id="cv-msg" hidden></p>
 {buy_btn}<a class="btn ghost cv-wa" id="cv-wa" href="#" target="_blank" rel="noopener">Pedir pelo WhatsApp</a>
 {combo_blk}<p class="nota">Nome, foto ou frase são combinados pelo WhatsApp depois do pedido. *Entrega grátis a partir de {FRETE_TXT}; locais mais distantes podem ter taxa.</p></aside></div>
-{modelos_blk}{secs_blk}
+{cb_banner}{outros_blk}{modelos_blk}{secs_blk}
 <section><h2>Perguntas frequentes sobre caneca personalizada {esc(nome.lower())}</h2><div class="faq">{faq_block}</div></section>
 {rel_blk}
 <p class="more"><a href="/canecas/#catalogos">← Ver todos os catálogos de canecas personalizadas</a></p>
