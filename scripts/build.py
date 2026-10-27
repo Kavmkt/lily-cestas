@@ -881,7 +881,12 @@ def catalogo_page(c):
     can_buy = bool(c['_preco'])
     wa_base = f'Oi! Vim pelo site da Lily Cestas e quero uma caneca personalizada do catálogo {nome}.'
     buy_btn = (f'<button type="button" class="btn cv-buy" id="cv-buy">Comprar agora</button>' if can_buy else '')
-    cfg = json.dumps({'tema': nome, 'slug': c['slug'], 'preco': c['_preco'], 'shop': SHOP, 'wa': WA, 'wabase': wa_base}, ensure_ascii=False).replace('</', '<\\/')
+    cb_preco = to_number(CANECAS.get('combo_preco'), 'Combo › preço', False) or 0
+    cb_qtd = int(to_number(CANECAS.get('combo_qtd'), 'Combo › quantidade', False) or 3)
+    cb_on = bool(CANECAS.get('combo_ativo', True) and cb_preco and c['_preco'])
+    cb_brinde = str(config.get('brinde_opcao2_nome') or 'Mãozinha de coração')
+    cfg = json.dumps({'tema': nome, 'slug': c['slug'], 'preco': c['_preco'], 'shop': SHOP, 'wa': WA, 'wabase': wa_base,
+                      'cbPreco': cb_preco, 'cbQtd': cb_qtd, 'cbBrinde': cb_brinde}, ensure_ascii=False).replace('</', '<\\/')
     js = '''<script>(function(){var C=%s,sel=document.getElementById("cv-model"),msg=document.getElementById("cv-msg"),b=document.getElementById("cv-buy"),w=document.getElementById("cv-wa");
 function pick(){var v=sel.value;if(!v){msg.textContent="Escolha o número do modelo primeiro 😉";msg.hidden=false;sel.focus();return null}msg.hidden=true;var p=v.split("|");return{n:p[0],t:p[1]}}
 function ev(n,m){try{window.gtag&&gtag("event",n,{item_name:C.tema,model:m})}catch(e){}}
@@ -890,6 +895,12 @@ var cart=[];try{cart=JSON.parse(localStorage.getItem("lily_cart_v2")||"[]")}catc
 cart.push({id:"catalogo-"+C.slug+"-"+m.n+"-"+Date.now(),name:nm,price:C.preco,qty:1,details:"Personalização (nome, foto ou frase) combinada no WhatsApp"});
 try{localStorage.setItem("lily_cart_v2",JSON.stringify(cart))}catch(e){}ev("catalogo_comprar_agora",m.n);location.href=C.shop+"#sacola"});
 if(w)w.addEventListener("click",function(e){var m=pick();if(!m){e.preventDefault();return}var t=C.wabase+(m.n==="x"?" Quero combinar um modelo.":" Quero o modelo "+m.n+" ("+m.t+").");w.href="https://wa.me/"+C.wa+"?text="+encodeURIComponent(t);ev("catalogo_whatsapp",m.n)});
+var cb=document.getElementById("cv-combo-buy");
+if(cb)cb.addEventListener("click",function(){var sels=[].slice.call(document.querySelectorAll(".cv-cs")),cm=document.getElementById("cv-cmsg"),ps=[];
+for(var i=0;i<sels.length;i++){if(!sels[i].value){cm.textContent="Escolha os "+C.cbQtd+" modelos do combo 😉";cm.hidden=false;sels[i].focus();return}var q=sels[i].value.split("|");ps.push(q[0]==="x"?"modelo a combinar":q[0]+" "+q[1])}
+cm.hidden=true;var cart=[];try{cart=JSON.parse(localStorage.getItem("lily_cart_v2")||"[]")}catch(e){}
+cart.push({id:"combo-"+C.slug+"-"+Date.now(),name:"Combo "+C.cbQtd+" canecas personalizadas · "+C.tema+" · Modelos: "+ps.join(" | "),price:C.cbPreco,qty:1,freeShip:true,brinde:true,details:"🎁 Brinde: chaveiro "+C.cbBrinde+" • 🚚 Frete grátis* • Nome, foto ou frase de cada caneca combinados no WhatsApp"});
+try{localStorage.setItem("lily_cart_v2",JSON.stringify(cart))}catch(e){}ev("catalogo_combo_comprar",C.slug);location.href=C.shop+"#sacola"});
 var tr=document.getElementById("cv-track"),ct=document.getElementById("cv-count"),n=tr.children.length;
 function cur(){return Math.max(0,Math.min(n-1,Math.round(tr.scrollLeft/tr.clientWidth)))}
 function upd(){ct.textContent=(cur()+1)+" / "+n}tr.addEventListener("scroll",upd,{passive:true});
@@ -903,6 +914,10 @@ document.addEventListener("keydown",function(e){if(e.target.closest&&e.target.cl
            ('Posso colocar foto, nome e frase?', 'Pode. Depois de finalizar o pedido, você envia nome, frase, foto ou as cores que preferir pelo WhatsApp e confirmamos tudo antes de produzir.'),
            ('Qual é o prazo?', c.get('prazo') or 'O prazo de produção é combinado no pedido, conforme a agenda do atelier.'),
            ('Vocês entregam na minha região?', v('Atendemos Santana de Parnaíba, Alphaville, Barueri, Cajamar, Osasco e Carapicuíba. Entrega grátis a partir de {frete}; locais mais distantes podem ter taxa.'))]
+    cb_opts = ''.join(f'<option value="{esc(m["numero"])}|{esc(m["nome"])}">{esc(m["numero"])} · {esc(m["nome"])}</option>' for m in modelos) + '<option value="x|x">Outro modelo (conto pelo WhatsApp)</option>'
+    cb_sels = ''.join(f'<select class="cv-sel cv-cs" aria-label="Modelo {i + 1} do combo"><option value="">Modelo {i + 1}…</option>{cb_opts}</select>' for i in range(cb_qtd))
+    combo_blk = (f'<div class="cv-combo"><b>🎁 Combo {cb_qtd} canecas por {brl(cb_preco)}</b><span>{brl(cb_preco / cb_qtd)} cada · frete grátis* · chaveirinho {esc(cb_brinde.lower())} de brinde</span>'
+                 f'{cb_sels}<p class="cv-msg" id="cv-cmsg" hidden></p><button type="button" class="btn cv-buy" id="cv-combo-buy">Comprar combo</button></div>') if cb_on else ''
     faq_block = ''.join(f'<details><summary>{esc(q)}</summary><p>{esc(a)}</p></details>' for q, a in faq)
     modelos_blk = (f'<section class="cv-models"><h2>Modelos de caneca personalizada {esc(nome.lower())}</h2><p class="sub">São {nmod} artes prontas. Anote o número do que mais gostar e escolha na lista acima.</p><ul class="cv-mlist">'
                    + ''.join(f'<li><b>{esc(m["numero"])}</b> {esc(m["nome"])}</li>' for m in modelos) + '</ul></section>') if modelos else ''
@@ -920,7 +935,7 @@ document.addEventListener("keydown",function(e){if(e.target.closest&&e.target.cl
 {cat_price_html(c, "cp cp-lg")}<p class="cv-prazo">⏱ {prazo}</p>
 <label class="cv-lbl" for="cv-model">Qual modelo você quer?</label><select id="cv-model" class="cv-sel">{opts}</select><p class="cv-msg" id="cv-msg" hidden></p>
 {buy_btn}<a class="btn ghost cv-wa" id="cv-wa" href="#" target="_blank" rel="noopener">Pedir pelo WhatsApp</a>
-<p class="nota">Nome, foto ou frase são combinados pelo WhatsApp depois do pedido. *Entrega grátis a partir de {FRETE_TXT}; locais mais distantes podem ter taxa.</p></aside></div>
+{combo_blk}<p class="nota">Nome, foto ou frase são combinados pelo WhatsApp depois do pedido. *Entrega grátis a partir de {FRETE_TXT}; locais mais distantes podem ter taxa.</p></aside></div>
 {modelos_blk}{secs_blk}
 <section><h2>Perguntas frequentes sobre caneca personalizada {esc(nome.lower())}</h2><div class="faq">{faq_block}</div></section>
 {rel_blk}

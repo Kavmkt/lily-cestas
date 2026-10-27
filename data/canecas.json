@@ -200,5 +200,8 @@
   "cta_titulo": "Não achou o seu tema?",
   "cta_texto": "Conte a ideia pelo WhatsApp e criamos uma caneca só sua.",
   "catalogos_titulo": "Caneca Personalizada com Foto, Nome e Frase",
-  "catalogos_texto": "Escolha o catálogo do seu tema, anote o número do modelo e personalize. Atendemos Santana de Parnaíba, Alphaville, Barueri, Cajamar, Osasco e Carapicuíba."
+  "catalogos_texto": "Escolha o catálogo do seu tema, anote o número do modelo e personalize. Atendemos Santana de Parnaíba, Alphaville, Barueri, Cajamar, Osasco e Carapicuíba.",
+  "combo_ativo": true,
+  "combo_qtd": 3,
+  "combo_preco": 119.9
 }

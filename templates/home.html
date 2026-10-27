@@ -1312,8 +1312,10 @@ html {
   }
 
   // Renderizar Sacola & Barra de Progresso de Mimos
+  function hasFreeShip() { return state.cart.some(i => i.freeShip); }
+  function hasBrinde() { return state.cart.some(i => i.brinde); }
   function shippingFor(sub) {
-    return sub >= CONFIG.entrega_gratis_a_partir ? 0 : CONFIG.taxa_entrega;
+    return (hasFreeShip() || sub >= CONFIG.entrega_gratis_a_partir) ? 0 : CONFIG.taxa_entrega;
   }
   function money0(v) { return formatBRL(v).replace(",00", ""); }
 
@@ -1334,12 +1336,14 @@ html {
     const rewardText = document.getElementById("cart-reward-text");
     const rewardPct = document.getElementById("cart-reward-pct");
     const rewardBar = document.getElementById("cart-reward-bar");
-    const pct = Math.min(100, Math.round((total / CONFIG.brinde1_valor) * 100));
+    const pct = hasBrinde() ? 100 : Math.min(100, Math.round((total / CONFIG.brinde1_valor) * 100));
     if (rewardBar) rewardBar.style.width = pct + "%";
     if (rewardPct) rewardPct.textContent = pct + "%";
     if (rewardText) {
       if (total === 0) {
         rewardText.textContent = `Compre a partir de ${formatBRL(CONFIG.brinde1_valor)} e ganhe ${CONFIG.brinde1_nome}!`;
+      } else if (hasBrinde() && total < CONFIG.brinde1_valor) {
+        rewardText.textContent = `🎁 Você ganhou o chaveiro do combo!`;
       } else if (total < CONFIG.brinde1_valor) {
         rewardText.textContent = `Faltam ${formatBRL(CONFIG.brinde1_valor - total)} para ganhar ${CONFIG.brinde1_nome}!`;
       } else {
@@ -1354,7 +1358,7 @@ html {
         shipText.textContent = `🚚 Entrega grátis a partir de ${money0(free)} • Pedido mínimo ${money0(min)}`;
       } else if (total < min) {
         shipText.textContent = `⚠️ Pedido mínimo ${money0(min)}: faltam ${formatBRL(min - total)}`;
-      } else if (total < free) {
+      } else if (total < free && !hasFreeShip()) {
         shipText.textContent = `🚚 Faltam ${formatBRL(free - total)} para a entrega ser grátis`;
       } else {
         shipText.textContent = "🚚 Entrega grátis neste pedido!";
@@ -1422,7 +1426,7 @@ html {
     // Banner de brindes na Etapa 1
     const giftBanner = document.getElementById("checkout-gift-banner");
     if (giftBanner) {
-      if (effectiveSub >= CONFIG.brinde1_valor) {
+      if (effectiveSub >= CONFIG.brinde1_valor || hasBrinde()) {
         giftBanner.textContent = `🎁 Brinde desbloqueado: ${CONFIG.brinde1_nome}!`;
       } else {
         giftBanner.textContent = `✨ Dica Lily: adicione mais ${formatBRL(CONFIG.brinde1_valor - effectiveSub)} para ganhar ${CONFIG.brinde1_nome}!`;
@@ -1430,7 +1434,7 @@ html {
     }
     const shipBanner = document.getElementById("checkout-ship-banner");
     if (shipBanner) {
-      shipBanner.textContent = effectiveSub >= CONFIG.entrega_gratis_a_partir
+      shipBanner.textContent = (effectiveSub >= CONFIG.entrega_gratis_a_partir || hasFreeShip())
         ? "🚚 Entrega grátis neste pedido!"
         : `🚚 Adicione mais ${formatBRL(CONFIG.entrega_gratis_a_partir - effectiveSub)} e a entrega fica grátis (abaixo de ${money0(CONFIG.entrega_gratis_a_partir)}, taxa de ${formatBRL(CONFIG.taxa_entrega)}).`;
     }

@@ -7,6 +7,13 @@
       "imagem_mobile": "/assets/banners/canecas-topo-mobile.png",
       "alt": "Canecas personalizadas: sua caneca, do seu jeito, com mais de 150 modelos prontos",
       "link": "#catalogos"
+    },
+    {
+      "ativo": true,
+      "imagem_web": "/assets/banners/canecas-combo-web.png",
+      "imagem_mobile": "/assets/banners/canecas-combo-mobile.png",
+      "alt": "Combo de 3 canecas personalizadas por R$ 119,90 com frete grátis e chaveirinho de brinde",
+      "link": "#catalogos"
     }
   ]
 }

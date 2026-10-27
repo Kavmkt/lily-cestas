@@ -360,6 +360,9 @@ content:
       - { name: h1, label: Título da página, type: string }
       - { name: intro, label: Texto de abertura, type: text }
       - { name: botao_principal, label: Texto do botão principal, type: string }
+      - { name: combo_ativo, label: Combo de canecas ligado, type: boolean, default: true, description: "Aparece nas páginas dos catálogos, com frete grátis e o chaveirinho de brinde." }
+      - { name: combo_qtd, label: Canecas no combo, type: number, default: 3 }
+      - { name: combo_preco, label: Preço do combo (R$), type: number, description: "Exemplo 119.90. Deixe 0 para esconder o combo." }
       - { name: temas_titulo, label: Título da seção de temas, type: string }
       - { name: temas_texto, label: Frase abaixo do título dos temas, type: string }
       - name: temas
