@@ -41,6 +41,10 @@ for i, page in enumerate(doc):
     paginas.append(f'/assets/catalogos/{a.slug}/{name}')
     # índice de modelos: linhas "01" seguidas do nome
     lines = [l.strip() for l in page.get_text().splitlines() if l.strip()]
+    for l in lines:  # índice com número e nome na mesma linha ("04 Engenheiro")
+        mm = re.fullmatch(r'(\d{2}) (\D.{1,60})', l)
+        if mm:
+            modelos.setdefault(mm.group(1), mm.group(2))
     for k in range(len(lines) - 1):
         if re.fullmatch(r'\d{2}', lines[k]) and not re.fullmatch(r'\d{2}', lines[k + 1]) and 'M O D E L O' not in lines[k + 1]:
             modelos.setdefault(lines[k], lines[k + 1])

@@ -1,0 +1,62 @@
+{
+  "nome": "Futebol",
+  "ativo": false,
+  "ordem": 4,
+  "preco": 59.9,
+  "preco_de": 0,
+  "prazo": "Prazo de produção combinado no pedido",
+  "descricao": "Catálogo de canecas personalizadas: Futebol. Escolha o número do modelo e personalize com nome, foto ou frase.",
+  "capa": "/assets/catalogos/futebol/p01.webp",
+  "paginas": [
+    "/assets/catalogos/futebol/p01.webp",
+    "/assets/catalogos/futebol/p02.webp",
+    "/assets/catalogos/futebol/p03.webp",
+    "/assets/catalogos/futebol/p04.webp",
+    "/assets/catalogos/futebol/p05.webp",
+    "/assets/catalogos/futebol/p06.webp",
+    "/assets/catalogos/futebol/p07.webp",
+    "/assets/catalogos/futebol/p08.webp"
+  ],
+  "modelos": [
+    {
+      "numero": "01",
+      "nome": "Grêmio · Seu Nome 10"
+    },
+    {
+      "numero": "02",
+      "nome": "São Paulo · Seu Nome 10"
+    },
+    {
+      "numero": "03",
+      "nome": "Flamengo · Mensagem da Torcida"
+    },
+    {
+      "numero": "04",
+      "nome": "Corinthians"
+    },
+    {
+      "numero": "05",
+      "nome": "Vasco da Gama"
+    },
+    {
+      "numero": "06",
+      "nome": "Flamengo · Bola e Gramado"
+    },
+    {
+      "numero": "07",
+      "nome": "Palmeiras · Bola e Gramado"
+    },
+    {
+      "numero": "08",
+      "nome": "Bahia · Bola e Gramado"
+    },
+    {
+      "numero": "09",
+      "nome": "Fluminense · Bola e Gramado"
+    },
+    {
+      "numero": "10",
+      "nome": "Santos"
+    }
+  ]
+}

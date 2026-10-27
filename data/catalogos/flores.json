@@ -1,0 +1,62 @@
+{
+  "nome": "Flores",
+  "ativo": true,
+  "ordem": 10,
+  "preco": 59.9,
+  "preco_de": 0,
+  "prazo": "Prazo de produção combinado no pedido",
+  "descricao": "Catálogo de canecas personalizadas: Flores. Escolha o número do modelo e personalize com nome, foto ou frase.",
+  "capa": "/assets/catalogos/flores/p01.webp",
+  "paginas": [
+    "/assets/catalogos/flores/p01.webp",
+    "/assets/catalogos/flores/p02.webp",
+    "/assets/catalogos/flores/p03.webp",
+    "/assets/catalogos/flores/p04.webp",
+    "/assets/catalogos/flores/p05.webp",
+    "/assets/catalogos/flores/p06.webp",
+    "/assets/catalogos/flores/p07.webp",
+    "/assets/catalogos/flores/p08.webp"
+  ],
+  "modelos": [
+    {
+      "numero": "01",
+      "nome": "Girassóis Aquarela"
+    },
+    {
+      "numero": "02",
+      "nome": "Mandalas de Girassol"
+    },
+    {
+      "numero": "03",
+      "nome": "Rosas Vintage"
+    },
+    {
+      "numero": "04",
+      "nome": "Lírios"
+    },
+    {
+      "numero": "05",
+      "nome": "Jardim Colorido"
+    },
+    {
+      "numero": "06",
+      "nome": "Renda Dourada"
+    },
+    {
+      "numero": "07",
+      "nome": "Floral Azul"
+    },
+    {
+      "numero": "08",
+      "nome": "Tulipas"
+    },
+    {
+      "numero": "09",
+      "nome": "Rosas e Peônias"
+    },
+    {
+      "numero": "10",
+      "nome": "Girassol · Frente à Luz"
+    }
+  ]
+}

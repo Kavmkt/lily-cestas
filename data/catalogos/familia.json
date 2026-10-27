@@ -1,0 +1,62 @@
+{
+  "nome": "Família e Avós",
+  "ativo": true,
+  "ordem": 11,
+  "preco": 59.9,
+  "preco_de": 0,
+  "prazo": "Prazo de produção combinado no pedido",
+  "descricao": "Catálogo de canecas personalizadas: Família e Avós. Escolha o número do modelo e personalize com nome, foto ou frase.",
+  "capa": "/assets/catalogos/familia/p01.webp",
+  "paginas": [
+    "/assets/catalogos/familia/p01.webp",
+    "/assets/catalogos/familia/p02.webp",
+    "/assets/catalogos/familia/p03.webp",
+    "/assets/catalogos/familia/p04.webp",
+    "/assets/catalogos/familia/p05.webp",
+    "/assets/catalogos/familia/p06.webp",
+    "/assets/catalogos/familia/p07.webp",
+    "/assets/catalogos/familia/p08.webp"
+  ],
+  "modelos": [
+    {
+      "numero": "01",
+      "nome": "Parabéns Vovô"
+    },
+    {
+      "numero": "02",
+      "nome": "Parabéns Vovó"
+    },
+    {
+      "numero": "03",
+      "nome": "O Melhor Vovô do Mundo"
+    },
+    {
+      "numero": "04",
+      "nome": "A Melhor Avó do Mundo"
+    },
+    {
+      "numero": "05",
+      "nome": "O Melhor Avô do Mundo"
+    },
+    {
+      "numero": "06",
+      "nome": "Vovó Coruja"
+    },
+    {
+      "numero": "07",
+      "nome": "Vovô Coruja"
+    },
+    {
+      "numero": "08",
+      "nome": "Amo os Docinhos da Minha Vovó"
+    },
+    {
+      "numero": "09",
+      "nome": "Feliz Dia dos Avós"
+    },
+    {
+      "numero": "10",
+      "nome": "Minha Avó é a Melhor"
+    }
+  ]
+}

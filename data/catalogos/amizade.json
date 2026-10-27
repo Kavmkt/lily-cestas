@@ -1,0 +1,62 @@
+{
+  "nome": "Amizade",
+  "ativo": true,
+  "ordem": 12,
+  "preco": 59.9,
+  "preco_de": 0,
+  "prazo": "Prazo de produção combinado no pedido",
+  "descricao": "Catálogo de canecas personalizadas: Amizade. Escolha o número do modelo e personalize com nome, foto ou frase.",
+  "capa": "/assets/catalogos/amizade/p01.webp",
+  "paginas": [
+    "/assets/catalogos/amizade/p01.webp",
+    "/assets/catalogos/amizade/p02.webp",
+    "/assets/catalogos/amizade/p03.webp",
+    "/assets/catalogos/amizade/p04.webp",
+    "/assets/catalogos/amizade/p05.webp",
+    "/assets/catalogos/amizade/p06.webp",
+    "/assets/catalogos/amizade/p07.webp",
+    "/assets/catalogos/amizade/p08.webp"
+  ],
+  "modelos": [
+    {
+      "numero": "01",
+      "nome": "Caixinha de Segredos"
+    },
+    {
+      "numero": "02",
+      "nome": "Amigas para Sempre"
+    },
+    {
+      "numero": "03",
+      "nome": "Best Friend Forever"
+    },
+    {
+      "numero": "04",
+      "nome": "Não Tenho uma Amiga, Tenho uma Irmã"
+    },
+    {
+      "numero": "05",
+      "nome": "Miga, Sua Loka! (Pop Art)"
+    },
+    {
+      "numero": "06",
+      "nome": "Miga, Sua Loka! (Vaquinha)"
+    },
+    {
+      "numero": "07",
+      "nome": "Melhor Amiga do Mundo"
+    },
+    {
+      "numero": "08",
+      "nome": "Te Amo Muito, Amiga"
+    },
+    {
+      "numero": "09",
+      "nome": "Amiga Incrível"
+    },
+    {
+      "numero": "10",
+      "nome": "Melhores Amigas é Pouco, Somos Irmãs"
+    }
+  ]
+}

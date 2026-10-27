@@ -1,0 +1,71 @@
+{
+  "nome": "Signos",
+  "ativo": true,
+  "ordem": 7,
+  "preco": 59.9,
+  "preco_de": 0,
+  "prazo": "Prazo de produção combinado no pedido",
+  "descricao": "Catálogo de canecas personalizadas: Signos. Escolha o número do modelo e personalize com nome, foto ou frase.",
+  "capa": "/assets/catalogos/signos/p01.webp",
+  "paginas": [
+    "/assets/catalogos/signos/p01.webp",
+    "/assets/catalogos/signos/p02.webp",
+    "/assets/catalogos/signos/p03.webp",
+    "/assets/catalogos/signos/p04.webp",
+    "/assets/catalogos/signos/p05.webp",
+    "/assets/catalogos/signos/p06.webp",
+    "/assets/catalogos/signos/p07.webp",
+    "/assets/catalogos/signos/p08.webp",
+    "/assets/catalogos/signos/p09.webp"
+  ],
+  "modelos": [
+    {
+      "numero": "01",
+      "nome": "Áries"
+    },
+    {
+      "numero": "02",
+      "nome": "Touro"
+    },
+    {
+      "numero": "03",
+      "nome": "Gêmeos"
+    },
+    {
+      "numero": "04",
+      "nome": "Câncer"
+    },
+    {
+      "numero": "05",
+      "nome": "Leão"
+    },
+    {
+      "numero": "06",
+      "nome": "Virgem"
+    },
+    {
+      "numero": "07",
+      "nome": "Libra"
+    },
+    {
+      "numero": "08",
+      "nome": "Escorpião"
+    },
+    {
+      "numero": "09",
+      "nome": "Sagitário"
+    },
+    {
+      "numero": "10",
+      "nome": "Capricórnio"
+    },
+    {
+      "numero": "11",
+      "nome": "Aquário"
+    },
+    {
+      "numero": "12",
+      "nome": "Peixes"
+    }
+  ]
+}

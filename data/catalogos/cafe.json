@@ -1,0 +1,62 @@
+{
+  "nome": "Café e Bebidas",
+  "ativo": true,
+  "ordem": 8,
+  "preco": 59.9,
+  "preco_de": 0,
+  "prazo": "Prazo de produção combinado no pedido",
+  "descricao": "Catálogo de canecas personalizadas: Café e Bebidas. Escolha o número do modelo e personalize com nome, foto ou frase.",
+  "capa": "/assets/catalogos/cafe/p01.webp",
+  "paginas": [
+    "/assets/catalogos/cafe/p01.webp",
+    "/assets/catalogos/cafe/p02.webp",
+    "/assets/catalogos/cafe/p03.webp",
+    "/assets/catalogos/cafe/p04.webp",
+    "/assets/catalogos/cafe/p05.webp",
+    "/assets/catalogos/cafe/p06.webp",
+    "/assets/catalogos/cafe/p07.webp",
+    "/assets/catalogos/cafe/p08.webp"
+  ],
+  "modelos": [
+    {
+      "numero": "01",
+      "nome": "Eu Amo Café · Café é Vida"
+    },
+    {
+      "numero": "02",
+      "nome": "Café Expresso"
+    },
+    {
+      "numero": "03",
+      "nome": "Foco, Força & Café"
+    },
+    {
+      "numero": "04",
+      "nome": "Paz, Amor e Muito Café"
+    },
+    {
+      "numero": "05",
+      "nome": "Um Bom Dia · Dose de Café"
+    },
+    {
+      "numero": "06",
+      "nome": "Corujinha Pijama"
+    },
+    {
+      "numero": "07",
+      "nome": "Corujinha Flores"
+    },
+    {
+      "numero": "08",
+      "nome": "A Vida Só Começa Depois do Café"
+    },
+    {
+      "numero": "09",
+      "nome": "Capuccino · Expresso · Com Leite"
+    },
+    {
+      "numero": "10",
+      "nome": "Com Café · Sem Café"
+    }
+  ]
+}

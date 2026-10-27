@@ -1,0 +1,62 @@
+{
+  "nome": "Infantil",
+  "ativo": true,
+  "ordem": 3,
+  "preco": 59.9,
+  "preco_de": 0,
+  "prazo": "Prazo de produção combinado no pedido",
+  "descricao": "Catálogo de canecas personalizadas: Infantil. Escolha o número do modelo e personalize com nome, foto ou frase.",
+  "capa": "/assets/catalogos/infantil/p01.webp",
+  "paginas": [
+    "/assets/catalogos/infantil/p01.webp",
+    "/assets/catalogos/infantil/p02.webp",
+    "/assets/catalogos/infantil/p03.webp",
+    "/assets/catalogos/infantil/p04.webp",
+    "/assets/catalogos/infantil/p05.webp",
+    "/assets/catalogos/infantil/p06.webp",
+    "/assets/catalogos/infantil/p07.webp",
+    "/assets/catalogos/infantil/p08.webp"
+  ],
+  "modelos": [
+    {
+      "numero": "01",
+      "nome": "Aviadoras"
+    },
+    {
+      "numero": "02",
+      "nome": "Bailarina Rosa"
+    },
+    {
+      "numero": "03",
+      "nome": "Bailarina Menta"
+    },
+    {
+      "numero": "04",
+      "nome": "Princesa para Colorir"
+    },
+    {
+      "numero": "05",
+      "nome": "Bombeiro para Colorir"
+    },
+    {
+      "numero": "06",
+      "nome": "Policial para Colorir"
+    },
+    {
+      "numero": "07",
+      "nome": "Sereia Encantada"
+    },
+    {
+      "numero": "08",
+      "nome": "Sereias do Mar"
+    },
+    {
+      "numero": "09",
+      "nome": "Bebê Raposinha"
+    },
+    {
+      "numero": "10",
+      "nome": "Safari Baby"
+    }
+  ]
+}

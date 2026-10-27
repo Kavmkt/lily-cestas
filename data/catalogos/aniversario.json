@@ -1,0 +1,108 @@
+{
+  "nome": "Aniversário",
+  "ativo": true,
+  "ordem": 14,
+  "preco": 59.9,
+  "preco_de": 0,
+  "prazo": "Prazo de produção combinado no pedido",
+  "descricao": "Catálogo de canecas personalizadas: Aniversário. Escolha o número do modelo e personalize com nome, foto ou frase.",
+  "capa": "/assets/catalogos/aniversario/p01.webp",
+  "paginas": [
+    "/assets/catalogos/aniversario/p01.webp",
+    "/assets/catalogos/aniversario/p02.webp",
+    "/assets/catalogos/aniversario/p03.webp",
+    "/assets/catalogos/aniversario/p04.webp",
+    "/assets/catalogos/aniversario/p05.webp",
+    "/assets/catalogos/aniversario/p06.webp",
+    "/assets/catalogos/aniversario/p07.webp",
+    "/assets/catalogos/aniversario/p08.webp",
+    "/assets/catalogos/aniversario/p09.webp",
+    "/assets/catalogos/aniversario/p10.webp",
+    "/assets/catalogos/aniversario/p11.webp",
+    "/assets/catalogos/aniversario/p12.webp",
+    "/assets/catalogos/aniversario/p13.webp",
+    "/assets/catalogos/aniversario/p14.webp"
+  ],
+  "modelos": [
+    {
+      "numero": "01",
+      "nome": "Feliz Aniversário Dourado"
+    },
+    {
+      "numero": "02",
+      "nome": "Aniversário Dourado e Bege"
+    },
+    {
+      "numero": "03",
+      "nome": "Parabéns com Balões"
+    },
+    {
+      "numero": "04",
+      "nome": "Feliz Vida (Bolo e Balões)"
+    },
+    {
+      "numero": "05",
+      "nome": "Feliz Aniversário Rosê"
+    },
+    {
+      "numero": "06",
+      "nome": "Aniversário Floral"
+    },
+    {
+      "numero": "07",
+      "nome": "Feliz Niver (Jardineira)"
+    },
+    {
+      "numero": "08",
+      "nome": "Amor de Vó"
+    },
+    {
+      "numero": "09",
+      "nome": "Niver (Doodles)"
+    },
+    {
+      "numero": "10",
+      "nome": "Parabéns, Répi Bardei"
+    },
+    {
+      "numero": "11",
+      "nome": "Parabéns Pra Você (Corações)"
+    },
+    {
+      "numero": "12",
+      "nome": "Feliz Aniversário (Filme)"
+    },
+    {
+      "numero": "13",
+      "nome": "Aniversário Marrom e Mostarda"
+    },
+    {
+      "numero": "14",
+      "nome": "Caneca da Mariana"
+    },
+    {
+      "numero": "15",
+      "nome": "Aniversário Dinossauro"
+    },
+    {
+      "numero": "16",
+      "nome": "Feliz Aniversário Verde"
+    },
+    {
+      "numero": "17",
+      "nome": "Parabéns Azul"
+    },
+    {
+      "numero": "18",
+      "nome": "Feliz Aniversário Executivo"
+    },
+    {
+      "numero": "19",
+      "nome": "Gol de Placa"
+    },
+    {
+      "numero": "20",
+      "nome": "Aniversário de Amiga"
+    }
+  ]
+}

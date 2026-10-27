@@ -1,0 +1,132 @@
+{
+  "nome": "Natal",
+  "ativo": true,
+  "ordem": 13,
+  "preco": 59.9,
+  "preco_de": 0,
+  "prazo": "Prazo de produção combinado no pedido",
+  "descricao": "Catálogo de canecas personalizadas: Natal. Escolha o número do modelo e personalize com nome, foto ou frase.",
+  "capa": "/assets/catalogos/natal/p01.webp",
+  "paginas": [
+    "/assets/catalogos/natal/p01.webp",
+    "/assets/catalogos/natal/p02.webp",
+    "/assets/catalogos/natal/p03.webp",
+    "/assets/catalogos/natal/p04.webp",
+    "/assets/catalogos/natal/p05.webp",
+    "/assets/catalogos/natal/p06.webp",
+    "/assets/catalogos/natal/p07.webp",
+    "/assets/catalogos/natal/p08.webp",
+    "/assets/catalogos/natal/p09.webp",
+    "/assets/catalogos/natal/p10.webp",
+    "/assets/catalogos/natal/p11.webp",
+    "/assets/catalogos/natal/p12.webp",
+    "/assets/catalogos/natal/p13.webp",
+    "/assets/catalogos/natal/p14.webp",
+    "/assets/catalogos/natal/p15.webp",
+    "/assets/catalogos/natal/p16.webp",
+    "/assets/catalogos/natal/p17.webp",
+    "/assets/catalogos/natal/p18.webp"
+  ],
+  "modelos": [
+    {
+      "numero": "01",
+      "nome": "Guirlanda de Natal"
+    },
+    {
+      "numero": "02",
+      "nome": "Papai Noel e Foto da Família"
+    },
+    {
+      "numero": "03",
+      "nome": "Bolas de Natal com Fotos"
+    },
+    {
+      "numero": "04",
+      "nome": "Natal Vermelho e Dourado"
+    },
+    {
+      "numero": "05",
+      "nome": "Família é o Presente"
+    },
+    {
+      "numero": "06",
+      "nome": "Bola de Natal da Família"
+    },
+    {
+      "numero": "07",
+      "nome": "Chapéu de Papai Noel"
+    },
+    {
+      "numero": "08",
+      "nome": "Papai Noel e Moldura Listrada"
+    },
+    {
+      "numero": "09",
+      "nome": "Árvore de Fotos"
+    },
+    {
+      "numero": "10",
+      "nome": "Natal em Família (Polaroid)"
+    },
+    {
+      "numero": "11",
+      "nome": "Três Guirlandas"
+    },
+    {
+      "numero": "12",
+      "nome": "Vovó Noemi (Papai Noel e Fita)"
+    },
+    {
+      "numero": "13",
+      "nome": "Ho Ho Ho de Fotos"
+    },
+    {
+      "numero": "14",
+      "nome": "Natal com Mamãe"
+    },
+    {
+      "numero": "15",
+      "nome": "Ho Ho Ho! (Roupa do Papai Noel)"
+    },
+    {
+      "numero": "16",
+      "nome": "Papai Noel, Árvore e Presentes"
+    },
+    {
+      "numero": "17",
+      "nome": "Natal da Família (Nome)"
+    },
+    {
+      "numero": "18",
+      "nome": "Papai Noel e os Biscoitos"
+    },
+    {
+      "numero": "19",
+      "nome": "Feliz Natal Fofinho"
+    },
+    {
+      "numero": "20",
+      "nome": "Capivara Natalina"
+    },
+    {
+      "numero": "21",
+      "nome": "Selos de Natal"
+    },
+    {
+      "numero": "22",
+      "nome": "Feliz Natal (Estampa Vermelha)"
+    },
+    {
+      "numero": "23",
+      "nome": "Presépio Dourado"
+    },
+    {
+      "numero": "24",
+      "nome": "Sagrada Família Dourada"
+    },
+    {
+      "numero": "25",
+      "nome": "Árvores Minimalistas"
+    }
+  ]
+}

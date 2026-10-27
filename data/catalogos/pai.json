@@ -1,0 +1,108 @@
+{
+  "nome": "Dia dos Pais",
+  "ativo": true,
+  "ordem": 15,
+  "preco": 59.9,
+  "preco_de": 0,
+  "prazo": "Prazo de produção combinado no pedido",
+  "descricao": "Catálogo de canecas personalizadas: Dia dos Pais. Escolha o número do modelo e personalize com nome, foto ou frase.",
+  "capa": "/assets/catalogos/pai/p01.webp",
+  "paginas": [
+    "/assets/catalogos/pai/p01.webp",
+    "/assets/catalogos/pai/p02.webp",
+    "/assets/catalogos/pai/p03.webp",
+    "/assets/catalogos/pai/p04.webp",
+    "/assets/catalogos/pai/p05.webp",
+    "/assets/catalogos/pai/p06.webp",
+    "/assets/catalogos/pai/p07.webp",
+    "/assets/catalogos/pai/p08.webp",
+    "/assets/catalogos/pai/p09.webp",
+    "/assets/catalogos/pai/p10.webp",
+    "/assets/catalogos/pai/p11.webp",
+    "/assets/catalogos/pai/p12.webp",
+    "/assets/catalogos/pai/p13.webp",
+    "/assets/catalogos/pai/p14.webp"
+  ],
+  "modelos": [
+    {
+      "numero": "01",
+      "nome": "Melhor Pai do Mundo (Polaroid)"
+    },
+    {
+      "numero": "02",
+      "nome": "O Melhor Pai do Mundo (Kraft)"
+    },
+    {
+      "numero": "03",
+      "nome": "Melhor Pai do Mundo (Azul Royal)"
+    },
+    {
+      "numero": "04",
+      "nome": "Eu Te Amo, Pai (Coração)"
+    },
+    {
+      "numero": "05",
+      "nome": "Melhor Pai #1 (Selo)"
+    },
+    {
+      "numero": "06",
+      "nome": "Eu Te Amo, Pai (Duas Fotos)"
+    },
+    {
+      "numero": "07",
+      "nome": "Pai (Significado)"
+    },
+    {
+      "numero": "08",
+      "nome": "Um Grande Pai e Super Vovô"
+    },
+    {
+      "numero": "09",
+      "nome": "Super Pai (Foto Inclinada)"
+    },
+    {
+      "numero": "10",
+      "nome": "Super Pai (Quadrinhos)"
+    },
+    {
+      "numero": "11",
+      "nome": "Pai Mais Fortão do Mundo"
+    },
+    {
+      "numero": "12",
+      "nome": "O Melhor Pai da Galáxia"
+    },
+    {
+      "numero": "13",
+      "nome": "Pai de Pet Também é Pai"
+    },
+    {
+      "numero": "14",
+      "nome": "Pai de Pet (Pata Marrom)"
+    },
+    {
+      "numero": "15",
+      "nome": "Pai de Pet (Aquarela)"
+    },
+    {
+      "numero": "16",
+      "nome": "Pai de Pet (Patinhas)"
+    },
+    {
+      "numero": "17",
+      "nome": "Pai Pra Toda Obra"
+    },
+    {
+      "numero": "18",
+      "nome": "Uso Exclusivo do Melhor Pai"
+    },
+    {
+      "numero": "19",
+      "nome": "Meu Pai, Meu Herói"
+    },
+    {
+      "numero": "20",
+      "nome": "Meu Super-Herói Favorito"
+    }
+  ]
+}

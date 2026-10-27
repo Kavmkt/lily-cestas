@@ -1,0 +1,154 @@
+{
+  "nome": "Namorados e Amor",
+  "ativo": true,
+  "ordem": 1,
+  "preco": 59.9,
+  "preco_de": 0,
+  "prazo": "Prazo de produção combinado no pedido",
+  "descricao": "Catálogo de canecas personalizadas: Namorados e Amor. Escolha o número do modelo e personalize com nome, foto ou frase.",
+  "capa": "/assets/catalogos/namorados/p01.webp",
+  "paginas": [
+    "/assets/catalogos/namorados/p01.webp",
+    "/assets/catalogos/namorados/p02.webp",
+    "/assets/catalogos/namorados/p03.webp",
+    "/assets/catalogos/namorados/p04.webp",
+    "/assets/catalogos/namorados/p05.webp",
+    "/assets/catalogos/namorados/p06.webp",
+    "/assets/catalogos/namorados/p07.webp",
+    "/assets/catalogos/namorados/p08.webp",
+    "/assets/catalogos/namorados/p09.webp",
+    "/assets/catalogos/namorados/p10.webp",
+    "/assets/catalogos/namorados/p11.webp",
+    "/assets/catalogos/namorados/p12.webp",
+    "/assets/catalogos/namorados/p13.webp",
+    "/assets/catalogos/namorados/p14.webp",
+    "/assets/catalogos/namorados/p15.webp",
+    "/assets/catalogos/namorados/p16.webp",
+    "/assets/catalogos/namorados/p17.webp",
+    "/assets/catalogos/namorados/p18.webp",
+    "/assets/catalogos/namorados/p19.webp",
+    "/assets/catalogos/namorados/p20.webp"
+  ],
+  "modelos": [
+    {
+      "numero": "01",
+      "nome": "Você é o Amor da Minha Vida"
+    },
+    {
+      "numero": "02",
+      "nome": "Amor da Minha Vida"
+    },
+    {
+      "numero": "03",
+      "nome": "Amor Eterno"
+    },
+    {
+      "numero": "04",
+      "nome": "Celebrando Nosso Amor"
+    },
+    {
+      "numero": "05",
+      "nome": "Amor de Verdade"
+    },
+    {
+      "numero": "06",
+      "nome": "O Meu Amor é Teu"
+    },
+    {
+      "numero": "07",
+      "nome": "Te Amo (Coração Vermelho)"
+    },
+    {
+      "numero": "08",
+      "nome": "Para Sempre Começa com Você"
+    },
+    {
+      "numero": "09",
+      "nome": "Meu Par"
+    },
+    {
+      "numero": "10",
+      "nome": "Te Amo (Mãos Dadas)"
+    },
+    {
+      "numero": "11",
+      "nome": "Te Amo do Jeitinho"
+    },
+    {
+      "numero": "12",
+      "nome": "Te Amar é o Melhor Despertar"
+    },
+    {
+      "numero": "13",
+      "nome": "Teu Amor Aquece"
+    },
+    {
+      "numero": "14",
+      "nome": "Esse Amor é Coisa Rara"
+    },
+    {
+      "numero": "15",
+      "nome": "Namorado Incrível"
+    },
+    {
+      "numero": "16",
+      "nome": "Você é Minha Nota Preferida"
+    },
+    {
+      "numero": "17",
+      "nome": "Meu Cantinho é Seu Abraço"
+    },
+    {
+      "numero": "18",
+      "nome": "Te Amo (Molduras Pretas)"
+    },
+    {
+      "numero": "19",
+      "nome": "Juntos Desde"
+    },
+    {
+      "numero": "20",
+      "nome": "Amor é Aconchego"
+    },
+    {
+      "numero": "21",
+      "nome": "Te Amo"
+    },
+    {
+      "numero": "22",
+      "nome": "Amor da Minha Vida"
+    },
+    {
+      "numero": "23",
+      "nome": "Te Amo Mais Que Tudo"
+    },
+    {
+      "numero": "24",
+      "nome": "Meu Amor é Você"
+    },
+    {
+      "numero": "25",
+      "nome": "Você Me Faz Tão Bem"
+    },
+    {
+      "numero": "26",
+      "nome": "Melhor Namorada do Mundo"
+    },
+    {
+      "numero": "27",
+      "nome": "Amar é Engordar Juntos"
+    },
+    {
+      "numero": "28",
+      "nome": "Sra. Dona da Verdade"
+    },
+    {
+      "numero": "29",
+      "nome": "Sr. Sempre Certo"
+    },
+    {
+      "numero": "30",
+      "nome": "Melhor Namorado do Mundo"
+    }
+  ]
+}

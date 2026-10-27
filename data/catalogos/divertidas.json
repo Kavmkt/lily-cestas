@@ -1,0 +1,62 @@
+{
+  "nome": "Divertidas",
+  "ativo": true,
+  "ordem": 5,
+  "preco": 59.9,
+  "preco_de": 0,
+  "prazo": "Prazo de produção combinado no pedido",
+  "descricao": "Catálogo de canecas personalizadas: Divertidas. Escolha o número do modelo e personalize com nome, foto ou frase.",
+  "capa": "/assets/catalogos/divertidas/p01.webp",
+  "paginas": [
+    "/assets/catalogos/divertidas/p01.webp",
+    "/assets/catalogos/divertidas/p02.webp",
+    "/assets/catalogos/divertidas/p03.webp",
+    "/assets/catalogos/divertidas/p04.webp",
+    "/assets/catalogos/divertidas/p05.webp",
+    "/assets/catalogos/divertidas/p06.webp",
+    "/assets/catalogos/divertidas/p07.webp",
+    "/assets/catalogos/divertidas/p08.webp"
+  ],
+  "modelos": [
+    {
+      "numero": "01",
+      "nome": "Que Se Dane"
+    },
+    {
+      "numero": "02",
+      "nome": "Com Calor · Sem Calor"
+    },
+    {
+      "numero": "03",
+      "nome": "Com TPM · Sem TPM"
+    },
+    {
+      "numero": "04",
+      "nome": "Com Mozão · Sem Mozão"
+    },
+    {
+      "numero": "05",
+      "nome": "Polvinhos Descolados"
+    },
+    {
+      "numero": "06",
+      "nome": "Polvinhos Arco-Íris"
+    },
+    {
+      "numero": "07",
+      "nome": "Polvinhos Laço"
+    },
+    {
+      "numero": "08",
+      "nome": "Polvinhos Gamers"
+    },
+    {
+      "numero": "09",
+      "nome": "Polvinhos Piratas"
+    },
+    {
+      "numero": "10",
+      "nome": "Turma dos Polvinhos"
+    }
+  ]
+}
