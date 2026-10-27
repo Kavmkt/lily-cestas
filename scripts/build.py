@@ -999,8 +999,13 @@ def canecas_page():
 <p><a class="btn" href="#catalogos">{esc(C.get("botao_principal") or "Escolher meu tema")}</a> <a class="btn ghost" href="{esc(wa(cta_msg))}" target="_blank" rel="noopener" data-ga="whatsapp_click" data-ga-item="canecas_hero">Falar no WhatsApp</a></p></header>
 {banners_blk}
 {catalogos_blk}
+<section><h2>Como funciona</h2><ol class="passos">{steps}</ol><p class="nota">*Locais mais distantes podem ter taxa de entrega. Confira pelo CEP no checkout ou pelo WhatsApp.</p></section>
+{prods_blk}
+{secs}
+<section class="cn-cta"><h2>{esc(C.get("cta_titulo") or "Não achou o seu tema?")}</h2><p>{esc(v(C.get("cta_texto") or ""))}</p><p><a class="btn" href="{esc(wa(cta_msg))}" target="_blank" rel="noopener" data-ga="whatsapp_click" data-ga-item="canecas_cta">Criar minha caneca no WhatsApp</a></p></section>
+<section><h2>Perguntas frequentes</h2><div class="faq">{faq_block}</div></section>
 </div></main>'''
-    write_page(path, head(title, desc, path, robots) + jsonld(BUSINESS, crumb_ld(trail), *extra) + fonts + top_html() + body + footer_html() + '</body></html>')
+    write_page(path, head(title, desc, path, robots) + jsonld(BUSINESS, crumb_ld(trail), faq_ld(faq_items), *extra) + fonts + top_html() + body + footer_html() + '</body></html>')
     if C.get('noindex', True) is False:
         page_urls.append(path)
 
