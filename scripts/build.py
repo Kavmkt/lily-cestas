@@ -954,7 +954,8 @@ def canecas_page():
     # banners próprios da página
     slides = ''
     n = 0
-    for b in (C.get('banners') or []):
+    TOPO = load_json(ROOT / 'data/canecas-topo.json', {}) or {}
+    for b in (TOPO.get('banners') or C.get('banners') or []):
         if b.get('ativo', True) is False:
             continue
         web = resize_to(b.get('imagem_web'), 1600)
@@ -1003,12 +1004,15 @@ def canecas_page():
     robots = 'noindex, nofollow' if C.get('noindex', True) else 'index, follow, max-image-preview:large'
     prods_blk = (f'<section id="produtos"><h2>{esc(C.get("produtos_titulo") or "Canecas prontas para pedir")}</h2><div class="cards">{cards_html(plist)}</div></section>') if plist else ''
     cta_msg = 'Oi! Vim pelo site da Lily Cestas e quero criar uma caneca personalizada do meu jeito.'
-    catalogos_blk = (f'<section id="catalogos"><h1 class="cn-h1">{esc(C.get("catalogos_titulo") or "Catálogos por tema")}</h1><p class="sub">{esc(v(C.get("catalogos_texto") or "Folheie o catálogo, escolha o número do modelo e personalize."))}</p><div class="ctcards">{catalogo_cards()}</div></section>') if CATALOGOS else ''
+    topo_cor = TOPO.get('cor') if TOPO.get('cor') in ('rose', 'vinho', 'lilas') else 'rose'
+    cat_head = (f'<h1 class="cn-h1">{esc(C.get("catalogos_titulo") or "Catálogos por tema")}</h1><p class="cn-sub">{esc(v(C.get("catalogos_texto") or "Folheie o catálogo, escolha o número do modelo e personalize."))}</p>') if CATALOGOS else ''
+    catalogos_blk = f'<section id="catalogos"><div class="ctcards">{catalogo_cards()}</div></section>' if CATALOGOS else ''
     fonts = ('<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>'
              '<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap" rel="stylesheet">'
              '<link rel="stylesheet" href="/assets/css/pages.css"><link rel="stylesheet" href="/assets/css/canecas.css">\n</head><body class="cn-page">' + cn_bg())
-    body = f'''<main><div class="wrap"><nav class="crumbs" aria-label="Navegação">{crumbs}</nav>
+    body = f'''<main><section class="cn-top cn-top-{topo_cor}"><div class="wrap"><nav class="crumbs" aria-label="Navegação">{crumbs}</nav>
 {banners_blk}
+{cat_head}</div></section><div class="wrap">
 {catalogos_blk}
 <section><h2>Como funciona</h2><ol class="passos">{steps}</ol><p class="nota">*Locais mais distantes podem ter taxa de entrega. Confira pelo CEP no checkout ou pelo WhatsApp.</p></section>
 {prods_blk}

@@ -63,3 +63,12 @@ body.cn-page{background:linear-gradient(180deg,#FFF3F6 0%,#FDF8F9 35%,#F6F0FA 70
 #catalogos{padding-top:18px}
 @media(max-width:700px){.cn-bg i.cn-x{display:none}.cn-bg i{opacity:.22}}
 @media(prefers-reduced-motion:reduce){.cn-bg i{animation:none}}
+
+/* faixa rosé do topo da página de canecas */
+.cn-top{background:linear-gradient(115deg,#B55F72 0%,#C87888 55%,#D98C9C 100%);padding:0 0 30px;margin-bottom:26px;border-radius:0 0 30px 30px;box-shadow:0 18px 36px -24px rgba(120,40,60,.6)}
+.cn-top-vinho{background:linear-gradient(115deg,#6E2A3C 0%,#8E3A50 55%,#A65365 100%)}
+.cn-top-lilas{background:linear-gradient(115deg,#8B6BB0 0%,#A98BCB 55%,#C4A9DE 100%)}
+.cn-top .crumbs,.cn-top .crumbs a,.cn-top .crumbs span{color:#FFF1F4}
+.cn-top .cn-banners{margin:6px 0 22px}.cn-top .cn-track{box-shadow:0 20px 40px -22px rgba(60,10,30,.7)}
+.cn-top .cn-dot{background:rgba(255,255,255,.55)}.cn-top .cn-dot.on{background:#fff}
+.cn-top .cn-h1{color:#fff;margin:0 0 .25em}.cn-sub{color:#FFF1F4;font-size:15px;margin:0}

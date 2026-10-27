@@ -6,15 +6,6 @@
   "h1": "Canecas Personalizadas do Seu Jeito",
   "intro": "Canecas com foto, nome, música e muitos temas para presentear ou para você. Escolha a ideia, envie os detalhes pelo WhatsApp e confirmamos tudo antes de produzir.",
   "botao_principal": "Escolher meu tema",
-  "banners": [
-    {
-      "ativo": true,
-      "imagem_web": "/assets/banners/canecas-topo-web.png",
-      "imagem_mobile": "/assets/banners/canecas-topo-mobile.png",
-      "alt": "Canecas personalizadas: sua caneca, do seu jeito, com mais de 150 modelos prontos",
-      "link": "#catalogos"
-    }
-  ],
   "temas_titulo": "Escolha um tema",
   "temas_texto": "Algumas ideias para começar. Não achou o seu? Dá para criar do zero: é só chamar no WhatsApp.",
   "temas": [

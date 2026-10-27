@@ -1,0 +1,12 @@
+{
+  "cor": "rose",
+  "banners": [
+    {
+      "ativo": true,
+      "imagem_web": "/assets/banners/canecas-topo-web.png",
+      "imagem_mobile": "/assets/banners/canecas-topo-mobile.png",
+      "alt": "Canecas personalizadas: sua caneca, do seu jeito, com mais de 150 modelos prontos",
+      "link": "#catalogos"
+    }
+  ]
+}

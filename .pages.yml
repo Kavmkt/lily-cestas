@@ -302,6 +302,34 @@ content:
           - { name: numero, label: Número (ex. 01), type: string, required: true }
           - { name: nome, label: Nome do modelo, type: string, required: true }
 
+  # ------------------------------------------------------------------ BANNER DO TOPO DAS CANECAS
+  - name: canecas-topo
+    label: Banner do topo da página de Canecas
+    type: file
+    path: data/canecas-topo.json
+    format: json
+    fields:
+      - name: cor
+        label: Cor da faixa atrás do banner
+        type: select
+        default: rose
+        options:
+          values:
+            - { value: rose, label: Rosé (padrão) }
+            - { value: vinho, label: Vinho }
+            - { value: lilas, label: Lilás }
+      - name: banners
+        label: Banners do topo
+        type: object
+        list: true
+        description: "Ficam no topo da página /canecas/, dentro de uma faixa colorida. Se houver mais de um, passam em carrossel. Envie sempre as duas versões."
+        fields:
+          - { name: ativo, label: Mostrar, type: boolean, default: true }
+          - { name: imagem_web, label: Imagem para computador (1600 x 320 px), type: image, options: { path: assets/banners } }
+          - { name: imagem_mobile, label: Imagem para celular (750 x 300 px), type: image, options: { path: assets/banners } }
+          - { name: alt, label: Descrição da imagem, type: string }
+          - { name: link, label: Para onde leva, type: string, description: "Exemplos: #catalogos (lista de catálogos), /canecas/pets/ ou https://wa.me/55... Vazio = sem clique." }
+
   # ------------------------------------------------------------------ PÁGINA DE CANECAS
   - name: canecas
     label: Página de Canecas (/canecas/)
@@ -314,17 +342,6 @@ content:
       - { name: h1, label: Título da página, type: string }
       - { name: intro, label: Texto de abertura, type: text }
       - { name: botao_principal, label: Texto do botão principal, type: string }
-      - name: banners
-        label: Banners da página de canecas
-        type: object
-        list: true
-        description: "Aparecem em carrossel abaixo do título. Envie sempre as duas versões."
-        fields:
-          - { name: ativo, label: Mostrar, type: boolean, default: true }
-          - { name: imagem_web, label: Imagem para computador (1600 x 320 px), type: image, options: { path: assets/banners } }
-          - { name: imagem_mobile, label: Imagem para celular (750 x 300 px), type: image, options: { path: assets/banners } }
-          - { name: alt, label: Descrição da imagem, type: string }
-          - { name: link, label: Para onde leva, type: string, description: "Exemplos: #temas, #produtos, /catalogo/ ou https://wa.me/55... Vazio = sem clique." }
       - { name: temas_titulo, label: Título da seção de temas, type: string }
       - { name: temas_texto, label: Frase abaixo do título dos temas, type: string }
       - name: temas
