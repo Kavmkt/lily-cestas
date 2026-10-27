@@ -6,7 +6,7 @@
   "preco_de": 0,
   "prazo": "Prazo de produção combinado no pedido",
   "descricao": "Catálogo de canecas personalizadas: Pets e Animais. Escolha o número do modelo e personalize com nome, foto ou frase.",
-  "capa": "/assets/catalogos/pets/p01.webp",
+  "capa": "/assets/catalogos/pets/capa.webp",
   "paginas": [
     "/assets/catalogos/pets/p01.webp",
     "/assets/catalogos/pets/p02.webp",

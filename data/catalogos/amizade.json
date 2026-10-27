@@ -6,7 +6,7 @@
   "preco_de": 0,
   "prazo": "Prazo de produção combinado no pedido",
   "descricao": "Catálogo de canecas personalizadas: Amizade. Escolha o número do modelo e personalize com nome, foto ou frase.",
-  "capa": "/assets/catalogos/amizade/p01.webp",
+  "capa": "/assets/catalogos/amizade/capa.webp",
   "paginas": [
     "/assets/catalogos/amizade/p01.webp",
     "/assets/catalogos/amizade/p02.webp",

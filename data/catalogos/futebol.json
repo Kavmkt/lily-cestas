@@ -6,7 +6,7 @@
   "preco_de": 0,
   "prazo": "Prazo de produção combinado no pedido",
   "descricao": "Catálogo de canecas personalizadas: Futebol. Escolha o número do modelo e personalize com nome, foto ou frase.",
-  "capa": "/assets/catalogos/futebol/p01.webp",
+  "capa": "/assets/catalogos/futebol/capa.webp",
   "paginas": [
     "/assets/catalogos/futebol/p01.webp",
     "/assets/catalogos/futebol/p02.webp",

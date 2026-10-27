@@ -6,7 +6,7 @@
   "preco_de": 0,
   "prazo": "Prazo de produção combinado no pedido",
   "descricao": "Catálogo de canecas personalizadas: Aniversário. Escolha o número do modelo e personalize com nome, foto ou frase.",
-  "capa": "/assets/catalogos/aniversario/p01.webp",
+  "capa": "/assets/catalogos/aniversario/capa.webp",
   "paginas": [
     "/assets/catalogos/aniversario/p01.webp",
     "/assets/catalogos/aniversario/p02.webp",

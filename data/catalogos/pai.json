@@ -6,7 +6,7 @@
   "preco_de": 0,
   "prazo": "Prazo de produção combinado no pedido",
   "descricao": "Catálogo de canecas personalizadas: Dia dos Pais. Escolha o número do modelo e personalize com nome, foto ou frase.",
-  "capa": "/assets/catalogos/pai/p01.webp",
+  "capa": "/assets/catalogos/pai/capa.webp",
   "paginas": [
     "/assets/catalogos/pai/p01.webp",
     "/assets/catalogos/pai/p02.webp",

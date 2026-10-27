@@ -852,7 +852,7 @@ def catalogo_cards():
         badge = f'<span class="ct-badge">-{c["_off"]}%</span>' if c['_off'] else ''
         capa = c['_capa'] or c['_pages'][0]
         out += (f'<a class="ctcard" href="{c["_url"]}" data-ga="catalogo_click" data-ga-item="{c["slug"]}">'
-                f'<span class="ct-img"><img src="{esc(capa)}" alt="Catálogo de canecas personalizadas: {esc(c["nome"])}" width="700" height="495" loading="lazy">{badge}</span>'
+                f'<span class="ct-img"><img src="{esc(capa)}" alt="Catálogo de canecas personalizadas: {esc(c["nome"])}" width="700" height="700" loading="lazy">{badge}</span>'
                 f'<span class="ct-body"><h3>{esc(c["nome"])}</h3><span class="ct-n">{n} modelos prontos para personalizar</span>'
                 f'{cat_price_html(c)}<em class="ct-btn">Ver catálogo →</em></span></a>')
     return out

@@ -6,7 +6,7 @@
   "preco_de": 0,
   "prazo": "Prazo de produção combinado no pedido",
   "descricao": "Catálogo de canecas personalizadas: Flores. Escolha o número do modelo e personalize com nome, foto ou frase.",
-  "capa": "/assets/catalogos/flores/p01.webp",
+  "capa": "/assets/catalogos/flores/capa.webp",
   "paginas": [
     "/assets/catalogos/flores/p01.webp",
     "/assets/catalogos/flores/p02.webp",

@@ -6,7 +6,7 @@
   "preco_de": 0,
   "prazo": "Prazo de produção combinado no pedido",
   "descricao": "Catálogo de canecas personalizadas: Café e Bebidas. Escolha o número do modelo e personalize com nome, foto ou frase.",
-  "capa": "/assets/catalogos/cafe/p01.webp",
+  "capa": "/assets/catalogos/cafe/capa.webp",
   "paginas": [
     "/assets/catalogos/cafe/p01.webp",
     "/assets/catalogos/cafe/p02.webp",
