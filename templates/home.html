@@ -1186,6 +1186,7 @@ html {
   }
 
   // Renderizar Catálogo de 12 Produtos (Com cards destacados alternando estilo)
+  const CAN_PAIR = {{CAN_PAIR_JS}};
   function pcardHtml(p) {
       const isFav = state.favorites.includes(p.id);
       const imgSrc = p.image;
@@ -1286,7 +1287,7 @@ html {
       const others = CATS.filter(c => !c.basket);
       const groups = [
         ...baskets.map(c => ({ cats: [c.key], icon: c.icon, title: c.label, sub: c.sub, limit: 12, cap: true, moreLabel: c.label })),
-        ...(others.length ? [{ cats: others.map(c => c.key), icon: "✨", title: "3D, Xícaras e Personalizados", sub: "Peças em impressão 3D, xícaras e itens com nome para presentear.", limit: 8, cap: false, moreLabel: "personalizados" }] : [])
+        ...(others.length ? [{ cats: others.map(c => c.key), icon: "✨", title: "3D, Xícaras e Personalizados", sub: "Peças em impressão 3D, xícaras e itens com nome para presentear.", limit: 8, cans: true, cap: false, moreLabel: "personalizados" }] : [])
       ];
       grid.innerHTML = groups.map(g => {
         const items = PRODUCTS.filter(p => g.cats.includes(p.category));
@@ -1296,7 +1297,7 @@ html {
           : `<div class="bg-[#FDF8F9] rounded-3xl p-8 text-center border border-[#EED9DF]"><p class="font-display font-semibold text-[#382126] mb-1">Novidades chegando em breve</p><p class="text-xs text-[#785860] mb-4">Quer algo desta linha agora? Chame a gente no WhatsApp.</p><a href="https://wa.me/{{WA}}" target="_blank" rel="noopener" class="inline-block px-5 py-2.5 rounded-full bg-[#B36273] text-white text-xs font-display font-semibold">Falar no WhatsApp</a></div>`;
         const first = (items[0] && items[0].category) || g.cats[0];
         const more = items.length ? `<div class="text-center mt-5"><a href="/catalogo/#cat-${first}" class="inline-block px-6 py-2.5 rounded-full bg-white text-[#A65365] border-2 border-[#C87888] font-display font-semibold text-xs sm:text-sm hover:bg-[#FDF2F5] transition-all">Ver mais ${g.moreLabel} →</a></div>` : "";
-        return `<div class="ccont"><div class="mb-4"><h3 class="font-display font-semibold text-xl sm:text-2xl text-[#382126]">${g.icon} ${g.title}</h3>${g.sub ? `<p class="text-xs sm:text-sm text-[#785860] mt-1">${g.sub}</p>` : ""}</div>${body}${more}</div>`;
+        return `<div class="ccont"><div class="mb-4"><h3 class="font-display font-semibold text-xl sm:text-2xl text-[#382126]">${g.icon} ${g.title}</h3>${g.sub ? `<p class="text-xs sm:text-sm text-[#785860] mt-1">${g.sub}</p>` : ""}</div>${body}${g.cans ? CAN_PAIR : ""}${more}</div>`;
       }).join("");
       return;
     }

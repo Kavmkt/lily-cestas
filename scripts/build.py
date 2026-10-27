@@ -515,7 +515,7 @@ FAQ_COMMON = faq
 # "ids" é a lista de preferência; só entram produtos que estão visíveis no site. Se faltar, completa com os mais bem colocados.
 OCCASIONS = [
     dict(slug='cesta-de-aniversario', nome='Cesta de aniversário', cat_filter=None,
-         ids=['box-feliz-aniversario', 'cesta-lily-imperial-rose', 'cesta-despertar-delicado', 'box-floral', 'cesta-doce-encanto', 'caneca-personalizada-chaveiro', 'kit-porta-retratos-polaroid', 'luminaria-litofania-3d-foto'],
+         ids=['box-feliz-aniversario', 'cesta-lily-imperial-rose', 'cesta-despertar-delicado', 'box-floral', 'cesta-doce-encanto', 'kit-porta-retratos-polaroid', 'luminaria-litofania-3d-foto'],
          title='Cesta de Aniversário e Presentes Personalizados | Lily Cestas',
          desc='Cestas de aniversário com chocolates, balões e mimos, além de presentes personalizados. Escolha no site, combine o cartão pelo WhatsApp e receba em casa.',
          h1='Cesta de Aniversário: presentes que fazem a diferença',
@@ -537,7 +537,7 @@ OCCASIONS = [
          faq=[('As cestas de café da manhã têm itens perecíveis?', 'A composição de cada cesta está descrita na página do produto. Se tiver restrição alimentar, avise pelo WhatsApp antes de finalizar.'),
               ('Dá para enviar para o escritório?', 'Dá. Informe o endereço, o nome de quem recebe e um contato da recepção no checkout.')]),
     dict(slug='presente-dia-das-maes', nome='Presente de Dia das Mães', cat_filter=None,
-         ids=['cesta-doce-encanto', 'box-floral', 'caneca-afeto-em-flor', 'cesta-despertar-delicado', 'buque-de-flores-artificial', 'luminaria-litofania-3d-foto', 'caneca-personalizada-chaveiro', 'trio-decorativo-3d-vaso'],
+         ids=['cesta-doce-encanto', 'box-floral', 'caneca-afeto-em-flor', 'cesta-despertar-delicado', 'buque-de-flores-artificial', 'luminaria-litofania-3d-foto', 'trio-decorativo-3d-vaso'],
          title='Presente de Dia das Mães: Cestas e Personalizados | Lily Cestas',
          desc='Cestas de presente, flores artificiais e peças personalizadas para o Dia das Mães. Escolha no site, personalize pelo WhatsApp e receba em casa.',
          h1='Presente de Dia das Mães com carinho de verdade',
@@ -1069,7 +1069,7 @@ if CANECAS.get('ativa', True):
 # ---- vitrine de canecas na home (logo depois do catálogo de cestas)
 HOME_CANECAS = ''
 if CANECAS.get('ativa', True) and CATALOGOS and CANECAS.get('home_ativo', True) is not False:
-    _sl = [slugify(x) for x in (CANECAS.get('home_destaques') or ['natal', 'namorados', 'aniversario', 'pets'])]
+    _sl = [slugify(x) for x in (CANECAS.get('home_destaques') or ['aniversario', 'pets', 'pai', 'signos'])]
     _by = {c['slug']: c for c in CATALOGOS}
     _sel = [_by[x] for x in _sl if x in _by][:8] or CATALOGOS[:4]
     _cards = ''
@@ -1086,6 +1086,26 @@ if CANECAS.get('ativa', True) and CATALOGOS and CANECAS.get('home_ativo', True) 
     HOME_CANECAS = (f'<section id="canecas-home" class="hcn"><div class="hcn-in"><div class="hcn-head"><div><h2>Canecas personalizadas</h2>'
                     f'<p>Escolha o modelo e personalize com foto, nome ou frase.</p></div><a class="hcn-all" href="/canecas/" data-ga="home_canecas_click" data-ga-item="ver_todas">Ver todas as canecas →</a></div>'
                     f'<div class="hcn-grid">{_cards}</div>{_combo}</div></section>')
+
+
+# ---- dois catálogos de canecas dentro do bloco "3D, Xícaras e Personalizados" (Namorados e Natal)
+CAN_PAIR = ''
+if CANECAS.get('ativa', True) and CATALOGOS:
+    _pp = [x for x in (CANECAS.get('home_par') or ['namorados', 'natal'])]
+    _by2 = {c['slug']: c for c in CATALOGOS}
+    for _s in [slugify(x) for x in _pp][:2]:
+        _c = _by2.get(_s)
+        if not _c:
+            continue
+        _old = f'<span class="pold">{brl(_c["_de"])}</span>' if _c['_de'] else ''
+        _pix = f'<span class="pnote">{brl(_c["_preco"] * (1 - config["pix_desconto"] / 100))} no Pix</span>' if _c['_preco'] else ''
+        _pr = f'{_old}<span class="pprice">{brl(_c["_preco"])}</span>{_pix}' if _c['_preco'] else '<span class="pprice">Consulte o valor</span>'
+        _off = f'<span class="pbadge" style="background:#1F7A45">-{_c["_off"]}%</span>' if _c['_off'] else ''
+        CAN_PAIR += (f'<a class="pcard" href="{_c["_url"]}" data-ga="home_canecas_click" data-ga-item="{_c["slug"]}" style="text-decoration:none;color:inherit"><div class="pimg">'
+                     f'<img src="{_c["_capa"] or _c["_pages"][0]}" alt="Caneca personalizada {esc(_c["nome"])}" loading="lazy" width="760" height="760" style="aspect-ratio:1/1;height:auto" />{_off}</div>'
+                     f'<div class="pbody"><p class="pcat">Canecas personalizadas</p><h3>{esc(_c["nome"])}</h3><p class="pwhat">{len(_c.get("modelos") or [])} modelos · foto, nome ou frase</p>'
+                     f'<div class="pfoot">{_pr}</div><div class="pbtns"><span class="btn1" style="grid-column:1/-1;text-align:center">Ver catálogo</span></div></div></a>')
+    CAN_PAIR = f'<div class="cgrid" style="margin-top:16px">{CAN_PAIR}</div>' if CAN_PAIR else ''
 
 
 tpl = (ROOT / 'templates/home.html').read_text(encoding='utf-8')
@@ -1209,7 +1229,7 @@ repl = {
     'HOME_LINKS': ''.join(f'<a href="/{c["pagina_url"]}/" class="p-4 rounded-2xl border border-[#EED9DF] bg-[#FDF8F9] hover:bg-white text-sm font-display font-semibold text-[#A65365]">{esc(c["nome"])} →</a>' for c in cats_with if c.get('pagina_url')) + ''.join(f'<a href="/{o["slug"]}/" class="p-4 rounded-2xl border border-[#EED9DF] bg-[#FDF8F9] hover:bg-white text-sm font-display font-semibold text-[#A65365]">{esc(o["nome"])} →</a>' for o in OCCASIONS_OK) + ('<a href="/canecas/" class="p-4 rounded-2xl border border-[#EED9DF] bg-[#FDF8F9] hover:bg-white text-sm font-display font-semibold text-[#A65365]">Canecas personalizadas →</a>' if (ROOT / 'data/canecas.json').exists() else '') + '<a href="/catalogo/" class="p-4 rounded-2xl border border-[#EED9DF] bg-[#FDF8F9] hover:bg-white text-sm font-display font-semibold text-[#A65365]">Catálogo completo →</a>',
     'CIDADES_JSON': json.dumps([x for x in (config.get('cidades_entrega') or []) if x], ensure_ascii=False),
     'FOOTER_CATS': ''.join(f'<li><a href="/{c["pagina_url"]}/" class="hover:text-white hover:underline">{esc(c["nome"])}</a></li>' for c in cats_with if c.get('pagina_url')) + ''.join(f'<li><a href="/{o["slug"]}/" class="hover:text-white hover:underline">{esc(o["nome"])}</a></li>' for o in OCCASIONS_OK) + ('<li><a href="/canecas/" class="hover:text-white hover:underline">Canecas Personalizadas</a></li>' if (ROOT / 'data/canecas.json').exists() else ''),
-    'BANNERS': BANNERS_HTML, 'HOME_CANECAS': HOME_CANECAS, 'IG_BTN': IG_BTN, 'BRINDE_POPUP': BRINDE_POPUP, 'OWNER_BLOCK': OWNER_BLOCK,
+    'BANNERS': BANNERS_HTML, 'CAN_PAIR_JS': json.dumps(CAN_PAIR, ensure_ascii=False).replace('</', '<\\/'), 'HOME_CANECAS': HOME_CANECAS, 'IG_BTN': IG_BTN, 'BRINDE_POPUP': BRINDE_POPUP, 'OWNER_BLOCK': OWNER_BLOCK,
     'FAST_TOP': (f'<span class="fast">⚡ {FAST_TXT}*</span>' if FAST_TXT else ''), 'FAST_CHIP': (f'<span class="fastchip">⚡ {FAST_TXT}*</span>' if FAST_TXT else ''), 'FAST_FOOT': (f' {FAST_TXT}* em produtos prontos.' if FAST_TXT else ''),
     'B1V': brl(config['brinde1_valor']).replace(',00', ''), 'FRETE_MIN': brl(FRETE_MIN).replace(',00', ''), 'HERO_CATS': hero_cats, 'HERO_IMG': hero_img, 'CAT_PILLS': pills, 'MIMOS_TEXT': mimos, 'REWARD_INIT': reward_init, 'DATA_JS': data_js,
     'OPT_BASES': ''.join(opt(o) for o in SIM['bases']), 'OPT_LOUCA': ''.join(opt(o) for o in SIM['louca']),
