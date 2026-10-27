@@ -1,0 +1,62 @@
+{
+  "nome": "Pets e Animais",
+  "ativo": true,
+  "ordem": 9,
+  "preco": 59.9,
+  "preco_de": 0,
+  "prazo": "Prazo de produção combinado no pedido",
+  "descricao": "Catálogo de canecas personalizadas: Pets e Animais. Escolha o número do modelo e personalize com nome, foto ou frase.",
+  "capa": "/assets/catalogos/pets/p01.webp",
+  "paginas": [
+    "/assets/catalogos/pets/p01.webp",
+    "/assets/catalogos/pets/p02.webp",
+    "/assets/catalogos/pets/p03.webp",
+    "/assets/catalogos/pets/p04.webp",
+    "/assets/catalogos/pets/p05.webp",
+    "/assets/catalogos/pets/p06.webp",
+    "/assets/catalogos/pets/p07.webp",
+    "/assets/catalogos/pets/p08.webp"
+  ],
+  "modelos": [
+    {
+      "numero": "01",
+      "nome": "Mãe de Gato"
+    },
+    {
+      "numero": "02",
+      "nome": "Mãe de Cachorro"
+    },
+    {
+      "numero": "03",
+      "nome": "Amor de Gato"
+    },
+    {
+      "numero": "04",
+      "nome": "Nem Todo Anjo Possui Asas"
+    },
+    {
+      "numero": "05",
+      "nome": "Azar é Não Ter um Gato Preto"
+    },
+    {
+      "numero": "06",
+      "nome": "Lar é Onde Minha Cachorra Está"
+    },
+    {
+      "numero": "07",
+      "nome": "Meu Melhor Amigo é o Meu Cachorro"
+    },
+    {
+      "numero": "08",
+      "nome": "Cão ou Gato? Adotei os Dois"
+    },
+    {
+      "numero": "09",
+      "nome": "Meu Melhor Cãopanheiro"
+    },
+    {
+      "numero": "10",
+      "nome": "Gatinhos Pastel"
+    }
+  ]
+}

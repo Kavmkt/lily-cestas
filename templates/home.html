@@ -2136,6 +2136,10 @@ html {
       }
       history.replaceState(null, "", location.pathname + "#catalogo");
     }
+    if (location.hash === "#sacola") {
+      document.getElementById("cart-drawer")?.classList.remove("hidden");
+      history.replaceState(null, "", location.pathname);
+    }
     const hp = /^#p=(.+)$/.exec(location.hash);
     if (hp) {
       openProductModal(decodeURIComponent(hp[1]));

@@ -815,6 +815,110 @@ if banners:
                        'function start(){timer=setInterval(function(){go(i+1)},5500)}function stop(){clearInterval(timer)}'
                        'w.addEventListener("touchstart",stop,{passive:true});w.addEventListener("mouseenter",stop);w.addEventListener("mouseleave",start);start();}mark();})();</script>' if len(banners) > 1 else ''))
 
+# ---------------------------------------------------------------- catálogos de canecas (/canecas/<tema>/)
+CATALOGOS = []
+for _f in sorted((ROOT / 'data/catalogos').glob('*.json')):
+    _c = load_json(_f, {}) or {}
+    if not _c or _c.get('ativo') is False or not _c.get('paginas'):
+        continue
+    _c['slug'] = slugify(_f.stem)
+    _c['_ordem'] = to_number(_c.get('ordem'), f'Catálogo {_f.name} › ordem', False) or 999
+    _c['_preco'] = to_number(_c.get('preco'), f'Catálogo {_f.name} › preço', False) or 0
+    _c['_de'] = to_number(_c.get('preco_de'), f'Catálogo {_f.name} › preço antigo', False) or 0
+    if _c['_de'] and _c['_de'] <= _c['_preco']:
+        _c['_de'] = 0
+    _c['_off'] = round((1 - _c['_preco'] / _c['_de']) * 100) if _c['_de'] and _c['_preco'] else 0
+    _c['_url'] = f'/canecas/{_c["slug"]}/'
+    _c['_pages'] = [u for u in (resize_to(x, 1400) for x in _c['paginas']) if u]
+    _c['_capa'] = resize_to(_c.get('capa') or _c['paginas'][0], 700)
+    if not _c['_pages']:
+        continue
+    CATALOGOS.append(_c)
+CATALOGOS.sort(key=lambda c: (c['_ordem'], c.get('nome', '')))
+
+
+def cat_price_html(c, cls='cp'):
+    if not c['_preco']:
+        return f'<span class="{cls}"><b>Consulte o valor</b></span>'
+    old = f'<s>{brl(c["_de"])}</s> ' if c['_de'] else ''
+    off = f'<i class="cp-off">-{c["_off"]}%</i>' if c['_off'] else ''
+    return f'<span class="{cls}">{old}<b>{brl(c["_preco"])}</b>{off}</span>'
+
+
+def catalogo_cards():
+    out = ''
+    for c in CATALOGOS:
+        n = len(c.get('modelos') or [])
+        badge = f'<span class="ct-badge">-{c["_off"]}%</span>' if c['_off'] else ''
+        capa = c['_capa'] or c['_pages'][0]
+        out += (f'<a class="ctcard" href="{c["_url"]}" data-ga="catalogo_click" data-ga-item="{c["slug"]}">'
+                f'<span class="ct-img"><img src="{esc(capa)}" alt="Catálogo de canecas personalizadas: {esc(c["nome"])}" width="700" height="495" loading="lazy">{badge}</span>'
+                f'<span class="ct-body"><h3>{esc(c["nome"])}</h3><span class="ct-n">{n} modelos prontos para personalizar</span>'
+                f'{cat_price_html(c)}<em class="ct-btn">Ver catálogo →</em></span></a>')
+    return out
+
+
+def catalogo_page(c):
+    path = c['_url']
+    nome = c['nome']
+    v = fill_vars
+    h1 = f'Canecas Personalizadas: {nome}'
+    desc = v(c.get('descricao') or '')[:300]
+    robots = 'noindex, nofollow' if CANECAS.get('noindex', True) else 'index, follow, max-image-preview:large'
+    trail = [('Início', '/'), ('Canecas personalizadas', '/canecas/'), (nome, path)]
+    crumbs = ' › '.join(f'<a href="{u}">{esc(nm)}</a>' if i < len(trail) - 1 else f'<span>{esc(nm)}</span>' for i, (nm, u) in enumerate(trail))
+    pages = c['_pages']
+    imgs = ''.join(f'<img class="cv-pg" src="{esc(u)}" alt="{esc(nome)}: página {i + 1} do catálogo" width="1400" height="989" {"fetchpriority=high" if i == 0 else "loading=lazy"} decoding="async">'
+                   for i, u in enumerate(pages))
+    modelos = c.get('modelos') or []
+    opts = '<option value="">Escolha o modelo…</option>' + ''.join(
+        f'<option value="{esc(m["numero"])}|{esc(m["nome"])}">{esc(m["numero"])} · {esc(m["nome"])}</option>' for m in modelos) + '<option value="x|Outro modelo (conto pelo WhatsApp)">Outro modelo (conto pelo WhatsApp)</option>'
+    prazo = esc(v(c.get('prazo') or 'Prazo de produção combinado no pedido'))
+    can_buy = bool(c['_preco'])
+    wa_base = f'Oi! Vim pelo site da Lily Cestas e quero uma caneca personalizada do catálogo {nome}.'
+    buy_btn = (f'<button type="button" class="btn cv-buy" id="cv-buy">Comprar agora</button>' if can_buy else '')
+    cfg = json.dumps({'tema': nome, 'slug': c['slug'], 'preco': c['_preco'], 'shop': SHOP, 'wa': WA, 'wabase': wa_base}, ensure_ascii=False).replace('</', '<\\/')
+    js = '''<script>(function(){var C=%s,sel=document.getElementById("cv-model"),msg=document.getElementById("cv-msg"),b=document.getElementById("cv-buy"),w=document.getElementById("cv-wa");
+function pick(){var v=sel.value;if(!v){msg.textContent="Escolha o número do modelo primeiro 😉";msg.hidden=false;sel.focus();return null}msg.hidden=true;var p=v.split("|");return{n:p[0],t:p[1]}}
+function ev(n,m){try{window.gtag&&gtag("event",n,{item_name:C.tema,model:m})}catch(e){}}
+if(b)b.addEventListener("click",function(){var m=pick();if(!m)return;var nm=m.n==="x"?"Caneca personalizada · "+C.tema+" (modelo a combinar)":"Caneca personalizada · "+C.tema+" · Modelo "+m.n+" "+m.t;
+var cart=[];try{cart=JSON.parse(localStorage.getItem("lily_cart_v2")||"[]")}catch(e){}
+cart.push({id:"catalogo-"+C.slug+"-"+m.n+"-"+Date.now(),name:nm,price:C.preco,qty:1,details:"Personalização (nome, foto ou frase) combinada no WhatsApp"});
+try{localStorage.setItem("lily_cart_v2",JSON.stringify(cart))}catch(e){}ev("catalogo_comprar_agora",m.n);location.href=C.shop+"#sacola"});
+if(w)w.addEventListener("click",function(e){var m=pick();if(!m){e.preventDefault();return}var t=C.wabase+(m.n==="x"?" Quero combinar um modelo.":" Quero o modelo "+m.n+" ("+m.t+").");w.href="https://wa.me/"+C.wa+"?text="+encodeURIComponent(t);ev("catalogo_whatsapp",m.n)});
+var tr=document.getElementById("cv-track"),ct=document.getElementById("cv-count"),n=tr.children.length;
+function cur(){return Math.max(0,Math.min(n-1,Math.round(tr.scrollLeft/tr.clientWidth)))}
+function upd(){ct.textContent=(cur()+1)+" / "+n}tr.addEventListener("scroll",upd,{passive:true});
+document.getElementById("cv-prev").addEventListener("click",function(){tr.scrollTo({left:(cur()-1)*tr.clientWidth,behavior:"smooth"})});
+document.getElementById("cv-next").addEventListener("click",function(){tr.scrollTo({left:(cur()+1)*tr.clientWidth,behavior:"smooth"})});
+document.addEventListener("keydown",function(e){if(e.target.closest&&e.target.closest("select,input,textarea"))return;if(e.key==="ArrowRight")document.getElementById("cv-next").click();if(e.key==="ArrowLeft")document.getElementById("cv-prev").click()});upd()})();</script>''' % cfg
+    fonts = ('<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>'
+             '<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap" rel="stylesheet">'
+             '<link rel="stylesheet" href="/assets/css/pages.css"><link rel="stylesheet" href="/assets/css/canecas.css">\n</head><body class="cat-page">')
+    faq = [('Como escolho o modelo?', 'Folheie o catálogo, anote o número do modelo que você gostou e escolha-o na lista ao lado. Para outro tema ou uma arte diferente, é só combinar pelo WhatsApp.'),
+           ('Posso colocar foto, nome e frase?', 'Pode. Depois de finalizar o pedido, você envia nome, frase, foto ou as cores que preferir pelo WhatsApp e confirmamos tudo antes de produzir.'),
+           ('Qual é o prazo?', c.get('prazo') or 'O prazo de produção é combinado no pedido, conforme a agenda do atelier.'),
+           ('Vocês entregam na minha região?', v('Atendemos Santana de Parnaíba, Alphaville, Barueri, Cajamar, Osasco e Carapicuíba. Entrega grátis a partir de {frete}; locais mais distantes podem ter taxa.'))]
+    faq_block = ''.join(f'<details><summary>{esc(q)}</summary><p>{esc(a)}</p></details>' for q, a in faq)
+    body = f'''<main><div class="wrap"><nav class="crumbs" aria-label="Navegação">{crumbs}</nav>
+<div class="cv"><div class="cv-view"><div class="cv-track" id="cv-track" aria-label="Páginas do catálogo">{imgs}</div>
+<button type="button" class="cv-nav cv-prev" id="cv-prev" aria-label="Página anterior">‹</button><button type="button" class="cv-nav cv-next" id="cv-next" aria-label="Próxima página">›</button><span class="cv-count" id="cv-count">1 / {len(pages)}</span></div>
+<aside class="cv-buybox"><span class="tag">☕ Catálogo</span><h1>{esc(h1)}</h1><p class="cv-sub">{esc(v(c.get("descricao") or ""))}</p>
+{cat_price_html(c, "cp cp-lg")}<p class="cv-prazo">⏱ {prazo}</p>
+<label class="cv-lbl" for="cv-model">Qual modelo você quer?</label><select id="cv-model" class="cv-sel">{opts}</select><p class="cv-msg" id="cv-msg" hidden></p>
+{buy_btn}<a class="btn ghost cv-wa" id="cv-wa" href="#" target="_blank" rel="noopener">Pedir pelo WhatsApp</a>
+<p class="nota">Nome, foto ou frase são combinados pelo WhatsApp depois do pedido. *Entrega grátis a partir de {FRETE_TXT}; locais mais distantes podem ter taxa.</p></aside></div>
+<section><h2>Perguntas frequentes</h2><div class="faq">{faq_block}</div></section>
+<p class="more"><a href="/canecas/#catalogos">← Ver outros catálogos de canecas</a></p>
+</div></main>'''
+    bar = (f'<div class="cv-bar">{cat_price_html(c, "cp")}<a class="btn" href="#cv-model" id="cv-bar-btn">Escolher modelo</a></div>')
+    write_page(path, head(f'Canecas Personalizadas {nome} | Catálogo | Lily Cestas', desc, path, robots)
+               + jsonld(BUSINESS, crumb_ld(trail), faq_ld(faq), {'@type': 'CollectionPage', 'name': h1, 'url': BASE + path}) + fonts + top_html() + body + bar + js
+               + footer_html() + '</body></html>')
+    if CANECAS.get('noindex', True) is False:
+        page_urls.append(path)
+
+
 # ---------------------------------------------------------------- página dedicada de canecas (/canecas/)
 def canecas_page():
     C = CANECAS
@@ -886,6 +990,7 @@ def canecas_page():
     robots = 'noindex, nofollow' if C.get('noindex', True) else 'index, follow, max-image-preview:large'
     prods_blk = (f'<section id="produtos"><h2>{esc(C.get("produtos_titulo") or "Canecas prontas para pedir")}</h2><div class="cards">{cards_html(plist)}</div></section>') if plist else ''
     cta_msg = 'Oi! Vim pelo site da Lily Cestas e quero criar uma caneca personalizada do meu jeito.'
+    catalogos_blk = (f'<section id="catalogos"><h2>{esc(C.get("catalogos_titulo") or "Catálogos por tema")}</h2><p class="sub">{esc(v(C.get("catalogos_texto") or "Folheie o catálogo, escolha o número do modelo e personalize."))}</p><div class="ctcards">{catalogo_cards()}</div></section>') if CATALOGOS else ''
     fonts = ('<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>'
              '<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap" rel="stylesheet">'
              '<link rel="stylesheet" href="/assets/css/pages.css"><link rel="stylesheet" href="/assets/css/canecas.css">\n</head><body>')
@@ -893,6 +998,7 @@ def canecas_page():
 <header class="cn-hero"><span class="tag">☕ Canecas personalizadas</span><h1>{esc(h1)}</h1><p class="intro">{esc(v(C.get("intro") or ""))}</p>
 <p><a class="btn" href="#temas">{esc(C.get("botao_principal") or "Escolher meu tema")}</a> <a class="btn ghost" href="{esc(wa(cta_msg))}" target="_blank" rel="noopener" data-ga="whatsapp_click" data-ga-item="canecas_hero">Falar no WhatsApp</a></p></header>
 {banners_blk}
+{catalogos_blk}
 <section id="temas"><h2>{esc(C.get("temas_titulo") or "Escolha um tema")}</h2><p class="sub">{esc(v(C.get("temas_texto") or ""))}</p><div class="temas">{tcards}</div></section>
 <section><h2>Como funciona</h2><ol class="passos">{steps}</ol><p class="nota">*Locais mais distantes podem ter taxa de entrega. Confira pelo CEP no checkout ou pelo WhatsApp.</p></section>
 {prods_blk}
@@ -907,6 +1013,8 @@ def canecas_page():
 
 if CANECAS.get('ativa', True):
     canecas_page()
+    for _c in CATALOGOS:
+        catalogo_page(_c)
 
 
 # ---------------------------------------------------------------- home (loja completa)

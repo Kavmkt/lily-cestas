@@ -272,6 +272,36 @@ content:
           - { name: pergunta, label: Pergunta, type: string, required: true }
           - { name: resposta, label: Resposta, type: text, required: true }
 
+  # ------------------------------------------------------------------ CATÁLOGOS DE CANECAS
+  - name: catalogos
+    label: Catálogos de canecas (por tema)
+    type: collection
+    path: data/catalogos
+    filename: '{primary}.json'
+    extension: json
+    format: json
+    view:
+      fields: [nome, preco, preco_de, ativo]
+      primary: nome
+    fields:
+      - { name: nome, label: Nome do tema, type: string, required: true, description: "Exemplo - Pets e Animais." }
+      - { name: ativo, label: Mostrar no site, type: boolean, default: true }
+      - { name: ordem, label: Ordem (1 aparece primeiro), type: number, default: 10 }
+      - { name: preco, label: Preço da caneca (R$), type: number, description: "Preço que o cliente paga. Exemplo 59.90. Deixe 0 para mostrar 'Consulte o valor'." }
+      - { name: preco_de, label: Preço antigo riscado (R$), type: number, description: "Opcional. Se for maior que o preço, o site mostra o preço riscado e a porcentagem de desconto. Use só um preço que vocês realmente cobraram." }
+      - { name: prazo, label: Prazo de produção e entrega, type: string, description: "Aparece ao lado do preço. Exemplo - Pronta em até 3 dias úteis." }
+      - { name: descricao, label: Texto de apresentação, type: text }
+      - { name: capa, label: Capa do anúncio, type: image, options: { path: assets/catalogos } }
+      - { name: paginas, label: Páginas do catálogo (na ordem), type: image, list: true, options: { path: assets/catalogos }, description: "Envie as páginas como imagem (JPG, PNG ou WebP), de preferência com até 1400 px de largura." }
+      - name: modelos
+        label: Modelos (número e nome)
+        type: object
+        list: true
+        description: "Aparecem na lista para o cliente escolher. O número tem que ser o mesmo que está no catálogo."
+        fields:
+          - { name: numero, label: Número (ex. 01), type: string, required: true }
+          - { name: nome, label: Nome do modelo, type: string, required: true }
+
   # ------------------------------------------------------------------ PÁGINA DE CANECAS
   - name: canecas
     label: Página de Canecas (/canecas/)
