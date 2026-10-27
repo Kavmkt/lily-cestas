@@ -360,6 +360,8 @@ content:
       - { name: h1, label: Título da página, type: string }
       - { name: intro, label: Texto de abertura, type: text }
       - { name: botao_principal, label: Texto do botão principal, type: string }
+      - { name: home_ativo, label: Mostrar canecas na home, type: boolean, default: true, description: "Vitrine com algumas canecas logo depois do catálogo de cestas." }
+      - { name: home_destaques, label: Catálogos que aparecem na home, type: string, list: true, description: "Código do catálogo, na ordem desejada (até 8). Exemplos - natal, namorados, aniversario, pets, pai, signos, cafe." }
       - { name: combo_ativo, label: Combo de canecas ligado, type: boolean, default: true, description: "Aparece nas páginas dos catálogos, com frete grátis e o chaveirinho de brinde." }
       - { name: combo_qtd, label: Canecas no combo, type: number, default: 3 }
       - { name: combo_preco, label: Preço do combo (R$), type: number, description: "Exemplo 119.90. Deixe 0 para esconder o combo." }

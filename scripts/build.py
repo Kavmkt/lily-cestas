@@ -1066,6 +1066,28 @@ if CANECAS.get('ativa', True):
 
 
 # ---------------------------------------------------------------- home (loja completa)
+# ---- vitrine de canecas na home (logo depois do catálogo de cestas)
+HOME_CANECAS = ''
+if CANECAS.get('ativa', True) and CATALOGOS and CANECAS.get('home_ativo', True) is not False:
+    _sl = [slugify(x) for x in (CANECAS.get('home_destaques') or ['natal', 'namorados', 'aniversario', 'pets'])]
+    _by = {c['slug']: c for c in CATALOGOS}
+    _sel = [_by[x] for x in _sl if x in _by][:8] or CATALOGOS[:4]
+    _cards = ''
+    for _c in _sel:
+        _off = f'<span class="hcn-off">-{_c["_off"]}%</span>' if _c['_off'] else ''
+        _old = f'<s>{brl(_c["_de"])}</s>' if _c['_de'] else ''
+        _pr = f'<span class="hcn-p">{_old}{brl(_c["_preco"])}</span>' if _c['_preco'] else '<span class="hcn-p">Consulte o valor</span>'
+        _cards += (f'<a class="hcn-card" href="{_c["_url"]}" data-ga="home_canecas_click" data-ga-item="{_c["slug"]}"><span class="hcn-img">'
+                   f'<img src="{_c["_capa"] or _c["_pages"][0]}" alt="Caneca personalizada {esc(_c["nome"])}" width="700" height="700" loading="lazy">{_off}</span>'
+                   f'<span class="hcn-b"><h3>{esc(_c["nome"])}</h3><small>{len(_c.get("modelos") or [])} modelos</small>{_pr}</span></a>')
+    _cbp = to_number(CANECAS.get('combo_preco'), 'Combo › preço', False) or 0
+    _cbq = int(to_number(CANECAS.get('combo_qtd'), 'Combo › quantidade', False) or 3)
+    _combo = (f'<p class="hcn-combo">🎁 <b>Combo {_cbq} canecas por {brl(_cbp)}</b> · frete grátis* · chaveirinho de brinde</p>') if (_cbp and CANECAS.get('combo_ativo', True)) else ''
+    HOME_CANECAS = (f'<section id="canecas-home" class="hcn"><div class="hcn-in"><div class="hcn-head"><div><h2>Canecas personalizadas</h2>'
+                    f'<p>Escolha o modelo e personalize com foto, nome ou frase.</p></div><a class="hcn-all" href="/canecas/" data-ga="home_canecas_click" data-ga-item="ver_todas">Ver todas as canecas →</a></div>'
+                    f'<div class="hcn-grid">{_cards}</div>{_combo}</div></section>')
+
+
 tpl = (ROOT / 'templates/home.html').read_text(encoding='utf-8')
 hero_p = next((p for p in active if p.get('destaque')), active[0] if active else visible[0])
 pill_cls = 'px-4 py-2 rounded-full text-xs font-display font-medium bg-white text-[#5A3D43] border border-[#EED9DF] hover:border-[#C87888] transition-all'
@@ -1187,7 +1209,7 @@ repl = {
     'HOME_LINKS': ''.join(f'<a href="/{c["pagina_url"]}/" class="p-4 rounded-2xl border border-[#EED9DF] bg-[#FDF8F9] hover:bg-white text-sm font-display font-semibold text-[#A65365]">{esc(c["nome"])} →</a>' for c in cats_with if c.get('pagina_url')) + ''.join(f'<a href="/{o["slug"]}/" class="p-4 rounded-2xl border border-[#EED9DF] bg-[#FDF8F9] hover:bg-white text-sm font-display font-semibold text-[#A65365]">{esc(o["nome"])} →</a>' for o in OCCASIONS_OK) + ('<a href="/canecas/" class="p-4 rounded-2xl border border-[#EED9DF] bg-[#FDF8F9] hover:bg-white text-sm font-display font-semibold text-[#A65365]">Canecas personalizadas →</a>' if (ROOT / 'data/canecas.json').exists() else '') + '<a href="/catalogo/" class="p-4 rounded-2xl border border-[#EED9DF] bg-[#FDF8F9] hover:bg-white text-sm font-display font-semibold text-[#A65365]">Catálogo completo →</a>',
     'CIDADES_JSON': json.dumps([x for x in (config.get('cidades_entrega') or []) if x], ensure_ascii=False),
     'FOOTER_CATS': ''.join(f'<li><a href="/{c["pagina_url"]}/" class="hover:text-white hover:underline">{esc(c["nome"])}</a></li>' for c in cats_with if c.get('pagina_url')) + ''.join(f'<li><a href="/{o["slug"]}/" class="hover:text-white hover:underline">{esc(o["nome"])}</a></li>' for o in OCCASIONS_OK) + ('<li><a href="/canecas/" class="hover:text-white hover:underline">Canecas Personalizadas</a></li>' if (ROOT / 'data/canecas.json').exists() else ''),
-    'BANNERS': BANNERS_HTML, 'IG_BTN': IG_BTN, 'BRINDE_POPUP': BRINDE_POPUP, 'OWNER_BLOCK': OWNER_BLOCK,
+    'BANNERS': BANNERS_HTML, 'HOME_CANECAS': HOME_CANECAS, 'IG_BTN': IG_BTN, 'BRINDE_POPUP': BRINDE_POPUP, 'OWNER_BLOCK': OWNER_BLOCK,
     'FAST_TOP': (f'<span class="fast">⚡ {FAST_TXT}*</span>' if FAST_TXT else ''), 'FAST_CHIP': (f'<span class="fastchip">⚡ {FAST_TXT}*</span>' if FAST_TXT else ''), 'FAST_FOOT': (f' {FAST_TXT}* em produtos prontos.' if FAST_TXT else ''),
     'B1V': brl(config['brinde1_valor']).replace(',00', ''), 'FRETE_MIN': brl(FRETE_MIN).replace(',00', ''), 'HERO_CATS': hero_cats, 'HERO_IMG': hero_img, 'CAT_PILLS': pills, 'MIMOS_TEXT': mimos, 'REWARD_INIT': reward_init, 'DATA_JS': data_js,
     'OPT_BASES': ''.join(opt(o) for o in SIM['bases']), 'OPT_LOUCA': ''.join(opt(o) for o in SIM['louca']),

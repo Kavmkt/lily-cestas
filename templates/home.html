@@ -315,6 +315,17 @@ html {
 .trustbar .fast{background:#F2D5DC;color:var(--ink);font-weight:700;border-radius:99px;padding:2px 11px}.chips span.fastchip{background:#FBEEF1;border-color:#C87888;color:#A65365;font-weight:700}
 .bp-ship b+b{margin-top:2px}
 .igbtn{display:inline-flex;align-items:center;gap:8px;margin-top:14px;padding:9px 16px;border-radius:99px;border:1px solid rgba(255,255,255,.7);color:#fff;font:600 13px 'Plus Jakarta Sans',sans-serif;text-decoration:none;transition:background .15s}.igbtn:hover{background:rgba(255,255,255,.16)}
+.hcn{background:linear-gradient(180deg,#FFF3F6,#FDF8F9);padding:44px 0;border-bottom:1px solid #EED9DF}.hcn-in{max-width:1120px;margin:0 auto;padding:0 20px}
+.hcn-head{display:flex;justify-content:space-between;align-items:flex-end;gap:14px;flex-wrap:wrap;margin-bottom:18px}.hcn h2{font:600 clamp(22px,3vw,30px) 'Montserrat',sans-serif;color:#A65365;margin:0}.hcn-head p{margin:4px 0 0;font-size:14px;color:#785860}
+.hcn-all{font:700 13px 'Montserrat',sans-serif;color:#A65365;text-decoration:none;border:1px solid #E5C2C9;background:#fff;border-radius:99px;padding:9px 18px}
+.hcn-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.hcn-card{display:flex;flex-direction:column;background:#fff;border:1px solid #EED9DF;border-radius:20px;overflow:hidden;text-decoration:none;color:#382126;transition:transform .15s,box-shadow .15s}.hcn-card:hover{transform:translateY(-3px);box-shadow:0 16px 28px -18px rgba(166,83,101,.55)}
+.hcn-img{position:relative;display:block}.hcn-img img{display:block;width:100%;aspect-ratio:1/1;object-fit:cover}
+.hcn-off{position:absolute;top:8px;left:8px;background:#1F7A45;color:#fff;font:700 11px 'Montserrat',sans-serif;border-radius:99px;padding:4px 10px}
+.hcn-b{display:flex;flex-direction:column;gap:3px;padding:12px 14px 14px}.hcn-b h3{margin:0;font:700 15px 'Montserrat',sans-serif}.hcn-b small{font-size:12px;color:#785860}
+.hcn-p{font:700 18px 'Montserrat',sans-serif;color:#A65365}.hcn-p s{font:500 12px 'Plus Jakarta Sans',sans-serif;color:#8C6C73;margin-right:6px}
+.hcn-combo{margin:18px 0 0;text-align:center;font:600 14px 'Plus Jakarta Sans',sans-serif;color:#5A3D43;background:#fff;border:1.5px dashed #C87888;border-radius:16px;padding:12px 16px}.hcn-combo b{color:#A65365}
+@media(max-width:860px){.hcn-grid{grid-template-columns:repeat(2,1fr);gap:12px}.hcn{padding:34px 0}}
 </style>
 </head>
 <body class="min-h-screen antialiased selection:bg-[#F2D5DC] selection:text-[#382126]">
@@ -452,6 +463,8 @@ html {
       </div>
     </div>
   </section>
+
+  {{HOME_CANECAS}}
 
   <section id="ifood" class="ifd">
     <div class="ifd-in">
