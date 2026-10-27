@@ -20,43 +20,53 @@
   "modelos": [
     {
       "numero": "01",
-      "nome": "Caixinha de Segredos"
+      "nome": "Caixinha de Segredos",
+      "img": "/assets/catalogos/amizade/m01.webp"
     },
     {
       "numero": "02",
-      "nome": "Amigas para Sempre"
+      "nome": "Amigas para Sempre",
+      "img": "/assets/catalogos/amizade/m02.webp"
     },
     {
       "numero": "03",
-      "nome": "Best Friend Forever"
+      "nome": "Best Friend Forever",
+      "img": "/assets/catalogos/amizade/m03.webp"
     },
     {
       "numero": "04",
-      "nome": "Não Tenho uma Amiga, Tenho uma Irmã"
+      "nome": "Não Tenho uma Amiga, Tenho uma Irmã",
+      "img": "/assets/catalogos/amizade/m04.webp"
     },
     {
       "numero": "05",
-      "nome": "Miga, Sua Loka! (Pop Art)"
+      "nome": "Miga, Sua Loka! (Pop Art)",
+      "img": "/assets/catalogos/amizade/m05.webp"
     },
     {
       "numero": "06",
-      "nome": "Miga, Sua Loka! (Vaquinha)"
+      "nome": "Miga, Sua Loka! (Vaquinha)",
+      "img": "/assets/catalogos/amizade/m06.webp"
     },
     {
       "numero": "07",
-      "nome": "Melhor Amiga do Mundo"
+      "nome": "Melhor Amiga do Mundo",
+      "img": "/assets/catalogos/amizade/m07.webp"
     },
     {
       "numero": "08",
-      "nome": "Te Amo Muito, Amiga"
+      "nome": "Te Amo Muito, Amiga",
+      "img": "/assets/catalogos/amizade/m08.webp"
     },
     {
       "numero": "09",
-      "nome": "Amiga Incrível"
+      "nome": "Amiga Incrível",
+      "img": "/assets/catalogos/amizade/m09.webp"
     },
     {
       "numero": "10",
-      "nome": "Melhores Amigas é Pouco, Somos Irmãs"
+      "nome": "Melhores Amigas é Pouco, Somos Irmãs",
+      "img": "/assets/catalogos/amizade/m10.webp"
     }
   ],
   "seo_titulo": "Caneca Personalizada para Amiga: Best Friend e Mais | Lily Cestas",

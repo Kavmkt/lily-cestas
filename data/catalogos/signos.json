@@ -21,51 +21,63 @@
   "modelos": [
     {
       "numero": "01",
-      "nome": "Áries"
+      "nome": "Áries",
+      "img": "/assets/catalogos/signos/m01.webp"
     },
     {
       "numero": "02",
-      "nome": "Touro"
+      "nome": "Touro",
+      "img": "/assets/catalogos/signos/m02.webp"
     },
     {
       "numero": "03",
-      "nome": "Gêmeos"
+      "nome": "Gêmeos",
+      "img": "/assets/catalogos/signos/m03.webp"
     },
     {
       "numero": "04",
-      "nome": "Câncer"
+      "nome": "Câncer",
+      "img": "/assets/catalogos/signos/m04.webp"
     },
     {
       "numero": "05",
-      "nome": "Leão"
+      "nome": "Leão",
+      "img": "/assets/catalogos/signos/m05.webp"
     },
     {
       "numero": "06",
-      "nome": "Virgem"
+      "nome": "Virgem",
+      "img": "/assets/catalogos/signos/m06.webp"
     },
     {
       "numero": "07",
-      "nome": "Libra"
+      "nome": "Libra",
+      "img": "/assets/catalogos/signos/m07.webp"
     },
     {
       "numero": "08",
-      "nome": "Escorpião"
+      "nome": "Escorpião",
+      "img": "/assets/catalogos/signos/m08.webp"
     },
     {
       "numero": "09",
-      "nome": "Sagitário"
+      "nome": "Sagitário",
+      "img": "/assets/catalogos/signos/m09.webp"
     },
     {
       "numero": "10",
-      "nome": "Capricórnio"
+      "nome": "Capricórnio",
+      "img": "/assets/catalogos/signos/m10.webp"
     },
     {
       "numero": "11",
-      "nome": "Aquário"
+      "nome": "Aquário",
+      "img": "/assets/catalogos/signos/m11.webp"
     },
     {
       "numero": "12",
-      "nome": "Peixes"
+      "nome": "Peixes",
+      "img": "/assets/catalogos/signos/m12.webp"
     }
   ],
   "seo_titulo": "Caneca de Signos Personalizada: Áries a Peixes | Lily Cestas",

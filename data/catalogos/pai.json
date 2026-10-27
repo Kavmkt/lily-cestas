@@ -26,83 +26,103 @@
   "modelos": [
     {
       "numero": "01",
-      "nome": "Melhor Pai do Mundo (Polaroid)"
+      "nome": "Melhor Pai do Mundo (Polaroid)",
+      "img": "/assets/catalogos/pai/m01.webp"
     },
     {
       "numero": "02",
-      "nome": "O Melhor Pai do Mundo (Kraft)"
+      "nome": "O Melhor Pai do Mundo (Kraft)",
+      "img": "/assets/catalogos/pai/m02.webp"
     },
     {
       "numero": "03",
-      "nome": "Melhor Pai do Mundo (Azul Royal)"
+      "nome": "Melhor Pai do Mundo (Azul Royal)",
+      "img": "/assets/catalogos/pai/m03.webp"
     },
     {
       "numero": "04",
-      "nome": "Eu Te Amo, Pai (Coração)"
+      "nome": "Eu Te Amo, Pai (Coração)",
+      "img": "/assets/catalogos/pai/m04.webp"
     },
     {
       "numero": "05",
-      "nome": "Melhor Pai #1 (Selo)"
+      "nome": "Melhor Pai #1 (Selo)",
+      "img": "/assets/catalogos/pai/m05.webp"
     },
     {
       "numero": "06",
-      "nome": "Eu Te Amo, Pai (Duas Fotos)"
+      "nome": "Eu Te Amo, Pai (Duas Fotos)",
+      "img": "/assets/catalogos/pai/m06.webp"
     },
     {
       "numero": "07",
-      "nome": "Pai (Significado)"
+      "nome": "Pai (Significado)",
+      "img": "/assets/catalogos/pai/m07.webp"
     },
     {
       "numero": "08",
-      "nome": "Um Grande Pai e Super Vovô"
+      "nome": "Um Grande Pai e Super Vovô",
+      "img": "/assets/catalogos/pai/m08.webp"
     },
     {
       "numero": "09",
-      "nome": "Super Pai (Foto Inclinada)"
+      "nome": "Super Pai (Foto Inclinada)",
+      "img": "/assets/catalogos/pai/m09.webp"
     },
     {
       "numero": "10",
-      "nome": "Super Pai (Quadrinhos)"
+      "nome": "Super Pai (Quadrinhos)",
+      "img": "/assets/catalogos/pai/m10.webp"
     },
     {
       "numero": "11",
-      "nome": "Pai Mais Fortão do Mundo"
+      "nome": "Pai Mais Fortão do Mundo",
+      "img": "/assets/catalogos/pai/m11.webp"
     },
     {
       "numero": "12",
-      "nome": "O Melhor Pai da Galáxia"
+      "nome": "O Melhor Pai da Galáxia",
+      "img": "/assets/catalogos/pai/m12.webp"
     },
     {
       "numero": "13",
-      "nome": "Pai de Pet Também é Pai"
+      "nome": "Pai de Pet Também é Pai",
+      "img": "/assets/catalogos/pai/m13.webp"
     },
     {
       "numero": "14",
-      "nome": "Pai de Pet (Pata Marrom)"
+      "nome": "Pai de Pet (Pata Marrom)",
+      "img": "/assets/catalogos/pai/m14.webp"
     },
     {
       "numero": "15",
-      "nome": "Pai de Pet (Aquarela)"
+      "nome": "Pai de Pet (Aquarela)",
+      "img": "/assets/catalogos/pai/m15.webp"
     },
     {
       "numero": "16",
-      "nome": "Pai de Pet (Patinhas)"
+      "nome": "Pai de Pet (Patinhas)",
+      "img": "/assets/catalogos/pai/m16.webp"
     },
     {
       "numero": "17",
-      "nome": "Pai Pra Toda Obra"
+      "nome": "Pai Pra Toda Obra",
+      "img": "/assets/catalogos/pai/m17.webp"
     },
     {
       "numero": "18",
-      "nome": "Uso Exclusivo do Melhor Pai"
+      "nome": "Uso Exclusivo do Melhor Pai",
+      "img": "/assets/catalogos/pai/m18.webp"
     },
     {
       "numero": "19",
-      "nome": "Meu Pai, Meu Herói"
+      "nome": "Meu Pai, Meu Herói",
+      "img": "/assets/catalogos/pai/m19.webp"
     },
     {
       "numero": "20",
-      "nome": "Meu Super-Herói Favorito"
+      "nome": "Meu Super-Herói Favorito",
+      "img": "/assets/catalogos/pai/m20.webp"
     }
   ],
   "seo_titulo": "Caneca Personalizada para Pai: Dia dos Pais com Foto | Lily Cestas",

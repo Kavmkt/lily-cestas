@@ -20,43 +20,53 @@
   "modelos": [
     {
       "numero": "01",
-      "nome": "Eu Amo Café · Café é Vida"
+      "nome": "Eu Amo Café · Café é Vida",
+      "img": "/assets/catalogos/cafe/m01.webp"
     },
     {
       "numero": "02",
-      "nome": "Café Expresso"
+      "nome": "Café Expresso",
+      "img": "/assets/catalogos/cafe/m02.webp"
     },
     {
       "numero": "03",
-      "nome": "Foco, Força & Café"
+      "nome": "Foco, Força & Café",
+      "img": "/assets/catalogos/cafe/m03.webp"
     },
     {
       "numero": "04",
-      "nome": "Paz, Amor e Muito Café"
+      "nome": "Paz, Amor e Muito Café",
+      "img": "/assets/catalogos/cafe/m04.webp"
     },
     {
       "numero": "05",
-      "nome": "Um Bom Dia · Dose de Café"
+      "nome": "Um Bom Dia · Dose de Café",
+      "img": "/assets/catalogos/cafe/m05.webp"
     },
     {
       "numero": "06",
-      "nome": "Corujinha Pijama"
+      "nome": "Corujinha Pijama",
+      "img": "/assets/catalogos/cafe/m06.webp"
     },
     {
       "numero": "07",
-      "nome": "Corujinha Flores"
+      "nome": "Corujinha Flores",
+      "img": "/assets/catalogos/cafe/m07.webp"
     },
     {
       "numero": "08",
-      "nome": "A Vida Só Começa Depois do Café"
+      "nome": "A Vida Só Começa Depois do Café",
+      "img": "/assets/catalogos/cafe/m08.webp"
     },
     {
       "numero": "09",
-      "nome": "Capuccino · Expresso · Com Leite"
+      "nome": "Capuccino · Expresso · Com Leite",
+      "img": "/assets/catalogos/cafe/m09.webp"
     },
     {
       "numero": "10",
-      "nome": "Com Café · Sem Café"
+      "nome": "Com Café · Sem Café",
+      "img": "/assets/catalogos/cafe/m10.webp"
     }
   ],
   "seo_titulo": "Caneca de Café Personalizada: Frases e Ilustrações | Lily Cestas",

@@ -26,83 +26,103 @@
   "modelos": [
     {
       "numero": "01",
-      "nome": "Feliz Aniversário Dourado"
+      "nome": "Feliz Aniversário Dourado",
+      "img": "/assets/catalogos/aniversario/m01.webp"
     },
     {
       "numero": "02",
-      "nome": "Aniversário Dourado e Bege"
+      "nome": "Aniversário Dourado e Bege",
+      "img": "/assets/catalogos/aniversario/m02.webp"
     },
     {
       "numero": "03",
-      "nome": "Parabéns com Balões"
+      "nome": "Parabéns com Balões",
+      "img": "/assets/catalogos/aniversario/m03.webp"
     },
     {
       "numero": "04",
-      "nome": "Feliz Vida (Bolo e Balões)"
+      "nome": "Feliz Vida (Bolo e Balões)",
+      "img": "/assets/catalogos/aniversario/m04.webp"
     },
     {
       "numero": "05",
-      "nome": "Feliz Aniversário Rosê"
+      "nome": "Feliz Aniversário Rosê",
+      "img": "/assets/catalogos/aniversario/m05.webp"
     },
     {
       "numero": "06",
-      "nome": "Aniversário Floral"
+      "nome": "Aniversário Floral",
+      "img": "/assets/catalogos/aniversario/m06.webp"
     },
     {
       "numero": "07",
-      "nome": "Feliz Niver (Jardineira)"
+      "nome": "Feliz Niver (Jardineira)",
+      "img": "/assets/catalogos/aniversario/m07.webp"
     },
     {
       "numero": "08",
-      "nome": "Amor de Vó"
+      "nome": "Amor de Vó",
+      "img": "/assets/catalogos/aniversario/m08.webp"
     },
     {
       "numero": "09",
-      "nome": "Niver (Doodles)"
+      "nome": "Niver (Doodles)",
+      "img": "/assets/catalogos/aniversario/m09.webp"
     },
     {
       "numero": "10",
-      "nome": "Parabéns, Répi Bardei"
+      "nome": "Parabéns, Répi Bardei",
+      "img": "/assets/catalogos/aniversario/m10.webp"
     },
     {
       "numero": "11",
-      "nome": "Parabéns Pra Você (Corações)"
+      "nome": "Parabéns Pra Você (Corações)",
+      "img": "/assets/catalogos/aniversario/m11.webp"
     },
     {
       "numero": "12",
-      "nome": "Feliz Aniversário (Filme)"
+      "nome": "Feliz Aniversário (Filme)",
+      "img": "/assets/catalogos/aniversario/m12.webp"
     },
     {
       "numero": "13",
-      "nome": "Aniversário Marrom e Mostarda"
+      "nome": "Aniversário Marrom e Mostarda",
+      "img": "/assets/catalogos/aniversario/m13.webp"
     },
     {
       "numero": "14",
-      "nome": "Caneca da Mariana"
+      "nome": "Caneca da Mariana",
+      "img": "/assets/catalogos/aniversario/m14.webp"
     },
     {
       "numero": "15",
-      "nome": "Aniversário Dinossauro"
+      "nome": "Aniversário Dinossauro",
+      "img": "/assets/catalogos/aniversario/m15.webp"
     },
     {
       "numero": "16",
-      "nome": "Feliz Aniversário Verde"
+      "nome": "Feliz Aniversário Verde",
+      "img": "/assets/catalogos/aniversario/m16.webp"
     },
     {
       "numero": "17",
-      "nome": "Parabéns Azul"
+      "nome": "Parabéns Azul",
+      "img": "/assets/catalogos/aniversario/m17.webp"
     },
     {
       "numero": "18",
-      "nome": "Feliz Aniversário Executivo"
+      "nome": "Feliz Aniversário Executivo",
+      "img": "/assets/catalogos/aniversario/m18.webp"
     },
     {
       "numero": "19",
-      "nome": "Gol de Placa"
+      "nome": "Gol de Placa",
+      "img": "/assets/catalogos/aniversario/m19.webp"
     },
     {
       "numero": "20",
-      "nome": "Aniversário de Amiga"
+      "nome": "Aniversário de Amiga",
+      "img": "/assets/catalogos/aniversario/m20.webp"
     }
   ],
   "seo_titulo": "Caneca de Aniversário Personalizada com Foto e Nome | Lily Cestas",

@@ -20,43 +20,53 @@
   "modelos": [
     {
       "numero": "01",
-      "nome": "Girassóis Aquarela"
+      "nome": "Girassóis Aquarela",
+      "img": "/assets/catalogos/flores/m01.webp"
     },
     {
       "numero": "02",
-      "nome": "Mandalas de Girassol"
+      "nome": "Mandalas de Girassol",
+      "img": "/assets/catalogos/flores/m02.webp"
     },
     {
       "numero": "03",
-      "nome": "Rosas Vintage"
+      "nome": "Rosas Vintage",
+      "img": "/assets/catalogos/flores/m03.webp"
     },
     {
       "numero": "04",
-      "nome": "Lírios"
+      "nome": "Lírios",
+      "img": "/assets/catalogos/flores/m04.webp"
     },
     {
       "numero": "05",
-      "nome": "Jardim Colorido"
+      "nome": "Jardim Colorido",
+      "img": "/assets/catalogos/flores/m05.webp"
     },
     {
       "numero": "06",
-      "nome": "Renda Dourada"
+      "nome": "Renda Dourada",
+      "img": "/assets/catalogos/flores/m06.webp"
     },
     {
       "numero": "07",
-      "nome": "Floral Azul"
+      "nome": "Floral Azul",
+      "img": "/assets/catalogos/flores/m07.webp"
     },
     {
       "numero": "08",
-      "nome": "Tulipas"
+      "nome": "Tulipas",
+      "img": "/assets/catalogos/flores/m08.webp"
     },
     {
       "numero": "09",
-      "nome": "Rosas e Peônias"
+      "nome": "Rosas e Peônias",
+      "img": "/assets/catalogos/flores/m09.webp"
     },
     {
       "numero": "10",
-      "nome": "Girassol · Frente à Luz"
+      "nome": "Girassol · Frente à Luz",
+      "img": "/assets/catalogos/flores/m10.webp"
     }
   ],
   "seo_titulo": "Caneca Floral Personalizada: Girassol, Rosas e Lírios | Lily Cestas",

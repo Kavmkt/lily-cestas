@@ -20,43 +20,53 @@
   "modelos": [
     {
       "numero": "01",
-      "nome": "Grêmio · Seu Nome 10"
+      "nome": "Grêmio · Seu Nome 10",
+      "img": "/assets/catalogos/futebol/m01.webp"
     },
     {
       "numero": "02",
-      "nome": "São Paulo · Seu Nome 10"
+      "nome": "São Paulo · Seu Nome 10",
+      "img": "/assets/catalogos/futebol/m02.webp"
     },
     {
       "numero": "03",
-      "nome": "Flamengo · Mensagem da Torcida"
+      "nome": "Flamengo · Mensagem da Torcida",
+      "img": "/assets/catalogos/futebol/m03.webp"
     },
     {
       "numero": "04",
-      "nome": "Corinthians"
+      "nome": "Corinthians",
+      "img": "/assets/catalogos/futebol/m04.webp"
     },
     {
       "numero": "05",
-      "nome": "Vasco da Gama"
+      "nome": "Vasco da Gama",
+      "img": "/assets/catalogos/futebol/m05.webp"
     },
     {
       "numero": "06",
-      "nome": "Flamengo · Bola e Gramado"
+      "nome": "Flamengo · Bola e Gramado",
+      "img": "/assets/catalogos/futebol/m06.webp"
     },
     {
       "numero": "07",
-      "nome": "Palmeiras · Bola e Gramado"
+      "nome": "Palmeiras · Bola e Gramado",
+      "img": "/assets/catalogos/futebol/m07.webp"
     },
     {
       "numero": "08",
-      "nome": "Bahia · Bola e Gramado"
+      "nome": "Bahia · Bola e Gramado",
+      "img": "/assets/catalogos/futebol/m08.webp"
     },
     {
       "numero": "09",
-      "nome": "Fluminense · Bola e Gramado"
+      "nome": "Fluminense · Bola e Gramado",
+      "img": "/assets/catalogos/futebol/m09.webp"
     },
     {
       "numero": "10",
-      "nome": "Santos"
+      "nome": "Santos",
+      "img": "/assets/catalogos/futebol/m10.webp"
     }
   ]
 }

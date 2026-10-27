@@ -20,43 +20,53 @@
   "modelos": [
     {
       "numero": "01",
-      "nome": "Mãe de Gato"
+      "nome": "Mãe de Gato",
+      "img": "/assets/catalogos/pets/m01.webp"
     },
     {
       "numero": "02",
-      "nome": "Mãe de Cachorro"
+      "nome": "Mãe de Cachorro",
+      "img": "/assets/catalogos/pets/m02.webp"
     },
     {
       "numero": "03",
-      "nome": "Amor de Gato"
+      "nome": "Amor de Gato",
+      "img": "/assets/catalogos/pets/m03.webp"
     },
     {
       "numero": "04",
-      "nome": "Nem Todo Anjo Possui Asas"
+      "nome": "Nem Todo Anjo Possui Asas",
+      "img": "/assets/catalogos/pets/m04.webp"
     },
     {
       "numero": "05",
-      "nome": "Azar é Não Ter um Gato Preto"
+      "nome": "Azar é Não Ter um Gato Preto",
+      "img": "/assets/catalogos/pets/m05.webp"
     },
     {
       "numero": "06",
-      "nome": "Lar é Onde Minha Cachorra Está"
+      "nome": "Lar é Onde Minha Cachorra Está",
+      "img": "/assets/catalogos/pets/m06.webp"
     },
     {
       "numero": "07",
-      "nome": "Meu Melhor Amigo é o Meu Cachorro"
+      "nome": "Meu Melhor Amigo é o Meu Cachorro",
+      "img": "/assets/catalogos/pets/m07.webp"
     },
     {
       "numero": "08",
-      "nome": "Cão ou Gato? Adotei os Dois"
+      "nome": "Cão ou Gato? Adotei os Dois",
+      "img": "/assets/catalogos/pets/m08.webp"
     },
     {
       "numero": "09",
-      "nome": "Meu Melhor Cãopanheiro"
+      "nome": "Meu Melhor Cãopanheiro",
+      "img": "/assets/catalogos/pets/m09.webp"
     },
     {
       "numero": "10",
-      "nome": "Gatinhos Pastel"
+      "nome": "Gatinhos Pastel",
+      "img": "/assets/catalogos/pets/m10.webp"
     }
   ],
   "seo_titulo": "Caneca Personalizada Pet: Mãe de Gato, Mãe de Cachorro | Lily Cestas",

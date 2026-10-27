@@ -886,8 +886,7 @@ def catalogo_page(c):
     cb_on = bool(CANECAS.get('combo_ativo', True) and cb_preco and c['_preco'])
     cb_brinde = str(config.get('brinde_opcao2_nome') or 'Mãozinha de coração')
     cfg = json.dumps({'tema': nome, 'slug': c['slug'], 'preco': c['_preco'], 'shop': SHOP, 'wa': WA, 'wabase': wa_base,
-                      'cbPreco': cb_preco, 'cbQtd': cb_qtd, 'cbBrinde': cb_brinde,
-                      'cbTemas': sorted([{'t': o['nome'], 'm': [[m['numero'], m['nome']] for m in (o.get('modelos') or [])]} for o in CATALOGOS if o.get('modelos')], key=lambda x: x['t'] != nome)}, ensure_ascii=False).replace('</', '<\\/')
+                      'cbPreco': cb_preco, 'cbQtd': cb_qtd, 'cbBrinde': cb_brinde}, ensure_ascii=False).replace('</', '<\\/')
     js = '''<script>(function(){var C=%s,sel=document.getElementById("cv-model"),msg=document.getElementById("cv-msg"),b=document.getElementById("cv-buy"),w=document.getElementById("cv-wa");
 function pick(){var v=sel.value;if(!v){msg.textContent="Escolha o número do modelo primeiro 😉";msg.hidden=false;sel.focus();return null}msg.hidden=true;var p=v.split("|");return{n:p[0],t:p[1]}}
 function ev(n,m){try{window.gtag&&gtag("event",n,{item_name:C.tema,model:m})}catch(e){}}
@@ -896,13 +895,6 @@ var cart=[];try{cart=JSON.parse(localStorage.getItem("lily_cart_v2")||"[]")}catc
 cart.push({id:"catalogo-"+C.slug+"-"+m.n+"-"+Date.now(),name:nm,price:C.preco,qty:1,details:"Personalização (nome, foto ou frase) combinada no WhatsApp"});
 try{localStorage.setItem("lily_cart_v2",JSON.stringify(cart))}catch(e){}ev("catalogo_comprar_agora",m.n);location.href=C.shop+"#sacola"});
 if(w)w.addEventListener("click",function(e){var m=pick();if(!m){e.preventDefault();return}var t=C.wabase+(m.n==="x"?" Quero combinar um modelo.":" Quero o modelo "+m.n+" ("+m.t+").");w.href="https://wa.me/"+C.wa+"?text="+encodeURIComponent(t);ev("catalogo_whatsapp",m.n)});
-var cb=document.getElementById("cv-combo-buy");
-[].slice.call(document.querySelectorAll(".cv-cs")).forEach(function(sl){C.cbTemas.forEach(function(t){var g=document.createElement("optgroup");g.label=t.t;t.m.forEach(function(m){var o=document.createElement("option");o.value=t.t+"|"+m[0]+"|"+m[1];o.textContent=m[0]+" · "+m[1];g.appendChild(o)});sl.appendChild(g)});var o=document.createElement("option");o.value="x";o.textContent="Outro modelo (conto pelo WhatsApp)";sl.appendChild(o)});
-if(cb)cb.addEventListener("click",function(){var sels=[].slice.call(document.querySelectorAll(".cv-cs")),cm=document.getElementById("cv-cmsg"),ps=[];
-for(var i=0;i<sels.length;i++){if(!sels[i].value){cm.textContent="Escolha os "+C.cbQtd+" modelos do combo 😉";cm.hidden=false;sels[i].focus();return}var v=sels[i].value;if(v==="x"){ps.push("modelo a combinar")}else{var q=v.split("|");ps.push(q[0]+" "+q[1]+" "+q[2])}}
-cm.hidden=true;var cart=[];try{cart=JSON.parse(localStorage.getItem("lily_cart_v2")||"[]")}catch(e){}
-cart.push({id:"combo-"+Date.now(),name:"Combo "+C.cbQtd+" canecas personalizadas · "+ps.join(" | "),price:C.cbPreco,qty:1,freeShip:true,brinde:true,details:"🎁 Brinde: chaveiro "+C.cbBrinde+" • 🚚 Frete grátis* • Nome, foto ou frase de cada caneca combinados no WhatsApp"});
-try{localStorage.setItem("lily_cart_v2",JSON.stringify(cart))}catch(e){}ev("catalogo_combo_comprar",C.slug);location.href=C.shop+"#sacola"});
 var tr=document.getElementById("cv-track"),ct=document.getElementById("cv-count"),n=tr.children.length;
 function cur(){return Math.max(0,Math.min(n-1,Math.round(tr.scrollLeft/tr.clientWidth)))}
 function upd(){ct.textContent=(cur()+1)+" / "+n}tr.addEventListener("scroll",upd,{passive:true});
@@ -916,9 +908,9 @@ document.addEventListener("keydown",function(e){if(e.target.closest&&e.target.cl
            ('Posso colocar foto, nome e frase?', 'Pode. Depois de finalizar o pedido, você envia nome, frase, foto ou as cores que preferir pelo WhatsApp e confirmamos tudo antes de produzir.'),
            ('Qual é o prazo?', c.get('prazo') or 'O prazo de produção é combinado no pedido, conforme a agenda do atelier.'),
            ('Vocês entregam na minha região?', v('Atendemos Santana de Parnaíba, Alphaville, Barueri, Cajamar, Osasco e Carapicuíba. Entrega grátis a partir de {frete}; locais mais distantes podem ter taxa.'))]
-    cb_sels = ''.join(f'<select class="cv-sel cv-cs" aria-label="Caneca {i + 1} do combo"><option value="">Caneca {i + 1}: escolha o modelo…</option></select>' for i in range(cb_qtd))
-    combo_blk = (f'<div class="cv-combo"><b>🎁 Combo {cb_qtd} canecas por {brl(cb_preco)}</b><span>{brl(cb_preco / cb_qtd)} cada · frete grátis* · chaveirinho {esc(cb_brinde.lower())} de brinde. Misture temas à vontade: uma romântica, uma de aniversário, o que quiser.</span>'
-                 f'{cb_sels}<p class="cv-msg" id="cv-cmsg" hidden></p><button type="button" class="btn cv-buy" id="cv-combo-buy">Comprar combo</button></div>') if cb_on else ''
+    combo_blk = (f'<a class="cv-combo" href="/canecas/combo/?de={c["slug"]}" data-ga="combo_cta_click" data-ga-item="{c["slug"]}"><b>🎁 Combo {cb_qtd} canecas por {brl(cb_preco)}</b>'
+                 f'<span>{brl(cb_preco / cb_qtd)} cada · frete grátis* · chaveirinho {esc(cb_brinde.lower())} de brinde. Monte vendo a arte de cada modelo e misture temas.</span>'
+                 f'<em class="btn">Montar meu combo →</em></a>') if cb_on else ''
     faq_block = ''.join(f'<details><summary>{esc(q)}</summary><p>{esc(a)}</p></details>' for q, a in faq)
     modelos_blk = (f'<section class="cv-models"><h2>Modelos de caneca personalizada {esc(nome.lower())}</h2><p class="sub">São {nmod} artes prontas. Anote o número do que mais gostar e escolha na lista acima.</p><ul class="cv-mlist">'
                    + ''.join(f'<li><b>{esc(m["numero"])}</b> {esc(m["nome"])}</li>' for m in modelos) + '</ul></section>') if modelos else ''
@@ -1060,10 +1052,119 @@ def canecas_page():
         page_urls.append(path)
 
 
+# ---------------------------------------------------------------- montador de combo (/canecas/combo/)
+COMBO_JS = r'''(function(){
+var C=__CFG__,KEY="lily_combo_draft",picks=[];
+function $(s,r){return (r||document).querySelector(s)}function $$(s,r){return [].slice.call((r||document).querySelectorAll(s))}
+try{picks=JSON.parse(localStorage.getItem(KEY)||"[]")||[]}catch(e){picks=[]}
+picks=picks.filter(function(p){return p&&p.n}).slice(0,C.qtd);
+function save(){try{localStorage.setItem(KEY,JSON.stringify(picks))}catch(e){}}
+function ev(n,x){try{window.gtag&&gtag("event",n,x||{})}catch(e){}}
+var toastEl=$("#cb-toast"),tt;function toast(m){toastEl.textContent=m;toastEl.classList.add("on");clearTimeout(tt);tt=setTimeout(function(){toastEl.classList.remove("on")},2600)}
+function cnt(t,n){return picks.filter(function(p){return p.t===t&&p.n===n}).length}
+function render(){
+ $$(".cb-slot").forEach(function(el,i){var p=picks[i];el.classList.toggle("full",!!p);
+  el.innerHTML=p?(p.w?'<span class="w">✨</span>':'<img src="'+p.img+'" alt="">')+'<em>'+(p.w?"Arte do zero":p.n)+'</em><i aria-hidden="true">×</i>':'<span class="plus">+</span><em>Caneca '+(i+1)+'</em>';
+  el.setAttribute("aria-label",p?"Remover caneca "+(i+1):"Caneca "+(i+1)+" vazia")});
+ $$(".cb-card").forEach(function(c){var k=cnt(c.dataset.t,c.dataset.n);c.classList.toggle("on",k>0);var b=$(".cb-ct",c);if(b)b.textContent=k>1?"×"+k:"✓"});
+ var wc=$("#cb-wild");if(wc){var k=picks.filter(function(p){return p.w}).length;wc.classList.toggle("on",k>0)}
+ $$(".cb-tab").forEach(function(t){var k=picks.filter(function(p){return p.t===t.dataset.t}).length;var b=$(".n",t);b.textContent=k;b.hidden=!k});
+ var left=C.qtd-picks.length,btn=$("#cb-go");btn.disabled=left>0;
+ btn.textContent=left>0?"Escolha mais "+left:"Adicionar combo à sacola";
+ $("#cb-info").innerHTML=left>0?"<b>"+picks.length+" de "+C.qtd+"</b> escolhidas":"<b>Combo completo!</b> 🎉";
+ $("#cb-tray").classList.toggle("done",left===0)}
+function add(p){if(picks.length>=C.qtd){toast("Seu combo já tem "+C.qtd+". Toque em uma caneca da bandeja para trocar.");$("#cb-tray").classList.add("shake");setTimeout(function(){$("#cb-tray").classList.remove("shake")},500);return}
+ picks.push(p);save();render();ev("combo_builder_add",{item_name:p.w?"arte do zero":p.t+" "+p.n});if(picks.length===C.qtd)toast("Combo completo! 🎉 É só adicionar à sacola.")}
+document.addEventListener("click",function(e){
+ var c=e.target.closest(".cb-card");
+ if(c){if(e.target.closest(".cb-zoom")){openZoom(c);return}add({t:c.dataset.t,n:c.dataset.n,nm:c.dataset.nm,img:c.dataset.img});return}
+ if(e.target.closest("#cb-wild")){add({w:1,t:"Arte do zero",n:"x",nm:"arte do zero",img:""});return}
+ var s=e.target.closest(".cb-slot");if(s&&picks[+s.dataset.i]){picks.splice(+s.dataset.i,1);save();render();return}
+ var t=e.target.closest(".cb-tab");if(t){showTab(t.dataset.s);return}
+ if(e.target.closest("#cb-zc")||e.target.id==="cb-zoom"){closeZoom();return}
+ if(e.target.closest("#cb-zadd")){var z=zoomCard;closeZoom();if(z)add({t:z.dataset.t,n:z.dataset.n,nm:z.dataset.nm,img:z.dataset.img});return}
+ if(e.target.closest("#cb-go")){go()}});
+document.addEventListener("keydown",function(e){if((e.key==="Enter"||e.key===" ")&&e.target.matches&&e.target.matches(".cb-card,#cb-wild")){e.preventDefault();e.target.click()}});
+var zoomCard=null;function openZoom(c){zoomCard=c;$("#cb-zimg").src=c.dataset.img;$("#cb-zt").textContent=c.dataset.t+" · "+c.dataset.n+" · "+c.dataset.nm;$("#cb-zoom").classList.add("on")}
+function closeZoom(){$("#cb-zoom").classList.remove("on");zoomCard=null}
+document.addEventListener("keydown",function(e){if(e.key==="Escape")closeZoom()});
+function showTab(s){$$(".cb-tab").forEach(function(t){t.classList.toggle("on",t.dataset.s===s);t.setAttribute("aria-selected",t.dataset.s===s)});
+ $$(".cb-sec").forEach(function(x){x.hidden=x.dataset.s!==s});$("#cb-q").value="";$("#cb-empty").hidden=true;$$(".cb-card").forEach(function(c){c.hidden=false});
+ var a=$(".cb-tab.on");if(a&&a.scrollIntoView)a.scrollIntoView({block:"nearest",inline:"center"})}
+$("#cb-q").addEventListener("input",function(){var q=this.value.trim().toLowerCase(),any=false;
+ if(!q){var a=$(".cb-tab.on");showTab(a?a.dataset.s:$(".cb-tab").dataset.s);return}
+ $$(".cb-sec").forEach(function(sec){var n=0;$$(".cb-card",sec).forEach(function(c){var ok=(c.dataset.nm+" "+c.dataset.n+" "+c.dataset.t).toLowerCase().indexOf(q)>-1;c.hidden=!ok;if(ok)n++});sec.hidden=!n;if(n)any=true});
+ $("#cb-empty").hidden=any});
+function go(){if(picks.length<C.qtd)return;
+ var parts=picks.map(function(p){return p.w?"arte do zero (modelo a combinar)":p.t+" "+p.n+" "+p.nm});
+ var cart=[];try{cart=JSON.parse(localStorage.getItem("lily_cart_v2")||"[]")}catch(e){}
+ cart.push({id:"combo-"+Date.now(),name:"Combo "+C.qtd+" canecas personalizadas · "+parts.join(" | "),price:C.preco,qty:1,freeShip:true,brinde:true,details:"🎁 Brinde: chaveiro "+C.brinde+" • 🚚 Frete grátis* • Nome, foto ou frase de cada caneca combinados no WhatsApp"});
+ try{localStorage.setItem("lily_cart_v2",JSON.stringify(cart));localStorage.removeItem(KEY)}catch(e){}
+ ev("combo_builder_complete",{value:C.preco});location.href=C.shop+"#sacola"}
+var de=(new URLSearchParams(location.search).get("de")||"").toLowerCase(),first=$(".cb-tab[data-s='"+de+"']")||$(".cb-tab");
+showTab(first.dataset.s);render()})();'''
+
+
+def combo_page():
+    cb_preco = to_number(CANECAS.get('combo_preco'), 'Combo › preço', False) or 0
+    cb_qtd = int(to_number(CANECAS.get('combo_qtd'), 'Combo › quantidade', False) or 3)
+    temas = [c for c in CATALOGOS if c.get('modelos') and any(m.get('img') for m in c['modelos'])]
+    if not (CANECAS.get('combo_ativo', True) and cb_preco and temas):
+        return
+    path = '/canecas/combo/'
+    v = fill_vars
+    cb_brinde = str(config.get('brinde_opcao2_nome') or 'Mãozinha de coração')
+    avulso = sum(min(c['_preco'] for c in temas) for _ in range(cb_qtd))
+    eco = max(0, avulso - cb_preco)
+    tabs = ''.join(f'<button type="button" role="tab" class="cb-tab" data-s="{c["slug"]}" data-t="{esc(c["nome"])}">{esc(c["nome"])}<span class="n" hidden>0</span></button>' for c in temas)
+    tabs += '<button type="button" role="tab" class="cb-tab cb-tab-w" data-s="zero" data-t="Arte do zero">✨ Do zero<span class="n" hidden>0</span></button>'
+    secs = ''
+    for c in temas:
+        cards = ''
+        for m in c['modelos']:
+            if not m.get('img'):
+                continue
+            img = resize_to(m['img'], 520)
+            if not img:
+                continue
+            cards += (f'<div class="cb-card" role="button" tabindex="0" data-t="{esc(c["nome"])}" data-n="{esc(m["numero"])}" data-nm="{esc(m["nome"])}" data-img="{img}">'
+                      f'<img src="{img}" alt="Caneca {esc(c["nome"].lower())}: {esc(m["nome"])}" width="520" height="248" loading="lazy" decoding="async">'
+                      f'<span class="cb-num">{esc(m["numero"])}</span><span class="cb-ct" aria-hidden="true">✓</span>'
+                      f'<button type="button" class="cb-zoom" aria-label="Ampliar {esc(m["nome"])}">🔍</button>'
+                      f'<span class="cb-nm">{esc(m["nome"])}</span></div>')
+        secs += f'<section class="cb-sec" data-s="{c["slug"]}" hidden><h2 class="cb-sh">{esc(c["nome"])} <small>{len([1 for m in c["modelos"] if m.get("img")])} modelos</small></h2><div class="cb-grid">{cards}</div></section>'
+    secs += ('<section class="cb-sec" data-s="zero" hidden><h2 class="cb-sh">Arte do zero</h2><div class="cb-wild" id="cb-wild" role="button" tabindex="0">'
+             '<span class="e">✨</span><b>Quero criar uma arte só minha</b><p>Conte a ideia pelo WhatsApp depois do pedido: nome, foto, frase, música ou um tema que não está nos catálogos. '
+             'Vale como uma das canecas do combo.</p><em>Toque para adicionar</em></div></section>')
+    cfg = json.dumps({'qtd': cb_qtd, 'preco': cb_preco, 'brinde': cb_brinde, 'shop': SHOP}, ensure_ascii=False)
+    js = '<script>' + COMBO_JS.replace('__CFG__', cfg) + '</script>'
+    trail = [('Início', '/'), ('Canecas personalizadas', '/canecas/'), ('Montar combo', path)]
+    crumbs = ' › '.join(f'<a href="{u}">{esc(nm)}</a>' if i < len(trail) - 1 else f'<span>{esc(nm)}</span>' for i, (nm, u) in enumerate(trail))
+    slots = ''.join(f'<button type="button" class="cb-slot" data-i="{i}"></button>' for i in range(cb_qtd))
+    title = f'Monte seu combo de {cb_qtd} canecas personalizadas | Lily Cestas'
+    head_html = head(title, f'Escolha {cb_qtd} modelos de caneca personalizada de qualquer tema por {brl(cb_preco)}, com frete grátis e chaveirinho de brinde.', path, 'noindex, follow')
+    fonts = ('<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>'
+             '<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">'
+             '<link rel="stylesheet" href="/assets/css/pages.css"><link rel="stylesheet" href="/assets/css/canecas.css">\n</head><body class="cb-body">')
+    body = f'''<main><section class="cn-top cn-top-rose cb-top"><div class="wrap"><nav class="crumbs" aria-label="Navegação">{crumbs}</nav>
+<h1 class="cn-h1">Monte seu combo de {cb_qtd} canecas</h1>
+<p class="cn-sub">Escolha {cb_qtd} modelos, de <b>qualquer tema</b>. <b>{brl(cb_preco)}</b> no total{(", você economiza " + brl(eco)) if eco else ""}, com frete grátis* e chaveirinho {esc(cb_brinde.lower())} de brinde.</p></div></section>
+<div class="cb-tools"><div class="wrap"><div class="cb-tabs" role="tablist" aria-label="Temas">{tabs}</div>
+<label class="cb-search"><span aria-hidden="true">🔍</span><input id="cb-q" type="search" placeholder="Buscar modelo (ex.: gato, natal, pai)" autocomplete="off"></label></div></div>
+<div class="wrap cb-main">{secs}<p id="cb-empty" class="cb-empty" hidden>Nenhum modelo encontrado. Tente outra palavra ou escolha "✨ Do zero".</p>
+<p class="nota">Nome, foto ou frase de cada caneca são combinados pelo WhatsApp depois do pedido. *Entrega grátis para a nossa região; locais mais distantes podem ter taxa.</p></div></main>
+<div class="cb-tray" id="cb-tray"><div class="cb-tray-in"><div class="cb-slots">{slots}</div><div class="cb-mid"><span id="cb-info"></span><small>{brl(cb_preco)} · frete grátis* · chaveirinho de brinde</small></div>
+<button type="button" class="btn" id="cb-go" disabled>Escolha mais {cb_qtd}</button></div></div>
+<div class="cb-toast" id="cb-toast" role="status" aria-live="polite"></div>
+<div class="cb-zoom-m" id="cb-zoom" role="dialog" aria-modal="true" aria-label="Ampliar modelo"><div class="cb-zbox"><button type="button" id="cb-zc" class="cb-zx" aria-label="Fechar">×</button><img id="cb-zimg" alt=""><p id="cb-zt"></p><button type="button" class="btn" id="cb-zadd">Escolher este modelo</button></div></div>'''
+    write_page(path, head_html + jsonld(BUSINESS, crumb_ld(trail)) + fonts + top_html() + body + js + footer_html() + '</body></html>')
+
+
 if CANECAS.get('ativa', True):
     canecas_page()
     for _c in CATALOGOS:
         catalogo_page(_c)
+    combo_page()
 
 
 # ---------------------------------------------------------------- home (loja completa)
@@ -1083,7 +1184,7 @@ if CANECAS.get('ativa', True) and CATALOGOS and CANECAS.get('home_ativo', True) 
                    f'<span class="hcn-b"><h3>{esc(_c["nome"])}</h3><small>{len(_c.get("modelos") or [])} modelos</small>{_pr}</span></a>')
     _cbp = to_number(CANECAS.get('combo_preco'), 'Combo › preço', False) or 0
     _cbq = int(to_number(CANECAS.get('combo_qtd'), 'Combo › quantidade', False) or 3)
-    _combo = (f'<p class="hcn-combo">🎁 <b>Combo {_cbq} canecas por {brl(_cbp)}</b> · frete grátis* · chaveirinho de brinde</p>') if (_cbp and CANECAS.get('combo_ativo', True)) else ''
+    _combo = (f'<p class="hcn-combo"><a href="/canecas/combo/" style="color:inherit;text-decoration:none" data-ga="home_combo_click">🎁 <b>Combo {_cbq} canecas por {brl(_cbp)}</b> · frete grátis* · chaveirinho de brinde · <u>Montar meu combo →</u></a></p>') if (_cbp and CANECAS.get('combo_ativo', True)) else ''
     HOME_CANECAS = (f'<section id="canecas-home" class="hcn"><div class="hcn-in"><div class="hcn-head"><div><h2>Canecas personalizadas</h2>'
                     f'<p>Escolha o modelo e personalize com foto, nome ou frase.</p></div><a class="hcn-all" href="/canecas/" data-ga="home_canecas_click" data-ga-item="ver_todas">Ver todas as canecas →</a></div>'
                     f'<div class="hcn-grid">{_cards}</div>{_combo}</div></section>')

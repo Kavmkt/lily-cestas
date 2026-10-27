@@ -30,103 +30,128 @@
   "modelos": [
     {
       "numero": "01",
-      "nome": "Guirlanda de Natal"
+      "nome": "Guirlanda de Natal",
+      "img": "/assets/catalogos/natal/m01.webp"
     },
     {
       "numero": "02",
-      "nome": "Papai Noel e Foto da Família"
+      "nome": "Papai Noel e Foto da Família",
+      "img": "/assets/catalogos/natal/m02.webp"
     },
     {
       "numero": "03",
-      "nome": "Bolas de Natal com Fotos"
+      "nome": "Bolas de Natal com Fotos",
+      "img": "/assets/catalogos/natal/m03.webp"
     },
     {
       "numero": "04",
-      "nome": "Natal Vermelho e Dourado"
+      "nome": "Natal Vermelho e Dourado",
+      "img": "/assets/catalogos/natal/m04.webp"
     },
     {
       "numero": "05",
-      "nome": "Família é o Presente"
+      "nome": "Família é o Presente",
+      "img": "/assets/catalogos/natal/m05.webp"
     },
     {
       "numero": "06",
-      "nome": "Bola de Natal da Família"
+      "nome": "Bola de Natal da Família",
+      "img": "/assets/catalogos/natal/m06.webp"
     },
     {
       "numero": "07",
-      "nome": "Chapéu de Papai Noel"
+      "nome": "Chapéu de Papai Noel",
+      "img": "/assets/catalogos/natal/m07.webp"
     },
     {
       "numero": "08",
-      "nome": "Papai Noel e Moldura Listrada"
+      "nome": "Papai Noel e Moldura Listrada",
+      "img": "/assets/catalogos/natal/m08.webp"
     },
     {
       "numero": "09",
-      "nome": "Árvore de Fotos"
+      "nome": "Árvore de Fotos",
+      "img": "/assets/catalogos/natal/m09.webp"
     },
     {
       "numero": "10",
-      "nome": "Natal em Família (Polaroid)"
+      "nome": "Natal em Família (Polaroid)",
+      "img": "/assets/catalogos/natal/m10.webp"
     },
     {
       "numero": "11",
-      "nome": "Três Guirlandas"
+      "nome": "Três Guirlandas",
+      "img": "/assets/catalogos/natal/m11.webp"
     },
     {
       "numero": "12",
-      "nome": "Vovó Noemi (Papai Noel e Fita)"
+      "nome": "Vovó Noemi (Papai Noel e Fita)",
+      "img": "/assets/catalogos/natal/m12.webp"
     },
     {
       "numero": "13",
-      "nome": "Ho Ho Ho de Fotos"
+      "nome": "Ho Ho Ho de Fotos",
+      "img": "/assets/catalogos/natal/m13.webp"
     },
     {
       "numero": "14",
-      "nome": "Natal com Mamãe"
+      "nome": "Natal com Mamãe",
+      "img": "/assets/catalogos/natal/m14.webp"
     },
     {
       "numero": "15",
-      "nome": "Ho Ho Ho! (Roupa do Papai Noel)"
+      "nome": "Ho Ho Ho! (Roupa do Papai Noel)",
+      "img": "/assets/catalogos/natal/m15.webp"
     },
     {
       "numero": "16",
-      "nome": "Papai Noel, Árvore e Presentes"
+      "nome": "Papai Noel, Árvore e Presentes",
+      "img": "/assets/catalogos/natal/m16.webp"
     },
     {
       "numero": "17",
-      "nome": "Natal da Família (Nome)"
+      "nome": "Natal da Família (Nome)",
+      "img": "/assets/catalogos/natal/m17.webp"
     },
     {
       "numero": "18",
-      "nome": "Papai Noel e os Biscoitos"
+      "nome": "Papai Noel e os Biscoitos",
+      "img": "/assets/catalogos/natal/m18.webp"
     },
     {
       "numero": "19",
-      "nome": "Feliz Natal Fofinho"
+      "nome": "Feliz Natal Fofinho",
+      "img": "/assets/catalogos/natal/m19.webp"
     },
     {
       "numero": "20",
-      "nome": "Capivara Natalina"
+      "nome": "Capivara Natalina",
+      "img": "/assets/catalogos/natal/m20.webp"
     },
     {
       "numero": "21",
-      "nome": "Selos de Natal"
+      "nome": "Selos de Natal",
+      "img": "/assets/catalogos/natal/m21.webp"
     },
     {
       "numero": "22",
-      "nome": "Feliz Natal (Estampa Vermelha)"
+      "nome": "Feliz Natal (Estampa Vermelha)",
+      "img": "/assets/catalogos/natal/m22.webp"
     },
     {
       "numero": "23",
-      "nome": "Presépio Dourado"
+      "nome": "Presépio Dourado",
+      "img": "/assets/catalogos/natal/m23.webp"
     },
     {
       "numero": "24",
-      "nome": "Sagrada Família Dourada"
+      "nome": "Sagrada Família Dourada",
+      "img": "/assets/catalogos/natal/m24.webp"
     },
     {
       "numero": "25",
-      "nome": "Árvores Minimalistas"
+      "nome": "Árvores Minimalistas",
+      "img": "/assets/catalogos/natal/m25.webp"
     }
   ],
   "seo_titulo": "Caneca de Natal Personalizada com Foto da Família | Lily Cestas",

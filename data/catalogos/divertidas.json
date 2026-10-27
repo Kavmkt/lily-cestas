@@ -20,43 +20,53 @@
   "modelos": [
     {
       "numero": "01",
-      "nome": "Que Se Dane"
+      "nome": "Que Se Dane",
+      "img": "/assets/catalogos/divertidas/m01.webp"
     },
     {
       "numero": "02",
-      "nome": "Com Calor · Sem Calor"
+      "nome": "Com Calor · Sem Calor",
+      "img": "/assets/catalogos/divertidas/m02.webp"
     },
     {
       "numero": "03",
-      "nome": "Com TPM · Sem TPM"
+      "nome": "Com TPM · Sem TPM",
+      "img": "/assets/catalogos/divertidas/m03.webp"
     },
     {
       "numero": "04",
-      "nome": "Com Mozão · Sem Mozão"
+      "nome": "Com Mozão · Sem Mozão",
+      "img": "/assets/catalogos/divertidas/m04.webp"
     },
     {
       "numero": "05",
-      "nome": "Polvinhos Descolados"
+      "nome": "Polvinhos Descolados",
+      "img": "/assets/catalogos/divertidas/m05.webp"
     },
     {
       "numero": "06",
-      "nome": "Polvinhos Arco-Íris"
+      "nome": "Polvinhos Arco-Íris",
+      "img": "/assets/catalogos/divertidas/m06.webp"
     },
     {
       "numero": "07",
-      "nome": "Polvinhos Laço"
+      "nome": "Polvinhos Laço",
+      "img": "/assets/catalogos/divertidas/m07.webp"
     },
     {
       "numero": "08",
-      "nome": "Polvinhos Gamers"
+      "nome": "Polvinhos Gamers",
+      "img": "/assets/catalogos/divertidas/m08.webp"
     },
     {
       "numero": "09",
-      "nome": "Polvinhos Piratas"
+      "nome": "Polvinhos Piratas",
+      "img": "/assets/catalogos/divertidas/m09.webp"
     },
     {
       "numero": "10",
-      "nome": "Turma dos Polvinhos"
+      "nome": "Turma dos Polvinhos",
+      "img": "/assets/catalogos/divertidas/m10.webp"
     }
   ],
   "seo_titulo": "Caneca Divertida Personalizada: Frases Engraçadas e Polvinhos | Lily Cestas",

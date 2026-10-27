@@ -20,43 +20,53 @@
   "modelos": [
     {
       "numero": "01",
-      "nome": "Aviadoras"
+      "nome": "Aviadoras",
+      "img": "/assets/catalogos/infantil/m01.webp"
     },
     {
       "numero": "02",
-      "nome": "Bailarina Rosa"
+      "nome": "Bailarina Rosa",
+      "img": "/assets/catalogos/infantil/m02.webp"
     },
     {
       "numero": "03",
-      "nome": "Bailarina Menta"
+      "nome": "Bailarina Menta",
+      "img": "/assets/catalogos/infantil/m03.webp"
     },
     {
       "numero": "04",
-      "nome": "Princesa para Colorir"
+      "nome": "Princesa para Colorir",
+      "img": "/assets/catalogos/infantil/m04.webp"
     },
     {
       "numero": "05",
-      "nome": "Bombeiro para Colorir"
+      "nome": "Bombeiro para Colorir",
+      "img": "/assets/catalogos/infantil/m05.webp"
     },
     {
       "numero": "06",
-      "nome": "Policial para Colorir"
+      "nome": "Policial para Colorir",
+      "img": "/assets/catalogos/infantil/m06.webp"
     },
     {
       "numero": "07",
-      "nome": "Sereia Encantada"
+      "nome": "Sereia Encantada",
+      "img": "/assets/catalogos/infantil/m07.webp"
     },
     {
       "numero": "08",
-      "nome": "Sereias do Mar"
+      "nome": "Sereias do Mar",
+      "img": "/assets/catalogos/infantil/m08.webp"
     },
     {
       "numero": "09",
-      "nome": "Bebê Raposinha"
+      "nome": "Bebê Raposinha",
+      "img": "/assets/catalogos/infantil/m09.webp"
     },
     {
       "numero": "10",
-      "nome": "Safari Baby"
+      "nome": "Safari Baby",
+      "img": "/assets/catalogos/infantil/m10.webp"
     }
   ],
   "seo_titulo": "Caneca Infantil Personalizada com Nome | Lily Cestas",
