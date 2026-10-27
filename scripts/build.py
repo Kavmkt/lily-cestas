@@ -920,6 +920,19 @@ document.addEventListener("keydown",function(e){if(e.target.closest&&e.target.cl
 
 
 # ---------------------------------------------------------------- página dedicada de canecas (/canecas/)
+def cn_bg():
+    """Fundo decorativo da página de canecas: ícones dos temas espalhados, bem suaves."""
+    import random
+    rnd = random.Random(7)
+    icons = ['☕', '💕', '🐾', '🎄', '🌸', '🎂', '⭐', '🎀', '🌷', '🎈', '🐙', '👑', '♌', '✨', '🎁', '🐱', '🐶', '🌻', '💗', '☕', '🎅', '🦋', '🥂', '👨‍👧']
+    out = ''
+    for i, ic in enumerate(icons * 2):
+        x, y = rnd.uniform(1, 96), rnd.uniform(1, 96)
+        size, rot, delay = rnd.randint(34, 72), rnd.randint(-28, 28), round(rnd.uniform(0, 6), 1)
+        out += f'<i style="left:{x:.1f}%;top:{y:.1f}%;font-size:{size}px;--r:{rot}deg;animation-delay:-{delay}s"{" class=cn-x" if i % 2 else ""}>{ic}</i>'
+    return f'<div class="cn-bg" aria-hidden="true">{out}</div>'
+
+
 def canecas_page():
     C = CANECAS
     path = '/canecas/'
@@ -990,14 +1003,11 @@ def canecas_page():
     robots = 'noindex, nofollow' if C.get('noindex', True) else 'index, follow, max-image-preview:large'
     prods_blk = (f'<section id="produtos"><h2>{esc(C.get("produtos_titulo") or "Canecas prontas para pedir")}</h2><div class="cards">{cards_html(plist)}</div></section>') if plist else ''
     cta_msg = 'Oi! Vim pelo site da Lily Cestas e quero criar uma caneca personalizada do meu jeito.'
-    catalogos_blk = (f'<section id="catalogos"><h2>{esc(C.get("catalogos_titulo") or "Catálogos por tema")}</h2><p class="sub">{esc(v(C.get("catalogos_texto") or "Folheie o catálogo, escolha o número do modelo e personalize."))}</p><div class="ctcards">{catalogo_cards()}</div></section>') if CATALOGOS else ''
+    catalogos_blk = (f'<section id="catalogos"><h1 class="cn-h1">{esc(C.get("catalogos_titulo") or "Catálogos por tema")}</h1><p class="sub">{esc(v(C.get("catalogos_texto") or "Folheie o catálogo, escolha o número do modelo e personalize."))}</p><div class="ctcards">{catalogo_cards()}</div></section>') if CATALOGOS else ''
     fonts = ('<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>'
              '<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap" rel="stylesheet">'
-             '<link rel="stylesheet" href="/assets/css/pages.css"><link rel="stylesheet" href="/assets/css/canecas.css">\n</head><body>')
+             '<link rel="stylesheet" href="/assets/css/pages.css"><link rel="stylesheet" href="/assets/css/canecas.css">\n</head><body class="cn-page">' + cn_bg())
     body = f'''<main><div class="wrap"><nav class="crumbs" aria-label="Navegação">{crumbs}</nav>
-<header class="cn-hero"><span class="tag">☕ Canecas personalizadas</span><h1>{esc(h1)}</h1><p class="intro">{esc(v(C.get("intro") or ""))}</p>
-<p><a class="btn" href="#catalogos">{esc(C.get("botao_principal") or "Escolher meu tema")}</a> <a class="btn ghost" href="{esc(wa(cta_msg))}" target="_blank" rel="noopener" data-ga="whatsapp_click" data-ga-item="canecas_hero">Falar no WhatsApp</a></p></header>
-{banners_blk}
 {catalogos_blk}
 <section><h2>Como funciona</h2><ol class="passos">{steps}</ol><p class="nota">*Locais mais distantes podem ter taxa de entrega. Confira pelo CEP no checkout ou pelo WhatsApp.</p></section>
 {prods_blk}

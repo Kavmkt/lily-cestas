@@ -52,3 +52,14 @@
 @media(max-width:860px){.cv{grid-template-columns:1fr}.cv-buybox{position:static}.cv-nav{width:36px;height:36px;font-size:22px}
 .cv-bar{display:flex;position:fixed;left:0;right:0;bottom:0;z-index:25;background:#fff;border-top:1px solid #EED9DF;padding:10px 16px calc(10px + env(safe-area-inset-bottom));align-items:center;justify-content:space-between;gap:12px;box-shadow:0 -8px 24px -12px rgba(56,33,38,.25)}
 body.cat-page .wafab{bottom:84px!important}body.cat-page .foot{margin-bottom:70px}}
+
+/* fundo temático da página de canecas */
+body.cn-page{background:linear-gradient(180deg,#FFF3F6 0%,#FDF8F9 35%,#F6F0FA 70%,#FFF6EC 100%)}
+.cn-bg{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+.cn-bg i{position:absolute;font-style:normal;opacity:.30;transform:rotate(var(--r,0deg));animation:cnfloat 9s ease-in-out infinite;filter:saturate(1.1)}
+@keyframes cnfloat{0%,100%{transform:translateY(0) rotate(var(--r,0deg))}50%{transform:translateY(-14px) rotate(calc(var(--r,0deg) + 6deg))}}
+.cn-page main,.cn-page .foot{position:relative;z-index:1}
+.cn-h1{font:600 clamp(22px,3vw,30px) 'Montserrat',sans-serif;color:#A65365;margin:0 0 .5em}
+#catalogos{padding-top:18px}
+@media(max-width:700px){.cn-bg i.cn-x{display:none}.cn-bg i{opacity:.22}}
+@media(prefers-reduced-motion:reduce){.cn-bg i{animation:none}}
