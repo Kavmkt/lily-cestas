@@ -378,6 +378,14 @@ def head(title, desc, path, robots='index, follow, max-image-preview:large'):
 
 
 # ---------------------------------------------------------------- paginas estaticas (categorias e cidades)
+def mo_mark(skip=''):
+    """Marcador do bloco 'mais opções' (xícaras + combo + 3D); é trocado pelo conteúdo no fim do build, quando tudo já existe."""
+    return f'<!--MAISOP:{skip}-->'
+
+
+MO_3D_URL = next((c.get('pagina_url') for c in cats if c.get('chave') == '3d-personalizados'), '')
+
+
 def write_page(path, content):
     d = OUT / path.strip('/')
     d.mkdir(parents=True, exist_ok=True)
@@ -447,7 +455,7 @@ def page_html(path, title, desc, h1, intro, blocks, plist, faq_items, trail, ext
 <section><h2>Produtos</h2><div class="cards">{cards_html(plist)}</div></section>
 <section><h2>Perguntas frequentes</h2><div class="faq">{faq_block}</div></section>
 {related_html}
-</div></main>''' + footer_html() + '</body></html>')
+{mo_mark('3d' if path.strip('/') == MO_3D_URL else '')}</div></main>''' + footer_html() + '</body></html>')
 
 
 CITIES = [
@@ -644,7 +652,7 @@ write_page(cat_path, head('Catálogo de Cestas e Presentes Personalizados | Lily
 {addon_section}
 <section><h2>Perguntas frequentes</h2><div class="faq">{faq_cat}</div></section>
 {rel_cat}
-</div></main>''' + footer_html() + '</body></html>')
+{mo_mark()}</div></main>''' + footer_html() + '</body></html>')
 page_urls.append(cat_path)
 
 REDIRECTS = {'/polaroid-quadro-qr-code-musical/': '/polaroid-quadro-shadow-box/'}
@@ -724,7 +732,7 @@ def product_page(p):
 {inc}{pers}{entrega}
 <section><h2>Perguntas frequentes</h2><div class="faq">{faq_block}</div></section>
 <section><h2>Você também pode gostar</h2><div class="cards">{cards_html(others)}</div></section>
-</div></main>''' + footer_html() + '</body></html>')
+{mo_mark('3d' if c.get('chave') == '3d-personalizados' else '')}</div></main>''' + footer_html() + '</body></html>')
 
 
 for p in visible:
@@ -947,7 +955,7 @@ document.addEventListener("keydown",function(e){if(e.target.closest&&e.target.cl
 <section><h2>Perguntas frequentes sobre caneca personalizada {esc(nome.lower())}</h2><div class="faq">{faq_block}</div></section>
 {rel_blk}
 <p class="more"><a href="/canecas/#catalogos">← Ver todos os catálogos de canecas personalizadas</a></p>
-</div></main>'''
+{mo_mark('can')}</div></main>'''
     bar = (f'<div class="cv-bar">{cat_price_html(c, "cp")}<a class="btn" href="#cv-model" id="cv-bar-btn">Escolher modelo</a></div>')
     ogimg = BASE + (c['_capa'] or c['_pages'][0])
     hd = head(title, desc, path, robots)
@@ -1060,7 +1068,7 @@ def canecas_page():
 {secs}
 <section class="cn-cta"><h2>{esc(C.get("cta_titulo") or "Não achou o seu tema?")}</h2><p>{esc(v(C.get("cta_texto") or ""))}</p><p><a class="btn" href="{esc(wa(cta_msg))}" target="_blank" rel="noopener" data-ga="whatsapp_click" data-ga-item="canecas_cta">Criar minha caneca no WhatsApp</a></p></section>
 <section><h2>Perguntas frequentes</h2><div class="faq">{faq_block}</div></section>
-</div></main>'''
+{mo_mark('can')}</div></main>'''
     write_page(path, head(title, desc, path, robots) + jsonld(BUSINESS, crumb_ld(trail), faq_ld(faq_items), *extra) + fonts + top_html() + body + footer_html() + '</body></html>')
     if C.get('noindex', True) is False:
         page_urls.append(path)
@@ -1403,6 +1411,47 @@ if CLARITY:
                    "if(l.readyState==='complete')idle();else c.addEventListener('load',idle);"
                    f"}})(window,document,'clarity','script','{CLARITY}');</script>")
 ga_snippet += '<script defer src="/assets/js/track.js"></script>'
+# ---------------------------------------------------------------- bloco "mais opções" em todas as páginas (canecas + combo + 3D)
+def mais_opcoes_html(skip=''):
+    out = ''
+    can_on = skip != 'can' and CANECAS.get('ativa', True) and CATALOGOS
+    if can_on:
+        sel = [_by[x] for x in [slugify(y) for y in (CANECAS.get('home_destaques') or ['aniversario', 'pets', 'pai', 'signos'])] if x in _by][:6] or CATALOGOS[:4]
+        cards = ''
+        for c in sel:
+            off = f'<span class="mo-off">-{c["_off"]}%</span>' if c['_off'] else ''
+            old = f'<s>{brl(c["_de"])}</s>' if c['_de'] else ''
+            pr = f'<span class="mo-p">{old}{brl(c["_preco"])}</span>' if c['_preco'] else ''
+            cards += (f'<a class="mo-card" href="{c["_url"]}" data-ga="mais_opcoes_click" data-ga-item="{c["slug"]}"><span class="mo-img"><img src="{c["_capa"] or c["_pages"][0]}" '
+                      f'alt="Caneca personalizada {esc(c["nome"])}" width="700" height="700" loading="lazy">{off}</span><span class="mo-b"><b>{esc(c["nome"])}</b><small>{len(c.get("modelos") or [])} modelos</small>{pr}</span></a>')
+        cb_p = to_number(CANECAS.get('combo_preco'), 'Combo › preço', False) or 0
+        cb_q = int(to_number(CANECAS.get('combo_qtd'), 'Combo › quantidade', False) or 3)
+        banner = ''
+        if cb_p and CANECAS.get('combo_ativo', True):
+            bw, bm = resize_to('/assets/banners/canecas-combo-web.png', 1600), resize_to('/assets/banners/canecas-combo-mobile.png', 900)
+            if bw or bm:
+                banner = (f'<a class="mo-cbbn" href="/canecas/combo/" data-ga="combo_banner_click" data-ga-item="mais_opcoes"><picture>'
+                          + (f'<source media="(max-width:767px)" srcset="{bm}">' if bm else '')
+                          + f'<img src="{bw or bm}" alt="Combo de {cb_q} canecas personalizadas por {brl(cb_p)} com frete grátis e chaveirinho de brinde" width="1600" height="320" loading="lazy" decoding="async"></picture></a>')
+        out += (f'<section class="mo"><div class="mo-head"><h2>Canecas personalizadas com foto, nome ou frase</h2><a href="/canecas/" data-ga="mais_opcoes_click" data-ga-item="ver_todas">Ver todas as canecas →</a></div>'
+                f'{banner}<div class="mo-row">{cards}</div></section>')
+    if skip != '3d':
+        c3 = next((c for c in cats if c.get('chave') == '3d-personalizados'), None)
+        ps = [x for x in active if x['_cat'] is c3][:4] if c3 else []
+        if ps:
+            link = f'<a href="/{c3["pagina_url"]}/" data-ga="mais_opcoes_click" data-ga-item="3d">Ver tudo em 3D e personalizados →</a>' if c3.get('pagina_url') else ''
+            out += f'<section class="mo"><div class="mo-head"><h2>Presentes 3D, decorativos e personalizados</h2>{link}</div><div class="cards">{cards_html(ps)}</div></section>'
+    return out
+
+
+_MO_RE = re.compile(r'<!--MAISOP:(\w*)-->')
+for f in OUT.rglob('*.html'):
+    if f.name.startswith('google') or '/assets/' in str(f):
+        continue
+    t = f.read_text(encoding='utf-8')
+    if '<!--MAISOP:' in t:
+        f.write_text(_MO_RE.sub(lambda m: mais_opcoes_html(m.group(1)), t), encoding='utf-8')
+
 for f in OUT.rglob('*.html'):
     if f.name.startswith('google') or '/assets/' in str(f):
         continue
