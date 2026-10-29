@@ -59,3 +59,4 @@ section[id^=cat-]{scroll-margin-top:90px}
 .mo-card{flex:0 0 min(210px,58vw);scroll-snap-align:start;display:flex;flex-direction:column;background:#fff;border:1px solid #EED9DF;border-radius:20px;overflow:hidden;text-decoration:none;color:#382126}
 .mo-img{position:relative;display:block}.mo-img img{display:block;width:100%;height:auto;aspect-ratio:1/1;object-fit:cover}.mo-off{position:absolute;left:10px;top:10px;background:#1F7A45;color:#fff;font:700 12px/1 'Montserrat',sans-serif;border-radius:99px;padding:6px 9px}
 .mo-b{display:flex;flex-direction:column;gap:3px;padding:12px 14px 14px}.mo-b b{font-size:15px}.mo-b small{font-size:12px;color:#785860}.mo-p{font-weight:700;font-size:16px;color:#A65365}.mo-p s{font-weight:400;font-size:12px;color:#8C6C73;margin-right:6px}
+.pixn{display:block;font-size:11px;font-weight:600;color:#1F6B3A;margin-top:2px}.pixnote{margin:-4px 0 10px;font-size:14px;color:#1F6B3A}

@@ -5,6 +5,7 @@ Uso: python3 scripts/build.py   (saida em _site/)
 Quem edita produtos, categorias e precos pelo painel nao precisa mexer neste arquivo.
 """
 import datetime
+from decimal import Decimal, ROUND_DOWN, ROUND_HALF_UP
 import hashlib
 import html
 import json
@@ -85,6 +86,11 @@ config = {
     'pix_desconto': 5, 'taxa_entrega': 15, 'entrega_gratis_a_partir': 125, 'pedido_minimo': 35, 'brinde1_valor': 150, 'brinde1_nome': 'Chaveiro de brinde',
     'foto_chaveiro_simples': '',
     'entrega_rapida_horas': 2,
+    'pix_embutido': True,
+    'agendamento_ativo': True, 'agendamento_dias': ['quarta', 'quinta'], 'agendamento_inicio': '08:30', 'agendamento_fim': '17:00',
+    'agendamento_horarios_noite': ['17:30', '18:30', '19:30', '20:30', '21:30', '22:30'], 'agendamento_horarios_manha': ['06:30', '07:30', '08:30'],
+    'agendamento_titulo': 'Estamos com alta demanda agora',
+    'agendamento_texto': 'Para garantir a sua entrega, escolha abaixo um dos horários disponíveis. Se preferir outro dia ou horário, é só combinar com a gente pelo WhatsApp.',
     'popup_brinde_ativo': True, 'popup_brinde_segundos': 5,
     'brinde_opcao1_nome': 'Coração 3D', 'brinde_opcao2_nome': 'Mãozinha de coração', 'foto_chaveiro_2': '/assets/brinde/chaveiro-maozinha-coracao.webp',
     'nome_proprietaria': 'Alicya Lima', 'cargo_proprietaria': 'Proprietária e criadora da Lily Cestas', 'foto_proprietaria': '/assets/equipe/alycia-lima.webp',
@@ -96,6 +102,27 @@ if len(config['whatsapp']) in (10, 11):
     config['whatsapp'] = '55' + config['whatsapp']
 for k in ('pix_desconto', 'taxa_entrega', 'brinde1_valor', 'entrega_gratis_a_partir', 'pedido_minimo'):
     config[k] = to_number(config[k], f'Configurações › {k}') or 0
+PIX_PCT = config['pix_desconto']
+PIX_EMBUTIDO = bool(config.get('pix_embutido', True)) and PIX_PCT > 0
+
+
+def pix_up(v):
+    """Preço do painel (o que o cliente paga no Pix) -> preço exibido no site (cartão).
+    Escolhe o centavo em que 'preço do site menos o desconto do Pix' volta exatamente ao preço do painel."""
+    if not PIX_EMBUTIDO or not v:
+        return v
+    f = (Decimal(100) - Decimal(str(PIX_PCT))) / Decimal(100)
+    alvo = Decimal(str(v)).quantize(Decimal('0.01'))
+    ini = int((alvo / f * 100).to_integral_value(rounding=ROUND_DOWN))
+    for c in range(ini - 1, ini + 5):
+        bruto = Decimal(c) / 100 * f
+        if (bruto * 100) % 1 == Decimal('0.5'):   # evita empate de arredondamento entre Python e JS
+            continue
+        if bruto.quantize(Decimal('0.01'), rounding=ROUND_HALF_UP) == alvo:
+            return float(Decimal(c) / 100)
+    return round(float(alvo / f), 2)
+
+
 LOJA_NO_AR = bool(config['loja_no_ar'])
 SHOP = '/' if LOJA_NO_AR else '/home/'   # onde fica a loja completa
 WA = config['whatsapp']
@@ -181,6 +208,12 @@ for f in sorted((ROOT / 'data/produtos').glob('*.json')):
     p['inclui'] = [x for x in (p.get('inclui') or []) if x]
     p['quiz'] = p.get('quiz') or []
     prods.append(p)
+for _p in prods:   # preço do painel = preço no Pix; o site mostra o preço de cartão (já com o desconto do Pix embutido)
+    if _p['preco']:
+        _p['_pix'] = _p['_promo'] or _p['preco']
+        _p['preco'] = pix_up(_p['preco'])
+        if _p['_promo']:
+            _p['_promo'] = pix_up(_p['_promo'])
 visible = sorted([p for p in prods if p['status'] != 'oculto' and p['_cat'].get('ativa', True)], key=lambda p: (p['ordem'], p['nome']))
 active = [p for p in visible if p['status'] == 'ativo']
 if not visible:
@@ -434,7 +467,8 @@ def cards_html(plist):
     for p in plist:
         old = f'<span style="text-decoration:line-through;color:#8C6C73;font-size:12px;display:block">{brl(p["preco"])}</span>' if p['_promo'] else ''
         action = '<span style="font-size:12px;font-weight:600;color:#6E5057">Esgotado</span>' if p['status'] == 'esgotado' else f'<a class="btn sm" href="{SHOP}#p={p["id"]}">Adicionar</a>'
-        out += f'''<article class="card"><a href="{prod_url(p)}"><img src="{p["_img"]}" alt="{esc(p.get("alt") or p["nome"])}" width="760" height="567" loading="lazy">{ship_pill(p)}</a><div class="cb"><h3><a href="{prod_url(p)}">{esc(p["nome"])}</a></h3><p>{esc(p["descricao"])}</p><div class="pr"><span>{old}<b>{brl(final_price(p))}</b></span>{action}</div></div></article>'''
+        pixn = f'<small class="pixn">💠 {brl(p["_pix"])} no Pix</small>' if PIX_EMBUTIDO and p.get('_pix') and p['status'] != 'esgotado' else ''
+        out += f'''<article class="card"><a href="{prod_url(p)}"><img src="{p["_img"]}" alt="{esc(p.get("alt") or p["nome"])}" width="760" height="567" loading="lazy">{ship_pill(p)}</a><div class="cb"><h3><a href="{prod_url(p)}">{esc(p["nome"])}</a></h3><p>{esc(p["descricao"])}</p><div class="pr"><span>{old}<b>{brl(final_price(p))}</b>{pixn}</span>{action}</div></div></article>'''
     return out
 
 
@@ -721,13 +755,14 @@ def product_page(p):
     trail = [('Início', '/')] + ([(c['nome'], f'/{c["pagina_url"]}/')] if c.get('pagina_url') and c in cats_with else []) + [(p['nome'], path)]
     crumbs = ' › '.join(f'<a href="{u}">{esc(n)}</a>' if i < len(trail) - 1 else f'<span>{esc(n)}</span>' for i, (n, u) in enumerate(trail))
     badge = f'<span class="tag">{esc(p["selo"])}</span>' if p['selo'] else ''
+    pix_line = f'<p class="pixnote">💠 <b>{brl(p["_pix"])} no Pix</b> ({int(PIX_PCT)}% de desconto sobre o valor no cartão)</p>' if PIX_EMBUTIDO and p.get('_pix') and not sold else ''
     fast_line = f'<p class="fastnote">⚡ <b>{FAST_TXT}*</b><small>{FAST_NOTE}</small></p>' if FAST_TXT and not p['personalizacao'] else ''
     return (head(title, desc, path).replace('<meta property="og:type" content="website">', '<meta property="og:type" content="product">') + jsonld(BUSINESS, crumb_ld(trail), faq_ld(items), prod_ld(p)) + '''
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/css/pages.css">
 </head><body>''' + top_html() + f'''<main><div class="wrap"><nav class="crumbs" aria-label="Navegação">{crumbs}</nav>
-<div class="lead"><div>{badge}<h1>{esc(p["nome"])}</h1><p class="intro">{esc(prod_desc(p))}</p><p class="price">{old}<b>{brl(final_price(p))}</b></p>{fast_line}<p class="shipnote">{"🚚 Entrega grátis neste produto" if final_price(p) >= FRETE_MIN else f"🚚 Entrega grátis em pedidos a partir de {FRETE_TXT}"} · Pedido mínimo {MIN_TXT}</p>{buy}</div>
+<div class="lead"><div>{badge}<h1>{esc(p["nome"])}</h1><p class="intro">{esc(prod_desc(p))}</p><p class="price">{old}<b>{brl(final_price(p))}</b></p>{pix_line}{fast_line}<p class="shipnote">{"🚚 Entrega grátis neste produto" if final_price(p) >= FRETE_MIN else f"🚚 Entrega grátis em pedidos a partir de {FRETE_TXT}"} · Pedido mínimo {MIN_TXT}</p>{buy}</div>
 <img class="hero" src="{p["_img"]}" alt="{esc(p.get("alt") or p["nome"])}" width="760" height="567" fetchpriority="high"></div>
 {inc}{pers}{entrega}
 <section><h2>Perguntas frequentes</h2><div class="faq">{faq_block}</div></section>
@@ -1222,7 +1257,7 @@ if CANECAS.get('ativa', True) and CATALOGOS:
         if not _c:
             continue
         _old = f'<span class="pold">{brl(_c["_de"])}</span>' if _c['_de'] else ''
-        _pix = f'<span class="pnote">{brl(_c["_preco"] * (1 - config["pix_desconto"] / 100))} no Pix</span>' if _c['_preco'] else ''
+        _pix = ''   # canecas têm preço fechado: sem desconto no Pix
         _pr = f'{_old}<span class="pprice">{brl(_c["_preco"])}</span>{_pix}' if _c['_preco'] else '<span class="pprice">Consulte o valor</span>'
         _off = f'<span class="pbadge" style="background:#1F7A45">-{_c["_off"]}%</span>' if _c['_off'] else ''
         CAN_PAIR += (f'<a class="pcard" href="{_c["_url"]}" data-ga="home_canecas_click" data-ga-item="{_c["slug"]}" style="text-decoration:none;color:inherit"><div class="pimg">'
@@ -1261,8 +1296,33 @@ for i, c in enumerate(cats_with):
         'filterKey': c['chave'], 'heroImg': c['_img'], 'caption': f'Foto real: {ps[0]["nome"]}'}
 sim0 = {k: {'chave': v[0]['chave'], 'preco': v[0]['preco'], 'nome': v[0]['nome']} for k, v in
         {'base': SIM['bases'], 'louca': SIM['louca'], 'pecas_3d': SIM['pecas_3d'], 'polaroids': SIM['polaroids']}.items()}
+_DIAS = {'domingo': 0, 'segunda': 1, 'terca': 2, 'quarta': 3, 'quinta': 4, 'sexta': 5, 'sabado': 6}   # chave: slugify() sem acento e sem '-feira'
+
+
+def agendamento_cfg():
+    """Janela de alta demanda: nesses dias/horários o checkout pede a escolha de um horário de entrega.
+    Qualquer valor inválido desliga o recurso (nunca atrapalha o checkout)."""
+    off = {'ativo': False}
+    if not config.get('agendamento_ativo', True):
+        return off
+    hm = re.compile(r'^([01]?\d|2[0-3]):([0-5]\d)$')
+    def horas(v):
+        return [f'{int(m.group(1)):02d}:{m.group(2)}' for m in (hm.match(str(x).strip()) for x in (v or []) if str(x).strip()) if m]
+    raw = config.get('agendamento_dias') or []
+    raw = [raw] if isinstance(raw, str) else raw
+    dias = sorted({_DIAS.get(re.sub(r'[^a-z]', '', slugify(str(d)).split('-')[0]), -1) for d in raw} - {-1})
+    ini, fim = hm.match(str(config.get('agendamento_inicio') or '').strip()), hm.match(str(config.get('agendamento_fim') or '').strip())
+    noite, manha = horas(config.get('agendamento_horarios_noite')), horas(config.get('agendamento_horarios_manha'))
+    if not (dias and ini and fim and (noite or manha)):
+        print('AVISO: agendamento de entrega desligado (dias, janela ou horários inválidos nas configurações).')
+        return off
+    return {'ativo': True, 'dias': dias, 'inicio': f'{int(ini.group(1)):02d}:{ini.group(2)}', 'fim': f'{int(fim.group(1)):02d}:{fim.group(2)}',
+            'noite': noite, 'manha': manha, 'titulo': str(config.get('agendamento_titulo') or ''), 'texto': str(config.get('agendamento_texto') or '')}
+
+
 cfg_js = {k: config[k] for k in ('pix_desconto', 'taxa_entrega', 'brinde1_valor', 'brinde1_nome', 'brinde_opcao1_nome', 'brinde_opcao2_nome', 'entrega_gratis_a_partir', 'pedido_minimo')}
 cfg_js['cidades_entrega'] = [x for x in (config.get('cidades_entrega') or []) if x]
+cfg_js['agendamento'] = agendamento_cfg()
 cfg_js.update({'foto_estudio_litofania': photo_lit, 'foto_estudio_polaroid': photo_pol})
 dumps = lambda o: json.dumps(o, ensure_ascii=False).replace('</', '<\\/')
 data_js = (f'const CONFIG = {dumps(cfg_js)};\n  const SIM0 = {dumps(sim0)};\n  const HOTSPOTS = {dumps(hotspots)};\n'

@@ -37,11 +37,11 @@ content:
         label: Preço (R$)
         type: number
         required: true
-        description: Preço normal do produto. Exemplo 89.90 (use ponto, sem R$).
+        description: "Preço que você quer receber (o valor do Pix). Exemplo 89.90 (use ponto, sem R$). O site soma o desconto do Pix por cima e mostra o preço de cartão automaticamente; no Pix o cliente paga exatamente este valor. Não precisa fazer conta."
       - name: preco_promocional
         label: Preço promocional (R$)
         type: number
-        description: Opcional. Se preencher, o site mostra o preço antigo riscado e vende por este valor. Precisa ser menor que o preço normal. Apague para encerrar a promoção.
+        description: Opcional. Também é o valor do Pix (o site soma o desconto do Pix por cima, igual ao preço normal). Se preencher, o site mostra o preço antigo riscado e vende por este valor. Precisa ser menor que o preço normal. Apague para encerrar a promoção.
       - name: status
         label: Situação
         type: select
@@ -418,8 +418,23 @@ content:
     fields:
       - { name: whatsapp, label: WhatsApp (com DDD, só números), type: string, description: Exemplo 5511914955434 }
       - { name: instagram, label: Link do Instagram, type: string }
-      - { name: ifood_url, label: Link da loja no iFood, type: string, description: Endereço da Lily Cestas no iFood. Aparece no bloco "Prefere comprar pelo iFood?". }
+      - { name: ifood_url, label: Link da loja no iFood, type: string, description: "Endereço da Lily Cestas no iFood. Aparece no bloco 'Prefere comprar pelo iFood?'." }
       - { name: pix_desconto, label: Desconto no Pix (%), type: number, description: Exemplo 5 }
+      - { name: pix_embutido, label: Desconto do Pix já embutido no preço (ligado), type: boolean, description: "Ligado: o preço que você cadastra nos produtos é o valor do Pix e o site soma o desconto automaticamente para o cartão (assim o Pix não reduz a sua margem). Desligado: o preço cadastrado é o de cartão e o Pix dá desconto de verdade. Vale para cestas e presentes; canecas têm preço fechado." }
+      - { name: agendamento_ativo, label: Agendamento da entrega em horários de alta demanda (ligado), type: boolean, description: "Nos dias e horários abaixo, antes de ir para o pagamento o cliente escolhe um horário de entrega num pop-up. Nos outros dias e horários o checkout segue normal." }
+      - name: agendamento_dias
+        label: Agendamento - dias da semana com alta demanda
+        type: select
+        multiple: true
+        options:
+          values: [domingo, segunda, terca, quarta, quinta, sexta, sabado]
+        description: "Dias em que o pop-up aparece. Exemplo quarta e quinta."
+      - { name: agendamento_inicio, label: Agendamento - a partir de que horas o pop-up aparece, type: string, description: "Formato HH:MM, horário de Brasília. Exemplo 08:30." }
+      - { name: agendamento_fim, label: Agendamento - até que horas o pop-up aparece, type: string, description: "Formato HH:MM, horário de Brasília. Exemplo 17:00 (às 17:00 o pop-up já não aparece)." }
+      - { name: agendamento_horarios_noite, label: Agendamento - horários de entrega de hoje à noite, type: string, list: true, description: "Um por linha, no formato HH:MM. Horários que já passaram não aparecem. Exemplo 17:30, 18:30 ... 22:30." }
+      - { name: agendamento_horarios_manha, label: Agendamento - horários de entrega de amanhã cedo, type: string, list: true, description: "Um por linha, no formato HH:MM. Exemplo 06:30, 07:30, 08:30." }
+      - { name: agendamento_titulo, label: Agendamento - título do pop-up, type: string }
+      - { name: agendamento_texto, label: Agendamento - texto do pop-up, type: text }
       - { name: cidades_entrega, label: Cidades atendidas na entrega, type: string, list: true, description: "Usadas para validar o CEP no checkout. Alphaville e Polvilho entram em Barueri, Santana de Parnaíba e Cajamar." }
       - { name: entrega_gratis_a_partir, label: Entrega grátis a partir de (R$), type: number, description: "Pedidos com este valor ou mais (soma dos produtos, sem o desconto do Pix) não pagam entrega. Exemplo 125." }
       - { name: entrega_rapida_horas, label: Entrega rápida em até (horas), type: number, description: "Aparece em destaque no site como 'Entrega rápida em até 2h*'. Coloque 0 para esconder." }

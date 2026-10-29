@@ -20,5 +20,28 @@
   "ga4_id": "G-EVBDMXD8GL",
   "entrega_gratis_a_partir": 125,
   "pedido_minimo": 35,
-  "clarity_id": "z2zt388utc"
+  "clarity_id": "z2zt388utc",
+  "pix_embutido": true,
+  "agendamento_ativo": true,
+  "agendamento_dias": [
+    "quarta",
+    "quinta"
+  ],
+  "agendamento_inicio": "08:30",
+  "agendamento_fim": "17:00",
+  "agendamento_horarios_noite": [
+    "17:30",
+    "18:30",
+    "19:30",
+    "20:30",
+    "21:30",
+    "22:30"
+  ],
+  "agendamento_horarios_manha": [
+    "06:30",
+    "07:30",
+    "08:30"
+  ],
+  "agendamento_titulo": "Estamos com alta demanda agora",
+  "agendamento_texto": "Para garantir a sua entrega, escolha abaixo um dos horários disponíveis. Se preferir outro dia ou horário, é só combinar com a gente pelo WhatsApp."
 }

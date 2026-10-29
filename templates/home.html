@@ -811,7 +811,7 @@ html {
               <input id="checkout-ref" type="text" placeholder="Ex: portão azul, ao lado da padaria" class="w-full rounded-xl border border-[#E5C2C9] px-3.5 py-2.5 text-xs sm:text-sm" />
             </div>
           </div>
-          <p class="text-[11px] text-[#785860]">A data e o horário da entrega a gente combina com você pelo WhatsApp.</p>
+          <p id="checkout-when-note" class="text-[11px] text-[#785860]">A data e o horário da entrega a gente combina com você pelo WhatsApp.</p>
 
           <div class="flex items-center justify-between pt-2">
             <button type="button" id="back-to-step-1-btn" class="px-4 py-2.5 rounded-full border border-[#E5C2C9] text-xs font-display font-semibold text-[#5A3D43]">
@@ -841,6 +841,12 @@ html {
                 <span class="text-[11px] text-[#785860]">Detalhes combinados pelo WhatsApp</span>
               </button>
             </div>
+          </div>
+
+          <p id="pix-note" class="hidden text-[11px] text-[#785860] -mt-1"></p>
+          <div id="checkout-slot-line" class="hidden flex items-center justify-between gap-2 p-3 rounded-2xl bg-[#F1F8F3] border border-[#CFE6D6] text-xs">
+            <span>⏰ <b>Entrega agendada:</b> <span id="checkout-slot-text"></span></span>
+            <button type="button" id="change-slot-btn" class="text-[#1F6B3A] font-display font-semibold underline">Alterar</button>
           </div>
 
           <!-- Resumo Financeiro Detalhado -->
@@ -890,6 +896,19 @@ html {
   {{BRINDE_POPUP}}
 
   <!-- Container de Notificações Toast -->
+  <!-- Agendamento da entrega (só aparece nos dias/horários de alta demanda configurados) -->
+  <div id="slot-modal" class="hidden fixed inset-0 z-[60] flex items-end sm:items-center justify-center p-0 sm:p-4" role="dialog" aria-modal="true" aria-labelledby="slot-title">
+    <div id="slot-backdrop" class="absolute inset-0 bg-[#382126]/60"></div>
+    <div class="relative bg-white w-full sm:max-w-lg max-h-[92vh] overflow-y-auto rounded-t-3xl sm:rounded-3xl shadow-2xl p-5 sm:p-6">
+      <button type="button" id="slot-close" class="absolute top-3 right-3 w-8 h-8 rounded-full bg-[#F9EBEE] text-[#A65365] font-bold" aria-label="Fechar">✕</button>
+      <p class="text-[11px] font-display font-bold uppercase tracking-wider text-[#A65365]">⏰ Agendamento da entrega</p>
+      <h3 id="slot-title" class="font-display text-lg font-bold text-[#382126] mt-1 pr-8">Estamos com alta demanda agora</h3>
+      <p id="slot-text" class="text-xs text-[#785860] mt-1.5"></p>
+      <div id="slot-groups" class="mt-4 space-y-4"></div>
+      <button type="button" id="slot-manual" class="mt-4 w-full text-center text-xs font-display font-semibold text-[#A65365] underline">Prefiro combinar outro dia ou horário pelo WhatsApp</button>
+    </div>
+  </div>
+
   <div id="toast-container" class="fixed bottom-5 right-5 z-50 flex flex-col gap-2 max-w-sm"></div>
 
   <script src="/lily-images.js"></script>
@@ -1478,7 +1497,8 @@ html {
 
     // Cálculo financeiro da Etapa 3
     const isPix = state.paymentMethod.includes("PIX");
-    const discount = isPix ? effectiveSub * (CONFIG.pix_desconto / 100) : 0;
+    const pixBase = state.cart.reduce((acc, it) => acc + (it.pix ? it.price * it.qty : 0), 0);
+    const discount = isPix ? pixBase * (CONFIG.pix_desconto / 100) : 0;
     state.deliveryFee = shippingFor(effectiveSub);
     const finalTotal = effectiveSub + state.deliveryFee - discount;
 
@@ -1489,7 +1509,22 @@ html {
 
     if (subEl) subEl.textContent = formatBRL(effectiveSub);
     if (shipEl) shipEl.textContent = state.deliveryFee === 0 ? "Grátis" : formatBRL(state.deliveryFee);
-    if (discEl) discEl.textContent = isPix ? `- ${formatBRL(discount)} (5% PIX)` : "R$ 0,00";
+    if (discEl) discEl.textContent = isPix && pixBase > 0 ? `- ${formatBRL(discount)} (${CONFIG.pix_desconto}% PIX)` : "R$ 0,00";
+    const pixNote = document.getElementById("pix-note");
+    if (pixNote) {
+      pixNote.textContent = pixBase === 0 ? "Canecas, adicionais e criações do Estúdio têm preço fechado, sem desconto adicional no Pix." : (pixBase < effectiveSub ? "O desconto do Pix vale para as cestas e presentes do pedido; canecas e adicionais têm preço fechado." : "");
+      pixNote.classList.toggle("hidden", !pixNote.textContent);
+    }
+
+    const whenNote = document.getElementById("checkout-when-note");
+    if (whenNote) whenNote.textContent = agendamentoAtivo() ? "⏰ Neste momento estamos com alta demanda: no próximo passo você escolhe o horário da entrega." : "A data e o horário da entrega a gente combina com você pelo WhatsApp.";
+    const slotLine = document.getElementById("checkout-slot-line");
+    if (slotLine) {
+      const sl = state.slot && !state.slot.manual ? state.slot.label : "";
+      slotLine.classList.toggle("hidden", !sl);
+      const slTxt = document.getElementById("checkout-slot-text");
+      if (slTxt) slTxt.textContent = sl;
+    }
     if (finalEl) finalEl.textContent = formatBRL(finalTotal);
 
     const summaryText = generateOrderSummaryText(effectiveSub, discount, finalTotal);
@@ -1500,6 +1535,67 @@ html {
     if (waLink) {
       waLink.href = "https://wa.me/{{WA}}?text=" + encodeURIComponent(summaryText);
     }
+  }
+
+  // ---- Agendamento de entrega nos horários de alta demanda (dias e janela vêm das Configurações)
+  function getAG() { return CONFIG.agendamento || { ativo: false }; }
+  const DIAS_PT = ["domingo", "segunda-feira", "terça-feira", "quarta-feira", "quinta-feira", "sexta-feira", "sábado"];
+  function spNow() {
+    try {
+      const parts = new Intl.DateTimeFormat("en-US", { timeZone: "America/Sao_Paulo", year: "numeric", month: "2-digit", day: "2-digit", weekday: "short", hour: "2-digit", minute: "2-digit", hourCycle: "h23" }).formatToParts(new Date());
+      const g = t => (parts.find(p => p.type === t) || {}).value;
+      const wd = { Sun: 0, Mon: 1, Tue: 2, Wed: 3, Thu: 4, Fri: 5, Sat: 6 }[g("weekday")];
+      const n = { wd, y: Number(g("year")), m: Number(g("month")), d: Number(g("day")), min: Number(g("hour")) * 60 + Number(g("minute")) };
+      return Object.values(n).some(v => v === undefined || Number.isNaN(v)) ? null : n;
+    } catch (e) { return null; }
+  }
+  function hmToMin(hm) { const p = String(hm).split(":"); return Number(p[0]) * 60 + Number(p[1]); }
+  function agendamentoAtivo() {
+    try {
+      const AG = getAG();
+      if (!AG.ativo || !AG.dias || !AG.dias.length) return false;
+      const n = spNow();
+      return !!n && AG.dias.includes(n.wd) && n.min >= hmToMin(AG.inicio) && n.min < hmToMin(AG.fim);
+    } catch (e) { return false; }
+  }
+  function slotDayLabel(n, add) {
+    const dt = new Date(Date.UTC(n.y, n.m - 1, n.d + add));
+    const nome = DIAS_PT[dt.getUTCDay()];
+    return nome.charAt(0).toUpperCase() + nome.slice(1) + ", " + String(dt.getUTCDate()).padStart(2, "0") + "/" + String(dt.getUTCMonth() + 1).padStart(2, "0");
+  }
+  function openSlotModal() {
+    const AG = getAG();
+    const modal = document.getElementById("slot-modal");
+    const n = spNow();
+    if (!modal || !n) { state.slot = { manual: true }; state.checkoutStep = 3; renderCheckoutModal(); return; }
+    document.getElementById("slot-title").textContent = AG.titulo || "Estamos com alta demanda agora";
+    document.getElementById("slot-text").textContent = AG.texto || "";
+    const groups = [
+      { title: "Hoje à noite · " + slotDayLabel(n, 0), times: (AG.noite || []).filter(t => hmToMin(t) > n.min), add: 0 },
+      { title: "Amanhã cedo · " + slotDayLabel(n, 1), times: AG.manha || [], add: 1 }
+    ].filter(gr => gr.times.length);
+    document.getElementById("slot-groups").innerHTML = groups.map(gr => `
+      <div>
+        <p class="text-xs font-display font-bold text-[#382126] mb-2">${gr.title}</p>
+        <div class="grid grid-cols-3 gap-2">
+          ${gr.times.map(t => `<button type="button" data-slot-pick="${gr.add}|${t}" class="py-2.5 rounded-xl border border-[#E5C2C9] bg-white text-sm font-display font-semibold text-[#A65365] hover:bg-[#FDF2F5] hover:border-[#B36273] transition-all">${t}</button>`).join("")}
+        </div>
+      </div>`).join("");
+    modal.dataset.dayToday = slotDayLabel(n, 0);
+    modal.dataset.dayTomorrow = slotDayLabel(n, 1);
+    modal.classList.remove("hidden");
+  }
+  function closeSlotModal() { document.getElementById("slot-modal")?.classList.add("hidden"); }
+  function goToStep3() {
+    if (state.cepOk === false) {
+      showToast("Ainda não entregamos nesse CEP. Fale com a gente no WhatsApp.");
+      return;
+    }
+    if (agendamentoAtivo() && !state.slot) {
+      try { openSlotModal(); return; } catch (e) { /* se algo falhar, segue o checkout normal */ }
+    }
+    state.checkoutStep = 3;
+    renderCheckoutModal();
   }
 
   function normCity(s) {
@@ -1562,7 +1658,7 @@ html {
       `• *De:* ${clientName}  ➔  *Para:* ${recipient}`,
       `• *Endereço:* ${address}${cep ? ` | CEP: ${cep}` : ""}`,
       ...(ref ? [`• *Referência:* ${ref}`] : []),
-      `• *Data e horário:* combinar aqui no WhatsApp`,
+      `• *Data e horário:* ${state.slot && !state.slot.manual ? state.slot.label + " (agendado no site)" : "combinar aqui no WhatsApp"}`,
       `----------------------------------------`,
       `*ITENS PERSONALIZADOS:*`
     ];
@@ -1703,6 +1799,7 @@ html {
             id: prod.id + "-" + Date.now(),
             name: prod.name,
             price: prod.price,
+            pix: true,
             qty: 1,
             details: prod.isBasket ? "Cesta montada pela Lily" : "Personalização a combinar no WhatsApp"
           });
@@ -1800,10 +1897,7 @@ html {
       const stepBtn = e.target.closest("[data-checkout-step-btn]");
       if (stepBtn) {
         const want = Number(stepBtn.getAttribute("data-checkout-step-btn"));
-        if (want === 3 && state.cepOk === false) {
-          showToast("Ainda não entregamos nesse CEP. Fale com a gente no WhatsApp.");
-          return;
-        }
+        if (want === 3) { goToStep3(); return; }
         state.checkoutStep = want;
         renderCheckoutModal();
         return;
@@ -1886,6 +1980,7 @@ html {
         id: rec.id + "-" + Date.now(),
         name: rec.name,
         price: rec.price,
+        pix: true,
         qty: 1,
         details: "Recomendado pelo Concierge Lily • " + rec.customizable
       });
@@ -2051,6 +2146,7 @@ html {
         id: prod.id + "-" + Date.now(),
         name: prod.name,
         price: prod.price,
+        pix: true,
         qty: 1,
         details: `${prod.isBasket ? "Cesta montada pela Lily" : "Personalização a combinar no WhatsApp"}${customColor ? ` • Obs.: ${customColor}` : ""}`
       });
@@ -2082,6 +2178,7 @@ html {
       }
       cartDrawer?.classList.add("hidden");
       state.checkoutStep = 1;
+      state.slot = null;
       renderCheckoutModal();
       checkoutModal?.classList.remove("hidden");
     });
@@ -2097,14 +2194,28 @@ html {
       state.checkoutStep = 1;
       renderCheckoutModal();
     });
-    document.getElementById("to-step-3-btn")?.addEventListener("click", () => {
-      if (state.cepOk === false) {
-        showToast("Ainda não entregamos nesse CEP. Fale com a gente no WhatsApp.");
-        return;
-      }
+    document.getElementById("to-step-3-btn")?.addEventListener("click", goToStep3);
+    document.getElementById("slot-close")?.addEventListener("click", closeSlotModal);
+    document.getElementById("slot-backdrop")?.addEventListener("click", closeSlotModal);
+    document.addEventListener("keydown", (e) => { if (e.key === "Escape") closeSlotModal(); });
+    document.getElementById("slot-manual")?.addEventListener("click", () => {
+      state.slot = { manual: true };
+      closeSlotModal();
       state.checkoutStep = 3;
       renderCheckoutModal();
     });
+    document.getElementById("slot-groups")?.addEventListener("click", (e) => {
+      const b = e.target.closest("[data-slot-pick]");
+      if (!b) return;
+      const [add, t] = b.getAttribute("data-slot-pick").split("|");
+      const modal = document.getElementById("slot-modal");
+      const day = (add === "0" ? modal.dataset.dayToday : modal.dataset.dayTomorrow) || "";
+      state.slot = { label: (add === "0" ? "Hoje, " : "Amanhã, ") + day + " às " + t, manual: false };
+      closeSlotModal();
+      state.checkoutStep = 3;
+      renderCheckoutModal();
+    });
+    document.getElementById("change-slot-btn")?.addEventListener("click", () => { try { openSlotModal(); } catch (e) {} });
     document.getElementById("back-to-step-2-btn")?.addEventListener("click", () => {
       state.checkoutStep = 2;
       renderCheckoutModal();
