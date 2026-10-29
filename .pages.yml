@@ -433,6 +433,14 @@ content:
       - { name: agendamento_fim, label: Agendamento - até que horas o pop-up aparece, type: string, description: "Formato HH:MM, horário de Brasília. Exemplo 17:00 (às 17:00 o pop-up já não aparece)." }
       - { name: agendamento_horarios_noite, label: Agendamento - horários de entrega de hoje à noite, type: string, list: true, description: "Um por linha, no formato HH:MM. Horários que já passaram não aparecem. Exemplo 17:30, 18:30 ... 22:30." }
       - { name: agendamento_horarios_manha, label: Agendamento - horários de entrega de amanhã cedo, type: string, list: true, description: "Um por linha, no formato HH:MM. Exemplo 06:30, 07:30, 08:30." }
+      - { name: agendamento_noturno_ativo, label: Agendamento à noite (ligado), type: boolean, description: "Depois do horário abaixo (ex.: 21:00) até a abertura (ex.: 06:30), o pop-up abre ao iniciar o pedido e o cliente agenda a entrega para o dia seguinte." }
+      - { name: agendamento_noturno_inicio, label: Agendamento à noite - começa às, type: string, description: "Formato HH:MM, horário de Brasília. Exemplo 21:00." }
+      - { name: agendamento_noturno_fim, label: Agendamento à noite - termina às (abertura), type: string, description: "Formato HH:MM. Antes deste horário (depois da meia-noite) o pedido ainda é agendado. Exemplo 06:30." }
+      - { name: agendamento_noturno_horarios_alta_demanda, label: Agendamento à noite - horários quando a entrega cai num dia de alta demanda, type: string, list: true, description: "Um por linha, formato HH:MM. Vale quando o dia da entrega é um dos dias de alta demanda (ex.: quarta e quinta). Exemplo 06:30, 07:00 ... 08:30." }
+      - { name: agendamento_noturno_primeiro, label: Agendamento à noite - primeiro horário nos outros dias, type: string, description: "Nos demais dias o cliente pode agendar o dia inteiro, de 30 em 30 minutos. Exemplo 06:30." }
+      - { name: agendamento_noturno_ultimo, label: Agendamento à noite - último horário nos outros dias, type: string, description: "Exemplo 22:30." }
+      - { name: agendamento_noturno_titulo, label: Agendamento à noite - título do pop-up, type: string }
+      - { name: agendamento_noturno_texto, label: Agendamento à noite - texto do pop-up, type: text }
       - { name: agendamento_titulo, label: Agendamento - título do pop-up, type: string }
       - { name: agendamento_texto, label: Agendamento - texto do pop-up, type: text }
       - { name: cidades_entrega, label: Cidades atendidas na entrega, type: string, list: true, description: "Usadas para validar o CEP no checkout. Alphaville e Polvilho entram em Barueri, Santana de Parnaíba e Cajamar." }

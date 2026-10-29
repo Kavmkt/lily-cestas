@@ -89,6 +89,11 @@ config = {
     'pix_embutido': True,
     'agendamento_ativo': True, 'agendamento_dias': ['quarta', 'quinta'], 'agendamento_inicio': '08:30', 'agendamento_fim': '17:00',
     'agendamento_horarios_noite': ['17:30', '18:30', '19:30', '20:30', '21:30', '22:30'], 'agendamento_horarios_manha': ['06:30', '07:30', '08:30'],
+    'agendamento_noturno_ativo': True, 'agendamento_noturno_inicio': '21:00', 'agendamento_noturno_fim': '06:30',
+    'agendamento_noturno_horarios_alta_demanda': ['06:30', '07:00', '07:30', '08:00', '08:30'],
+    'agendamento_noturno_primeiro': '06:30', 'agendamento_noturno_ultimo': '22:30',
+    'agendamento_noturno_titulo': 'Já passou do nosso horário de atendimento',
+    'agendamento_noturno_texto': 'Seu pedido fica agendado e a nossa equipe confirma pelo WhatsApp a partir das 6h30. Escolha abaixo o melhor horário para receber o presente.',
     'agendamento_titulo': 'Estamos com alta demanda agora',
     'agendamento_texto': 'Para garantir a sua entrega, escolha abaixo um dos horários disponíveis. Se preferir outro dia ou horário, é só combinar com a gente pelo WhatsApp.',
     'popup_brinde_ativo': True, 'popup_brinde_segundos': 5,
@@ -1316,7 +1321,19 @@ def agendamento_cfg():
     if not (dias and ini and fim and (noite or manha)):
         print('AVISO: agendamento de entrega desligado (dias, janela ou horários inválidos nas configurações).')
         return off
-    return {'ativo': True, 'dias': dias, 'inicio': f'{int(ini.group(1)):02d}:{ini.group(2)}', 'fim': f'{int(fim.group(1)):02d}:{fim.group(2)}',
+    nt = {'ativo': False}
+    n_ini, n_fim = hm.match(str(config.get('agendamento_noturno_inicio') or '').strip()), hm.match(str(config.get('agendamento_noturno_fim') or '').strip())
+    n_pri, n_ult = hm.match(str(config.get('agendamento_noturno_primeiro') or '').strip()), hm.match(str(config.get('agendamento_noturno_ultimo') or '').strip())
+    alta = horas(config.get('agendamento_noturno_horarios_alta_demanda'))
+    if config.get('agendamento_noturno_ativo', True) and n_ini and n_fim and n_pri and n_ult:
+        a, z = int(n_pri.group(1)) * 60 + int(n_pri.group(2)), int(n_ult.group(1)) * 60 + int(n_ult.group(2))
+        livre = [f'{m // 60:02d}:{m % 60:02d}' for m in range(a, z + 1, 30)]
+        if livre:
+            nt = {'ativo': True, 'inicio': f'{int(n_ini.group(1)):02d}:{n_ini.group(2)}', 'fim': f'{int(n_fim.group(1)):02d}:{n_fim.group(2)}', 'alta': alta, 'livre': livre,
+                  'titulo': str(config.get('agendamento_noturno_titulo') or ''), 'texto': str(config.get('agendamento_noturno_texto') or '')}
+    elif config.get('agendamento_noturno_ativo', True):
+        print('AVISO: agendamento noturno desligado (horários inválidos nas configurações).')
+    return {'ativo': True, 'noturno': nt, 'dias': dias, 'inicio': f'{int(ini.group(1)):02d}:{ini.group(2)}', 'fim': f'{int(fim.group(1)):02d}:{fim.group(2)}',
             'noite': noite, 'manha': manha, 'titulo': str(config.get('agendamento_titulo') or ''), 'texto': str(config.get('agendamento_texto') or '')}
 
 

@@ -43,5 +43,19 @@
     "08:30"
   ],
   "agendamento_titulo": "Estamos com alta demanda agora",
-  "agendamento_texto": "Para garantir a sua entrega, escolha abaixo um dos horários disponíveis. Se preferir outro dia ou horário, é só combinar com a gente pelo WhatsApp."
+  "agendamento_texto": "Para garantir a sua entrega, escolha abaixo um dos horários disponíveis. Se preferir outro dia ou horário, é só combinar com a gente pelo WhatsApp.",
+  "agendamento_noturno_ativo": true,
+  "agendamento_noturno_inicio": "21:00",
+  "agendamento_noturno_fim": "06:30",
+  "agendamento_noturno_horarios_alta_demanda": [
+    "06:30",
+    "07:00",
+    "07:30",
+    "08:00",
+    "08:30"
+  ],
+  "agendamento_noturno_primeiro": "06:30",
+  "agendamento_noturno_ultimo": "22:30",
+  "agendamento_noturno_titulo": "Já passou do nosso horário de atendimento",
+  "agendamento_noturno_texto": "Seu pedido fica agendado e a nossa equipe confirma pelo WhatsApp a partir das 6h30. Escolha abaixo o melhor horário para receber o presente."
 }

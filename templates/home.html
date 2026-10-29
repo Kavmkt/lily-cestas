@@ -1517,7 +1517,12 @@ html {
     }
 
     const whenNote = document.getElementById("checkout-when-note");
-    if (whenNote) whenNote.textContent = agendamentoAtivo() ? "⏰ Neste momento estamos com alta demanda: no próximo passo você escolhe o horário da entrega." : "A data e o horário da entrega a gente combina com você pelo WhatsApp.";
+    if (whenNote) {
+      const modoN = agendamentoModo();
+      whenNote.textContent = state.slot && !state.slot.manual ? "⏰ Entrega agendada: " + state.slot.label + "."
+        : (modoN ? (modoN.tipo === "noite" ? "🌙 Estamos fora do horário de atendimento: escolha o horário da entrega para agendar o seu pedido." : "⏰ Neste momento estamos com alta demanda: no próximo passo você escolhe o horário da entrega.")
+        : "A data e o horário da entrega a gente combina com você pelo WhatsApp.");
+    }
     const slotLine = document.getElementById("checkout-slot-line");
     if (slotLine) {
       const sl = state.slot && !state.slot.manual ? state.slot.label : "";
@@ -1537,7 +1542,7 @@ html {
     }
   }
 
-  // ---- Agendamento de entrega nos horários de alta demanda (dias e janela vêm das Configurações)
+  // ---- Agendamento de entrega (dias/horários de alta demanda e pedidos feitos à noite; tudo vem das Configurações)
   function getAG() { return CONFIG.agendamento || { ativo: false }; }
   const DIAS_PT = ["domingo", "segunda-feira", "terça-feira", "quarta-feira", "quinta-feira", "sexta-feira", "sábado"];
   function spNow() {
@@ -1550,30 +1555,62 @@ html {
     } catch (e) { return null; }
   }
   function hmToMin(hm) { const p = String(hm).split(":"); return Number(p[0]) * 60 + Number(p[1]); }
-  function agendamentoAtivo() {
+  // Qual regra vale agora? null = checkout normal (sem pop-up).
+  //  "noite": depois das 21h (até as 6h30) o pedido é agendado para o dia seguinte (ou para hoje, se já passou da meia-noite)
+  //  "dia":   nos dias de alta demanda, dentro da janela configurada (ex.: qua/qui das 08:30 às 17:00)
+  function agendamentoModo() {
     try {
       const AG = getAG();
-      if (!AG.ativo || !AG.dias || !AG.dias.length) return false;
+      if (!AG.ativo) return null;
       const n = spNow();
-      return !!n && AG.dias.includes(n.wd) && n.min >= hmToMin(AG.inicio) && n.min < hmToMin(AG.fim);
-    } catch (e) { return false; }
+      if (!n) return null;
+      const nt = AG.noturno;
+      if (nt && nt.ativo) {
+        const ini = hmToMin(nt.inicio), fim = hmToMin(nt.fim);
+        if (n.min >= ini) return { tipo: "noite", add: 1, wd: (n.wd + 1) % 7 };
+        if (n.min < fim) return { tipo: "noite", add: 0, wd: n.wd };
+      }
+      if (AG.dias && AG.dias.length && AG.dias.includes(n.wd) && n.min >= hmToMin(AG.inicio) && n.min < hmToMin(AG.fim)) return { tipo: "dia" };
+      return null;
+    } catch (e) { return null; }
   }
+  function agendamentoAtivo() { return !!agendamentoModo(); }
   function slotDayLabel(n, add) {
     const dt = new Date(Date.UTC(n.y, n.m - 1, n.d + add));
     const nome = DIAS_PT[dt.getUTCDay()];
     return nome.charAt(0).toUpperCase() + nome.slice(1) + ", " + String(dt.getUTCDate()).padStart(2, "0") + "/" + String(dt.getUTCMonth() + 1).padStart(2, "0");
   }
-  function openSlotModal() {
+  function openSlotModal(advance) {
     const AG = getAG();
     const modal = document.getElementById("slot-modal");
     const n = spNow();
-    if (!modal || !n) { state.slot = { manual: true }; state.checkoutStep = 3; renderCheckoutModal(); return; }
-    document.getElementById("slot-title").textContent = AG.titulo || "Estamos com alta demanda agora";
-    document.getElementById("slot-text").textContent = AG.texto || "";
-    const groups = [
-      { title: "Hoje à noite · " + slotDayLabel(n, 0), times: (AG.noite || []).filter(t => hmToMin(t) > n.min), add: 0 },
-      { title: "Amanhã cedo · " + slotDayLabel(n, 1), times: AG.manha || [], add: 1 }
-    ].filter(gr => gr.times.length);
+    const modo = agendamentoModo();
+    if (!modal || !n || !modo) { state.slot = { manual: true }; if (advance) { state.checkoutStep = 3; renderCheckoutModal(); } return; }
+    let titulo = AG.titulo, texto = AG.texto, groups = [];
+    if (modo.tipo === "dia") {
+      groups = [
+        { title: "Hoje à noite · " + slotDayLabel(n, 0), times: (AG.noite || []).filter(t => hmToMin(t) > n.min), add: 0 },
+        { title: "Amanhã cedo · " + slotDayLabel(n, 1), times: AG.manha || [], add: 1 }
+      ];
+    } else {
+      const nt = AG.noturno;
+      const quando = modo.add === 1 ? "Amanhã" : "Hoje";
+      titulo = nt.titulo || titulo; texto = nt.texto || texto;
+      if (AG.dias && AG.dias.includes(modo.wd)) {
+        groups = [{ title: quando + " cedo · " + slotDayLabel(n, modo.add), times: nt.alta || [], add: modo.add }];
+      } else {
+        const lista = nt.livre || [];
+        groups = [
+          { title: quando + " de manhã · " + slotDayLabel(n, modo.add), times: lista.filter(t => hmToMin(t) < 720), add: modo.add },
+          { title: "À tarde", times: lista.filter(t => hmToMin(t) >= 720 && hmToMin(t) < 1080), add: modo.add },
+          { title: "À noite", times: lista.filter(t => hmToMin(t) >= 1080), add: modo.add }
+        ];
+      }
+    }
+    groups = groups.filter(gr => gr.times.length);
+    if (!groups.length) { state.slot = { manual: true }; if (advance) { state.checkoutStep = 3; renderCheckoutModal(); } return; }
+    document.getElementById("slot-title").textContent = titulo || "Estamos com alta demanda agora";
+    document.getElementById("slot-text").textContent = texto || "";
     document.getElementById("slot-groups").innerHTML = groups.map(gr => `
       <div>
         <p class="text-xs font-display font-bold text-[#382126] mb-2">${gr.title}</p>
@@ -1583,16 +1620,23 @@ html {
       </div>`).join("");
     modal.dataset.dayToday = slotDayLabel(n, 0);
     modal.dataset.dayTomorrow = slotDayLabel(n, 1);
+    modal.dataset.advance = advance ? "1" : "";
     modal.classList.remove("hidden");
   }
   function closeSlotModal() { document.getElementById("slot-modal")?.classList.add("hidden"); }
+  function afterSlotChoice() {
+    const advance = document.getElementById("slot-modal")?.dataset.advance === "1";
+    closeSlotModal();
+    if (advance) state.checkoutStep = 3;
+    renderCheckoutModal();
+  }
   function goToStep3() {
     if (state.cepOk === false) {
       showToast("Ainda não entregamos nesse CEP. Fale com a gente no WhatsApp.");
       return;
     }
     if (agendamentoAtivo() && !state.slot) {
-      try { openSlotModal(); return; } catch (e) { /* se algo falhar, segue o checkout normal */ }
+      try { openSlotModal(true); return; } catch (e) { /* se algo falhar, segue o checkout normal */ }
     }
     state.checkoutStep = 3;
     renderCheckoutModal();
@@ -2181,6 +2225,9 @@ html {
       state.slot = null;
       renderCheckoutModal();
       checkoutModal?.classList.remove("hidden");
+      // depois das 21h o pop-up de agendamento já abre ao iniciar o pedido
+      const modoAgora = agendamentoModo();
+      if (modoAgora && modoAgora.tipo === "noite") { try { openSlotModal(false); } catch (e) { /* segue o checkout normal */ } }
     });
 
     document.getElementById("close-checkout-modal-btn")?.addEventListener("click", () => checkoutModal?.classList.add("hidden"));
@@ -2200,9 +2247,7 @@ html {
     document.addEventListener("keydown", (e) => { if (e.key === "Escape") closeSlotModal(); });
     document.getElementById("slot-manual")?.addEventListener("click", () => {
       state.slot = { manual: true };
-      closeSlotModal();
-      state.checkoutStep = 3;
-      renderCheckoutModal();
+      afterSlotChoice();
     });
     document.getElementById("slot-groups")?.addEventListener("click", (e) => {
       const b = e.target.closest("[data-slot-pick]");
@@ -2210,12 +2255,11 @@ html {
       const [add, t] = b.getAttribute("data-slot-pick").split("|");
       const modal = document.getElementById("slot-modal");
       const day = (add === "0" ? modal.dataset.dayToday : modal.dataset.dayTomorrow) || "";
-      state.slot = { label: (add === "0" ? "Hoje, " : "Amanhã, ") + day + " às " + t, manual: false };
-      closeSlotModal();
-      state.checkoutStep = 3;
-      renderCheckoutModal();
+      state.slot = { label: (add === "0" ? "Hoje, " : "Amanhã, ") + day.charAt(0).toLowerCase() + day.slice(1) + " às " + t, manual: false };
+      afterSlotChoice();
+      if (document.getElementById("slot-modal")?.classList.contains("hidden")) showToast("Entrega agendada: " + state.slot.label);
     });
-    document.getElementById("change-slot-btn")?.addEventListener("click", () => { try { openSlotModal(); } catch (e) {} });
+    document.getElementById("change-slot-btn")?.addEventListener("click", () => { try { openSlotModal(false); } catch (e) {} });
     document.getElementById("back-to-step-2-btn")?.addEventListener("click", () => {
       state.checkoutStep = 2;
       renderCheckoutModal();
