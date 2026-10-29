@@ -11,7 +11,7 @@
         var p = { currency: 'BRL', value: o.value || 0, payment_type: o.payment_type || '', items: o.items || [], link_location: 'finalizar_pedido', page_path: base.page_path };
         ev('generate_lead', p);
         // Google Ads: conversão "pedido enviado" (só dispara se o código do Google Ads estiver configurado)
-        try { var ads = window.LILY_ADS || {}; if (ads.lead && window.gtag) window.gtag('event', 'conversion', { send_to: ads.lead, value: o.value || 0, currency: 'BRL' }); } catch (e) {}
+        try { var ads = window.LILY_ADS || {}; if (ads.lead && window.gtag) window.gtag('event', 'conversion', { send_to: ads.lead, value: o.value || 1, currency: 'BRL' }); } catch (e) {}
         return;
       }
       var where = (a.className || '').indexOf('wafab') > -1 ? 'botao_flutuante' : 'pagina';

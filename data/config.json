@@ -57,5 +57,8 @@
   "agendamento_noturno_primeiro": "06:30",
   "agendamento_noturno_ultimo": "22:30",
   "agendamento_noturno_titulo": "Já passou do nosso horário de atendimento",
-  "agendamento_noturno_texto": "Seu pedido fica agendado e a nossa equipe confirma pelo WhatsApp a partir das 6h30. Escolha abaixo o melhor horário para receber o presente."
+  "agendamento_noturno_texto": "Seu pedido fica agendado e a nossa equipe confirma pelo WhatsApp a partir das 6h30. Escolha abaixo o melhor horário para receber o presente.",
+  "google_ads_id": "AW-18151712226",
+  "google_ads_conversao_pedido": "dAxsCOD3t64dEOLLtM9D",
+  "google_ads_conversao_contato": "h50QCOP3t64dEOLLtM9D"
 }
