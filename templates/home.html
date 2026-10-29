@@ -978,6 +978,16 @@ html {
     return "R$ " + Number(value).toFixed(2).replace(".", ",");
   }
 
+  // ---- Eventos para o Google Analytics / Google Ads (nunca podem quebrar a compra)
+  function gaEvent(name, params) { try { if (window.gtag) window.gtag("event", name, params || {}); } catch (e) {} }
+  function gaItems(list) {
+    return (list || []).map(it => ({ item_id: String(it.id || "").replace(/-\d{10,}$/, ""), item_name: it.name, price: Number(it.price) || 0, quantity: it.qty || 1 }));
+  }
+  function cartPush(item) {
+    state.cart.push(item);
+    try { gaEvent("add_to_cart", { currency: "BRL", value: (Number(item.price) || 0) * (item.qty || 1), items: gaItems([item]) }); } catch (e) {}
+  }
+
   function getImgSrc(key) {
     if (window.LILY_IMAGES && window.LILY_IMAGES[key]) {
       return window.LILY_IMAGES[key];
@@ -1532,6 +1542,7 @@ html {
     }
     if (finalEl) finalEl.textContent = formatBRL(finalTotal);
 
+    window.__lilyOrder = { value: Math.round(finalTotal * 100) / 100, currency: "BRL", payment_type: isPix ? "pix" : (/Cart/.test(state.paymentMethod) ? "cartao" : "whatsapp"), items: gaItems(state.cart), delivery_slot: state.slot && !state.slot.manual ? state.slot.label : "" };
     const summaryText = generateOrderSummaryText(effectiveSub, discount, finalTotal);
     const summaryArea = document.getElementById("checkout-summary-preview");
     if (summaryArea) summaryArea.value = summaryText;
@@ -1731,6 +1742,7 @@ html {
     const prod = PRODUCTS.find(p => p.id === prodId);
     if (!prod) return;
     state.activeModalProduct = prod;
+    try { gaEvent("view_item", { currency: "BRL", value: prod.price, items: [{ item_id: prod.id, item_name: prod.name, item_category: prod.categoryLabel, price: prod.price, quantity: 1 }] }); } catch (e) {}
 
     const modal = document.getElementById("product-custom-modal");
     const title = document.getElementById("modal-prod-title");
@@ -1839,7 +1851,7 @@ html {
         const id = quickAdd.getAttribute("data-quick-add");
         const prod = PRODUCTS.find(p => p.id === id);
         if (prod) {
-          state.cart.push({
+          cartPush({
             id: prod.id + "-" + Date.now(),
             name: prod.name,
             price: prod.price,
@@ -1951,7 +1963,7 @@ html {
       if (upsellBtn) {
         const name = upsellBtn.getAttribute("data-upsell-add");
         const price = Number(upsellBtn.getAttribute("data-upsell-price"));
-        state.cart.push({
+        cartPush({
           id: "upsell-" + Date.now(),
           name: "Adicional: " + name,
           price: price,
@@ -1968,6 +1980,7 @@ html {
       const payBtn = e.target.closest("[data-pay-method]");
       if (payBtn) {
         state.paymentMethod = payBtn.getAttribute("data-pay-method");
+        gaEvent("add_payment_info", { currency: "BRL", value: state.cart.reduce((a, it) => a + it.price * it.qty, 0), payment_type: /PIX/.test(state.paymentMethod) ? "pix" : (/Cart/.test(state.paymentMethod) ? "cartao" : "whatsapp"), items: gaItems(state.cart) });
         document.querySelectorAll("[data-pay-method]").forEach(b => {
           if (b === payBtn) {
             b.className = "p-3 rounded-2xl border-2 border-[#B36273] bg-[#FDF2F5] text-left transition-all";
@@ -2020,7 +2033,7 @@ html {
     document.getElementById("quiz-add-direct-btn")?.addEventListener("click", () => {
       const rec = state.quizRecommendation;
       if (!rec) return;
-      state.cart.push({
+      cartPush({
         id: rec.id + "-" + Date.now(),
         name: rec.name,
         price: rec.price,
@@ -2135,7 +2148,7 @@ html {
       if (s.item3d !== "none") parts.push(`3D: "${s.text3d || "Arte 3D"}" (${s.color3dLabel})`);
       if (s.polaroid !== "none") parts.push(`${s.polaroidLabel} ("${s.polaroidCaption || "Com legenda"}")`);
 
-      state.cart.push({
+      cartPush({
         id: "sim-" + Date.now(),
         name: `Criação Estúdio Lily • ${s.baseLabel}`,
         price: total,
@@ -2186,7 +2199,7 @@ html {
       const prod = state.activeModalProduct;
       if (!prod) return;
       const customColor = (document.getElementById("modal-custom-color")?.value || "").trim();
-      state.cart.push({
+      cartPush({
         id: prod.id + "-" + Date.now(),
         name: prod.name,
         price: prod.price,
@@ -2198,7 +2211,7 @@ html {
         const id = cb.getAttribute("data-addon-check");
         const a = ADDONS.find(x => x.id === id);
         const txt = (document.querySelector(`input[data-addon-text="${id}"]`)?.value || "").trim();
-        state.cart.push({
+        cartPush({
           id: "addon-" + id + "-" + Date.now(),
           name: "Adicional: " + a.name,
           price: a.price,
@@ -2225,6 +2238,7 @@ html {
       state.slot = null;
       renderCheckoutModal();
       checkoutModal?.classList.remove("hidden");
+      gaEvent("begin_checkout", { currency: "BRL", value: cartNow, items: gaItems(state.cart) });
       // depois das 21h o pop-up de agendamento já abre ao iniciar o pedido
       const modoAgora = agendamentoModo();
       if (modoAgora && modoAgora.tipo === "noite") { try { openSlotModal(false); } catch (e) { /* segue o checkout normal */ } }
@@ -2277,6 +2291,7 @@ html {
     });
 
     document.getElementById("copy-order-summary-btn")?.addEventListener("click", () => {
+      gaEvent("copiar_pedido", { currency: "BRL", value: (window.__lilyOrder || {}).value || 0 });
       const summaryArea = document.getElementById("checkout-summary-preview");
       if (!summaryArea) return;
       summaryArea.select();
@@ -2302,7 +2317,7 @@ html {
     if (ha) {
       const a = ADDONS.find(x => x.id === decodeURIComponent(ha[1]));
       if (a) {
-        state.cart.push({ id: "addon-" + a.id + "-" + Date.now(), name: "Adicional: " + a.name, price: a.price, qty: 1, details: a.ask === "frase" ? "Frase a combinar no WhatsApp" : "Foto enviada pelo WhatsApp" });
+        cartPush({ id: "addon-" + a.id + "-" + Date.now(), name: "Adicional: " + a.name, price: a.price, qty: 1, details: a.ask === "frase" ? "Frase a combinar no WhatsApp" : "Foto enviada pelo WhatsApp" });
         saveState();
         renderCart();
         showToast(`"${a.name}" adicionado à sacola Lily!`);

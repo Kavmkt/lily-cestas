@@ -99,7 +99,7 @@ config = {
     'popup_brinde_ativo': True, 'popup_brinde_segundos': 5,
     'brinde_opcao1_nome': 'Coração 3D', 'brinde_opcao2_nome': 'Mãozinha de coração', 'foto_chaveiro_2': '/assets/brinde/chaveiro-maozinha-coracao.webp',
     'nome_proprietaria': 'Alicya Lima', 'cargo_proprietaria': 'Proprietária e criadora da Lily Cestas', 'foto_proprietaria': '/assets/equipe/alycia-lima.webp',
-    'foto_estudio_litofania': '', 'foto_estudio_polaroid': '', 'ga4_id': '', 'clarity_id': '',
+    'foto_estudio_litofania': '', 'foto_estudio_polaroid': '', 'ga4_id': '', 'clarity_id': '', 'google_ads_id': '', 'google_ads_conversao_pedido': '', 'google_ads_conversao_contato': '',
 }
 config.update({k: v for k, v in load_json(ROOT / 'data/config.json', {}).items() if v not in (None, '')})
 config['whatsapp'] = re.sub(r'\D', '', str(config['whatsapp']))
@@ -759,6 +759,7 @@ def product_page(p):
         others += [x for x in (active or visible) if x is not p and x not in others][:4 - len(others)]
     trail = [('Início', '/')] + ([(c['nome'], f'/{c["pagina_url"]}/')] if c.get('pagina_url') and c in cats_with else []) + [(p['nome'], path)]
     crumbs = ' › '.join(f'<a href="{u}">{esc(n)}</a>' if i < len(trail) - 1 else f'<span>{esc(n)}</span>' for i, (n, u) in enumerate(trail))
+    view_item_js = ('<script>try{window.gtag&&gtag("event","view_item",' + json.dumps({'currency': 'BRL', 'value': final_price(p), 'items': [{'item_id': p['id'], 'item_name': p['nome'], 'item_category': p['_cat']['nome'], 'price': final_price(p), 'quantity': 1}]}, ensure_ascii=False).replace('</', '<\\/') + ')}catch(e){}</script>')
     badge = f'<span class="tag">{esc(p["selo"])}</span>' if p['selo'] else ''
     pix_line = f'<p class="pixnote">💠 <b>{brl(p["_pix"])} no Pix</b> ({int(PIX_PCT)}% de desconto sobre o valor no cartão)</p>' if PIX_EMBUTIDO and p.get('_pix') and not sold else ''
     fast_line = f'<p class="fastnote">⚡ <b>{FAST_TXT}*</b><small>{FAST_NOTE}</small></p>' if FAST_TXT and not p['personalizacao'] else ''
@@ -772,7 +773,7 @@ def product_page(p):
 {inc}{pers}{entrega}
 <section><h2>Perguntas frequentes</h2><div class="faq">{faq_block}</div></section>
 <section><h2>Você também pode gostar</h2><div class="cards">{cards_html(others)}</div></section>
-{mo_mark('3d' if c.get('chave') == '3d-personalizados' else '')}</div></main>''' + footer_html() + '</body></html>')
+{mo_mark('3d' if c.get('chave') == '3d-personalizados' else '')}</div></main>{view_item_js}''' + footer_html() + '</body></html>')
 
 
 for p in visible:
@@ -942,10 +943,12 @@ def catalogo_page(c):
     js = '''<script>(function(){var C=%s,sel=document.getElementById("cv-model"),msg=document.getElementById("cv-msg"),b=document.getElementById("cv-buy"),w=document.getElementById("cv-wa");
 function pick(){var v=sel.value;if(!v){msg.textContent="Escolha o número do modelo primeiro 😉";msg.hidden=false;sel.focus();return null}msg.hidden=true;var p=v.split("|");return{n:p[0],t:p[1]}}
 function ev(n,m){try{window.gtag&&gtag("event",n,{item_name:C.tema,model:m})}catch(e){}}
+function gt(n,p){try{window.gtag&&gtag("event",n,p)}catch(e){}}
+gt("view_item",{currency:"BRL",value:C.preco,items:[{item_id:"catalogo-"+C.slug,item_name:"Caneca personalizada "+C.tema,item_category:"Canecas personalizadas",price:C.preco,quantity:1}]});
 if(b)b.addEventListener("click",function(){var m=pick();if(!m)return;var nm=m.n==="x"?"Caneca personalizada · "+C.tema+" (modelo a combinar)":"Caneca personalizada · "+C.tema+" · Modelo "+m.n+" "+m.t;
 var cart=[];try{cart=JSON.parse(localStorage.getItem("lily_cart_v2")||"[]")}catch(e){}
 cart.push({id:"catalogo-"+C.slug+"-"+m.n+"-"+Date.now(),name:nm,price:C.preco,qty:1,details:"Personalização (nome, foto ou frase) combinada no WhatsApp"});
-try{localStorage.setItem("lily_cart_v2",JSON.stringify(cart))}catch(e){}ev("catalogo_comprar_agora",m.n);location.href=C.shop+"#sacola"});
+try{localStorage.setItem("lily_cart_v2",JSON.stringify(cart))}catch(e){}ev("catalogo_comprar_agora",m.n);gt("add_to_cart",{currency:"BRL",value:C.preco,items:[{item_id:"catalogo-"+C.slug+"-"+m.n,item_name:nm,item_category:"Canecas personalizadas",price:C.preco,quantity:1}]});location.href=C.shop+"#sacola"});
 if(w)w.addEventListener("click",function(e){var m=pick();if(!m){e.preventDefault();return}var t=C.wabase+(m.n==="x"?" Quero combinar um modelo.":" Quero o modelo "+m.n+" ("+m.t+").");w.href="https://wa.me/"+C.wa+"?text="+encodeURIComponent(t);ev("catalogo_whatsapp",m.n)});
 var tr=document.getElementById("cv-track"),ct=document.getElementById("cv-count"),n=tr.children.length;
 function cur(){return Math.max(0,Math.min(n-1,Math.round(tr.scrollLeft/tr.clientWidth)))}
@@ -1162,7 +1165,7 @@ function go(){if(picks.length<C.qtd)return;
  var cart=[];try{cart=JSON.parse(localStorage.getItem("lily_cart_v2")||"[]")}catch(e){}
  cart.push({id:"combo-"+Date.now(),name:"Combo "+C.qtd+" canecas personalizadas · "+parts.join(" | "),price:C.preco,qty:1,freeShip:true,brinde:true,details:"🎁 Brinde: chaveiro "+C.brinde+" • 🚚 Frete grátis* • Nome, foto ou frase de cada caneca combinados no WhatsApp"});
  try{localStorage.setItem("lily_cart_v2",JSON.stringify(cart));localStorage.removeItem(KEY)}catch(e){}
- ev("combo_builder_complete",{value:C.preco});location.href=C.shop+"#sacola"}
+ ev("combo_builder_complete",{value:C.preco,currency:"BRL"});try{window.gtag&&gtag("event","add_to_cart",{currency:"BRL",value:C.preco,items:[{item_id:"combo-canecas",item_name:"Combo de "+C.qtd+" canecas personalizadas",item_category:"Canecas personalizadas",price:C.preco,quantity:1}]})}catch(e){}location.href=C.shop+"#sacola"}
 var de=(new URLSearchParams(location.search).get("de")||"").toLowerCase(),first=$(".cb-tab[data-s='"+de+"']")||$(".cb-tab");
 showTab(first.dataset.s);render()})();'''
 
@@ -1469,12 +1472,23 @@ GA4 = str(config.get('ga4_id') or '').strip().upper()
 if GA4 and not re.fullmatch(r'G-[A-Z0-9]{6,14}', GA4):
     print(f'Aviso: o código do Google Analytics "{GA4}" não parece válido (deve ser como G-ABC123XYZ). Analytics não foi ligado.')
     GA4 = ''
+ADS_ID = str(config.get('google_ads_id') or '').strip().upper()
+ADS_LEAD = str(config.get('google_ads_conversao_pedido') or '').strip()
+ADS_CONTATO = str(config.get('google_ads_conversao_contato') or '').strip()
+ADS_JS = ''
+if ADS_ID and not re.fullmatch(r'AW-\d{6,12}', ADS_ID):
+    print(f'Aviso: o código do Google Ads "{ADS_ID}" não parece válido (deve ser como AW-123456789). Google Ads não foi ligado.')
+    ADS_ID = ''
+if ADS_ID:
+    _lab = lambda v: f'{ADS_ID}/{v}' if re.fullmatch(r'[A-Za-z0-9_-]{8,}', v) else ''
+    ADS_JS = (f"gtag('config','{ADS_ID}');window.LILY_ADS={json.dumps({'lead': _lab(ADS_LEAD), 'contato': _lab(ADS_CONTATO)})};")
 ga_snippet = ''
 if GA4:
     ga_snippet = (f'<script async src="https://www.googletagmanager.com/gtag/js?id={GA4}"></script>'
                   "<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}"
                   "gtag('consent','default',{ad_storage:'denied',ad_user_data:'denied',ad_personalization:'denied',analytics_storage:'granted'});"
-                  f"gtag('js',new Date());gtag('config','{GA4}');</script>")
+                  "gtag('set','url_passthrough',true);"
+                  f"gtag('js',new Date());gtag('config','{GA4}');" + ADS_JS + "</script>")
 CLARITY = str(config.get('clarity_id') or '').strip().lower()
 if CLARITY and not re.fullmatch(r'[a-z0-9]{8,12}', CLARITY):
     print(f'Aviso: o código do Microsoft Clarity "{CLARITY}" não parece válido. Clarity não foi ligado.')
