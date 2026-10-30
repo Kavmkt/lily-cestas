@@ -1,0 +1,21 @@
+{
+  "nome": "Chaveiro Carta de Amor com Foto",
+  "categoria": "3d-personalizados",
+  "preco": 24.99,
+  "status": "ativo",
+  "foto": "/assets/produtos/chaveiro-carta-gaveta-foto.webp",
+  "alt": "Chaveiro em formato de carta branca com coração vermelho, com uma gavetinha que desliza e revela a foto de um casal, argola e corrente dourada",
+  "selo": "NOVIDADE",
+  "descricao": "Um chaveiro em formato de carta de amor, com selo de coração vermelho e uma gavetinha secreta que desliza e revela a sua foto. Uma lembrança para levar o amor sempre junto, perfeita para casais, aniversário, Dia dos Namorados ou para acompanhar uma cesta de presente.",
+  "personalizacao": "Foto enviada pelo WhatsApp",
+  "inclui": [
+    "1 chaveiro carta com gavetinha para foto",
+    "1 foto personalizada com a sua imagem",
+    "Argola e corrente douradas"
+  ],
+  "ordem": 5,
+  "destaque": false,
+  "quiz": [
+    "amor"
+  ]
+}
