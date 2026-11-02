@@ -1324,6 +1324,7 @@ for p in visible:
     products_js.append({
         'id': p['id'], 'name': p['nome'], 'category': p['_cat']['chave'], 'categoryLabel': p['_cat']['nome'],
         'price': final_price(p), 'priceOriginal': p['preco'] if p['_promo'] else None, 'badge': p['selo'], 'image': p['_img'], 'images': p['_imgs'] if len(p['_imgs']) > 1 else [],
+        'mimos': [str(x) for x in (p.get('mimos_frete') or []) if x],
         'shortDesc': p['descricao'], 'customizable': p['personalizacao'], 'includes': p['inclui'], 'quiz': p['quiz'],
         'order': p['ordem'], 'soldOut': p['status'] == 'esgotado', 'isBasket': bool(p['_cat'].get('eh_cesta'))})
 addons_js = [{'id': a['id'], 'name': a['nome'], 'desc': a['descricao'], 'price': a['_promo'] or a['preco'],

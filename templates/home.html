@@ -911,6 +911,19 @@ html {
     </div>
   </div>
 
+  <!-- Oferta de frete grátis: ao adicionar uma cesta de entrada, sugere um mimo que libera a entrega grátis -->
+  <div id="mimo-modal" class="hidden fixed inset-0 z-[60] flex items-end sm:items-center justify-center p-0 sm:p-4" role="dialog" aria-modal="true" aria-labelledby="mimo-title">
+    <div id="mimo-backdrop" class="absolute inset-0 bg-[#382126]/60"></div>
+    <div class="relative bg-white w-full sm:max-w-md max-h-[92vh] overflow-y-auto rounded-t-3xl sm:rounded-3xl shadow-2xl p-5 sm:p-6">
+      <button type="button" id="mimo-close" class="absolute top-3 right-3 w-8 h-8 rounded-full bg-[#F9EBEE] text-[#A65365] font-bold" aria-label="Fechar">✕</button>
+      <p class="text-[11px] font-display font-bold uppercase tracking-wider text-[#1E8A4C]">🚚 Entrega grátis</p>
+      <h3 id="mimo-title" class="font-display text-lg font-bold text-[#382126] mt-1 pr-8">Libere o frete grátis com um mimo</h3>
+      <p id="mimo-text" class="text-xs text-[#785860] mt-1.5"></p>
+      <div id="mimo-list" class="mt-4 space-y-3"></div>
+      <button type="button" id="mimo-skip" class="mt-4 w-full text-center text-xs font-display font-semibold text-[#A65365] underline">Não, obrigado. Vou pagar a entrega</button>
+    </div>
+  </div>
+
   <div id="toast-container" class="fixed bottom-5 right-5 z-50 flex flex-col gap-2 max-w-sm"></div>
 
   <script src="/lily-images.js"></script>
@@ -988,7 +1001,52 @@ html {
   function cartPush(item) {
     state.cart.push(item);
     try { gaEvent("add_to_cart", { currency: "BRL", value: (Number(item.price) || 0) * (item.qty || 1), items: gaItems([item]) }); } catch (e) {}
+    try { mimoAfterAdd(item); } catch (e) {}
   }
+
+  // ---- Frete grátis com mimo: depois de adicionar uma cesta que tem "mimos" configurados, oferece o mimo que completa o valor da entrega grátis
+  function mimoAfterAdd(item) {
+    const base = String(item.id || "").replace(/-\d{10,}$/, "");
+    const prod = PRODUCTS.find(p => p.id === base);
+    if (!prod || !prod.mimos || !prod.mimos.length) return;
+    setTimeout(() => { try { openMimoModal(prod); } catch (e) {} }, 450);
+  }
+  function openMimoModal(prod) {
+    const modal = document.getElementById("mimo-modal");
+    if (!modal || !modal.classList.contains("hidden")) return;
+    const free = CONFIG.entrega_gratis_a_partir;
+    const sub = state.cart.reduce((a, it) => a + it.price * it.qty, 0);
+    if (sub >= free || state.cart.some(i => i.freeShip)) return;
+    const opts = prod.mimos.map(id => PRODUCTS.find(p => p.id === id)).filter(p => p && !p.soldOut && sub + p.price >= free);
+    if (!opts.length) return;
+    document.getElementById("mimo-text").textContent = "Faltam " + formatBRL(free - sub) + " para a entrega ser grátis. Escolha um mimo e economize " + formatBRL(CONFIG.taxa_entrega) + " de entrega:";
+    document.getElementById("mimo-list").innerHTML = opts.map(p => `
+      <div class="flex items-center gap-3 rounded-2xl border border-[#EED9DF] p-2.5">
+        <img src="${p.image}" alt="" width="64" height="64" class="w-16 h-16 rounded-xl object-cover shrink-0" loading="lazy" />
+        <div class="min-w-0 flex-1">
+          <p class="text-xs font-display font-semibold text-[#382126] leading-snug" style="display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden">${p.name}</p>
+          <p class="text-xs text-[#A65365] font-display font-bold mt-0.5">${formatBRL(p.price)} <span class="text-[#1E8A4C] font-semibold">• entrega grátis</span></p>
+        </div>
+        <button type="button" data-mimo="${p.id}" class="shrink-0 px-3.5 py-2 rounded-full bg-gradient-to-br from-[#C87888] to-[#A65365] text-white text-xs font-display font-semibold">Adicionar</button>
+      </div>`).join("");
+    modal.classList.remove("hidden");
+    gaEvent("view_promotion", { promotion_id: "frete-gratis-mimo", promotion_name: "Frete grátis com mimo" });
+  }
+  function closeMimoModal() { document.getElementById("mimo-modal")?.classList.add("hidden"); }
+  document.addEventListener("click", (e) => {
+    const m = document.getElementById("mimo-modal");
+    if (!m || m.classList.contains("hidden")) return;
+    if (e.target.closest("#mimo-close") || e.target.closest("#mimo-skip") || e.target.id === "mimo-backdrop") { closeMimoModal(); return; }
+    const btn = e.target.closest("[data-mimo]");
+    if (!btn) return;
+    const p = PRODUCTS.find(x => x.id === btn.getAttribute("data-mimo"));
+    if (!p) return;
+    cartPush({ id: p.id + "-" + Date.now(), name: p.name, price: p.price, pix: true, qty: 1, details: "Mimo adicionado para liberar a entrega grátis • Personalização a combinar no WhatsApp" });
+    saveState();
+    renderCart();
+    closeMimoModal();
+    showToast("🚚 Entrega grátis liberada! Mimo adicionado à sacola.");
+  });
 
   function getImgSrc(key) {
     if (window.LILY_IMAGES && window.LILY_IMAGES[key]) {

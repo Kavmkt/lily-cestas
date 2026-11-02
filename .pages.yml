@@ -58,6 +58,11 @@ content:
         type: image
         required: true
         description: Envie uma foto nítida, de preferência na horizontal. O site reduz o tamanho sozinho.
+      - name: mimos_frete
+        label: Mimos que liberam a entrega grátis (opcional)
+        type: string
+        list: true
+        description: "Para cestas de entrada abaixo do valor da entrega grátis. Digite o código de cada mimo (o nome do arquivo do produto, ex. kit-porta-retratos-polaroid). Ao adicionar esta cesta, o cliente vê um pop-up oferecendo esses mimos para ganhar entrega grátis."
       - name: fotos
         label: Mais fotos (opcional, formam um slide na página do produto)
         type: image
