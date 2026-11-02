@@ -1,0 +1,11 @@
+{
+  "nome": "Cesta Parabéns em promoção",
+  "ativo": true,
+  "ordem": 1,
+  "imagem_web": "/assets/banners/cesta-parabens-web.png",
+  "imagem_mobile": "/assets/banners/cesta-parabens-mobile.png",
+  "alt": "Cesta Parabéns em promoção: de R$ 115 por R$ 81,65 no Pix, com caixa rígida super resistente e chaveirinho de brinde",
+  "link": "/produto/cesta-parabens/",
+  "titulo": "Cesta Parabéns em promoção",
+  "cor": "rose"
+}

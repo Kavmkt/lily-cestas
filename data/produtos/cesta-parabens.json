@@ -1,0 +1,29 @@
+{
+  "nome": "Cesta Parabéns",
+  "categoria": "cestas",
+  "preco": 109.25,
+  "preco_promocional": 81.65,
+  "status": "ativo",
+  "foto": "/assets/produtos/cesta-parabens-1.webp",
+  "fotos": [
+    "/assets/produtos/cesta-parabens-2.webp",
+    "/assets/produtos/cesta-parabens-3.webp"
+  ],
+  "alt": "Cesta Parabéns: caixa azul com plaquinha PARABÉNS e balões, recheada com Mini Oreo, KitKat e Negresco, com chaveirinho de brinde",
+  "selo": "NOVIDADE",
+  "descricao": "Uma cesta de presente completinha com preço que cabe no bolso. Caixa azul rígida e super resistente, com plaquinha PARABÉNS e balões, recheada de chocolates e biscoitos e embalada com papel de seda xadrez. Acompanha um chaveirinho de brinde para a pessoa levar de lembrança. Ideal para aniversário, comemorações e para dar um mimo sem pesar no orçamento.",
+  "personalizacao": "Detalhes combinados pelo WhatsApp",
+  "inclui": [
+    "1 Caixa azul rígida e resistente com plaquinha PARABÉNS",
+    "1 Chaveirinho de brinde (o modelo pode variar)",
+    "1 Mini Oreo",
+    "1 Chocolate KitKat",
+    "1 Negresco",
+    "Papel de seda xadrez para decorar"
+  ],
+  "ordem": 1,
+  "destaque": false,
+  "quiz": [
+    "amiga"
+  ]
+}

@@ -485,7 +485,7 @@ def cards_html(plist):
     return out
 
 
-def page_html(path, title, desc, h1, intro, blocks, plist, faq_items, trail, extra_nodes, related_html, hero_img=None, cta='Ver presentes'):
+def page_html(path, title, desc, h1, intro, blocks, plist, faq_items, trail, extra_nodes, related_html, hero_img=None, cta='Ver presentes', plist_more=None):
     nodes = [BUSINESS, crumb_ld(trail), faq_ld(faq_items)] + extra_nodes
     crumbs = ' › '.join(f'<a href="{u}">{esc(n)}</a>' if i < len(trail) - 1 else f'<span>{esc(n)}</span>' for i, (n, u) in enumerate(trail))
     sec = ''.join(f'<section><h2>{esc(h)}</h2><p>{esc(t)}</p></section>' for h, t in blocks)
@@ -499,7 +499,8 @@ def page_html(path, title, desc, h1, intro, blocks, plist, faq_items, trail, ext
 </head><body>''' + top_html() + f'''<main><div class="wrap"><nav class="crumbs" aria-label="Navegação">{crumbs}</nav>
 <div class="lead"><div><h1>{esc(h1)}</h1><p class="intro">{esc(intro)}</p>{fast_pill}<p><a class="btn" href="{SHOP}#catalogo">{cta}</a> <a class="btn ghost" href="/catalogo/">Ver catálogo completo</a></p></div>{img}</div>
 {sec}
-<section><h2>Produtos</h2><div class="cards">{cards_html(plist)}</div></section>
+<section><h2>{'Mais indicados para esta ocasião' if plist_more else 'Produtos'}</h2><div class="cards">{cards_html(plist)}</div></section>
+{('<section><h2>Todos os outros presentes</h2><div class="cards">' + cards_html(plist_more) + '</div></section>') if plist_more else ''}
 <section><h2>Perguntas frequentes</h2><div class="faq">{faq_block}</div></section>
 {related_html}
 {mo_mark('3d' if path.strip('/') == MO_3D_URL else '')}</div></main>''' + footer_html() + '</body></html>')
@@ -710,6 +711,7 @@ for old_path, new_path in REDIRECTS.items():
 </head><body><p>Esta página mudou. <a href="{new_path}">Clique aqui para continuar</a>.</p></body></html>''')
 
 featured = ([p for p in active if p.get('destaque')] + [p for p in active if not p.get('destaque')])[:4]
+ALL_PRODS = [p for c in cats_with for p in cat_prods[c['chave']]]   # todos os presentes visíveis, categoria por categoria
 for c in CITIES:
     path = f'/{c["slug"]}/'
     cid = c['cidade']
@@ -721,7 +723,7 @@ for c in CITIES:
     viz = ''.join(f'<a href="/{CITY_BY[v]["slug"]}/">{CITY_BY[v]["cidade"]}</a>' for v in c['vizinhas'])
     rel = '<section class="rel"><h2>Também atendemos</h2><p>' + viz + '</p><p>' + ''.join(f'<a href="/{o["pagina_url"]}/">{esc(o["nome"])}</a>' for o in cats_with if o.get('pagina_url')) + '</p></section>'
     extra = [{'@type': 'WebPage', 'name': c['h1'], 'url': BASE + path, 'about': {'@id': BASE + '/#negocio'}, 'spatialCoverage': {'@type': 'City', 'name': cid}}]
-    write_page(path, page_html(path, c['title'], c['desc'], c['h1'], c['intro'], c['blocks'], featured, items, [('Início', '/'), (f'Presentes em {cid}', path)], extra, rel,
+    write_page(path, page_html(path, c['title'], c['desc'], c['h1'], c['intro'], c['blocks'], ALL_PRODS, items, [('Início', '/'), (f'Presentes em {cid}', path)], extra, rel,
                                (featured[0]['_img'], featured[0].get('alt') or featured[0]['nome']) if featured else None))
     page_urls.append(path)
 
@@ -730,15 +732,16 @@ for c in CITIES:
 for o in OCCASIONS_OK:
     path = f'/{o["slug"]}/'
     ps = o['_prods']
-    prices = [final_price(p) for p in ps]
+    resto = [p for p in ALL_PRODS if p not in ps]
+    prices = [final_price(p) for p in ps + resto]
     items = [(f'Quanto custa {o["nome"].lower()} na Lily Cestas?', f'Os presentes desta página custam de {brl(min(prices))} a {brl(max(prices))}.'),
              ('Vocês entregam na minha região?', 'Atendemos Santana de Parnaíba, Alphaville, Barueri, Cajamar, Osasco e Carapicuíba. Informe o CEP no checkout e conferimos na hora. ' + ENTREGA_TXT)] + o['faq'] + FAQ_COMMON[-1:]
     rel = '<section class="rel"><h2>Mais ideias de presente</h2><p>' + ''.join(
         f'<a href="/{x["slug"]}/">{esc(x["nome"])}</a>' for x in OCCASIONS_OK if x is not o) + '</p><p>' + ''.join(
         f'<a href="/{c["pagina_url"]}/">{esc(c["nome"])}</a>' for c in cats_with if c.get('pagina_url')) + '</p></section>'
-    extra = [{'@type': 'CollectionPage', 'name': o['h1'], 'url': BASE + path, 'mainEntity': {'@type': 'ItemList', 'itemListElement': [{'@type': 'ListItem', 'position': i + 1, 'item': prod_ld(p)} for i, p in enumerate(ps)]}}]
+    extra = [{'@type': 'CollectionPage', 'name': o['h1'], 'url': BASE + path, 'mainEntity': {'@type': 'ItemList', 'itemListElement': [{'@type': 'ListItem', 'position': i + 1, 'item': prod_ld(p)} for i, p in enumerate(ps + resto)]}}]
     write_page(path, page_html(path, o['title'], o['desc'], o['h1'], o['intro'], o['blocks'], ps, items, [('Início', '/'), (o['nome'], path)], extra, rel,
-                               (ps[0]['_img'], ps[0].get('alt') or ps[0]['nome'])))
+                               (ps[0]['_img'], ps[0].get('alt') or ps[0]['nome']), plist_more=resto or None))
     page_urls.append(path)
 
 # ---- página de cada produto
@@ -801,6 +804,15 @@ def product_page(p):
 for p in visible:
     write_page(prod_url(p), product_page(p))
     page_urls.append(prod_url(p))
+
+# páginas de produto que mudaram de endereço (quem entrou pelo link antigo é levado ao novo)
+PRODUCT_REDIRECTS = {'/produto/cesta-polvinho-parabens/': 'cesta-parabens'}
+for old_path, new_id in PRODUCT_REDIRECTS.items():
+    _np = next((p for p in visible if p['id'] == new_id), None)
+    if _np:
+        write_page(old_path, f'''<!DOCTYPE html><html lang="pt-BR"><head><meta charset="UTF-8"><title>Página movida | Lily Cestas</title>
+<link rel="canonical" href="{BASE}{prod_url(_np)}"><meta name="robots" content="noindex"><meta http-equiv="refresh" content="0; url={prod_url(_np)}">
+</head><body><p>Esta página mudou. <a href="{prod_url(_np)}">Clique aqui para continuar</a>.</p></body></html>''')
 
 # ---- feed gratuito do Google Shopping (Merchant Center)
 def xml(t):
