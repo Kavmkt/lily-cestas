@@ -221,6 +221,7 @@ html {
 #catalog-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}@media(min-width:900px){#catalog-grid{grid-template-columns:repeat(4,minmax(0,1fr));gap:20px}}
 .pcard{background:#fff;border:1px solid var(--line);border-radius:20px;overflow:hidden;display:flex;flex-direction:column;transition:.25s}.pcard:hover{box-shadow:0 18px 34px -22px rgba(166,83,101,.65);transform:translateY(-2px)}
 .pimg{position:relative}.pimg img{display:block;width:100%;aspect-ratio:1/1;object-fit:cover}
+.mthumbs{position:absolute;right:12px;bottom:12px;display:flex;gap:6px}.mthumbs:empty{display:none}.mthumbs button{width:44px;height:44px;padding:0;border-radius:10px;overflow:hidden;border:2px solid #fff;opacity:.85;cursor:pointer;background:#fff}.mthumbs button.on{border-color:#A65365;opacity:1}.mthumbs img{width:100%;height:100%;object-fit:cover;display:block}
 .pbadge{position:absolute;left:8px;top:8px;background:var(--rose);color:#fff;font:700 9.5px 'Montserrat',sans-serif;letter-spacing:.06em;text-transform:uppercase;border-radius:99px;padding:4px 9px}
 .pship{position:absolute;left:8px;bottom:8px;background:rgba(255,255,255,.95);color:#1F6B3A;font:700 9.5px/1.2 'Montserrat',sans-serif;border-radius:99px;padding:4px 9px;box-shadow:0 2px 8px rgba(56,33,38,.12)}
 .pfav{position:absolute;right:8px;top:8px;width:34px;height:34px;border-radius:99px;background:rgba(255,255,255,.92);border:0;cursor:pointer;font-size:16px;color:#B89CA3}.pfav .on{color:#C87888}
@@ -691,6 +692,7 @@ html {
     <div class="relative z-10 bg-white rounded-3xl max-w-lg w-full border border-[#EED9DF] shadow-floating overflow-hidden max-h-[92vh] overflow-y-auto">
       <div class="relative aspect-square bg-[#FDF6F8]">
         <img id="modal-prod-img" src="" alt="Produto Lily Cestas" class="w-full h-full object-cover max-w-full" />
+        <div id="modal-prod-thumbs" class="mthumbs"></div>
         <button type="button" id="close-prod-modal-btn" class="absolute top-3 right-3 w-8 h-8 rounded-full bg-white/90 text-[#382126] font-bold text-sm shadow-sm">✕</button>
         <span id="modal-prod-cat" class="absolute bottom-3 left-3 px-3 py-1 rounded-full bg-[#B36273] text-white text-xs font-display font-semibold">Categoria</span>
       </div>
@@ -1759,6 +1761,17 @@ html {
     if (desc) desc.textContent = prod.shortDesc;
     if (customNote) customNote.classList.toggle("hidden", !!prod.isBasket);
     if (img) img.src = prod.image;
+    const thumbs = document.getElementById("modal-prod-thumbs");
+    if (thumbs) {
+      const gal = prod.images || [];
+      thumbs.innerHTML = gal.length > 1 ? gal.map((u, i) => `<button type="button" data-thumb="${u}" class="${i === 0 ? "on" : ""}" aria-label="Foto ${i + 1}"><img src="${u}" alt=""></button>`).join("") : "";
+      thumbs.onclick = (ev) => {
+        const t = ev.target.closest("[data-thumb]");
+        if (!t || !img) return;
+        img.src = t.dataset.thumb;
+        thumbs.querySelectorAll("button").forEach(x => x.classList.toggle("on", x === t));
+      };
+    }
     if (includesList) {
       includesList.innerHTML = prod.includes.map(inc => `<li class="flex items-center gap-2 text-xs text-[#5A3D43]"><span class="text-[#C87888] font-bold">✓</span><span>${inc}</span></li>`).join("");
     }

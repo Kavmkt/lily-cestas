@@ -58,6 +58,11 @@ content:
         type: image
         required: true
         description: Envie uma foto nítida, de preferência na horizontal. O site reduz o tamanho sozinho.
+      - name: fotos
+        label: Mais fotos (opcional, formam um slide na página do produto)
+        type: image
+        list: true
+        description: "Fotos extras do mesmo produto. A foto principal vem primeiro e estas aparecem em seguida, para o cliente passar de uma para outra."
       - name: alt
         label: Descrição da foto (opcional)
         type: string

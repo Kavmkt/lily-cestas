@@ -206,6 +206,13 @@ for f in sorted((ROOT / 'data/produtos').glob('*.json')):
     if p['status'] != 'oculto' and (not foto or not (ROOT / foto).exists()):
         fail(f'{where}: a foto não foi encontrada. Envie a foto de novo no painel.')
     p['_foto'] = foto
+    p['_fotos'] = []
+    for _x in (p.get('fotos') or []):
+        _rel = str((_x.get('foto') if isinstance(_x, dict) else _x) or '').lstrip('/')
+        if _rel and (ROOT / _rel).exists():
+            p['_fotos'].append(_rel)
+        elif _rel and p['status'] != 'oculto':
+            fail(f'{where}: uma das fotos extras não foi encontrada ({_rel}). Envie a foto de novo no painel.')
     p['ordem'] = to_number(p.get('ordem'), f'{where} › ordem', False) or 999
     p.setdefault('selo', '')
     p.setdefault('descricao', '')
@@ -329,6 +336,7 @@ def img_url(path):
 
 for p in visible:
     p['_img'] = img_url(p['_foto'])
+    p['_imgs'] = [p['_img']] + [u for u in (img_url(x) for x in p['_fotos']) if u]
 for c in cats:
     first = (cat_prods.get(c['chave']) or [None])[0]
     c['_img'] = img_url(c.get('foto')) or (first['_img'] if first else '')
@@ -378,7 +386,7 @@ def prod_ld(p):
              'seller': {'@id': BASE + '/#negocio'},
              'shippingDetails': {'@type': 'OfferShippingDetails', 'shippingRate': {'@type': 'MonetaryAmount', 'value': '0.00' if final_price(p) >= FRETE_MIN else '%.2f' % config['taxa_entrega'], 'currency': 'BRL'},
                                  'shippingDestination': {'@type': 'DefinedRegion', 'addressCountry': 'BR', 'addressRegion': 'SP'}}}
-    return {'@type': 'Product', 'name': p['nome'], 'url': BASE + prod_url(p), 'sku': p['id'], 'image': BASE + p['_img'], 'description': prod_desc(p),
+    return {'@type': 'Product', 'name': p['nome'], 'url': BASE + prod_url(p), 'sku': p['id'], 'image': [BASE + u for u in p['_imgs']] if len(p.get('_imgs') or []) > 1 else BASE + p['_img'], 'description': prod_desc(p),
             'brand': {'@type': 'Brand', 'name': 'Lily Cestas'}, 'category': p['_cat']['nome'], 'offers': offer}
 
 
@@ -760,6 +768,20 @@ def product_page(p):
     trail = [('Início', '/')] + ([(c['nome'], f'/{c["pagina_url"]}/')] if c.get('pagina_url') and c in cats_with else []) + [(p['nome'], path)]
     crumbs = ' › '.join(f'<a href="{u}">{esc(n)}</a>' if i < len(trail) - 1 else f'<span>{esc(n)}</span>' for i, (n, u) in enumerate(trail))
     view_item_js = ('<script>try{window.gtag&&gtag("event","view_item",' + json.dumps({'currency': 'BRL', 'value': final_price(p), 'items': [{'item_id': p['id'], 'item_name': p['nome'], 'item_category': p['_cat']['nome'], 'price': final_price(p), 'quantity': 1}]}, ensure_ascii=False).replace('</', '<\\/') + ')}catch(e){}</script>')
+    _alt = esc(p.get("alt") or p["nome"])
+    if len(p['_imgs']) > 1:
+        _slides = ''.join(f'<img src="{u}" alt="{_alt}{" (foto " + str(i + 1) + ")" if i else ""}" width="768" height="960"' + (' fetchpriority="high"' if i == 0 else ' loading="lazy"') + '>' for i, u in enumerate(p['_imgs']))
+        _dots = ''.join(f'<button type="button" class="gal-dot" aria-label="Foto {i + 1}"></button>' for i in range(len(p['_imgs'])))
+        hero_html = (f'<div class="gal" aria-label="Fotos do produto"><div class="gal-track">{_slides}</div>'
+                     '<button type="button" class="gal-nav gal-prev" aria-label="Foto anterior">‹</button><button type="button" class="gal-nav gal-next" aria-label="Próxima foto">›</button>'
+                     f'<div class="gal-dots">{_dots}</div></div>'
+                     '<script>(function(){var g=document.querySelector(".gal");if(!g)return;var t=g.querySelector(".gal-track"),d=[].slice.call(g.querySelectorAll(".gal-dot")),n=t.children.length,i=0;'
+                     'function go(k){i=(k+n)%n;t.scrollTo({left:i*t.clientWidth,behavior:"smooth"})}'
+                     'function mark(){i=Math.max(0,Math.min(n-1,Math.round(t.scrollLeft/t.clientWidth)));d.forEach(function(e,j){e.classList.toggle("on",j===i)})}'
+                     't.addEventListener("scroll",mark,{passive:true});d.forEach(function(e,j){e.addEventListener("click",function(){go(j)})});'
+                     'g.querySelector(".gal-prev").addEventListener("click",function(){go(i-1)});g.querySelector(".gal-next").addEventListener("click",function(){go(i+1)});mark();})();</script>')
+    else:
+        hero_html = f'<img class="hero" src="{p["_img"]}" alt="{_alt}" width="760" height="567" fetchpriority="high">'
     badge = f'<span class="tag">{esc(p["selo"])}</span>' if p['selo'] else ''
     pix_line = f'<p class="pixnote">💠 <b>{brl(p["_pix"])} no Pix</b> ({int(PIX_PCT)}% de desconto sobre o valor no cartão)</p>' if PIX_EMBUTIDO and p.get('_pix') and not sold else ''
     fast_line = f'<p class="fastnote">⚡ <b>{FAST_TXT}*</b><small>{FAST_NOTE}</small></p>' if FAST_TXT and not p['personalizacao'] else ''
@@ -769,7 +791,7 @@ def product_page(p):
 <link rel="stylesheet" href="/assets/css/pages.css">
 </head><body>''' + top_html() + f'''<main><div class="wrap"><nav class="crumbs" aria-label="Navegação">{crumbs}</nav>
 <div class="lead"><div>{badge}<h1>{esc(p["nome"])}</h1><p class="intro">{esc(prod_desc(p))}</p><p class="price">{old}<b>{brl(final_price(p))}</b></p>{pix_line}{fast_line}<p class="shipnote">{"🚚 Entrega grátis neste produto" if final_price(p) >= FRETE_MIN else f"🚚 Entrega grátis em pedidos a partir de {FRETE_TXT}"} · Pedido mínimo {MIN_TXT}</p>{buy}</div>
-<img class="hero" src="{p["_img"]}" alt="{esc(p.get("alt") or p["nome"])}" width="760" height="567" fetchpriority="high"></div>
+{hero_html}</div>
 {inc}{pers}{entrega}
 <section><h2>Perguntas frequentes</h2><div class="faq">{faq_block}</div></section>
 <section><h2>Você também pode gostar</h2><div class="cards">{cards_html(others)}</div></section>
@@ -1289,7 +1311,7 @@ products_js = []
 for p in visible:
     products_js.append({
         'id': p['id'], 'name': p['nome'], 'category': p['_cat']['chave'], 'categoryLabel': p['_cat']['nome'],
-        'price': final_price(p), 'priceOriginal': p['preco'] if p['_promo'] else None, 'badge': p['selo'], 'image': p['_img'],
+        'price': final_price(p), 'priceOriginal': p['preco'] if p['_promo'] else None, 'badge': p['selo'], 'image': p['_img'], 'images': p['_imgs'] if len(p['_imgs']) > 1 else [],
         'shortDesc': p['descricao'], 'customizable': p['personalizacao'], 'includes': p['inclui'], 'quiz': p['quiz'],
         'order': p['ordem'], 'soldOut': p['status'] == 'esgotado', 'isBasket': bool(p['_cat'].get('eh_cesta'))})
 addons_js = [{'id': a['id'], 'name': a['nome'], 'desc': a['descricao'], 'price': a['_promo'] or a['preco'],
