@@ -1,7 +1,8 @@
 {
   "nome": "Cesta parabéns ",
   "categoria": "cestas",
-  "preco": 90,
+  "preco": 109.9,
+  "preco_promocional": 81.9,
   "status": "ativo",
   "foto": "/assets/produtos/IMG_0567.png",
   "fotos": [
