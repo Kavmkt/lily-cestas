@@ -1371,7 +1371,17 @@ def agendamento_cfg():
                   'titulo': str(config.get('agendamento_noturno_titulo') or ''), 'texto': str(config.get('agendamento_noturno_texto') or '')}
     elif config.get('agendamento_noturno_ativo', True):
         print('AVISO: agendamento noturno desligado (horários inválidos nas configurações).')
-    return {'ativo': True, 'noturno': nt, 'dias': dias, 'inicio': f'{int(ini.group(1)):02d}:{ini.group(2)}', 'fim': f'{int(fim.group(1)):02d}:{fim.group(2)}',
+    # dia especial: numa data específica (ex.: hoje) o pop-up vale o dia todo, só com os horários escolhidos; depois da data, nada muda
+    esp = None
+    _d = re.match(r'^(\d{4})-(\d{2})-(\d{2})$', str(config.get('agendamento_especial_data') or '').strip())
+    _hs = horas(config.get('agendamento_especial_horarios'))
+    _ei, _ef = hm.match(str(config.get('agendamento_especial_inicio') or '06:30').strip()), hm.match(str(config.get('agendamento_especial_fim') or '21:00').strip())
+    if _d and _hs and _ei and _ef:
+        esp = {'data': _d.group(0), 'inicio': f'{int(_ei.group(1)):02d}:{_ei.group(2)}', 'fim': f'{int(_ef.group(1)):02d}:{_ef.group(2)}', 'horarios': _hs,
+               'titulo': str(config.get('agendamento_especial_titulo') or ''), 'texto': str(config.get('agendamento_especial_texto') or '')}
+    elif config.get('agendamento_especial_data'):
+        print('AVISO: dia especial de agendamento ignorado (data ou horários inválidos nas configurações).')
+    return {'ativo': True, 'especial': esp, 'noturno': nt, 'dias': dias, 'inicio': f'{int(ini.group(1)):02d}:{ini.group(2)}', 'fim': f'{int(fim.group(1)):02d}:{fim.group(2)}',
             'noite': noite, 'manha': manha, 'titulo': str(config.get('agendamento_titulo') or ''), 'texto': str(config.get('agendamento_texto') or '')}
 
 

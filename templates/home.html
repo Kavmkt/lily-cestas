@@ -1590,7 +1590,7 @@ html {
     if (whenNote) {
       const modoN = agendamentoModo();
       whenNote.textContent = state.slot && !state.slot.manual ? "⏰ Entrega agendada: " + state.slot.label + "."
-        : (modoN ? (modoN.tipo === "noite" ? "🌙 Estamos fora do horário de atendimento: escolha o horário da entrega para agendar o seu pedido." : "⏰ Neste momento estamos com alta demanda: no próximo passo você escolhe o horário da entrega.")
+        : (modoN ? (modoN.tipo === "especial" ? "📅 " + (getAG().especial.titulo || "Hoje as entregas são agendadas") + ": no próximo passo você escolhe o horário." : modoN.tipo === "noite" ? "🌙 Estamos fora do horário de atendimento: escolha o horário da entrega para agendar o seu pedido." : "⏰ Neste momento estamos com alta demanda: no próximo passo você escolhe o horário da entrega.")
         : "A data e o horário da entrega a gente combina com você pelo WhatsApp.");
     }
     const slotLine = document.getElementById("checkout-slot-line");
@@ -1625,6 +1625,7 @@ html {
       return Object.values(n).some(v => v === undefined || Number.isNaN(v)) ? null : n;
     } catch (e) { return null; }
   }
+  function ymdOf(n) { return n.y + "-" + String(n.m).padStart(2, "0") + "-" + String(n.d).padStart(2, "0"); }
   function hmToMin(hm) { const p = String(hm).split(":"); return Number(p[0]) * 60 + Number(p[1]); }
   // Qual regra vale agora? null = checkout normal (sem pop-up).
   //  "noite": depois das 21h (até as 6h30) o pedido é agendado para o dia seguinte (ou para hoje, se já passou da meia-noite)
@@ -1641,11 +1642,21 @@ html {
         if (n.min >= ini) return { tipo: "noite", add: 1, wd: (n.wd + 1) % 7 };
         if (n.min < fim) return { tipo: "noite", add: 0, wd: n.wd };
       }
+      const es = AG.especial;
+      if (es && es.data === ymdOf(n) && n.min >= hmToMin(es.inicio) && n.min < hmToMin(es.fim)) return { tipo: "especial" };
       if (AG.dias && AG.dias.length && AG.dias.includes(n.wd) && n.min >= hmToMin(AG.inicio) && n.min < hmToMin(AG.fim)) return { tipo: "dia" };
       return null;
     } catch (e) { return null; }
   }
   function agendamentoAtivo() { return !!agendamentoModo(); }
+  // dia especial: no lugar do "entrega rápida em até 2h", o topo avisa que hoje as entregas são agendadas
+  try {
+    const mEsp = agendamentoModo();
+    if (mEsp && mEsp.tipo === "especial") {
+      const aviso = "📅 " + (getAG().especial.titulo || "Hoje as entregas são agendadas");
+      document.querySelectorAll(".fast, .fastchip").forEach(el => { el.textContent = aviso; });
+    }
+  } catch (e) {}
   function slotDayLabel(n, add) {
     const dt = new Date(Date.UTC(n.y, n.m - 1, n.d + add));
     const nome = DIAS_PT[dt.getUTCDay()];
@@ -1658,7 +1669,11 @@ html {
     const modo = agendamentoModo();
     if (!modal || !n || !modo) { state.slot = { manual: true }; if (advance) { state.checkoutStep = 3; renderCheckoutModal(); } return; }
     let titulo = AG.titulo, texto = AG.texto, groups = [];
-    if (modo.tipo === "dia") {
+    if (modo.tipo === "especial") {
+      const es = AG.especial;
+      titulo = es.titulo || titulo; texto = es.texto || texto;
+      groups = [{ title: "Hoje · " + slotDayLabel(n, 0), times: (es.horarios || []).filter(t => hmToMin(t) > n.min), add: 0 }];
+    } else if (modo.tipo === "dia") {
       groups = [
         { title: "Hoje à noite · " + slotDayLabel(n, 0), times: (AG.noite || []).filter(t => hmToMin(t) > n.min), add: 0 },
         { title: "Amanhã cedo · " + slotDayLabel(n, 1), times: AG.manha || [], add: 1 }

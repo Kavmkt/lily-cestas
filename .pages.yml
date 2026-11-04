@@ -451,6 +451,12 @@ content:
       - { name: agendamento_noturno_ultimo, label: Agendamento à noite - último horário nos outros dias, type: string, description: "Exemplo 22:30." }
       - { name: agendamento_noturno_titulo, label: Agendamento à noite - título do pop-up, type: string }
       - { name: agendamento_noturno_texto, label: Agendamento à noite - texto do pop-up, type: text }
+      - { name: agendamento_especial_data, label: Dia especial - data, type: string, description: "Opcional. Formato AAAA-MM-DD (ex. 2026-11-04). Nesse dia, e só nele, o pop-up de agendamento aparece o dia todo (da hora de início até a hora de fim abaixo) e mostra apenas os horários do dia especial. Passou a data, volta tudo ao normal sozinho." }
+      - { name: agendamento_especial_inicio, label: Dia especial - começa às, type: string, description: "Formato HH:MM. Padrão 06:30." }
+      - { name: agendamento_especial_fim, label: Dia especial - termina às, type: string, description: "Formato HH:MM. Padrão 21:00 (depois disso vale o agendamento da noite)." }
+      - { name: agendamento_especial_horarios, label: Dia especial - horários de entrega de hoje, type: string, list: true, description: "Um por linha, formato HH:MM. Horários que já passaram não aparecem. Exemplo 17:30, 18:30 ... 22:30." }
+      - { name: agendamento_especial_titulo, label: Dia especial - título do pop-up, type: string }
+      - { name: agendamento_especial_texto, label: Dia especial - texto do pop-up, type: text }
       - { name: agendamento_titulo, label: Agendamento - título do pop-up, type: string }
       - { name: agendamento_texto, label: Agendamento - texto do pop-up, type: text }
       - { name: cidades_entrega, label: Cidades atendidas na entrega, type: string, list: true, description: "Usadas para validar o CEP no checkout. Alphaville e Polvilho entram em Barueri, Santana de Parnaíba e Cajamar." }
