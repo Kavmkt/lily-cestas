@@ -58,18 +58,5 @@
   "foto_chaveiro_simples": "/assets/produtos/chaveiro-simples.webp",
   "foto_estudio_litofania": "/assets/produtos/litofania-3d.webp",
   "foto_estudio_polaroid": "/assets/produtos/polaroid-led.webp",
-  "loja_no_ar": true,
-  "agendamento_especial_data": "2026-11-04",
-  "agendamento_especial_inicio": "06:30",
-  "agendamento_especial_fim": "21:00",
-  "agendamento_especial_horarios": [
-    "17:30",
-    "18:30",
-    "19:30",
-    "20:30",
-    "21:30",
-    "22:30"
-  ],
-  "agendamento_especial_titulo": "Hoje as entregas são a partir das 17h",
-  "agendamento_especial_texto": "Hoje estamos agendando as entregas a partir das 17h. Escolha abaixo o melhor horário para receber o presente. Se preferir outro dia ou horário, é só combinar com a gente pelo WhatsApp."
+  "loja_no_ar": true
 }
