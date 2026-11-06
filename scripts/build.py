@@ -516,9 +516,9 @@ def compra_segura_html():
     steps = [('Escolha o presente', 'No site, em poucos cliques. Se preferir, chame no WhatsApp e a gente ajuda a escolher.'),
              ('Envie o pedido', 'Finalize em 3 etapas. O pedido chega para a nossa equipe pelo WhatsApp, e ainda não há nenhuma cobrança.'),
              ('Confirmamos tudo com você', 'Disponibilidade, valor, personalização (nome, frase ou foto) e horário de entrega, combinados antes de você pagar.'),
-             ('Pague e receba', f'Pix com {int(config["pix_desconto"])}% de desconto ou outra forma combinada. Avisamos pelo WhatsApp quando o presente sair para entrega.')]
+             ('Pague e receba', f'Pix com {int(config["pix_desconto"])}% de desconto, ou cartão de crédito e débito pelo link seguro do Mercado Pago. Avisamos pelo WhatsApp quando o presente sair para entrega.')]
     li = ''.join(f'<li><b>{esc(a)}</b><span>{esc(b)}</span></li>' for a, b in steps)
-    seals = ['💬 Atendimento por pessoas, pelo WhatsApp · Seg a Sáb, 8h às 19h', '📍 Atelier em Santana de Parnaíba, SP']
+    seals = ['🔒 Pagamento seguro: Pix, crédito e débito pelo Mercado Pago', '💬 Atendimento por pessoas, pelo WhatsApp · Seg a Sáb, 8h às 19h', '📍 Atelier em Santana de Parnaíba, SP']
     if CNPJ:
         seals.insert(0, f'🧾 CNPJ {esc(CNPJ)}')
     if GNOTA and INOTA:
@@ -842,7 +842,7 @@ def product_page(p):
     inc = ('<section><h2>O que vem</h2><ul class="inc">' + ''.join(f'<li>{esc(x)}</li>' for x in p['inclui']) + '</ul></section>') if p['inclui'] else ''
     pers = f'<section><h2>Personalização</h2><p>{esc(p["personalizacao"])}. Depois de finalizar o pedido, você combina tudo pelo WhatsApp antes da produção.</p></section>' if p['personalizacao'] else ''
     entrega = (f'<section><h2>Entrega e pagamento</h2><p>Entregamos em {", ".join(config.get("cidades_entrega") or [])}. Informe o CEP no checkout para conferir a entrega. {ENTREGA_TXT}'
-               f' Pagando no Pix, você tem {int(config["pix_desconto"])}% de desconto nos produtos.</p></section>')
+               f' Pagando no Pix, você tem {int(config["pix_desconto"])}% de desconto nos produtos. No cartão de crédito ou débito, você paga pelo link seguro do Mercado Pago, enviado no WhatsApp depois que confirmamos o pedido.</p></section>')
     items = [(f'Quanto custa {p["nome"]}?', f'{p["nome"]} custa {brl(final_price(p))}. ' + ('A entrega é grátis.' if final_price(p) >= FRETE_MIN else f'A entrega é grátis em pedidos a partir de {FRETE_TXT}.') + f' Pedido mínimo de {MIN_TXT}.'),
              ('Dá para personalizar?', 'Dá. Nome, frase ou foto são combinados pelo WhatsApp depois que você finaliza o pedido.'),
              ('Vocês entregam na minha região?', 'Atendemos Santana de Parnaíba, Alphaville, Barueri, Cajamar, Osasco e Carapicuíba. Informe o CEP no checkout e conferimos na hora.')]
