@@ -430,6 +430,10 @@ content:
       - { name: instagram, label: Link do Instagram, type: string }
       - { name: ifood_url, label: Link da loja no iFood, type: string, description: "Endereço da Lily Cestas no iFood. Aparece no bloco 'Prefere comprar pelo iFood?'." }
       - { name: pix_desconto, label: Desconto no Pix (%), type: number, description: Exemplo 5 }
+      - { name: cnpj, label: CNPJ da empresa, type: string, description: "Aparece no topo do site, na seção Compra segura, nas páginas de produto e no rodapé. Exemplo 00.000.000/0001-00." }
+      - { name: google_maps_url, label: Link das avaliações no Google (Google Maps), type: string, description: "Link do perfil da empresa no Google Maps. Usado nos selos de avaliação." }
+      - { name: google_nota, label: Nota no Google (ex 5,0), type: string, description: "Só preencha se for a nota real. Se ficar vazio, o selo some do site." }
+      - { name: ifood_nota, label: Nota no iFood (ex 5,0), type: string, description: "Só preencha se for a nota real. Se ficar vazio, o selo some do site." }
       - { name: pix_embutido, label: Desconto do Pix já embutido no preço (ligado), type: boolean, description: "Ligado: o preço que você cadastra nos produtos é o valor do Pix e o site soma o desconto automaticamente para o cartão (assim o Pix não reduz a sua margem). Desligado: o preço cadastrado é o de cartão e o Pix dá desconto de verdade. Vale para cestas e presentes; canecas têm preço fechado." }
       - { name: agendamento_ativo, label: Agendamento da entrega em horários de alta demanda (ligado), type: boolean, description: "Nos dias e horários abaixo, antes de ir para o pagamento o cliente escolhe um horário de entrega num pop-up. Nos outros dias e horários o checkout segue normal." }
       - name: agendamento_dias

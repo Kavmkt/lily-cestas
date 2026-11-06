@@ -1,0 +1,47 @@
+/* Provas sociais e confianca (home, produtos e paginas internas) */
+.lp-proof{list-style:none;display:flex;flex-wrap:wrap;gap:8px 14px;margin:16px 0 0;padding:0;font:600 13px/1.2 'Plus Jakarta Sans',sans-serif;color:#5A3D43}
+.lp-proof li{display:inline-flex;align-items:center}
+.lp-proof a,.lp-proof span{color:inherit;text-decoration:none;background:#fff;border:1px solid #EED9DF;border-radius:99px;padding:7px 12px;display:inline-block}
+.lp-proof a:hover{border-color:#C87888}
+.lp-proof b{color:#B27A00;font-weight:700}
+.lp-proof-sm{margin-top:10px;font-size:12px}
+.lp-proof li:last-child span{background:none;border:0;padding:7px 2px;font-weight:500;font-size:12px;color:#785860}
+@media(max-width:560px){.lp-proof{gap:6px 8px;margin-top:12px}.lp-proof a{padding:6px 10px;font-size:12px}}
+.lp-seal{margin:14px 0 4px;padding:12px 14px;background:#FDF8F9;border:1px solid #EED9DF;border-radius:16px;font:500 13px/1.45 'Plus Jakarta Sans',sans-serif;color:#5A3D43}
+.lp-seal p{margin:0}
+.lp-note{margin:0;padding:10px 12px;border-radius:14px;background:#F2FAF4;border:1px solid #CFE8D6;color:#27613A;font-size:12px;line-height:1.5}
+.lp-head{text-align:center;max-width:640px;margin:0 auto 22px}
+.lp-tag{display:inline-block;font:700 11px 'Montserrat',sans-serif;letter-spacing:.12em;text-transform:uppercase;color:#A65365;margin-bottom:8px}
+.lp-head h2{font:300 28px/1.2 'Montserrat',sans-serif;color:#382126;margin:0 0 8px}
+.lp-head h2 b{font-weight:700;color:#A65365}
+.lp-head p{margin:0;color:#6b4a52;font-size:15px}
+.lp-prova{max-width:1000px;margin:0 auto}
+.lp-rate{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:26px}
+.lp-rcard{display:flex;flex-direction:column;align-items:center;text-align:center;gap:4px;padding:18px 14px;background:#fff;border:1.5px solid #EED9DF;border-radius:20px;text-decoration:none;color:#382126;transition:transform .15s,border-color .15s}
+.lp-rcard:hover{transform:translateY(-2px);border-color:#C87888}
+.lp-rcard b{font:700 18px 'Montserrat',sans-serif}
+.lp-rcard small{font:500 12px/1.4 'Plus Jakarta Sans',sans-serif;color:#785860}
+.lp-stars{color:#F5A623;font-size:22px;letter-spacing:2px}
+.lp-h3{font:600 16px 'Montserrat',sans-serif;color:#382126;text-align:center;margin:8px 0 14px}
+.lp-msgs{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:28px;align-items:start}
+.lp-msgs figure{margin:0}
+.lp-msgs img{width:100%;height:auto;border-radius:16px;display:block;border:1px solid #EED9DF}
+.lp-msgs figcaption{font:500 11px 'Plus Jakarta Sans',sans-serif;color:#785860;text-align:center;margin-top:6px}
+.lp-gal{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-bottom:22px}
+.lp-gal img,.lp-gal video{width:100%;height:100%;object-fit:cover;border-radius:16px;display:block;background:#F5E7EA}
+.lp-gal video{aspect-ratio:9/16;grid-column:span 2;max-height:520px;justify-self:center;width:auto;max-width:100%}
+.lp-igrow{text-align:center;margin:0}
+.lp-igrow a{display:inline-flex;align-items:center;gap:8px;background:#fff;color:#A65365;border:1.5px solid #E5C2C9;font:600 14px 'Montserrat',sans-serif;border-radius:99px;padding:12px 22px;text-decoration:none}
+.lp-igrow a:hover{background:#FDF2F5}
+.lp-seg{background:#fff;border-bottom:1px solid #EED9DF;padding:44px 16px}
+.lp-in{max-width:1000px;margin:0 auto}
+.lp-steps{list-style:none;counter-reset:s;display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin:0 0 20px;padding:0}
+.lp-steps li{counter-increment:s;position:relative;background:#FDF8F9;border:1.5px solid #EED9DF;border-radius:20px;padding:44px 16px 16px;display:flex;flex-direction:column;gap:6px}
+.lp-steps li:before{content:counter(s);position:absolute;top:12px;left:16px;width:26px;height:26px;border-radius:50%;background:#A65365;color:#fff;font:700 13px/26px 'Montserrat',sans-serif;text-align:center}
+.lp-steps b{font:700 15px 'Montserrat',sans-serif;color:#382126}
+.lp-steps span{font:400 13px/1.5 'Plus Jakarta Sans',sans-serif;color:#5A3D43}
+.lp-seals{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;justify-content:center;gap:8px 10px}
+.lp-seals li{background:#F2FAF4;border:1px solid #CFE8D6;color:#27613A;border-radius:99px;padding:7px 14px;font:600 12px/1.3 'Plus Jakarta Sans',sans-serif}
+@media(max-width:820px){.lp-steps{grid-template-columns:1fr 1fr}}
+@media(max-width:560px){.lp-steps{grid-template-columns:1fr;gap:10px}.lp-steps li{padding:14px 14px 14px 56px}.lp-steps li:before{top:14px;left:15px}.lp-head h2{font-size:23px}.lp-rcard b{font-size:16px}.lp-rcard small{font-size:11px}}
+@media(min-width:900px){.lp-gal{grid-template-columns:repeat(5,1fr)}.lp-gal video{grid-column:auto;aspect-ratio:auto;max-height:none;width:100%}.lp-gal img{aspect-ratio:9/16!important}}

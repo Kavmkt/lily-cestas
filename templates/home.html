@@ -328,6 +328,7 @@ html {
 .hcn-combo{margin:18px 0 0;text-align:center;font:600 14px 'Plus Jakarta Sans',sans-serif;color:#5A3D43;background:#fff;border:1.5px dashed #C87888;border-radius:16px;padding:12px 16px}.hcn-combo b{color:#A65365}
 @media(max-width:860px){.hcn-grid{grid-template-columns:repeat(2,1fr);gap:12px}.hcn{padding:34px 0}}
 </style>
+<link rel="stylesheet" href="/assets/css/provas.css">
 </head>
 <body class="min-h-screen antialiased selection:bg-[#F2D5DC] selection:text-[#382126]">
 
@@ -380,6 +381,7 @@ html {
           <h1>Cestas e presentes <b>personalizados</b> que emocionam de verdade</h1>
           <p class="sub">Cestas, boxes, canecas e peças em 3D. Você escolhe, personaliza pelo WhatsApp e recebe em casa.</p>
           <p class="hero-btns" style="margin-top:20px;display:flex;flex-wrap:wrap;gap:10px"><a class="cta1" href="#catalogo">Ver cestas e presentes</a><a class="cta2" href="https://wa.me/{{WA}}?text=Oi%21%20Vim%20pelo%20site%20da%20Lily%20Cestas%20e%20quero%20ajuda%20para%20escolher%20um%20presente." target="_blank" rel="noopener">Falar no WhatsApp</a></p>
+          {{LP_PROOF}}
         </div>
         <div class="lg:col-span-6">
           {{HERO_IMG}}
@@ -466,6 +468,8 @@ html {
   </section>
 
   {{HOME_CANECAS}}
+
+  {{LP_SEGURA}}
 
   <section id="ifood" class="ifd">
     <div class="ifd-in">
@@ -573,7 +577,7 @@ html {
   <section id="depoimentos" class="py-16 bg-[#FDF8F9] border-b border-[#EED9DF]">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
       
-      <div class="igblock"><h2 class="sec-h" style="color:#fff">Veja entregas <b style="color:#fff">de verdade</b> no Instagram</h2><p style="opacity:.95;margin:.5rem 0 0">Fotos dos presentes montados e entregues pela Lily Cestas.</p><a href="{{INSTA}}" target="_blank" rel="noopener">Seguir @lilycestas.ofc</a></div>
+      {{LP_PROVAS}}
 
       <!-- Perguntas Frequentes -->
       <div id="faq" class="max-w-3xl mx-auto">
@@ -617,6 +621,7 @@ html {
             </div>
           </div>
           <p class="text-xs sm:text-sm text-white/90 max-w-md leading-relaxed">Atelier de cestas de presente, canecas e peças personalizadas. Santana de Parnaíba, SP.</p>
+          {{CNPJ_LINE}}
           {{OWNER_BLOCK}}
           {{IG_BTN}}
         </div>
@@ -641,6 +646,7 @@ html {
 
       <div class="pt-6 flex flex-col sm:flex-row items-center justify-between gap-2 text-xs text-white/80 font-display">
         <p>© 2026 Lily Cestas &amp; Atelier Personalizados. Todos os direitos reservados.</p>
+        {{FOOT_LINKS}}
       </div>
     </div>
   </footer>
@@ -870,6 +876,8 @@ html {
               <span id="checkout-final-val" class="text-lg text-[#A65365]">R$ 0,00</span>
             </div>
           </div>
+
+          <p class="lp-note">🔒 <b>Você ainda não paga nada.</b> Ao enviar, o pedido chega para a nossa equipe no WhatsApp. Confirmamos disponibilidade, valor, personalização e horário com você antes do pagamento.</p>
 
           <div>
             <label for="checkout-summary-preview" class="block text-xs font-display font-semibold text-[#382126] mb-1">Protocolo Completo do Pedido Lily Cestas:</label>

@@ -84,7 +84,7 @@ config = {
     'loja_no_ar': False, 'whatsapp': '5511914955434', 'instagram': 'https://www.instagram.com/lilycestas.ofc/',
     'ifood_url': 'https://www.ifood.com.br/delivery/santana-de-parnaiba-sp/lily-cestas--presentes-colinas-da-anhanguera/25073e59-c1d1-43a8-a317-7f5c948f97ab',
     'pix_desconto': 5, 'taxa_entrega': 15, 'entrega_gratis_a_partir': 125, 'pedido_minimo': 35, 'brinde1_valor': 150, 'brinde1_nome': 'Chaveiro de brinde',
-    'foto_chaveiro_simples': '',
+    'foto_chaveiro_simples': '', 'cnpj': '', 'google_maps_url': '', 'google_nota': '', 'ifood_nota': '',
     'entrega_rapida_horas': 2,
     'pix_embutido': True,
     'agendamento_ativo': True, 'agendamento_dias': ['quarta', 'quinta'], 'agendamento_inicio': '08:30', 'agendamento_fim': '17:00',
@@ -364,9 +364,14 @@ BUSINESS = {
     'contactPoint': {'@type': 'ContactPoint', 'telephone': phone, 'contactType': 'customer service', 'availableLanguage': 'Portuguese', 'url': f'https://wa.me/{WA}'},
     'address': {'@type': 'PostalAddress', 'addressLocality': 'Santana de Parnaíba', 'addressRegion': 'SP', 'addressCountry': 'BR'},
     'areaServed': [{'@type': 'City', 'name': n} for n in ['Santana de Parnaíba', 'Barueri', 'Cajamar', 'Osasco', 'Carapicuíba']] + [{'@type': 'Place', 'name': 'Alphaville'}],
-    'sameAs': [config['instagram']],
+    'sameAs': [u for u in [config['instagram'], str(config.get('google_maps_url') or '').strip(), config.get('ifood_url')] if u],
     'openingHoursSpecification': [{'@type': 'OpeningHoursSpecification', 'dayOfWeek': ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'], 'opens': '08:00', 'closes': '19:00'}],
 }
+
+
+_cnpj_ld = str(config.get('cnpj') or '').strip()
+if _cnpj_ld:
+    BUSINESS['taxID'] = _cnpj_ld
 
 
 def prod_url(p):
@@ -451,16 +456,92 @@ IG_HANDLE = '@' + config['instagram'].rstrip('/').split('/')[-1]
 IG_BTN = f'<a class="igbtn" href="{esc(config["instagram"])}" target="_blank" rel="noopener" data-ga="instagram_click" data-ga-item="rodape">{IG_SVG}<span>Siga {esc(IG_HANDLE)} no Instagram</span></a>'
 
 
+# ---------------------------------------------------------------- confianca: provas, avaliacoes, compra segura
+CNPJ = str(config.get('cnpj') or '').strip()
+GMAPS = str(config.get('google_maps_url') or '').strip()
+GNOTA = str(config.get('google_nota') or '').strip()
+INOTA = str(config.get('ifood_nota') or '').strip()
+IFOOD = str(config.get('ifood_url') or '').strip()
+
+
+def proof_ul(cls='lp-proof'):
+    it = []
+    if GMAPS and GNOTA:
+        it.append(f'<li><a href="{esc(GMAPS)}" target="_blank" rel="noopener" data-ga="proof_click" data-ga-item="google"><b>★ {esc(GNOTA)}</b> no Google</a></li>')
+    if IFOOD and INOTA:
+        it.append(f'<li><a href="{esc(IFOOD)}" target="_blank" rel="noopener" data-ga="proof_click" data-ga-item="ifood"><b>★ {esc(INOTA)}</b> no iFood</a></li>')
+    if CNPJ:
+        it.append(f'<li><span>CNPJ {esc(CNPJ)}</span></li>')
+    return f'<ul class="{cls}" aria-label="Avaliações e dados da empresa">' + ''.join(it) + '</ul>' if it else ''
+
+
+LP_PROOF = proof_ul('lp-proof')
+SEAL_HTML = ('<div class="lp-seal"><p>🔒 <b>Compra segura:</b> você envia o pedido e a gente confirma tudo pelo WhatsApp <b>antes do pagamento</b>.</p>' + proof_ul('lp-proof lp-proof-sm') + '</div>')
+CNPJ_LINE = f'<p class="text-xs text-white/85">CNPJ {esc(CNPJ)} · Santana de Parnaíba, SP</p>' if CNPJ else ''
+FOOT_LINKS = ('<span class="flex flex-wrap gap-x-4 gap-y-1">'
+              + (f'<a class="hover:text-white hover:underline" href="{esc(GMAPS)}" target="_blank" rel="noopener">Avaliações no Google</a>' if GMAPS else '')
+              + '<a class="hover:text-white hover:underline" href="/politica-de-privacidade/">Política de privacidade</a></span>')
+
+
+def _lp_img(name, alt, ratio='3/4'):
+    u = img_url('assets/provas/' + name)
+    return f'<img src="{u}" alt="{esc(alt)}" loading="lazy" decoding="async" style="aspect-ratio:{ratio}">' if u else ''
+
+
+def provas_html():
+    stars = '<span class="lp-stars" aria-hidden="true">★★★★★</span>'
+    cards = ''
+    if GMAPS and GNOTA:
+        cards += f'<a class="lp-rcard" href="{esc(GMAPS)}" target="_blank" rel="noopener" data-ga="proof_click" data-ga-item="google_card">{stars}<b>{esc(GNOTA)} no Google</b><small>Avaliações de clientes, com fotos. Ver no Google →</small></a>'
+    if IFOOD and INOTA:
+        cards += f'<a class="lp-rcard" href="{esc(IFOOD)}" target="_blank" rel="noopener" data-ga="proof_click" data-ga-item="ifood_card">{stars}<b>{esc(INOTA)} no iFood</b><small>Nota dos clientes que pediram pelo app. Ver no iFood →</small></a>'
+    cards = f'<div class="lp-rate">{cards}</div>' if cards else ''
+    msgs = ('<h3 class="lp-h3">O que as clientes escrevem pra gente</h3><div class="lp-msgs">'
+            + '<figure>' + _lp_img('whatsapp-cliente-1.png', 'Mensagem de cliente pelo WhatsApp: "Muito obrigada pela sua dedicação em me atender de última hora! Seu capricho é incrível."', '739/430') + '<figcaption>Mensagem recebida pelo WhatsApp</figcaption></figure>'
+            + '<figure>' + _lp_img('whatsapp-cliente-2.png', 'Mensagem de cliente pelo WhatsApp: "Obrigado. Que bom que conheci vocês."', '739/495') + '<figcaption>Mensagem recebida pelo WhatsApp</figcaption></figure></div>')
+    poster = img_url('assets/provas/video-poster.jpg')
+    gal = ('<h3 class="lp-h3">Presentes montados e entregues por nós</h3><div class="lp-gal">'
+           + _lp_img('entrega-cesta-parabens-balao.jpg', 'Cesta de presente com balão em formato de coração escrito Parabéns, urso de pelúcia e cartão', '9/16')
+           + _lp_img('entrega-box-aniversario-caneca.jpg', 'Box de aniversário com chocolates, rosa e caneca personalizada com foto', '9/16')
+           + _lp_img('entrega-coracao-polaroid.jpg', 'Chaveiro de coração e porta-retratos Polaroid personalizados com fotos', '3/4')
+           + _lp_img('entrega-cartao-fotos.jpg', 'Box com chocolates, porta-retratos com fotos e cartão escrito à mão', '3/4')
+           + f'<video class="lp-video" controls playsinline preload="none" poster="{poster}" aria-label="Vídeo de uma caneca personalizada com nome"><source src="/assets/video/entrega-lily-cestas.mp4" type="video/mp4"></video></div>')
+    ig = f'<p class="lp-igrow"><a href="{esc(config["instagram"])}" target="_blank" rel="noopener" data-ga="instagram_click" data-ga-item="provas">{IG_SVG}<span>Veja mais entregas no Instagram {esc(IG_HANDLE)}</span></a></p>'
+    return ('<section id="avaliacoes" class="lp-prova"><div class="lp-head"><span class="lp-tag">Quem já recebeu, aprova</span>'
+            '<h2>Avaliações e entregas <b>de verdade</b></h2><p>Nota máxima onde os clientes avaliam e mensagens reais de quem comprou.</p></div>'
+            + cards + msgs + gal + ig + '</section>')
+
+
+def compra_segura_html():
+    steps = [('Escolha o presente', 'No site, em poucos cliques. Se preferir, chame no WhatsApp e a gente ajuda a escolher.'),
+             ('Envie o pedido', 'Finalize em 3 etapas. O pedido chega para a nossa equipe pelo WhatsApp, e ainda não há nenhuma cobrança.'),
+             ('Confirmamos tudo com você', 'Disponibilidade, valor, personalização (nome, frase ou foto) e horário de entrega, combinados antes de você pagar.'),
+             ('Pague e receba', f'Pix com {int(config["pix_desconto"])}% de desconto ou outra forma combinada. Avisamos pelo WhatsApp quando o presente sair para entrega.')]
+    li = ''.join(f'<li><b>{esc(a)}</b><span>{esc(b)}</span></li>' for a, b in steps)
+    seals = ['💬 Atendimento por pessoas, pelo WhatsApp · Seg a Sáb, 8h às 19h', '📍 Atelier em Santana de Parnaíba, SP']
+    if CNPJ:
+        seals.insert(0, f'🧾 CNPJ {esc(CNPJ)}')
+    if GNOTA and INOTA:
+        seals.append(f'⭐ Nota {esc(GNOTA)} no Google e {esc(INOTA)} no iFood')
+    return ('<section id="compra-segura" class="lp-seg"><div class="lp-in"><div class="lp-head"><span class="lp-tag">Compra segura</span>'
+            '<h2>Como funciona o seu <b>pedido</b></h2><p>Você não paga nada ao enviar o pedido. Primeiro a gente confirma tudo com você.</p></div>'
+            f'<ol class="lp-steps">{li}</ol><ul class="lp-seals">' + ''.join(f'<li>{x}</li>' for x in seals) + '</ul></div></section>')
+
+
+LP_PROVAS = provas_html()
+LP_SEGURA = compra_segura_html()
+
+
 def footer_html():
     cat_li = ''.join(f'<li><a href="/{c["pagina_url"]}/">{esc(c["nome"])}</a></li>' for c in cats_with if c.get('pagina_url'))
     cat_li += ''.join(f'<li><a href="/{o["slug"]}/">{esc(o["nome"])}</a></li>' for o in OCCASIONS_OK)
     cat_li += '<li><a href="/canecas/">Canecas Personalizadas</a></li>' if (ROOT / 'data/canecas.json').exists() else ''
     city_li = ''.join(f'<li><a href="/{x["slug"]}/">Presentes em {x["cidade"]}</a></li>' for x in CITIES)
     return f'''<footer class="foot"><div class="wrap grid">
-<div><strong>Lily Cestas</strong><p>Atelier de cestas de presente, canecas e peças personalizadas. Santana de Parnaíba, SP.</p><p><a href="https://wa.me/{WA}" rel="noopener" target="_blank">WhatsApp {phone}</a></p>{OWNER_BLOCK}{IG_BTN}</div>
+<div><strong>Lily Cestas</strong><p>Atelier de cestas de presente, canecas e peças personalizadas. Santana de Parnaíba, SP.</p><p><a href="https://wa.me/{WA}" rel="noopener" target="_blank">WhatsApp {phone}</a></p>{('<p>CNPJ ' + esc(CNPJ) + '</p>') if CNPJ else ''}{OWNER_BLOCK}{IG_BTN}</div>
 <div><strong>Nossos presentes</strong><ul>{cat_li}</ul></div>
 <div><strong>Onde entregamos</strong><ul>{city_li}</ul></div>
-</div><p class="copy">© {datetime.date.today().year} Lily Cestas &amp; Atelier Personalizados.</p></footer>
+</div><p class="copy">© {datetime.date.today().year} Lily Cestas &amp; Atelier Personalizados. · <a href="/politica-de-privacidade/">Política de privacidade</a></p></footer>
 <a class="wafab" href="https://wa.me/{WA}?text={esc('Oi! Vim pelo site da Lily Cestas.')}" target="_blank" rel="noopener" style="position:fixed;right:18px;bottom:18px;z-index:30;background:#25D366;color:#fff;border-radius:99px;padding:12px 18px;font:600 14px Montserrat,sans-serif;text-decoration:none;box-shadow:0 14px 30px -10px rgba(37,211,102,.7)">💬 WhatsApp</a>'''
 
 
@@ -495,7 +576,7 @@ def page_html(path, title, desc, h1, intro, blocks, plist, faq_items, trail, ext
     return (head(title, desc, path) + jsonld(*nodes) + '''
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/assets/css/pages.css">
+<link rel="stylesheet" href="/assets/css/pages.css"><link rel="stylesheet" href="/assets/css/provas.css">
 </head><body>''' + top_html() + f'''<main><div class="wrap"><nav class="crumbs" aria-label="Navegação">{crumbs}</nav>
 <div class="lead"><div><h1>{esc(h1)}</h1><p class="intro">{esc(intro)}</p>{fast_pill}<p><a class="btn" href="{SHOP}#catalogo">{cta}</a> <a class="btn ghost" href="/catalogo/">Ver catálogo completo</a></p></div>{img}</div>
 {sec}
@@ -693,7 +774,7 @@ write_page(cat_path, head('Catálogo de Cestas e Presentes Personalizados | Lily
            + jsonld(BUSINESS, crumb_ld([('Início', '/'), ('Catálogo', cat_path)]), faq_ld(cat_items), *cat_ld) + '''
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/assets/css/pages.css">
+<link rel="stylesheet" href="/assets/css/pages.css"><link rel="stylesheet" href="/assets/css/provas.css">
 </head><body>''' + top_html() + f'''<main><div class="wrap"><nav class="crumbs" aria-label="Navegação"><a href="/">Início</a> › <span>Catálogo</span></nav>
 <div class="cathead"><h1>Catálogo completo</h1><p class="intro">Todas as cestas de presente, xícaras e presentes personalizados da Lily Cestas, organizados por categoria.</p><nav class="chips" aria-label="Categorias">{chips}</nav></div>
 {sections}
@@ -757,6 +838,7 @@ def product_page(p):
            f'<p><a class="btn" href="https://wa.me/{WA}?text={esc(urllib.parse.quote(wa_text))}" target="_blank" rel="noopener">Perguntar no WhatsApp</a></p>') if sold else (
            f'<p class="buy"><a class="btn" data-ga="add_to_cart_click" data-ga-item="{p["id"]}" href="{SHOP}#p={p["id"]}">Adicionar ao pedido</a> '
            f'<a class="btn ghost" href="https://wa.me/{WA}?text={esc(urllib.parse.quote(wa_text))}" target="_blank" rel="noopener">Pedir pelo WhatsApp</a></p>')
+    buy += '' if sold else SEAL_HTML
     inc = ('<section><h2>O que vem</h2><ul class="inc">' + ''.join(f'<li>{esc(x)}</li>' for x in p['inclui']) + '</ul></section>') if p['inclui'] else ''
     pers = f'<section><h2>Personalização</h2><p>{esc(p["personalizacao"])}. Depois de finalizar o pedido, você combina tudo pelo WhatsApp antes da produção.</p></section>' if p['personalizacao'] else ''
     entrega = (f'<section><h2>Entrega e pagamento</h2><p>Entregamos em {", ".join(config.get("cidades_entrega") or [])}. Informe o CEP no checkout para conferir a entrega. {ENTREGA_TXT}'
@@ -791,7 +873,7 @@ def product_page(p):
     return (head(title, desc, path).replace('<meta property="og:type" content="website">', '<meta property="og:type" content="product">') + jsonld(BUSINESS, crumb_ld(trail), faq_ld(items), prod_ld(p)) + '''
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/assets/css/pages.css">
+<link rel="stylesheet" href="/assets/css/pages.css"><link rel="stylesheet" href="/assets/css/provas.css">
 </head><body>''' + top_html() + f'''<main><div class="wrap"><nav class="crumbs" aria-label="Navegação">{crumbs}</nav>
 <div class="lead"><div>{badge}<h1>{esc(p["nome"])}</h1><p class="intro">{esc(prod_desc(p))}</p><p class="price">{old}<b>{brl(final_price(p))}</b></p>{pix_line}{fast_line}<p class="shipnote">{"🚚 Entrega grátis neste produto" if final_price(p) >= FRETE_MIN else f"🚚 Entrega grátis em pedidos a partir de {FRETE_TXT}"} · Pedido mínimo {MIN_TXT}</p>{buy}</div>
 {hero_html}</div>
@@ -992,7 +1074,7 @@ document.getElementById("cv-next").addEventListener("click",function(){tr.scroll
 document.addEventListener("keydown",function(e){if(e.target.closest&&e.target.closest("select,input,textarea"))return;if(e.key==="ArrowRight")document.getElementById("cv-next").click();if(e.key==="ArrowLeft")document.getElementById("cv-prev").click()});upd()})();</script>''' % cfg
     fonts = ('<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>'
              '<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap" rel="stylesheet">'
-             '<link rel="stylesheet" href="/assets/css/pages.css"><link rel="stylesheet" href="/assets/css/canecas.css">\n</head><body class="cat-page">')
+             '<link rel="stylesheet" href="/assets/css/pages.css"><link rel="stylesheet" href="/assets/css/provas.css"><link rel="stylesheet" href="/assets/css/canecas.css">\n</head><body class="cat-page">')
     faq = [(q['pergunta'], sv(q.get('resposta'))) for q in (c.get('faq') or []) if q.get('pergunta')] + [('Como escolho o modelo?', 'Folheie o catálogo, anote o número do modelo que você gostou e escolha-o na lista ao lado. Para outro tema ou uma arte diferente, é só combinar pelo WhatsApp.'),
            ('Posso colocar foto, nome e frase?', 'Pode. Depois de finalizar o pedido, você envia nome, frase, foto ou as cores que preferir pelo WhatsApp e confirmamos tudo antes de produzir.'),
            ('Qual é o prazo?', c.get('prazo') or 'O prazo de produção é combinado no pedido, conforme a agenda do atelier.'),
@@ -1135,7 +1217,7 @@ def canecas_page():
     catalogos_blk = f'<section id="catalogos"><div class="ctcards">{catalogo_cards()}</div></section>' if CATALOGOS else ''
     fonts = ('<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>'
              '<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap" rel="stylesheet">'
-             '<link rel="stylesheet" href="/assets/css/pages.css"><link rel="stylesheet" href="/assets/css/canecas.css">\n</head><body class="cn-page">' + cn_bg())
+             '<link rel="stylesheet" href="/assets/css/pages.css"><link rel="stylesheet" href="/assets/css/provas.css"><link rel="stylesheet" href="/assets/css/canecas.css">\n</head><body class="cn-page">' + cn_bg())
     body = f'''<main><section class="cn-top cn-top-{topo_cor}"><div class="wrap"><nav class="crumbs" aria-label="Navegação">{crumbs}</nav>
 {banners_blk}
 {cat_head}</div></section><div class="wrap">
@@ -1244,7 +1326,7 @@ def combo_page():
     head_html = head(title, f'Escolha {cb_qtd} modelos de caneca personalizada de qualquer tema por {brl(cb_preco)}, com frete grátis e chaveirinho de brinde.', path, 'noindex, follow')
     fonts = ('<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>'
              '<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">'
-             '<link rel="stylesheet" href="/assets/css/pages.css"><link rel="stylesheet" href="/assets/css/canecas.css">\n</head><body class="cb-body">')
+             '<link rel="stylesheet" href="/assets/css/pages.css"><link rel="stylesheet" href="/assets/css/provas.css"><link rel="stylesheet" href="/assets/css/canecas.css">\n</head><body class="cb-body">')
     body = f'''<main><section class="cn-top cn-top-rose cb-top"><div class="wrap"><nav class="crumbs" aria-label="Navegação">{crumbs}</nav>
 <h1 class="cn-h1">Monte seu combo de {cb_qtd} canecas</h1>
 <p class="cn-sub">Escolha {cb_qtd} modelos, de <b>qualquer tema</b>. <b>{brl(cb_preco)}</b> no total{(", você economiza " + brl(eco)) if eco else ""}, com frete grátis* e chaveirinho {esc(cb_brinde.lower())} de brinde.</p></div></section>
@@ -1478,7 +1560,7 @@ repl = {
     'HOME_LINKS': ''.join(f'<a href="/{c["pagina_url"]}/" class="p-4 rounded-2xl border border-[#EED9DF] bg-[#FDF8F9] hover:bg-white text-sm font-display font-semibold text-[#A65365]">{esc(c["nome"])} →</a>' for c in cats_with if c.get('pagina_url')) + ''.join(f'<a href="/{o["slug"]}/" class="p-4 rounded-2xl border border-[#EED9DF] bg-[#FDF8F9] hover:bg-white text-sm font-display font-semibold text-[#A65365]">{esc(o["nome"])} →</a>' for o in OCCASIONS_OK) + ('<a href="/canecas/" class="p-4 rounded-2xl border border-[#EED9DF] bg-[#FDF8F9] hover:bg-white text-sm font-display font-semibold text-[#A65365]">Canecas personalizadas →</a>' if (ROOT / 'data/canecas.json').exists() else '') + '<a href="/catalogo/" class="p-4 rounded-2xl border border-[#EED9DF] bg-[#FDF8F9] hover:bg-white text-sm font-display font-semibold text-[#A65365]">Catálogo completo →</a>',
     'CIDADES_JSON': json.dumps([x for x in (config.get('cidades_entrega') or []) if x], ensure_ascii=False),
     'FOOTER_CATS': ''.join(f'<li><a href="/{c["pagina_url"]}/" class="hover:text-white hover:underline">{esc(c["nome"])}</a></li>' for c in cats_with if c.get('pagina_url')) + ''.join(f'<li><a href="/{o["slug"]}/" class="hover:text-white hover:underline">{esc(o["nome"])}</a></li>' for o in OCCASIONS_OK) + ('<li><a href="/canecas/" class="hover:text-white hover:underline">Canecas Personalizadas</a></li>' if (ROOT / 'data/canecas.json').exists() else ''),
-    'BANNERS': BANNERS_HTML, 'CAN_PAIR_JS': json.dumps(CAN_PAIR, ensure_ascii=False).replace('</', '<\\/'), 'HOME_CANECAS': HOME_CANECAS, 'IG_BTN': IG_BTN, 'BRINDE_POPUP': BRINDE_POPUP, 'OWNER_BLOCK': OWNER_BLOCK,
+    'BANNERS': BANNERS_HTML, 'CAN_PAIR_JS': json.dumps(CAN_PAIR, ensure_ascii=False).replace('</', '<\\/'), 'HOME_CANECAS': HOME_CANECAS, 'IG_BTN': IG_BTN, 'BRINDE_POPUP': BRINDE_POPUP, 'OWNER_BLOCK': OWNER_BLOCK, 'LP_PROOF': LP_PROOF, 'LP_PROVAS': LP_PROVAS, 'LP_SEGURA': LP_SEGURA, 'CNPJ_LINE': CNPJ_LINE, 'FOOT_LINKS': FOOT_LINKS,
     'FAST_TOP': (f'<span class="fast">⚡ {FAST_TXT}*</span>' if FAST_TXT else ''), 'FAST_CHIP': (f'<span class="fastchip">⚡ {FAST_TXT}*</span>' if FAST_TXT else ''), 'FAST_FOOT': (f' {FAST_TXT}* em produtos prontos.' if FAST_TXT else ''),
     'B1V': brl(config['brinde1_valor']).replace(',00', ''), 'FRETE_MIN': brl(FRETE_MIN).replace(',00', ''), 'HERO_CATS': '', 'HERO_IMG': hero_img, 'CAT_PILLS': pills, 'MIMOS_TEXT': mimos, 'REWARD_INIT': reward_init, 'DATA_JS': data_js,
     'OPT_BASES': ''.join(opt(o) for o in SIM['bases']), 'OPT_LOUCA': ''.join(opt(o) for o in SIM['louca']),
@@ -1595,6 +1677,35 @@ for f in OUT.rglob('*.html'):
     if 'http-equiv="refresh"' in t or '</head>' not in t:
         continue
     f.write_text(t.replace('</head>', ga_snippet + '</head>', 1), encoding='utf-8')
+
+
+# ---------------------------------------------------------------- politica de privacidade
+def privacidade_page():
+    def sec(h, ps):
+        return f'<section><h2>{esc(h)}</h2>' + ''.join(f'<p>{esc(x)}</p>' for x in ps) + '</section>'
+    quem = 'Lily Cestas & Atelier Personalizados' + (f', CNPJ {CNPJ}' if CNPJ else '')
+    corpo = ''.join([
+        sec('Quem somos', ['Esta política explica como a Lily Cestas, atelier de cestas de presente e personalizados de Santana de Parnaíba, SP, trata os dados de quem visita o site e faz pedidos. O contato para qualquer assunto de privacidade é o nosso WhatsApp.']),
+        sec('Quais dados usamos', ['Para fazer o pedido você informa nome, telefone, endereço de entrega, CEP e, quando há personalização, nomes, frases e fotos. Esses dados chegam até nós pelo WhatsApp.',
+                                   'O CEP digitado é consultado no serviço público ViaCEP apenas para confirmar a cidade da entrega.',
+                                   'O site usa ferramentas de medição, como Google Analytics, Google Ads e Microsoft Clarity, que podem usar cookies e registrar de forma anônima como o site é usado (páginas vistas, cliques e mapas de calor), para melhorarmos a experiência e medirmos nossos anúncios.']),
+        sec('Para que usamos', ['Usamos os dados para confirmar o pedido, produzir o presente, combinar o pagamento e a entrega e avisar você pelo WhatsApp. Também podemos usar números e medidas agregadas para melhorar o site.']),
+        sec('Com quem compartilhamos', ['Compartilhamos o estritamente necessário com quem faz a entrega (nome, telefone e endereço) e com os serviços de medição citados acima. Não vendemos seus dados.']),
+        sec('Por quanto tempo guardamos', ['Guardamos os dados pelo tempo necessário para atender o pedido e cumprir obrigações legais e fiscais. Fotos e textos de personalização são usados apenas para produzir o seu presente.']),
+        sec('Seus direitos', ['Pela Lei Geral de Proteção de Dados (LGPD) você pode pedir acesso, correção ou exclusão dos seus dados, e saber com quem eles foram compartilhados. É só chamar a gente no WhatsApp.']),
+        sec('Atualizações', ['Podemos atualizar esta política quando o site ou a forma de atendimento mudar. A versão vigente fica sempre nesta página.']),
+    ])
+    fonts = ('<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>'
+             '<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap" rel="stylesheet">'
+             '<link rel="stylesheet" href="/assets/css/pages.css"><link rel="stylesheet" href="/assets/css/provas.css">')
+    html = (head('Política de Privacidade | Lily Cestas', 'Como a Lily Cestas trata os dados de quem visita o site e faz pedidos, de acordo com a LGPD.', '/politica-de-privacidade/')
+            + jsonld(BUSINESS) + '\n' + fonts + '\n</head><body>' + top_html()
+            + f'<main><div class="wrap"><h1>Política de Privacidade</h1><p class="intro">{esc(quem)}</p>{corpo}</div></main>' + footer_html() + '</body></html>')
+    write_page('/politica-de-privacidade/', html)
+
+
+privacidade_page()
+page_urls.append('/politica-de-privacidade/')
 
 # ---------------------------------------------------------------- sitemap e robots
 urls = ['/'] + page_urls
