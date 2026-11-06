@@ -503,6 +503,7 @@ def provas_html():
     gal = ('<h3 class="lp-h3">Presentes montados e entregues por nós</h3><div class="lp-gal">'
            + _lp_img('entrega-cesta-parabens-balao.jpg', 'Cesta de presente com balão em formato de coração escrito Parabéns, urso de pelúcia e cartão', '9/16')
            + _lp_img('entrega-box-aniversario-caneca.jpg', 'Box de aniversário com chocolates, rosa e caneca personalizada com foto', '9/16')
+           + _lp_img('entrega-buques-pedidos-saindo.jpg', 'Buquês de rosas vermelhas com bombons Ferrero Rocher e cesta com flores, embalados para entrega', '9/16')
            + _lp_img('entrega-coracao-polaroid.jpg', 'Chaveiro de coração e porta-retratos Polaroid personalizados com fotos', '3/4')
            + _lp_img('entrega-cartao-fotos.jpg', 'Box com chocolates, porta-retratos com fotos e cartão escrito à mão', '3/4')
            + f'<video class="lp-video" controls playsinline preload="none" poster="{poster}" aria-label="Vídeo de uma caneca personalizada com nome"><source src="/assets/video/entrega-lily-cestas.mp4" type="video/mp4"></video></div>')
